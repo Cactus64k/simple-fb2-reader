@@ -1,0 +1,612 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkFileChooserDialog" id="book_filechooserdialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="modal">True</property>
+    <property name="default_width">320</property>
+    <property name="default_height">260</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_wnd</property>
+    <property name="filter">fb2_files_filter</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="book_filechooserdialog-vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="book_filechooserdialog-action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="book_filechooserdialog_cancel_button">
+                <property name="label">gtk-cancel</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="book_filechooserdialog_ok_button">
+                <property name="label">gtk-open</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">book_filechooserdialog_cancel_button</action-widget>
+      <action-widget response="2">book_filechooserdialog_ok_button</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkTextBuffer" id="book_textbuff"/>
+  <object class="GtkAdjustment" id="book_textview_horisontal_adjustment">
+    <property name="upper">1000</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="book_textview_vertical_adjustment">
+    <property name="upper">1000</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkListStore" id="books_sections_liststore">
+    <columns>
+      <!-- column-name section_num -->
+      <column type="gint"/>
+      <!-- column-name section_name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkTextBuffer" id="encode_textbuffer"/>
+  <object class="GtkTreeStore" id="encode_treestore">
+    <columns>
+      <!-- column-name is_encode -->
+      <column type="gboolean"/>
+      <!-- column-name encode_name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkFileFilter" id="fb2_files_filter">
+    <patterns>
+      <pattern>*.fb2</pattern>
+      <pattern>*.fb2.zip</pattern>
+      <pattern>*.txt</pattern>
+    </patterns>
+  </object>
+  <object class="GtkWindow" id="main_wnd">
+    <property name="can_focus">False</property>
+    <property name="events">GDK_KEY_PRESS_MASK | GDK_STRUCTURE_MASK</property>
+    <property name="title" translatable="yes">Simple FB2 Reader</property>
+    <property name="window_position">center</property>
+    <property name="default_width">640</property>
+    <property name="default_height">480</property>
+    <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
+    <signal name="configure-event" handler="main_wnd_configure_event_cb" object="book_textview" swapped="no"/>
+    <signal name="key-press-event" handler="main_wnd_key_press_event_cb" swapped="no"/>
+    <child>
+      <object class="GtkBox" id="box1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child>
+          <object class="GtkMenuBar" id="main_wnd_menu_bar">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkMenuItem" id="file_menuitm">
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">File</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="file_menu">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="file_open_imagemenuitem">
+                        <property name="label">gtk-open</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="file_open_imagemenuitem_activate_cb" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="file_navigation_imagemenuitem">
+                        <property name="label">gtk-index</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="file_navigation_imagemenuitem_activate_cb" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="file_search_imagemenuitem">
+                        <property name="label">gtk-find</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="file_search_imagemenuitem_activate_cb" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkSeparatorMenuItem" id="file_separatormenuitem">
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="file_quit_imagemenuitem">
+                        <property name="label">gtk-quit</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="gtk_main_quit" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="settings_imagemenuitem">
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Settings</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="settings_font_imagemenuitem">
+                        <property name="label">gtk-select-font</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="settings_color_imagemenuitem">
+                        <property name="label">gtk-select-color</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <child type="submenu">
+                          <object class="GtkMenu" id="menu2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <child>
+                              <object class="GtkCheckMenuItem" id="settings_color_dark_scheme_checkmenuitem">
+                                <property name="use_action_appearance">False</property>
+                                <property name="visible">True</property>
+                                <property name="can_focus">False</property>
+                                <property name="label" translatable="yes">Use dark color scheme</property>
+                                <property name="use_underline">True</property>
+                                <signal name="toggled" handler="settings_color_dark_scheme_checkmenuitem_toggled_cb" swapped="no"/>
+                              </object>
+                            </child>
+                          </object>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="help_menuitem">
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">_Справка</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="help_menu">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="help_about_imagemenuitem">
+                        <property name="label">gtk-about</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="book_text_view_scrolledwindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="hadjustment">book_textview_horisontal_adjustment</property>
+            <property name="vadjustment">book_textview_vertical_adjustment</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTextView" id="book_textview">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hadjustment">book_textview_horisontal_adjustment</property>
+                <property name="vadjustment">book_textview_vertical_adjustment</property>
+                <property name="editable">False</property>
+                <property name="wrap_mode">word</property>
+                <property name="cursor_visible">False</property>
+                <property name="buffer">book_textbuff</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkStatusbar" id="book_statusbar">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">2</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="navigation_dialog">
+    <property name="can_focus">False</property>
+    <property name="modal">True</property>
+    <property name="default_width">200</property>
+    <property name="default_height">200</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_wnd</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="navigation_dialog-vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="navigation_dialog_action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="navigation_dialog-cancel-button">
+                <property name="label">gtk-cancel</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="navigation_dialog-jump-button">
+                <property name="label">gtk-apply</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkScrolledWindow" id="navigation_dialog-scrolledwindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="books_section_treeview">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">books_sections_liststore</property>
+                <property name="headers_visible">False</property>
+                <property name="headers_clickable">False</property>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="treeview-selection2"/>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                    <property name="resizable">True</property>
+                    <property name="title" translatable="yes">Sections</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                    <child>
+                      <object class="GtkCellRendererText" id="cellrenderertext2"/>
+                      <attributes>
+                        <attribute name="text">1</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">navigation_dialog-cancel-button</action-widget>
+      <action-widget response="2">navigation_dialog-jump-button</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkWindow" id="search_wnd">
+    <property name="can_focus">False</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="type_hint">dialog</property>
+    <property name="deletable">False</property>
+    <property name="transient_for">main_wnd</property>
+    <property name="has_resize_grip">False</property>
+    <signal name="key-press-event" handler="search_wnd_key_press_event_cb" swapped="no"/>
+    <child>
+      <object class="GtkBox" id="search_wnd_box">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="margin_left">3</property>
+        <property name="margin_right">3</property>
+        <property name="margin_top">3</property>
+        <property name="margin_bottom">3</property>
+        <property name="spacing">3</property>
+        <child>
+          <object class="GtkEntry" id="search_query_entry">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="width_chars">30</property>
+            <signal name="changed" handler="search_query_changed_cb" swapped="no"/>
+            <signal name="activate" handler="search_query_activate_cb" swapped="no"/>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="search_wnd_close_button">
+            <property name="use_action_appearance">False</property>
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="receives_default">True</property>
+            <property name="use_action_appearance">False</property>
+            <property name="relief">none</property>
+            <signal name="clicked" handler="search_wnd_close_button_clicked_cb" object="search_wnd" swapped="no"/>
+            <child>
+              <object class="GtkImage" id="search_button_close_image">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="stock">gtk-close</property>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkDialog" id="txt_encode_dialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="default_width">480</property>
+    <property name="default_height">640</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_wnd</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="txt_encode_dialog_vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="txt_encode_dialog_action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="txt_encode_dialog_cancel_button">
+                <property name="label">gtk-cancel</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="txt_encode_dialog_ok_button">
+                <property name="label">gtk-apply</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkPaned" id="paned1">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <child>
+              <object class="GtkScrolledWindow" id="txt_encode_dialog_treeview_scrolledwindow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hscrollbar_policy">never</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkTreeView" id="encode_treeview">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="model">encode_treestore</property>
+                    <property name="headers_visible">False</property>
+                    <property name="headers_clickable">False</property>
+                    <property name="enable_search">False</property>
+                    <property name="search_column">0</property>
+                    <signal name="cursor-changed" handler="encode_treeview_cursor_changed_cb" swapped="no"/>
+                    <child>
+                      <object class="GtkTreeViewColumn" id="treeviewcolumn2">
+                        <property name="title" translatable="yes">column</property>
+                        <child>
+                          <object class="GtkCellRendererText" id="encode_name_cellrenderertext"/>
+                          <attributes>
+                            <attribute name="text">1</attribute>
+                          </attributes>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="resize">False</property>
+                <property name="shrink">False</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkScrolledWindow" id="txt_encode_dialog_text_view_scrolledwindow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkTextView" id="encode_textview">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="buffer">encode_textbuffer</property>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="resize">True</property>
+                <property name="shrink">True</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">txt_encode_dialog_cancel_button</action-widget>
+      <action-widget response="2">txt_encode_dialog_ok_button</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkSizeGroup" id="windows_size_group">
+    <property name="mode">both</property>
+    <widgets>
+      <widget name="main_wnd"/>
+      <widget name="navigation_dialog"/>
+      <widget name="txt_encode_dialog"/>
+    </widgets>
+  </object>
+</interface>
