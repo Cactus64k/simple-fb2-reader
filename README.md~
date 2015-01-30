@@ -1,6 +1,6 @@
 # simple-fb2-reader
 <<<<<<< HEAD
-Simple tool to read FB2 on GTK+3
+Simple tool to read FB2 on GTK3
 =======
 Simple FB2 book reader on GTK+3
 Depends:
