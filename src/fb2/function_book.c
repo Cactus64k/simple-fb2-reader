@@ -12,24 +12,32 @@ int parse_fb2(char* path, GtkTextBuffer* text_buff)
 	if(file_tree != NULL)
 	{
 		xmlNode* root = file_tree->children;
-		xmlNode* node = root->children;
 		GtkTextIter text_buff_end;
 
 		gtk_text_buffer_get_end_iter(text_buff, &text_buff_end);
 
+		while(root != NULL)		// ищем рут
+		{
+			if((root->type == XML_ELEMENT_NODE) && (strcmp((char*)root->name, "FictionBook") == 0))
+				break;
+
+			root = root->next;
+		}
+
+
+		xmlNode* node = root->children;
 
 		//**************************************************************************
 
-		/*while(node != NULL)
+		while(node != NULL)
 		{
-			if(strcmp((char*)node->name, "stylesheet") == 0)
+			if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)node->name, "stylesheet") == 0))
 			{
 
 			}
 
 			node = node->next;
 		}
-		*/
 
 		//**************************************************************************
 
@@ -37,7 +45,7 @@ int parse_fb2(char* path, GtkTextBuffer* text_buff)
 
 		while(node != NULL)
 		{
-			if(strcmp((char*)node->name, "binary") == 0)
+			if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)node->name, "binary") == 0))
 				parse_book_binary(node, binary_hash_table);
 
 			node = node->next;
@@ -49,7 +57,7 @@ int parse_fb2(char* path, GtkTextBuffer* text_buff)
 
 		while(node != NULL)
 		{
-			if(strcmp((char*)node->name, "description") == 0)
+			if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)node->name, "description") == 0))
 			{
 				parse_book_description(node, text_buff, &text_buff_end);
 			}
@@ -63,7 +71,7 @@ int parse_fb2(char* path, GtkTextBuffer* text_buff)
 
 		while(node != NULL)
 		{
-			if(strcmp((char*)node->name, "body") == 0)
+			if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)node->name, "body") == 0))
 			{
 				if(node->properties == NULL)
 				{
@@ -77,11 +85,11 @@ int parse_fb2(char* path, GtkTextBuffer* text_buff)
 					gtk_text_buffer_apply_tag(text_buff, default_tag, &text_buff_start, &text_buff_end);
 				}
 
-				else if(strcmp((char*)node->properties, "notes") == 0)
+				if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)node->name, "notes") == 0))
 				{
 
 				}
-				else if(strcmp((char*)node->properties, "comments") == 0)
+				if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)node->name, "comments") == 0))
 				{
 
 				}

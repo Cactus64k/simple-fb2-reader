@@ -16,7 +16,7 @@ int parse_link(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_e
 
 	while(properties != NULL)
 	{
-		if(strcmp((char*)properties->name, "href") == 0)
+		if((node->type == XML_ATTRIBUTE_NODE) && (strcmp((char*)properties->name, "href") == 0))
 		{
 			const char* href = (char*)properties->children->content;
 			char* href_dup = g_strdup(href);
@@ -55,22 +55,26 @@ int parse_formated_text_for_link(xmlNode* node, GtkTextBuffer* text_buff, GtkTex
 	{
 		tag = NULL;
 
-		if(strcmp((char*)node->name, "text") == 0)					// обычный текст
+		if((node->type == XML_TEXT_NODE) && (strcmp((char*)node->name, "text") == 0))
 			gtk_text_buffer_insert(text_buff, text_buff_end, (char*)node->content, -1);
-		else if(strcmp((char*)node->name, "strong") == 0)			// жирный
-			tag = strong_tag;
-		else if(strcmp((char*)node->name, "emphasis") == 0)			// курсив
-			tag = emphasis_tag;
-		else if(strcmp((char*)node->name, "strikethrough") == 0)	// зачеркнутый
-			tag = strikethrough_tag;
-		else if(strcmp((char*)node->name, "sub") == 0)				// нижний индекс
-			tag = sub_tag;
-		else if(strcmp((char*)node->name, "sup") == 0)				// верхний индекс
-			tag = sup_tag;
-		else if(strcmp((char*)node->name, "code") == 0)				// код, моноширинный шрифт
-			tag = code_tag;
-		else if(strcmp((char*)node->name, "image") == 0)			// картинка
-			parse_image(node, text_buff, text_buff_end);
+		else if(node->type == XML_ELEMENT_NODE)
+		{
+			if(strcmp((char*)node->name, "strong") == 0)			// жирный
+				tag = strong_tag;
+			else if(strcmp((char*)node->name, "emphasis") == 0)			// курсив
+				tag = emphasis_tag;
+			else if(strcmp((char*)node->name, "strikethrough") == 0)	// зачеркнутый
+				tag = strikethrough_tag;
+			else if(strcmp((char*)node->name, "sub") == 0)				// нижний индекс
+				tag = sub_tag;
+			else if(strcmp((char*)node->name, "sup") == 0)				// верхний индекс
+				tag = sup_tag;
+			else if(strcmp((char*)node->name, "code") == 0)				// код, моноширинный шрифт
+				tag = code_tag;
+			else if(strcmp((char*)node->name, "image") == 0)			// картинка
+				parse_image(node, text_buff, text_buff_end);
+		}
+
 
 		if(tag != NULL)
 		{

@@ -69,17 +69,21 @@
 		GtkTextTag*				a_tag;
 		GtkTextTag*				cite_tag;
 		GtkTextTag*				text_author_tag;
+		GtkTextTag*				epigraph_tag;
+		GtkTextTag*				stanza_tag;
 
 		GHashTable*				binary_hash_table;
 		GHashTable*				links_hash_table;
 		size_t					tag_table_default_size;
 	} FB2_READER;
 
+	#define EPIGRAPH_TAG_MARGIN 0.25f
+
 	ENCODE_DIALOG	GLOBAL_ENCODE_DIALOG;
 	FB2_READER		GLOBAL_FB2_READER;
 	SEARCH_WINDOW	GLOBAL_SEARCH_WND;
 
-	int open_new_book(char* file_path);
+	int open_book(char* file_path);
 
 	int main_wnd_init(GtkBuilder* builder, FB2_READER* obj);
 	int search_wnd_init(GtkBuilder* builder, SEARCH_WINDOW* obj);

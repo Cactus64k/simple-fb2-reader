@@ -10,7 +10,7 @@ int parse_date(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_e
 
 	while(properties != NULL)
 	{
-		if(strcmp((char*)properties->name, "value") == 0)
+		if((properties->type == XML_ATTRIBUTE_NODE) && (strcmp((char*)properties->name, "value") == 0))
 		{
 			char* date = (char*)properties->children->content;
 			gtk_text_buffer_insert(text_buff, text_buff_end, date, -1);

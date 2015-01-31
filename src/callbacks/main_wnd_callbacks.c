@@ -9,15 +9,12 @@ void file_open_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_da
 		gtk_widget_hide(GTK_WIDGET(file_open_dialog));
 
 		char* file_path = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(file_open_dialog));
-
-		open_new_book(file_path);
+		open_book(file_path);
 
 		g_free(file_path);
-
 	}
 
 	gtk_widget_hide(GTK_WIDGET(file_open_dialog));
-
 }
 
 
@@ -33,17 +30,14 @@ void file_search_imagemenuitem_activate_cb(GtkMenuItem* menuitem, gpointer user_
 
 void file_navigation_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_data)
 {
-	GtkDialog* dialog = GLOBAL_FB2_READER.navigation_dialog;
+	/*GtkDialog* dialog = GLOBAL_FB2_READER.navigation_dialog;
 
 	if(gtk_dialog_run(dialog) == 2)
 	{
-
 		gtk_widget_hide(GTK_WIDGET(dialog));
-
 	}
 
-	gtk_widget_hide(GTK_WIDGET(dialog));
-
+	gtk_widget_hide(GTK_WIDGET(dialog));*/
 }
 
 
@@ -59,6 +53,25 @@ gboolean main_wnd_configure_event_cb(GtkWidget *widget, GdkEvent *event, gpointe
 
 	gtk_text_view_set_right_margin(text_view, margin);
 	gtk_text_view_set_left_margin(text_view, margin);
+
+	//******************************************************************************************************
+
+	GtkTextTag* epigraph_tag	= GLOBAL_FB2_READER.epigraph_tag;
+
+	GValue value = G_VALUE_INIT;
+	g_value_init(&value, G_TYPE_INT);
+
+	g_value_set_int(&value, (allocated_size.width + margin) * EPIGRAPH_TAG_MARGIN);
+	g_object_set_property(G_OBJECT(epigraph_tag), "left-margin", &value);
+	g_object_set_property(G_OBJECT(epigraph_tag), "right-margin", &value);
+
+	g_value_unset(&value);
+
+
+	/*GdkRectangle rect;
+	gtk_text_view_get_visible_rect(text_view, &rect);
+	printf("\n\nx=%d\ny=%d\nw=%d\nh=%d\n", rect.x, rect.y, rect.width, rect.height);*/
+
 
 	return false;
 }

@@ -29,6 +29,9 @@ int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
 	assert(obj->navigation_dialog	!= NULL);
 	assert(obj->sections_liststore	!= NULL);
 
+	GtkAllocation allocated_size;
+	gtk_widget_get_allocation(GTK_WIDGET(obj->text_view), &allocated_size);
+
 
 	GtkTextTagTable* text_tag_table	= gtk_text_buffer_get_tag_table(obj->text_buff);
 
@@ -63,6 +66,12 @@ int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
 	//####################################################################################################################################
 	obj->text_author_tag			= gtk_text_buffer_create_tag(obj->text_buff, NULL, 	"size-points",		12.f,
 																						"justification",	GTK_JUSTIFY_RIGHT, NULL);
+	//####################################################################################################################################
+	obj->epigraph_tag				= gtk_text_buffer_create_tag(obj->text_buff, NULL, 	"left-margin",		allocated_size.width * EPIGRAPH_TAG_MARGIN,
+																						"right-margin",		allocated_size.width * EPIGRAPH_TAG_MARGIN, NULL);
+	//####################################################################################################################################
+	obj->stanza_tag					= gtk_text_buffer_create_tag(obj->text_buff, NULL, 	"size-points",		15.f,
+																						"justification",	GTK_JUSTIFY_CENTER, NULL);
 
 	/*obj->a_tag					= gtk_text_buffer_create_tag(obj->text_buff, NULL, 	"foreground",		"blue",
 																						"underline",		PANGO_UNDERLINE_SINGLE,NULL);*/
@@ -82,6 +91,7 @@ int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
 	assert(obj->code_tag			!= NULL);
 	assert(obj->subtitle_tag		!= NULL);
 	assert(obj->image_tag			!= NULL);
+	assert(obj->epigraph_tag			!= NULL);
 	assert(obj->binary_hash_table	!= NULL);
 	assert(obj->links_hash_table	!= NULL);
 	//assert(obj->a_tag				!= NULL);

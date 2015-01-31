@@ -8,9 +8,12 @@ int parse_p(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end)
 
 	node = node->children;
 
-	gtk_text_buffer_insert(text_buff, text_buff_end, "\t", -1);
-	parse_formated_text(node, text_buff, text_buff_end);
-	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+	if(node != NULL)
+	{
+		gtk_text_buffer_insert(text_buff, text_buff_end, "\t", -1);
+		parse_formated_text(node, text_buff, text_buff_end);
+		gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+	}
 
 	return 0;
 }
@@ -35,26 +38,29 @@ int parse_formated_text(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* te
 	{
 		tag = NULL;
 
-		if(strcmp((char*)node->name, "text") == 0)					// обычный текст
+		if((node->type == XML_TEXT_NODE) && (strcmp((char*)node->name, "text") == 0))
 			gtk_text_buffer_insert(text_buff, text_buff_end, (char*)node->content, -1);
-		else if(strcmp((char*)node->name, "strong") == 0)			// жирный
-			tag = strong_tag;
-		else if(strcmp((char*)node->name, "emphasis") == 0)			// курсив
-			tag = emphasis_tag;
-		else if(strcmp((char*)node->name, "a") == 0)				// ссылка
-			parse_link(node, text_buff, text_buff_end);
-		else if(strcmp((char*)node->name, "strikethrough") == 0)	// зачеркнутый
-			tag = strikethrough_tag;
-		else if(strcmp((char*)node->name, "sub") == 0)				// нижний индекс
-			tag = sub_tag;
-		else if(strcmp((char*)node->name, "sup") == 0)				// верхний индекс
-			tag = sup_tag;
-		else if(strcmp((char*)node->name, "code") == 0)				// код, моноширинный шрифт
-			tag = code_tag;
-		else if(strcmp((char*)node->name, "image") == 0)			// картинка
-			parse_image(node, text_buff, text_buff_end);
-		else if(strcmp((char*)node->name, "style") == 0)			// стилевое оформление
-			print_unsupported_tag("style");
+		else if(node->type == XML_ELEMENT_NODE)
+		{
+			if(strcmp((char*)node->name, "strong") == 0)			// жирный
+				tag = strong_tag;
+			else if(strcmp((char*)node->name, "emphasis") == 0)			// курсив
+				tag = emphasis_tag;
+			else if(strcmp((char*)node->name, "a") == 0)				// ссылка
+				parse_link(node, text_buff, text_buff_end);
+			else if(strcmp((char*)node->name, "strikethrough") == 0)	// зачеркнутый
+				tag = strikethrough_tag;
+			else if(strcmp((char*)node->name, "sub") == 0)				// нижний индекс
+				tag = sub_tag;
+			else if(strcmp((char*)node->name, "sup") == 0)				// верхний индекс
+				tag = sup_tag;
+			else if(strcmp((char*)node->name, "code") == 0)				// код, моноширинный шрифт
+				tag = code_tag;
+			else if(strcmp((char*)node->name, "image") == 0)			// картинка
+				parse_image(node, text_buff, text_buff_end);
+			else if(strcmp((char*)node->name, "style") == 0)			// стилевое оформление
+				parse_style(node, text_buff, text_buff_end);
+		}
 
 
 

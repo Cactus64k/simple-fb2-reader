@@ -13,7 +13,7 @@ int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 
 	while(properties != NULL)
 	{
-		if(strcmp((char*)properties->name, "id") == 0)
+		if((properties->type == XML_ATTRIBUTE_NODE) && (strcmp((char*)properties->name, "id") == 0))
 		{
 			image_id = (char*)properties->children->content;
 			break;

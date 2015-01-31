@@ -12,14 +12,17 @@ int parse_image(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_
 
 	while(properties != NULL)
 	{
-		if(strcmp((char*)properties->name, "href") == 0)
+		if(node->type == XML_ELEMENT_NODE)
 		{
-			image = g_hash_table_lookup(binary_hash_table, properties->children->content+1);
-			assert(image != NULL);
-			break;
+			if(strcmp((char*)properties->name, "href") == 0)
+			{
+				image = g_hash_table_lookup(binary_hash_table, properties->children->content+1);
+				assert(image != NULL);
+				break;
+			}
+			else if(strcmp((char*)properties->name, "title") == 0)
+				image_title = (char*)properties->children->content;
 		}
-		else if(strcmp((char*)properties->name, "title") == 0)
-			image_title = (char*)properties->children->content;
 
 		properties = properties->next;
 	}
