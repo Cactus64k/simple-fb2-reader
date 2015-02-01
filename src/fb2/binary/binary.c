@@ -23,9 +23,13 @@ int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 
 	//***********************************************************************************************************
 
-	GdkPixbufLoader* loader = gdk_pixbuf_loader_new();
-
 	guchar out_buff[(READ_CHUNK_SIZE/4)*3];
+
+	char tmp_image_name[128];
+	pid_t cur_pid = getpid();
+	snprintf(tmp_image_name, sizeof(tmp_image_name), "/tmp/simple-fb2-reader-%d", cur_pid);
+
+	FILE* f = fopen(tmp_image_name, "wb");
 
 	char* image_data	= (char*)node->children->content;
 	ssize_t data_len	= strlen(image_data);
@@ -36,30 +40,24 @@ int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 	while(data_len > 0)
 	{
 		size_t count = (data_len > READ_CHUNK_SIZE)? READ_CHUNK_SIZE : data_len;
-		size_t bytes_count = g_base64_decode_step(image_data, count, out_buff, &state, &save);
+		size_t buff_pos = g_base64_decode_step(image_data, count, out_buff, &state, &save);
 
-		if(gdk_pixbuf_loader_write(loader, out_buff, bytes_count, NULL) == false)
-		{
-			fprintf(stderr, "failed to parse image %s\n", image_id);
-			break;
-		}
+		fwrite(out_buff, 1, buff_pos, f);
 
 		image_data	+= READ_CHUNK_SIZE;
 		data_len	-= READ_CHUNK_SIZE;
 
 	}
 
-	GdkPixbuf* pixbuf = gdk_pixbuf_loader_get_pixbuf(loader);
-	if(pixbuf != NULL)
-	{
-		g_object_ref(pixbuf);		// почему то добавление в хеш таблицу не увеличивает счетчик ссылок
-		g_hash_table_insert(binary_table, image_id, pixbuf);
-	}
-	else
-		fprintf(stderr, "failed to get image %s from pixbuf loader\n", image_id);
+	fclose(f);
 
-	gdk_pixbuf_loader_close(loader, NULL);
-	g_object_unref(G_OBJECT(loader));
+	GdkPixbuf* pixbuf = gdk_pixbuf_new_from_file(tmp_image_name, NULL);
+	if(pixbuf == NULL)
+		fprintf(stderr, "failed to get image %s\n", image_id);
+	else
+		g_hash_table_insert(binary_table, image_id, pixbuf);
+
+	remove(tmp_image_name);
 
 	return 0;
 }
