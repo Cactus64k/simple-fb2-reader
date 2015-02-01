@@ -16,8 +16,10 @@ int parse_image(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_
 		{
 			if(strcmp((char*)properties->name, "href") == 0)
 			{
-				image = g_hash_table_lookup(binary_hash_table, properties->children->content+1);
-				assert(image != NULL);
+				char* image_id = (char*)(properties->children->content+1);
+				image = g_hash_table_lookup(binary_hash_table, image_id);
+				if(image == NULL)
+					fprintf(stderr, "image %s not fount in table\n", image_id);
 				break;
 			}
 			else if(strcmp((char*)properties->name, "title") == 0)
@@ -27,7 +29,9 @@ int parse_image(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_
 		properties = properties->next;
 	}
 
-	gtk_text_buffer_insert_pixbuf(text_buff, text_buff_end, image);
+	if(image != NULL)
+		gtk_text_buffer_insert_pixbuf(text_buff, text_buff_end, image);
+
 	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 	if(image_title != NULL)
 		gtk_text_buffer_insert(text_buff, text_buff_end, image_title, -1);
