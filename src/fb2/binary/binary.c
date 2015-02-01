@@ -1,12 +1,11 @@
 #include "../fb2_chunks.h"
 
+#define CHUNK_SIZE 1024
+
 int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 {
 	assert(node != NULL);
 	assert(binary_table != NULL);
-
-	gsize out_len = 0;
-	unsigned char* image_b64 = g_base64_decode((char*)node->children->content, &out_len);
 
 	char* image_id = NULL;
 	xmlAttr* properties = node->properties;
@@ -22,22 +21,39 @@ int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 		properties = properties->next;
 	}
 
-	char* tmp_name = tmpnam(NULL);
+	//***********************************************************************************************************
 
-	FILE* tmp_image = fopen(tmp_name, "w");
-	assert(tmp_image != NULL);
+	GdkPixbufLoader* loader = gdk_pixbuf_loader_new();
 
-	fwrite(image_b64, out_len, 1, tmp_image);
-	fflush(tmp_image);
+	guchar out_buff[(CHUNK_SIZE/4)*3+3];
 
-	GdkPixbuf* image = gdk_pixbuf_new_from_file(tmp_name, NULL);
-	assert(image != NULL);
+	char* image_data	= (char*)node->children->content;
+	ssize_t data_len	= strlen(image_data);
 
-	g_hash_table_insert(binary_table, image_id, image);
+	gint state = 0;
+	guint save = 0;
 
-	fclose(tmp_image);
-	remove(tmp_name);
-	g_free(image_b64);
+	while(data_len > 0)
+	{
+		size_t count = g_base64_decode_step(image_data, CHUNK_SIZE, out_buff, &state, &save);
+
+		if(gdk_pixbuf_loader_write(loader, out_buff, count, NULL) == false)
+			break;
+
+		image_data	+= CHUNK_SIZE;
+		data_len	-= CHUNK_SIZE;
+
+	}
+
+	GdkPixbuf* pixbuf = gdk_pixbuf_loader_get_pixbuf(loader);
+	if(pixbuf != NULL)
+	{
+		g_object_ref(pixbuf);		// почему то добавление в хеш таблицу не увеличивает счетчик ссылок
+		g_hash_table_insert(binary_table, image_id, pixbuf);
+	}
+
+	gdk_pixbuf_loader_close(loader, NULL);
+	g_object_unref(G_OBJECT(loader));
 
 	return 0;
 }

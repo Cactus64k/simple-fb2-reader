@@ -4,17 +4,17 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/book_io.c \
+../src/book_open.c \
 ../src/init_global_obj.c \
 ../src/main.c 
 
 OBJS += \
-./src/book_io.o \
+./src/book_open.o \
 ./src/init_global_obj.o \
 ./src/main.o 
 
 C_DEPS += \
-./src/book_io.d \
+./src/book_open.d \
 ./src/init_global_obj.d \
 ./src/main.d 
 
