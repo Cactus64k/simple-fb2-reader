@@ -6,17 +6,20 @@
 C_SRCS += \
 ../src/callbacks/encode_dialog_callbacks.c \
 ../src/callbacks/main_wnd_callbacks.c \
-../src/callbacks/search_wnd_callbacks.c 
+../src/callbacks/search_wnd_callbacks.c \
+../src/callbacks/text_view_callback.c 
 
 OBJS += \
 ./src/callbacks/encode_dialog_callbacks.o \
 ./src/callbacks/main_wnd_callbacks.o \
-./src/callbacks/search_wnd_callbacks.o 
+./src/callbacks/search_wnd_callbacks.o \
+./src/callbacks/text_view_callback.o 
 
 C_DEPS += \
 ./src/callbacks/encode_dialog_callbacks.d \
 ./src/callbacks/main_wnd_callbacks.d \
-./src/callbacks/search_wnd_callbacks.d 
+./src/callbacks/search_wnd_callbacks.d \
+./src/callbacks/text_view_callback.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

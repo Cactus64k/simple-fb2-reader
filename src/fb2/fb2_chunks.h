@@ -4,7 +4,7 @@
 
 	#include "../chunks.h"
 
-	gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEventButton* event, GtkTextIter* iter, gpointer user_data);
+	gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data);
 
 	int parse_fb2(char* path, GtkTextBuffer* text_buff);
 	int parse_book_body(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);

@@ -1,6 +1,6 @@
 #include "../fb2_chunks.h"
 
-#define CHUNK_SIZE 1024
+#define READ_CHUNK_SIZE 1024
 
 int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 {
@@ -25,7 +25,7 @@ int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 
 	GdkPixbufLoader* loader = gdk_pixbuf_loader_new();
 
-	guchar out_buff[(CHUNK_SIZE/4)*3+3];
+	guchar out_buff[(READ_CHUNK_SIZE/4)*3+3];
 
 	char* image_data	= (char*)node->children->content;
 	ssize_t data_len	= strlen(image_data);
@@ -35,13 +35,13 @@ int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 
 	while(data_len > 0)
 	{
-		size_t count = g_base64_decode_step(image_data, CHUNK_SIZE, out_buff, &state, &save);
+		size_t count = g_base64_decode_step(image_data, READ_CHUNK_SIZE, out_buff, &state, &save);
 
 		if(gdk_pixbuf_loader_write(loader, out_buff, count, NULL) == false)
 			break;
 
-		image_data	+= CHUNK_SIZE;
-		data_len	-= CHUNK_SIZE;
+		image_data	+= READ_CHUNK_SIZE;
+		data_len	-= READ_CHUNK_SIZE;
 
 	}
 

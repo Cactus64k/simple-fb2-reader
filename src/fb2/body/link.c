@@ -16,7 +16,7 @@ int parse_link(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_e
 
 	while(properties != NULL)
 	{
-		if((node->type == XML_ATTRIBUTE_NODE) && (strcmp((char*)properties->name, "href") == 0))
+		if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)properties->name, "href") == 0))
 		{
 			const char* href = (char*)properties->children->content;
 			char* href_dup = g_strdup(href);

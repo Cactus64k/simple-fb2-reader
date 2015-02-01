@@ -83,6 +83,8 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEvent* event, gpoint
 	GdkEventKey key_event		= event->key;
 	GtkWidget* search_window	= GLOBAL_SEARCH_WND.search_wnd;
 	GtkEntry* search_entry		= GLOBAL_SEARCH_WND.search_query_entry;
+	GtkTextBuffer* text_buff	= GLOBAL_FB2_READER.text_buff;
+	GtkClipboard* clipboard		= GLOBAL_FB2_READER.clipboard;
 
 	switch(key_event.keyval)
 	{
@@ -95,25 +97,23 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEvent* event, gpoint
 			}
 
 			break;
+		case GDK_KEY_C:
+		case GDK_KEY_c:
+			if(key_event.state & GDK_CONTROL_MASK)
+			{
+				if(gtk_text_buffer_get_has_selection(text_buff) == true)
+				{
+					gtk_text_buffer_copy_clipboard(text_buff, clipboard);
+				}
+			}
+
+			break;
 		default:
 			break;
 	}
 
 	return true;
 }
-
-
-gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEventButton* event, GtkTextIter* iter, gpointer user_data)
-{
-	if(event->type == GDK_BUTTON_RELEASE)
-		if(event->state & GDK_BUTTON1_MASK)
-		{
-			char* href = (char*)g_object_get_data(G_OBJECT(tag), "href");
-			printf("link href=%s\n", href);
-		}
-	return true;
-}
-
 
 void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)
 {
@@ -125,10 +125,7 @@ void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* check
 
 	if(gtk_check_menu_item_get_active(checkmenuitem))
 	{
-		color.alpha	= 1;
-		color.blue	= 0.21176470588;
-		color.green	= 0.20392156863;
-		color.red	= 0.18039215686;
+		gdk_rgba_parse(&color, "#293134");
 		gtk_widget_override_background_color(GTK_WIDGET(text_view), GTK_STATE_FLAG_NORMAL, &color);
 		g_value_set_string(&value, "white");
 
@@ -136,10 +133,7 @@ void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* check
 	}
 	else
 	{
-		color.alpha	= 1;
-		color.blue	= 1;
-		color.green	= 1;
-		color.red	= 1;
+		gdk_rgba_parse(&color, "#ffffff");
 		gtk_widget_override_background_color(GTK_WIDGET(text_view), GTK_STATE_FLAG_NORMAL, &color);
 		g_value_set_string(&value, "black");
 

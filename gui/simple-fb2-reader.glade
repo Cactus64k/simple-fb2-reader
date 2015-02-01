@@ -286,6 +286,7 @@
                 <property name="wrap_mode">word</property>
                 <property name="cursor_visible">False</property>
                 <property name="buffer">book_textbuff</property>
+                <signal name="motion-notify-event" handler="book_textview_motion_notify_event_cb" swapped="no"/>
               </object>
             </child>
           </object>

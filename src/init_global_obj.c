@@ -81,6 +81,11 @@ int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
 	obj->binary_hash_table			= g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_object_unref);
 	obj->links_hash_table			= g_hash_table_new_full(g_str_hash, g_str_equal, NULL, g_object_unref);
 
+	obj->link_cursor				= gdk_cursor_new(GDK_HAND2);
+	obj->def_cursor					= gdk_cursor_new(GDK_XTERM);
+
+	obj->clipboard					= gtk_clipboard_get(0);
+
 	assert(obj->default_tag			!= NULL);
 	assert(obj->title_tag			!= NULL);
 	assert(obj->strong_tag			!= NULL);
@@ -91,10 +96,10 @@ int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
 	assert(obj->code_tag			!= NULL);
 	assert(obj->subtitle_tag		!= NULL);
 	assert(obj->image_tag			!= NULL);
-	assert(obj->epigraph_tag			!= NULL);
+	assert(obj->epigraph_tag		!= NULL);
 	assert(obj->binary_hash_table	!= NULL);
 	assert(obj->links_hash_table	!= NULL);
-	//assert(obj->a_tag				!= NULL);
+	assert(obj->clipboard			!= NULL);
 
 	gtk_widget_show_all(obj->main_wnd);
 

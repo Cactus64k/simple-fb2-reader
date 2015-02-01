@@ -55,6 +55,9 @@
 		GtkFileChooserDialog*	filechooserdialog;
 		GtkDialog*				navigation_dialog;
 		GtkListStore*			sections_liststore;
+		GdkCursor*				link_cursor;
+		GdkCursor*				def_cursor;
+		GtkClipboard* 			clipboard;
 
 		GtkTextTag*				default_tag;
 		GtkTextTag*				title_tag;
