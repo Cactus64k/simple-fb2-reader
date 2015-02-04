@@ -95,5 +95,6 @@
 
 	#include "fb2/fb2_chunks.h"
 	#include "txt/txt_parser.h"
+	#include "reader_errors.h"
 
 #endif /* CHUNKS_H_ */

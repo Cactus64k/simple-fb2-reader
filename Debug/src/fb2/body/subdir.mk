@@ -5,7 +5,6 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../src/fb2/body/annotation.c \
-../src/fb2/body/book_body.c \
 ../src/fb2/body/cite.c \
 ../src/fb2/body/date.c \
 ../src/fb2/body/epigraph.c \
@@ -21,7 +20,6 @@ C_SRCS += \
 
 OBJS += \
 ./src/fb2/body/annotation.o \
-./src/fb2/body/book_body.o \
 ./src/fb2/body/cite.o \
 ./src/fb2/body/date.o \
 ./src/fb2/body/epigraph.o \
@@ -37,7 +35,6 @@ OBJS += \
 
 C_DEPS += \
 ./src/fb2/body/annotation.d \
-./src/fb2/body/book_body.d \
 ./src/fb2/body/cite.d \
 ./src/fb2/body/date.d \
 ./src/fb2/body/epigraph.d \

@@ -53,7 +53,7 @@ int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 
 	GdkPixbuf* pixbuf = gdk_pixbuf_new_from_file(tmp_image_name, NULL);
 	if(pixbuf == NULL)
-		fprintf(stderr, "failed to get image %s\n", image_id);
+		fprintf(stderr, "Failed to parse image(%s) from file\n", image_id);
 	else
 		g_hash_table_insert(binary_table, image_id, pixbuf);
 

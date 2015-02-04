@@ -23,8 +23,8 @@ gboolean book_textview_motion_notify_event_cb(GtkWidget* widget, GdkEventMotion*
 
 gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data)
 {
-	GtkTextView* text_view = GTK_TEXT_VIEW(object);
-	GdkCursor* link_cusor = GLOBAL_FB2_READER.link_cursor;
+	GtkTextView* text_view	= GTK_TEXT_VIEW(object);
+	GdkCursor* link_cusor	= GLOBAL_FB2_READER.link_cursor;
 
 	if(event->type == GDK_BUTTON_RELEASE)
 	{
@@ -32,6 +32,13 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 		{
 			char* href = (char*)g_object_get_data(G_OBJECT(tag), "href");
 			printf("link href=%s\n", href);
+
+			GValue value = G_VALUE_INIT;
+			g_value_init(&value, G_TYPE_STRING);
+			g_value_set_string(&value, "purple");
+			g_object_set_property(G_OBJECT(tag), "foreground", &value);
+			g_value_unset(&value);
+
 		}
 	}
 	else if(event->type == GDK_MOTION_NOTIFY)

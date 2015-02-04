@@ -78,7 +78,7 @@ int parse_fb2(char* path, GtkTextBuffer* text_buff)
 					GtkTextTag* default_tag	= GLOBAL_FB2_READER.default_tag;
 					GtkTextIter text_buff_start;
 
-					parse_book_body(node, text_buff, &text_buff_end);
+					parse_body(node, text_buff, &text_buff_end);
 
 					gtk_text_buffer_get_start_iter(text_buff, &text_buff_start);
 

@@ -143,8 +143,6 @@ void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* check
 	g_object_set_property(G_OBJECT(default_tag), "foreground", &value);
 	g_value_unset(&value);
 
-
-
 }
 
 

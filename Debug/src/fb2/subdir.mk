@@ -4,12 +4,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../src/fb2/book_body.c \
 ../src/fb2/function_book.c 
 
 OBJS += \
+./src/fb2/book_body.o \
 ./src/fb2/function_book.o 
 
 C_DEPS += \
+./src/fb2/book_body.d \
 ./src/fb2/function_book.d 
 
 

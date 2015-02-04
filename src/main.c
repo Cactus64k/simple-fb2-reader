@@ -41,7 +41,12 @@ int main(int argc,	char *argv[])
 
 	g_object_unref(G_OBJECT(builder));
 
-	parse_fb2("/home/cactus/example.fb2", GLOBAL_FB2_READER.text_buff);
+	if(argc == 2)
+	{
+		open_book(argv[1]);
+	}
+
+	open_book("/home/cactus/example.fb2");
 	//open_book("/home/cactus/gamilton_piter_obnazhyonnyi_bog_fenomen.fb2");
 
 	gtk_main();

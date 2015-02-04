@@ -70,7 +70,7 @@ int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
 	obj->epigraph_tag				= gtk_text_buffer_create_tag(obj->text_buff, NULL, 	"left-margin",		allocated_size.width * EPIGRAPH_TAG_MARGIN,
 																						"right-margin",		allocated_size.width * EPIGRAPH_TAG_MARGIN, NULL);
 	//####################################################################################################################################
-	obj->stanza_tag					= gtk_text_buffer_create_tag(obj->text_buff, NULL, 	"size-points",		15.f,
+	obj->stanza_tag					= gtk_text_buffer_create_tag(obj->text_buff, NULL, 	"style",			PANGO_STYLE_ITALIC,
 																						"justification",	GTK_JUSTIFY_CENTER, NULL);
 
 	/*obj->a_tag					= gtk_text_buffer_create_tag(obj->text_buff, NULL, 	"foreground",		"blue",

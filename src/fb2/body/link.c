@@ -16,12 +16,20 @@ int parse_link(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_e
 
 	while(properties != NULL)
 	{
-		if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)properties->name, "href") == 0))
+		if(node->type == XML_ELEMENT_NODE)			//type="note"
 		{
-			const char* href = (char*)properties->children->content;
-			char* href_dup = g_strdup(href);
-			g_signal_connect(G_OBJECT(a_tag), "event", G_CALLBACK(a_tag_event_cb), NULL);
-			g_object_set_data_full(G_OBJECT(a_tag), "href", href_dup, g_free);
+			if(strcmp((char*)properties->name, "href") == 0)
+			{
+				const char* href = (char*)properties->children->content;
+				if(*href == '#')
+					href++;
+				else
+					fputs("not local links not supported\n", stderr);
+
+				char* href_dup = g_strdup(href);
+				g_signal_connect(G_OBJECT(a_tag), "event", G_CALLBACK(a_tag_event_cb), NULL);
+				g_object_set_data_full(G_OBJECT(a_tag), "href", href_dup, g_free);
+			}
 		}
 
 		properties = properties->next;

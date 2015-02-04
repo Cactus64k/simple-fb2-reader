@@ -16,7 +16,13 @@ int parse_image(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_
 		{
 			if(strcmp((char*)properties->name, "href") == 0)
 			{
-				char* image_id = (char*)(properties->children->content+1);
+				char* image_id = (char*)(properties->children->content);
+				if(*image_id == '#') // local
+					image_id++;
+				else
+					fputs("not local links not supported\n", stderr);
+
+
 				image = g_hash_table_lookup(binary_hash_table, image_id);
 				if(image == NULL)
 					fprintf(stderr, "image %s not fount in table\n", image_id);

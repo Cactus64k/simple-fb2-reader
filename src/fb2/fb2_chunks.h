@@ -7,13 +7,13 @@
 	gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data);
 
 	int parse_fb2(char* path, GtkTextBuffer* text_buff);
-	int parse_book_body(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
+	int parse_body(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
 	int parse_book_binary(xmlNode* node, GHashTable* binary_table);
 	int parse_book_description(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
 	int parse_title_info(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
 	int parse_link(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
 	int parse_image(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_body_section(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
+	int parse_section(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
 	int parse_p(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
 	int parse_formated_text(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
 	int parse_date(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
