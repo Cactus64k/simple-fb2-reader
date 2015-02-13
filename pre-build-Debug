@@ -1,10 +1,10 @@
 #!/bin/bash
-
-cd ~/Yandex.Disk/Eclipse/LINUX/simple-fb2-reader/gui
-
-touch ../Debug/gui/simple-fb2-reader.glade.o
-
+if test ! -e "${CWD}/gui"; then
+mkdir gui;
+fi
+touch ${CWD}/gui/simple-fb2-reader.glade.o
+cd ../gui
 objcopy	--input binary \
 	--output elf64-x86-64 \
 	--binary-architecture i386 \
-	simple-fb2-reader.glade ../Debug/gui/simple-fb2-reader.glade.o
+	simple-fb2-reader.glade ${CWD}/gui/simple-fb2-reader.glade.o
