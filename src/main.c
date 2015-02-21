@@ -13,6 +13,7 @@ int main(int argc,	char *argv[])
 	//g_mem_set_vtable(glib_mem_profiler_table);
 
 	setbuf(stdout, NULL);
+	setbuf(stderr, NULL);
 
 	setlocale(LC_ALL, "");
 	bindtextdomain(TRANSLATION_DOMAIN, TRANSLATION_DIR_NAME);
@@ -25,10 +26,11 @@ int main(int argc,	char *argv[])
 
 	gtk_builder_set_translation_domain(builder, TRANSLATION_DOMAIN);
 
-	char* gui_start	= &_binary_simple_fb2_reader_glade_start;
-	char* gui_end	= &_binary_simple_fb2_reader_glade_end;
+	char* gui_start		= &_binary_simple_fb2_reader_glade_start;
+	char* gui_end		= &_binary_simple_fb2_reader_glade_end;
+	uintptr_t gui_len	= (uintptr_t)(gui_end-gui_start);
 
-	int result = gtk_builder_add_from_string(builder, gui_start, gui_end-gui_start, NULL);
+	guint result = gtk_builder_add_from_string(builder, gui_start, gui_len, NULL);
 	assert(result != 0);
 
 	gtk_builder_connect_signals(builder, NULL);
@@ -43,11 +45,15 @@ int main(int argc,	char *argv[])
 
 	if(argc == 2)
 	{
-		open_book(argv[1]);
+		reader_open_book(argv[1]);
 	}
 
-	open_book("/home/cactus/example.fb2");
-	//open_book("/home/cactus/gamilton_piter_obnazhyonnyi_bog_fenomen.fb2");
+	#ifdef DEBUG
+		char test_path[] = "/home/cactus/example.fb2";
+
+		reader_open_book(test_path);
+		//open_book("/home/cactus/gamilton_piter_obnazhyonnyi_bog_fenomen.fb2");
+	#endif
 
 	gtk_main();
 

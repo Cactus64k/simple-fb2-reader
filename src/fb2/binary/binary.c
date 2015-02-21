@@ -2,13 +2,14 @@
 
 #define READ_CHUNK_SIZE 1024
 
-int parse_book_binary(xmlNode* node, GHashTable* binary_table)
+int parse_book_binary(FB2_READER_TEXT_VIEW* obj, xmlNode* node)
 {
 	assert(node != NULL);
-	assert(binary_table != NULL);
 
-	char* image_id = NULL;
+	GHashTable* binary_hash_table	= *(obj->binary_hash_table);
 	xmlAttr* properties = node->properties;
+	char* image_id = NULL;
+
 
 	while(properties != NULL)
 	{
@@ -55,7 +56,7 @@ int parse_book_binary(xmlNode* node, GHashTable* binary_table)
 	if(pixbuf == NULL)
 		fprintf(stderr, "Failed to parse image(%s) from file\n", image_id);
 	else
-		g_hash_table_insert(binary_table, image_id, pixbuf);
+		g_hash_table_insert(binary_hash_table, image_id, pixbuf);
 
 	remove(tmp_image_name);
 

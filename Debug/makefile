@@ -9,9 +9,11 @@ RM := rm -rf
 # All of the sources participating in the build are defined here
 -include sources.mk
 -include src/txt/subdir.mk
+-include src/init/subdir.mk
 -include src/fb2/description/subdir.mk
 -include src/fb2/body/subdir.mk
 -include src/fb2/binary/subdir.mk
+-include src/fb2/attributes/subdir.mk
 -include src/fb2/subdir.mk
 -include src/callbacks/subdir.mk
 -include src/subdir.mk
@@ -48,7 +50,7 @@ clean:
 	-@echo ' '
 
 pre-build:
-	-sh /home/cactus/Yandex.Disk/Eclipse/LINUX/simple-fb2-reader/pre-build-Debug
+	-sh /home/cactus/Yandex.Disk/Eclipse/LINUX/simple-fb2-reader/build_gui
 	-@echo ' '
 
 .PHONY: all clean dependents

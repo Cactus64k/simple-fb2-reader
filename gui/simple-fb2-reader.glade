@@ -66,6 +66,11 @@
       <action-widget response="2">book_filechooserdialog_ok_button</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkImage" id="book_position_icon_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-redo</property>
+  </object>
   <object class="GtkTextBuffer" id="book_textbuff"/>
   <object class="GtkAdjustment" id="book_textview_horisontal_adjustment">
     <property name="upper">1000</property>
@@ -77,12 +82,12 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkListStore" id="books_sections_liststore">
+  <object class="GtkTreeStore" id="books_sections_treestore">
     <columns>
-      <!-- column-name section_num -->
-      <column type="gint"/>
       <!-- column-name section_name -->
       <column type="gchararray"/>
+      <!-- column-name section_string -->
+      <column type="gint"/>
     </columns>
   </object>
   <object class="GtkTextBuffer" id="encode_textbuffer"/>
@@ -108,11 +113,11 @@
     <property name="window_position">center</property>
     <property name="default_width">640</property>
     <property name="default_height">480</property>
-    <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
+    <signal name="destroy" handler="main_wnd_destroy_cb" swapped="no"/>
     <signal name="configure-event" handler="main_wnd_configure_event_cb" object="book_textview" swapped="no"/>
     <signal name="key-press-event" handler="main_wnd_key_press_event_cb" swapped="no"/>
     <child>
-      <object class="GtkBox" id="box1">
+      <object class="GtkBox" id="main_wnd_box">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="orientation">vertical</property>
@@ -143,28 +148,6 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem" id="file_navigation_imagemenuitem">
-                        <property name="label">gtk-index</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="file_navigation_imagemenuitem_activate_cb" swapped="no"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="file_search_imagemenuitem">
-                        <property name="label">gtk-find</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <signal name="activate" handler="file_search_imagemenuitem_activate_cb" swapped="no"/>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkSeparatorMenuItem" id="file_separatormenuitem">
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -179,7 +162,55 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <signal name="activate" handler="gtk_main_quit" swapped="no"/>
+                        <signal name="activate" handler="main_wnd_destroy_cb" swapped="no"/>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkMenuItem" id="book_menuitm">
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">Book</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu3">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="book_search_imagemenuitem">
+                        <property name="label">gtk-find</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="book_search_imagemenuitem_activate_cb" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="book_navigation_imagemenuitem">
+                        <property name="label">gtk-index</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                        <signal name="activate" handler="book_navigation_imagemenuitem_activate_cb" swapped="no"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="book_position_imagemenuitem">
+                        <property name="label" translatable="yes">To last read position</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="image">book_position_icon_image</property>
+                        <property name="use_stock">False</property>
+                        <signal name="activate" handler="book_position_imagemenuitem_activate_cb" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -280,6 +311,7 @@
               <object class="GtkTextView" id="book_textview">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="margin_bottom">10</property>
                 <property name="hadjustment">book_textview_horisontal_adjustment</property>
                 <property name="vadjustment">book_textview_vertical_adjustment</property>
                 <property name="editable">False</property>
@@ -293,19 +325,6 @@
           <packing>
             <property name="expand">True</property>
             <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkStatusbar" id="book_statusbar">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="orientation">vertical</property>
-            <property name="spacing">2</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
             <property name="position">2</property>
           </packing>
         </child>
@@ -315,8 +334,8 @@
   <object class="GtkDialog" id="navigation_dialog">
     <property name="can_focus">False</property>
     <property name="modal">True</property>
-    <property name="default_width">200</property>
-    <property name="default_height">200</property>
+    <property name="default_width">400</property>
+    <property name="default_height">400</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_wnd</property>
     <child internal-child="vbox">
@@ -346,7 +365,7 @@
             </child>
             <child>
               <object class="GtkButton" id="navigation_dialog-jump-button">
-                <property name="label">gtk-apply</property>
+                <property name="label">gtk-jump-to</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -377,9 +396,12 @@
               <object class="GtkTreeView" id="books_section_treeview">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="model">books_sections_liststore</property>
+                <property name="model">books_sections_treestore</property>
                 <property name="headers_visible">False</property>
                 <property name="headers_clickable">False</property>
+                <property name="enable_grid_lines">horizontal</property>
+                <property name="enable_tree_lines">True</property>
+                <signal name="row-activated" handler="books_section_treeview_row_activated_cb" swapped="no"/>
                 <child internal-child="selection">
                   <object class="GtkTreeSelection" id="treeview-selection2"/>
                 </child>
@@ -388,15 +410,9 @@
                     <property name="resizable">True</property>
                     <property name="title" translatable="yes">Sections</property>
                     <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext1"/>
+                      <object class="GtkCellRendererText" id="section_title_cellrenderertext"/>
                       <attributes>
                         <attribute name="text">0</attribute>
-                      </attributes>
-                    </child>
-                    <child>
-                      <object class="GtkCellRendererText" id="cellrenderertext2"/>
-                      <attributes>
-                        <attribute name="text">1</attribute>
                       </attributes>
                     </child>
                   </object>

@@ -1,20 +1,17 @@
 #include "../fb2_chunks.h"
 
-
-
-int parse_book_description(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end)
+int parse_book_description(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	assert(node != NULL);
-	assert(text_buff != NULL);
+	assert(parent_node != NULL);
 	assert(text_buff_end != NULL);
 
-	node = node->children;
+	xmlNode* node				= parent_node->children;
 
 	while(node != NULL)
 	{
 		if(strcmp((char*)node->name, "title-info") == 0)
 		{
-			parse_title_info(node, text_buff, text_buff_end);
+			parse_title_info(obj, node, text_buff_end);
 		}
 		else if(strcmp((char*)node->name, "src-title-info") == 0)
 		{
@@ -44,13 +41,13 @@ int parse_book_description(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter*
 }
 
 
-int parse_title_info(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end)
+int parse_title_info(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	assert(node != NULL);
-	assert(text_buff != NULL);
+	assert(parent_node != NULL);
 	assert(text_buff_end != NULL);
 
-	node = node->children;
+	xmlNode* node = parent_node->children;
+
 	GtkWidget* main_wnd = GLOBAL_FB2_READER.main_wnd;
 
 	while(node != NULL)

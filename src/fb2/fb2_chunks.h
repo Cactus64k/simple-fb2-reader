@@ -6,24 +6,28 @@
 
 	gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data);
 
-	int parse_fb2(char* path, GtkTextBuffer* text_buff);
-	int parse_body(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_book_binary(xmlNode* node, GHashTable* binary_table);
-	int parse_book_description(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_title_info(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_link(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_image(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_section(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_p(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_formated_text(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_date(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_poem(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_style(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_text_autor(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int print_unsupported_tag(char* tag);
-	int parse_epigraph(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_title(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_subtitle(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
-	int parse_cite(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end);
+	int parse_fb2				(char* path);
+	int parse_book_binary		(FB2_READER_TEXT_VIEW* obj, xmlNode* node);
+	int parse_body				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_book_description	(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_title_info		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_link				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_image				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_image_inline		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_section			(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end, GtkTreeIter* tree_iter);
+	int parse_p					(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_formated_text		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_date				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_poem				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_style				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_text_autor		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_epigraph			(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_title				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_subtitle			(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_cite				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_table				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_annotation		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+
+	int parse_id_attribute		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 
 #endif /* FB2_CHUNKS_H_ */

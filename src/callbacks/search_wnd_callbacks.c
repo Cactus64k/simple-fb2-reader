@@ -13,28 +13,28 @@ gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpoin
 
 	//printf("key event\n");
 
-	return false;
+	return FALSE;
 }
 
 
 void search_query_changed_cb(GtkEditable* editable, gpointer user_data)
 {
-	bool* entry_edited				= &GLOBAL_SEARCH_WND.entry_edited;
-	*entry_edited = true;
+	gboolean* entry_edited	 = &GLOBAL_SEARCH_WND.entry_edited;
+	*entry_edited = TRUE;
 }
 
 void search_query_activate_cb(GtkEntry* entry, gpointer user_data)
 {
 	//gtk_widget_hide(GTK_WIDGET(user_data));
 
-	GtkTextBuffer* text_buff		= GLOBAL_FB2_READER.text_buff;
-	GtkTextView* text_view			= GLOBAL_FB2_READER.text_view;
+	GtkTextBuffer* text_buff		= GLOBAL_FB2_READER.book_text_view.text_buff;
+	GtkTextView* text_view			= GLOBAL_FB2_READER.book_text_view.text_view;
 	GtkTextIter* last_search_pos	= &GLOBAL_SEARCH_WND.last_pos;
-	bool* entry_edited				= &GLOBAL_SEARCH_WND.entry_edited;
+	gboolean* entry_edited			= &GLOBAL_SEARCH_WND.entry_edited;
 
 	const char* query = gtk_entry_get_text(entry);
 
-	if(*entry_edited == true)
+	if(*entry_edited == TRUE)
 		gtk_text_buffer_get_start_iter(text_buff, last_search_pos);
 
 
@@ -43,21 +43,15 @@ void search_query_activate_cb(GtkEntry* entry, gpointer user_data)
 
 	if(gtk_text_iter_forward_search(last_search_pos, query, GTK_TEXT_SEARCH_CASE_INSENSITIVE, &text_buff_match_start_iter, &text_buff_match_end_iter, NULL))
 	{
-		printf("match sucsess\n");
 		gtk_text_buffer_select_range(text_buff, &text_buff_match_start_iter, &text_buff_match_end_iter);
 
-		GtkTextMark* mark = gtk_text_buffer_create_mark(text_buff, NULL, &text_buff_match_start_iter, TRUE);
-		gtk_text_view_scroll_mark_onscreen(text_view, mark);
-		gtk_text_buffer_delete_mark(text_buff, mark);
+		gtk_text_view_scroll_to_iter(text_view, &text_buff_match_start_iter, 0.f, TRUE, 0.f, 0.5f);
 
 		*last_search_pos = text_buff_match_end_iter;
 
-		*entry_edited = false;
+		*entry_edited = FALSE;
 	}
 	else
-	{
-		printf("match failed\n");
 		gtk_text_buffer_get_start_iter(text_buff, last_search_pos);
-	}
 
 }

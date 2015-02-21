@@ -1,0 +1,10 @@
+#!/bin/bash
+if test ! -e "${CWD}/gui"; then
+mkdir gui;
+fi
+touch ${CWD}/gui/simple-fb2-reader.glade.o
+cd ../gui
+objcopy	--input binary \
+	--output elf64-x86-64 \
+	--binary-architecture i386 \
+	simple-fb2-reader.glade ${CWD}/gui/simple-fb2-reader.glade.o

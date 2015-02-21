@@ -11,12 +11,12 @@ void encode_treeview_cursor_changed_cb(GtkTreeView* tree_view, gpointer user_dat
 	size_t buffer_data_size				= GLOBAL_ENCODE_DIALOG.buffer_data_size;
 
 	GtkTreeIter tree_iter;
-	gboolean is_encode = false;
+	gboolean is_encode = FALSE;
 
-	if(gtk_tree_selection_get_selected(tree_selection, NULL, &tree_iter) == true)
+	if(gtk_tree_selection_get_selected(tree_selection, NULL, &tree_iter) == TRUE)
 	{
 		gtk_tree_model_get(tree_model, &tree_iter, IS_ENCODE_COLUMN, &is_encode, -1);
-		if(is_encode == true)
+		if(is_encode == TRUE)
 		{
 			char* encode_name = NULL;
 			gtk_tree_model_get(tree_model, &tree_iter, ENCODE_NAME_COLUMN, &encode_name, -1);
@@ -38,7 +38,7 @@ void encode_treeview_cursor_changed_cb(GtkTreeView* tree_view, gpointer user_dat
 				fprintf(stderr, "TXT encode error: %s\n", error_text);
 			}
 			else
-				gtk_text_buffer_set_text(text_buffer, dst_buffer, dst_buff_size-dst_buff_left);
+				gtk_text_buffer_set_text(text_buffer, dst_buffer, (dst_buff_size-dst_buff_left));
 
 
 
@@ -49,3 +49,5 @@ void encode_treeview_cursor_changed_cb(GtkTreeView* tree_view, gpointer user_dat
 
 	}
 }
+
+

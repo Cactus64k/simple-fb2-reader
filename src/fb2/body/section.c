@@ -1,161 +1,83 @@
 #include "../fb2_chunks.h"
 
-int parse_section(xmlNode* parent_node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end)
+int parse_section(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end, GtkTreeIter* tree_iter)
 {
 	assert(parent_node != NULL);
-	assert(text_buff != NULL);
 	assert(text_buff_end != NULL);
 
-	bool section_in_section = false;
+	GtkTextBuffer* text_buff			= obj->text_buff;
+	xmlNode* node						= parent_node->children;
+	GtkTreeStore* sections_treestore	= obj->sections_treestore;
+	gboolean save_section				= obj->save_section;
 
-	xmlNode* node					= parent_node->children;
-	xmlAttr* properties				= parent_node->properties;
-	GHashTable* links_hash_table	= GLOBAL_FB2_READER.binary_hash_table;
+	parse_id_attribute(obj, parent_node, text_buff_end);
 
-	//########################################################################################################
+	gboolean has_title		= FALSE;
+	GtkTreeIter section_iter;
 
-	while(properties != NULL)
+	if(save_section == TRUE)
 	{
-		if(properties->type == XML_ATTRIBUTE_NODE)
-		{
-			if(strcmp((char*)properties->name, "id") == 0)
-			{
-				char* link_id = (char*)properties->children->content;
-				GtkTextMark* mark = gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, true);
+		gtk_tree_store_append(sections_treestore, &section_iter, tree_iter);
 
-				g_hash_table_insert(links_hash_table, link_id, mark);
-				break;
-			}
-		}
-
-		properties = properties->next;
+		gint cur_line = gtk_text_iter_get_line(text_buff_end);
+		gtk_tree_store_set(sections_treestore, &section_iter, SECTION_STRING_COLUMN, cur_line, -1);
 	}
-
-	//########################################################################################################
 
 	while(node != NULL)
 	{
-		if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)node->name, "section") == 0))
+		if(node->type == XML_ELEMENT_NODE)
 		{
-			section_in_section = true;
-			break;
+			if(strcmp((char*)node->name, "title") == 0)
+			{
+				if(save_section == TRUE)
+				{
+					GtkTextMark* start_tag_mark = gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
+
+					parse_title(obj, node, text_buff_end);
+
+					GtkTextIter start_tag_iter;
+					gtk_text_buffer_get_iter_at_mark(text_buff, &start_tag_iter, start_tag_mark);
+					gtk_text_buffer_delete_mark(text_buff, start_tag_mark);
+
+					char* title_data = gtk_text_buffer_get_text(text_buff, &start_tag_iter, text_buff_end, TRUE);
+
+					gtk_tree_store_set(sections_treestore, &section_iter,  SECTION_NAME_COLUMN, title_data, -1);
+					g_free(title_data);
+				}
+				else
+					parse_title(obj, node, text_buff_end);
+
+				has_title = TRUE;
+			}
+			else if(strcmp((char*)node->name, "epigraph") == 0)
+				parse_epigraph(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "annotation") == 0)
+				parse_annotation(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "section") == 0)
+				parse_section(obj, node, text_buff_end, &section_iter);
+			else if(strcmp((char*)node->name, "p") == 0)
+				parse_p(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "empty-line") == 0)
+				gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+			else if(strcmp((char*)node->name, "image") == 0)
+				parse_image(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "poem") == 0)
+				parse_poem(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "subtitle") == 0)
+				parse_subtitle(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "cite") == 0)
+				parse_cite(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "table") == 0)
+				parse_table(obj, node, text_buff_end);
 		}
 
 		node = node->next;
 	}
 
-	//########################################################################################################
-
-	node				= parent_node->children;
-	size_t title_count	= 0;
-	size_t image_count	= 0;
-	size_t anntn_count	= 0;
-	size_t textt_count	= 0;
-
-	if(section_in_section == true)
+	if((has_title == FALSE) && (save_section == TRUE))
 	{
-		while(node != NULL)
-		{
-			if(node->type == XML_ELEMENT_NODE)
-			{
-				if(strcmp((char*)node->name, "title") == 0)
-				{
-					if(title_count == 0)
-					{
-						parse_title(node, text_buff, text_buff_end);
-						title_count++;
-					}
-					else
-						fputs("fb2 format error: more then one title in section tag\n", stderr);
-				}
-				else if(strcmp((char*)node->name, "epigraph") == 0)
-					parse_epigraph(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "image") == 0)
-				{
-					if(image_count == 0)
-					{
-						parse_image(node, text_buff, text_buff_end);
-						image_count++;
-					}
-					else
-						fputs("fb2 format error: more then one image in section tag\n", stderr);
-				}
-				else if(strcmp((char*)node->name, "annotation") == 0)
-				{
-					if(anntn_count == 0)
-					{
-						print_unsupported_tag("annotation");
-						anntn_count++;
-					}
-					else
-						fputs("fb2 format error: more then one annotation in section tag\n", stderr);
-
-				}
-				else if(strcmp((char*)node->name, "section") == 0)
-					parse_section(node, text_buff, text_buff_end);
-			}
-
-			node = node->next;
-		}
+		gtk_tree_store_set(sections_treestore, &section_iter, SECTION_NAME_COLUMN, "NO NAME", -1);
 	}
-	else
-	{
-		while(node != NULL)
-		{
-			if(node->type == XML_ELEMENT_NODE)
-			{
-				if(strcmp((char*)node->name, "p") == 0)
-				{
-					parse_p(node, text_buff, text_buff_end);
-					textt_count++;
-				}
-				else if(strcmp((char*)node->name, "empty-line") == 0)
-				{
-					gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
-					textt_count++;
-				}
-				else if(strcmp((char*)node->name, "title") == 0)
-				{
-					parse_title(node, text_buff, text_buff_end);
-					textt_count++;
-				}
-				else if(strcmp((char*)node->name, "epigraph") == 0)
-				{
-					parse_epigraph(node, text_buff, text_buff_end);
-					textt_count++;
-				}
-				else if(strcmp((char*)node->name, "image") == 0)
-				{
-					parse_image(node, text_buff, text_buff_end);
-					textt_count++;
-				}
-				else if(strcmp((char*)node->name, "poem") == 0)
-				{
-					parse_poem(node, text_buff, text_buff_end);
-					textt_count++;
-				}
-				else if(strcmp((char*)node->name, "subtitle") == 0)
-				{
-					parse_subtitle(node, text_buff, text_buff_end);
-					textt_count++;
-				}
-				else if(strcmp((char*)node->name, "cite") == 0)
-				{
-					parse_cite(node, text_buff, text_buff_end);
-					textt_count++;
-				}
-				else if(strcmp((char*)node->name, "table") == 0)
-				{
-					print_unsupported_tag("table");
-					textt_count++;
-				}
-			}
 
-			node = node->next;
-		}
-		if(textt_count == 0)
-			fputs("fb2 format error: no text tags in section tag\n", stderr);
-	}
 	return 0;
 }
-
