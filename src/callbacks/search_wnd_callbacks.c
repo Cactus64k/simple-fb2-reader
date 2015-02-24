@@ -11,8 +11,6 @@ gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpoin
 	if(key_event.keyval == GDK_KEY_Escape)
 		gtk_widget_hide(widget);
 
-	//printf("key event\n");
-
 	return FALSE;
 }
 

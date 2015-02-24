@@ -4,16 +4,16 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../src/fb2_reader.c \
-../src/main.c 
+../src/main.c \
+../src/reader.c 
 
 OBJS += \
-./src/fb2_reader.o \
-./src/main.o 
+./src/main.o \
+./src/reader.o 
 
 C_DEPS += \
-./src/fb2_reader.d \
-./src/main.d 
+./src/main.d \
+./src/reader.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes

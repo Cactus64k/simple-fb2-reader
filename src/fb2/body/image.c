@@ -2,8 +2,8 @@
 
 int parse_image(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	assert(parent_node != NULL);
-	assert(text_buff_end != NULL);
+	g_return_val_if_fail(parent_node != NULL, -1);
+	g_return_val_if_fail(text_buff_end != NULL, -2);
 
 	GtkTextBuffer* text_buff		= obj->text_buff;
 	GHashTable* binary_hash_table	= *(obj->binary_hash_table);
@@ -29,10 +29,10 @@ int parse_image(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* te
 
 					image = g_hash_table_lookup(binary_hash_table, image_id);
 					if(image == NULL)
-						fprintf(stderr, "image %s not fount in table\n", image_id);
+						fprintf(stderr, "Image %s not found in table\n", image_id);
 				}
 				else
-					fputs("not local links not supported\n", stderr);
+					fputs("Not local links not supported\n", stderr);
 
 				break;
 			}
@@ -61,8 +61,8 @@ int parse_image(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* te
 
 int parse_image_inline(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	assert(parent_node != NULL);
-	assert(text_buff_end != NULL);
+	g_return_val_if_fail(parent_node != NULL, -1);
+	g_return_val_if_fail(text_buff_end != NULL, -2);
 
 	GtkTextBuffer* text_buff		= obj->text_buff;
 	GHashTable* binary_hash_table	= *(obj->binary_hash_table);
@@ -85,10 +85,10 @@ int parse_image_inline(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextI
 
 					image = g_hash_table_lookup(binary_hash_table, image_id);
 					if(image == NULL)
-						fprintf(stderr, "image %s not fount in table\n", image_id);
+						fprintf(stderr, "Image %s not found in table\n", image_id);
 				}
 				else
-					fputs("not local links not supported\n", stderr);
+					fputs("Not local links not supported\n", stderr);
 
 				break;
 			}

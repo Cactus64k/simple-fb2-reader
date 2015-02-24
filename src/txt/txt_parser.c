@@ -1,9 +1,9 @@
-#include "txt_parser.h"
+#include "txt_chunks.h"
 
 int parse_txt(char* file_path, char* encode)
 {
-	assert(file_path != NULL);
-	assert(encode != NULL);
+	g_return_val_if_fail(file_path != NULL, -1);
+	g_return_val_if_fail(encode != NULL, -2);
 
 	GtkTextBuffer* text_buff = GLOBAL_FB2_READER.book_text_view.text_buff;
 

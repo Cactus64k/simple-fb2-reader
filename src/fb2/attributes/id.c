@@ -2,8 +2,8 @@
 
 int parse_id_attribute(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	assert(parent_node != NULL);
-	assert(text_buff_end != NULL);
+	g_return_val_if_fail(parent_node != NULL, -1);
+	g_return_val_if_fail(text_buff_end != NULL, -2);
 
 	GHashTable* links_hash_table	= obj->links_hash_table;
 	//GtkTextBuffer* text_buff		= obj->text_buff;

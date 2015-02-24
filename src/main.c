@@ -28,7 +28,7 @@ int main(int argc,	char *argv[])
 
 	char* gui_start		= &_binary_simple_fb2_reader_glade_start;
 	char* gui_end		= &_binary_simple_fb2_reader_glade_end;
-	uintptr_t gui_len	= (uintptr_t)(gui_end-gui_start);
+	uintptr_t gui_len	= (uintptr_t)(gui_end - gui_start);
 
 	guint result = gtk_builder_add_from_string(builder, gui_start, gui_len, NULL);
 	assert(result != 0);

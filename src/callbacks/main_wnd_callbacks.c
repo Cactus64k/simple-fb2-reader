@@ -34,12 +34,15 @@ void book_position_imagemenuitem_activate_cb(GtkMenuItem* menuitem, gpointer use
 	GtkTextBuffer* text_buff	= GLOBAL_FB2_READER.book_text_view.text_buff;
 	GtkTextView* text_view		= GLOBAL_FB2_READER.book_text_view.text_view;
 
-	gint read_line				= g_key_file_get_int64(book_config, "book", "read_line", NULL);
-	gint read_line_offset		= g_key_file_get_int64(book_config, "book", "read_line_offset", NULL);
+	if(book_config != NULL)
+	{
+		gint read_line				= g_key_file_get_int64(book_config, "book", "read_line", NULL);
+		gint read_line_offset		= g_key_file_get_int64(book_config, "book", "read_line_offset", NULL);
 
-	GtkTextIter iter;
-	gtk_text_buffer_get_iter_at_line_offset(text_buff, &iter, read_line, read_line_offset);
-	gtk_text_view_scroll_to_iter(text_view, &iter, 0.f, TRUE, 0.f, 0.0f);
+		GtkTextIter iter;
+		gtk_text_buffer_get_iter_at_line_offset(text_buff, &iter, read_line, read_line_offset);
+		gtk_text_view_scroll_to_iter(text_view, &iter, 0.f, TRUE, 0.f, 0.0f);
+	}
 }
 
 void main_wnd_destroy_cb(GtkWidget *object, gpointer user_data)
@@ -77,6 +80,15 @@ void book_navigation_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer u
 	gtk_widget_hide(GTK_WIDGET(dialog));
 }
 
+void main_wnd_size_allocate_cb (GtkWidget *widget, GdkRectangle *allocation, gpointer user_data)
+{
+	GtkTextView* text_view = GTK_TEXT_VIEW(user_data);
+
+	gint margin = allocation->width * 0.15;
+
+	gtk_text_view_set_right_margin(text_view, margin);
+	gtk_text_view_set_left_margin(text_view, margin);
+}
 
 void books_section_treeview_row_activated_cb(GtkTreeView* tree_view, GtkTreePath* path, GtkTreeViewColumn* column, gpointer user_data)
 {
@@ -102,24 +114,6 @@ void books_section_treeview_row_activated_cb(GtkTreeView* tree_view, GtkTreePath
 	}
 
 }
-
-
-
-gboolean main_wnd_configure_event_cb(GtkWidget *widget, GdkEvent *event, gpointer user_data)
-{
-	GtkTextView* text_view = GTK_TEXT_VIEW(user_data);
-	GtkAllocation allocated_size;
-
-	gtk_widget_get_allocation(GTK_WIDGET(text_view), &allocated_size);
-
-	gint margin = (allocated_size.width * 0.15);
-
-	gtk_text_view_set_right_margin(text_view, margin);
-	gtk_text_view_set_left_margin(text_view, margin);
-
-	return FALSE;
-}
-
 
 
 gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEvent* event, gpointer user_data)
@@ -155,7 +149,6 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEvent* event, gpoint
 
 	return TRUE;
 }
-
 
 
 void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)

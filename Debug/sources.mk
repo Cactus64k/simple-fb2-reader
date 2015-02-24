@@ -16,6 +16,7 @@ SUBDIRS := \
 src/txt \
 src \
 src/init \
+src/fb2_zip \
 src/fb2 \
 src/fb2/description \
 src/fb2/body \

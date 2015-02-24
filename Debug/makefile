@@ -10,6 +10,7 @@ RM := rm -rf
 -include sources.mk
 -include src/txt/subdir.mk
 -include src/init/subdir.mk
+-include src/fb2_zip/subdir.mk
 -include src/fb2/description/subdir.mk
 -include src/fb2/body/subdir.mk
 -include src/fb2/binary/subdir.mk

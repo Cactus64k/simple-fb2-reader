@@ -7,6 +7,7 @@
 	gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data);
 
 	int parse_fb2				(char* path);
+	int parse_function_book		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 	int parse_book_binary		(FB2_READER_TEXT_VIEW* obj, xmlNode* node);
 	int parse_body				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 	int parse_book_description	(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);

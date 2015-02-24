@@ -90,7 +90,6 @@
       <column type="gint"/>
     </columns>
   </object>
-  <object class="GtkTextBuffer" id="encode_textbuffer"/>
   <object class="GtkTreeStore" id="encode_treestore">
     <columns>
       <!-- column-name is_encode -->
@@ -99,6 +98,7 @@
       <column type="gchararray"/>
     </columns>
   </object>
+  <object class="GtkTextBuffer" id="encode_textbuffer"/>
   <object class="GtkFileFilter" id="fb2_files_filter">
     <patterns>
       <pattern>*.fb2</pattern>
@@ -114,8 +114,8 @@
     <property name="default_width">640</property>
     <property name="default_height">480</property>
     <signal name="destroy" handler="main_wnd_destroy_cb" swapped="no"/>
-    <signal name="configure-event" handler="main_wnd_configure_event_cb" object="book_textview" swapped="no"/>
     <signal name="key-press-event" handler="main_wnd_key_press_event_cb" swapped="no"/>
+    <signal name="size-allocate" handler="main_wnd_size_allocate_cb" object="book_textview" swapped="no"/>
     <child>
       <object class="GtkBox" id="main_wnd_box">
         <property name="visible">True</property>
@@ -203,43 +203,7 @@
                       </object>
                     </child>
                     <child>
-                      <object class="GtkImageMenuItem" id="book_position_imagemenuitem">
-                        <property name="label" translatable="yes">To last read position</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="image">book_position_icon_image</property>
-                        <property name="use_stock">False</property>
-                        <signal name="activate" handler="book_position_imagemenuitem_activate_cb" swapped="no"/>
-                      </object>
-                    </child>
-                  </object>
-                </child>
-              </object>
-            </child>
-            <child>
-              <object class="GtkMenuItem" id="settings_imagemenuitem">
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Settings</property>
-                <property name="use_underline">True</property>
-                <child type="submenu">
-                  <object class="GtkMenu" id="menu1">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <child>
-                      <object class="GtkImageMenuItem" id="settings_font_imagemenuitem">
-                        <property name="label">gtk-select-font</property>
-                        <property name="use_action_appearance">False</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="settings_color_imagemenuitem">
+                      <object class="GtkImageMenuItem" id="book_color_imagemenuitem">
                         <property name="label">gtk-select-color</property>
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -251,7 +215,7 @@
                             <property name="visible">True</property>
                             <property name="can_focus">False</property>
                             <child>
-                              <object class="GtkCheckMenuItem" id="settings_color_dark_scheme_checkmenuitem">
+                              <object class="GtkCheckMenuItem" id="book_color_dark_scheme_checkmenuitem">
                                 <property name="use_action_appearance">False</property>
                                 <property name="visible">True</property>
                                 <property name="can_focus">False</property>
@@ -262,6 +226,17 @@
                             </child>
                           </object>
                         </child>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="book_position_imagemenuitem">
+                        <property name="label" translatable="yes">To last read position</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="image">book_position_icon_image</property>
+                        <property name="use_stock">False</property>
+                        <signal name="activate" handler="book_position_imagemenuitem_activate_cb" swapped="no"/>
                       </object>
                     </child>
                   </object>

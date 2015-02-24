@@ -20,6 +20,8 @@
 	#include <libintl.h>
 	#include <gtk/gtk.h>
 
+	#include <zip.h>
+
 	enum
 	{
 		SECTION_NAME_COLUMN = 0,
@@ -106,6 +108,7 @@
 
 	int reader_open_book(char* file_path);
 	int reader_close_book();
+	gboolean test_file_type(char* file_path, const char* file_ext);
 	int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset);
 
 	int main_wnd_init(GtkBuilder* builder, FB2_READER* obj);
@@ -114,6 +117,7 @@
 
 
 	#include "fb2/fb2_chunks.h"
-	#include "txt/txt_parser.h"
+	#include "txt/txt_chunks.h"
+	#include "fb2_zip/fb2_zip_chunks.h"
 
 #endif /* CHUNKS_H_ */

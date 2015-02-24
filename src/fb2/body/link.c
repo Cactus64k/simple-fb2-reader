@@ -5,8 +5,8 @@ int parse_formated_text_for_link(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTe
 
 int parse_link(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	assert(parent_node != NULL);
-	assert(text_buff_end != NULL);
+	g_return_val_if_fail(parent_node != NULL, -1);
+	g_return_val_if_fail(text_buff_end != NULL, -2);
 
 
 	GtkTextBuffer* text_buff	= obj->text_buff;
@@ -27,7 +27,7 @@ int parse_link(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* tex
 				if(*href == '#')
 					href++;
 				else
-					fputs("not local links not supported\n", stderr);
+					fputs("Not local links not supported\n", stderr);
 
 				char* href_dup = g_strdup(href);
 				g_signal_connect(G_OBJECT(a_tag), "event", G_CALLBACK(a_tag_event_cb), NULL);
@@ -53,8 +53,8 @@ int parse_link(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* tex
 
 int parse_formated_text_for_link(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)		// своя функция для форматирования текста в угоду соблюдения стандарта
 {
-	assert(parent_node != NULL);
-	assert(text_buff_end != NULL);
+	g_return_val_if_fail(parent_node != NULL, -1);
+	g_return_val_if_fail(text_buff_end != NULL, -2);
 
 	GtkTextBuffer* text_buff	= obj->text_buff;
 	xmlNode* node				= parent_node;
