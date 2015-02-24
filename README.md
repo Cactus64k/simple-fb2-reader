@@ -3,7 +3,7 @@ Simple tool to read FB2 books on GTK+3
 =======
 
 Skils(- not support, ~ some support):
-- support fb2 and txt files
+- support fb2, fb2.zip and txt files
 - color chemas(black and white)
 - saving reading position
 - full format support(-stylesheet, ~table)
