@@ -1,7 +1,6 @@
 #include "chunks.h"
 
 #define TRANSLATION_DOMAIN "simple-fb2-reader"
-#define TRANSLATION_DIR_NAME "/usr/share/locale/"
 
 
 extern char _binary_simple_fb2_reader_glade_start;
@@ -16,7 +15,10 @@ int main(int argc,	char *argv[])
 	setbuf(stderr, NULL);
 
 	setlocale(LC_ALL, "");
-	bindtextdomain(TRANSLATION_DOMAIN, TRANSLATION_DIR_NAME);
+
+	char* domain = textdomain(TRANSLATION_DOMAIN);
+	assert(domain != NULL);
+
 	bind_textdomain_codeset(TRANSLATION_DOMAIN, "UTF-8");
 	textdomain(TRANSLATION_DOMAIN);
 

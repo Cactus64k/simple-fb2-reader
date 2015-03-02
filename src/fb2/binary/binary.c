@@ -25,9 +25,9 @@ int parse_book_binary(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node)
 
 	if(image_id != NULL)
 	{
-		if(g_hash_table_contains(binary_hash_table, image_id) == TRUE)
+		if(g_hash_table_contains(binary_hash_table, image_id) == FALSE)
 		{
-			char* image_data	= (char*)parent_node->children->content;
+			char* image_data = (char*)parent_node->children->content;
 
 			if(image_data != NULL)
 			{

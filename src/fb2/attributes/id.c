@@ -17,7 +17,7 @@ int parse_id_attribute(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextI
 				char* id				= g_strdup((char*)properties->children->content);
 				gint pos 				= gtk_text_iter_get_line(text_buff_end);
 
-				if(g_hash_table_contains(links_hash_table, id) == TRUE)
+				if(g_hash_table_contains(links_hash_table, id) == FALSE)
 				{
 					g_hash_table_insert(links_hash_table, id, GINT_TO_POINTER(pos));
 					break;
