@@ -17,10 +17,14 @@
 
 	#include <libxml/parser.h>
 	#include <libxml/tree.h>
+
 	#include <libintl.h>
+
 	#include <gtk/gtk.h>
 
 	#include <zip.h>
+
+	#define _C(str) gettext(str)
 
 	enum
 	{

@@ -35,7 +35,7 @@ void encode_treeview_cursor_changed_cb(GtkTreeView* tree_view, gpointer user_dat
 			if(res == (size_t)-1)
 			{
 				char* error_text = strerror(errno);
-				fprintf(stderr, "TXT encode error: %s\n", error_text);
+				fprintf(stderr, _C("ERROR: failed to encode txt file %s\n"), error_text);
 			}
 			else
 				gtk_text_buffer_set_text(text_buffer, dst_buffer, (dst_buff_size-dst_buff_left));

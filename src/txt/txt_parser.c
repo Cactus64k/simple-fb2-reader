@@ -36,7 +36,7 @@ int parse_txt(char* file_path, char* encode)
 			if(res == (size_t)-1)
 			{
 				char* error_text = strerror(errno);
-				fprintf(stderr, "TXT encode error: %s\n", error_text);
+				fprintf(stderr, _C("ERROR: failed to encode txt file: %s\n"), error_text);
 
 				//break;
 			}
@@ -59,6 +59,6 @@ int parse_txt(char* file_path, char* encode)
 		gtk_text_buffer_apply_tag_by_name(text_buff, "default_tag", &text_buff_start_iter, &text_buff_end_iter);
 	}
 	else
-		fprintf(stderr, "Error reading file: %s\n", file_path);
+		fprintf(stderr, _C("ERROR: failed to open txt file: %s\n"), file_path);
 	return 0;
 }

@@ -26,7 +26,7 @@ int init_main_reader_text_view(GtkBuilder* builder, FB2_READER* obj0)
 	GtkTextIter text_buff_end;
 	gtk_text_buffer_get_end_iter(obj->text_buff, &text_buff_end);
 
-	gtk_text_buffer_insert_with_tags_by_name(obj->text_buff, &text_buff_end, "\n\n\n\nHello! =P \n", -1, "title_tag", "default_tag", NULL);
+	gtk_text_buffer_insert_with_tags_by_name(obj->text_buff, &text_buff_end, _C("\n\n\n\nHello! =P \n"), -1, "title_tag", "default_tag", NULL);
 
 	GtkTextTagTable* text_tag_table	= gtk_text_buffer_get_tag_table(obj->text_buff);
 

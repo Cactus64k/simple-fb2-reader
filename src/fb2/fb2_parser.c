@@ -30,7 +30,7 @@ int parse_fb2(char* file_path)
 		xmlFreeDoc(file_tree);
 	}
 	else
-		fprintf(stderr, "Failed to parsing file: %s\n", file_path);
+		fprintf(stderr, _C("ERROR: Failed to parsing fb2 file: %s\n"), file_path);
 
 	xmlCleanupParser();
 

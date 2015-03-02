@@ -168,16 +168,12 @@ void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* check
 		gdk_rgba_parse(&color, "#313132");
 		gtk_widget_override_background_color(GTK_WIDGET(text_view), GTK_STATE_FLAG_NORMAL, &color);
 		g_value_set_string(&value, "gray");
-
-		printf("Apply dark color scheme\n");
 	}
 	else
 	{
 		gdk_rgba_parse(&color, "#ffffff");
 		gtk_widget_override_background_color(GTK_WIDGET(text_view), GTK_STATE_FLAG_NORMAL, &color);
 		g_value_set_string(&value, "black");
-
-		printf("Apply white color scheme\n");
 	}
 
 	g_object_set_property(G_OBJECT(default_tag), "foreground", &value);

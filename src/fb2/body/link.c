@@ -27,7 +27,7 @@ int parse_link(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* tex
 				if(*href == '#')
 					href++;
 				else
-					fputs("Not local links not supported\n", stderr);
+					fputs(_C("Not local links not supported\n"), stderr);
 
 				char* href_dup = g_strdup(href);
 				g_signal_connect(G_OBJECT(a_tag), "event", G_CALLBACK(a_tag_event_cb), NULL);

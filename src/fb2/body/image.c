@@ -29,10 +29,10 @@ int parse_image(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* te
 
 					image = g_hash_table_lookup(binary_hash_table, image_id);
 					if(image == NULL)
-						fprintf(stderr, "Image %s not found in table\n", image_id);
+						fprintf(stderr, _C("Image %s not found in table\n"), image_id);
 				}
 				else
-					fputs("Not local links not supported\n", stderr);
+					fputs(_C("Not local links not supported\n"), stderr);
 
 				break;
 			}
@@ -85,10 +85,10 @@ int parse_image_inline(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextI
 
 					image = g_hash_table_lookup(binary_hash_table, image_id);
 					if(image == NULL)
-						fprintf(stderr, "Image %s not found in table\n", image_id);
+						fprintf(stderr, _C("Image %s not found in table\n"), image_id);
 				}
 				else
-					fputs("Not local links not supported\n", stderr);
+					fputs(_C("Not local links not supported\n"), stderr);
 
 				break;
 			}

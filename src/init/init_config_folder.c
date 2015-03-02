@@ -10,7 +10,7 @@ int create_config_dir()
 	snprintf(buff, sizeof(buff), "%s/simple-fb2-reader/books/", conf_dir);
 	g_mkdir_with_parents(buff, 0766);
 	if(res == -1 && errno != EEXIST)
-		fprintf(stderr, "failed to create folder: %s\n %s\n", buff, strerror(errno));
+		fprintf(stderr, _C("ERROR: failed to create folder: %s\n %s\n"), buff, strerror(errno));
 
 	return 0;
 }

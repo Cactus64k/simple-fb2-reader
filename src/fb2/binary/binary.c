@@ -25,24 +25,28 @@ int parse_book_binary(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node)
 
 	if(image_id != NULL)
 	{
-		char* image_data	= (char*)parent_node->children->content;
-
-		if(image_data != NULL)
+		if(g_hash_table_contains(binary_hash_table, image_id) == TRUE)
 		{
-			GdkPixbuf* pixbuf = NULL;
+			char* image_data	= (char*)parent_node->children->content;
 
-			get_pixbuf_from_base64(image_data, &pixbuf);
+			if(image_data != NULL)
+			{
+				GdkPixbuf* pixbuf = NULL;
 
-			if(pixbuf != NULL)
-				g_hash_table_insert(binary_hash_table, image_id, pixbuf);
+				get_pixbuf_from_base64(image_data, &pixbuf);
+
+				if(pixbuf != NULL)
+					g_hash_table_insert(binary_hash_table, image_id, pixbuf);
+			}
+			else
+				fputs(_C("ERROR: no content in <image> tag\n"), stderr);
 		}
 		else
-			fputs("No content in image tag\n", stderr);
-
+			fprintf(stderr, _C("ERROR: image %s already exist in table\n"), image_id);
 	}
 	else
 	{
-		fputs("No id properties in image tag\n", stderr);
+		fputs(_C("ERROR: no id properties in <image> tag\n"), stderr);
 	}
 
 	return 0;
@@ -74,7 +78,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 
 		if(gdk_pixbuf_loader_write(loader, out_buff, bytes_count, &loader_error) == FALSE)
 		{
-			fprintf(stderr, "GdkPixbufLoader error: %s\n", loader_error->message);
+			fprintf(stderr, _C("ERROR: GdkPixbufLoader: %s\n"), loader_error->message);
 			g_error_free(loader_error);
 			has_error = TRUE;
 
@@ -90,7 +94,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 
 	if(loader_error != NULL)
 	{
-		fprintf(stderr, "GdkPixbufLoader error: %s\n", loader_error->message);
+		fprintf(stderr, _C("ERROR: GdkPixbufLoader: %s\n"), loader_error->message);
 
 		g_error_free(loader_error);
 		has_error = TRUE;

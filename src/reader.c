@@ -36,7 +36,7 @@ int reader_open_book(char* file_path)
 			g_key_file_set_int64(book_config, "book", "read_line", 0);
 			g_key_file_set_int64(book_config, "book", "read_line_offset", 0);
 
-			fprintf(stderr, "GKeyFile error: %s\n", key_file_error->message);
+			fprintf(stderr, _C("ERROR: GKeyFile %s\n"), key_file_error->message);
 
 			g_error_free(key_file_error);
 		}
@@ -91,7 +91,7 @@ int reader_open_book(char* file_path)
 
 	}
 	else
-		fprintf(stderr, "Error reading file: %s\n", file_path);
+		fprintf(stderr, _C("ERROR: failed to open file: %s\n"), file_path);
 
 	return 0;
 }

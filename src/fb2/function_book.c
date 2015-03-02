@@ -93,7 +93,7 @@ int parse_function_book(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkText
 
 	//**************************************************************************
 
-	printf("End read book\n");
+	printf(_C("End read book\n"));
 
 
 
