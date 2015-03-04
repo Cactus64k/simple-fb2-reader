@@ -6,6 +6,8 @@ int init_main_reader_text_view(GtkBuilder* builder, FB2_READER* obj0)
 {
 	FB2_READER_TEXT_VIEW* obj		= &obj0->book_text_view;
 
+	memset(obj, 0, sizeof(*obj));
+
 	obj->save_section				= FALSE;
 	obj->text_buff					= GTK_TEXT_BUFFER(			gtk_builder_get_object(builder, "book_textbuff"));
 	obj->text_view					= GTK_TEXT_VIEW(			gtk_builder_get_object(builder, "book_textview"));

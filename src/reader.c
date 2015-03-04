@@ -109,9 +109,10 @@ gboolean test_file_type(char* file_path, const char* file_ext)
 
 int reader_close()
 {
-	GKeyFile* app_config	= GLOBAL_FB2_READER.app_config;
-	char* app_config_path	= GLOBAL_FB2_READER.app_config_path;
-	GtkWindow* main_wnd		= GTK_WINDOW(GLOBAL_FB2_READER.main_wnd);
+	GKeyFile* app_config				= GLOBAL_FB2_READER.app_config;
+	char* app_config_path				= GLOBAL_FB2_READER.app_config_path;
+	GtkWidget* main_wnd					= GLOBAL_FB2_READER.main_wnd;
+	GtkCheckMenuItem* color_check_item	= GLOBAL_FB2_READER.color_check_item;
 
 	GValue main_wnd_maximize = G_VALUE_INIT;
 	g_value_init(&main_wnd_maximize, G_TYPE_BOOLEAN);
@@ -119,21 +120,18 @@ int reader_close()
 
 	g_key_file_set_boolean(app_config, "app",				"maximize",	g_value_get_boolean(&main_wnd_maximize));
 
-	//state = gtk_check_menu_item_get_active(color_check_item);
-	//g_key_file_set_boolean(app_config, "app",				"dark_color_cheme",		state);
+	gboolean state = gtk_check_menu_item_get_active(color_check_item);
+	g_key_file_set_boolean(app_config, "app",				"dark_color_cheme",		state);
 
-	//GtkAllocation main_wnd_size;
-	//gtk_widget_get_allocation(GTK_WIDGET(main_wnd), &main_wnd_size);
-	gint width = 0;
-	gint height = 0;
-	gtk_window_get_size(main_wnd, &width, &height);
-
-	g_key_file_set_integer(app_config, "app",				"width",		width);
-	g_key_file_set_integer(app_config, "app",				"height",		height);
+	gint main_wnd_width = 0;
+	gint main_wnd_height = 0;
+	gtk_window_get_size(GTK_WINDOW(main_wnd), &main_wnd_width, &main_wnd_height);
+	g_key_file_set_integer(app_config, "app",				"width",		main_wnd_width);
+	g_key_file_set_integer(app_config, "app",				"height",		main_wnd_height);
 
 	gint main_wnd_x_pos = 0;
 	gint main_wnd_y_pos = 0;
-	gtk_window_get_position(main_wnd, &main_wnd_x_pos, &main_wnd_y_pos);
+	gtk_window_get_position(GTK_WINDOW(main_wnd), &main_wnd_x_pos, &main_wnd_y_pos);
 	g_key_file_set_integer(app_config, "app",				"x_pos",		main_wnd_x_pos);
 	g_key_file_set_integer(app_config, "app",				"y_pos",		main_wnd_y_pos);
 

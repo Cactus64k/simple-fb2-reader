@@ -78,14 +78,13 @@
 	{
 		GtkWidget*				main_wnd;
 
+		GtkCheckMenuItem*		color_check_item;
+
 		FB2_READER_TEXT_VIEW	book_text_view;
 
 		GtkFileChooserDialog*	filechooserdialog;
 		GtkDialog*				navigation_dialog;
 		GtkDialog*				notes_dialog;
-
-		GtkTextView*			notes_text_view;
-
 
 		GdkCursor*				link_cursor;
 		GdkCursor*				def_cursor;
@@ -112,6 +111,7 @@
 
 	int reader_open_book(char* file_path);
 	int reader_close_book();
+	int reader_close();
 	gboolean test_file_type(char* file_path, const char* file_ext);
 	int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset);
 

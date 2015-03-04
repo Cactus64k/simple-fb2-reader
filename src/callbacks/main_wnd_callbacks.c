@@ -45,8 +45,16 @@ void book_position_imagemenuitem_activate_cb(GtkMenuItem* menuitem, gpointer use
 	}
 }
 
+gboolean main_wnd_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer user_data)
+{
+	reader_close();
+
+	return FALSE;
+}
+
 void main_wnd_destroy_cb(GtkWidget *object, gpointer user_data)
 {
+
 	reader_close_book();
 	gtk_main_quit();
 }
@@ -81,8 +89,8 @@ void book_navigation_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer u
 }
 
 void main_wnd_size_allocate_cb (GtkWidget *widget, GdkRectangle *allocation, gpointer user_data)
-{
-	GtkTextView* text_view = GTK_TEXT_VIEW(user_data);
+{	GtkTextView* text_view = GTK_TEXT_VIEW(user_data);
+	GKeyFile* app_config	= GLOBAL_FB2_READER.app_config;
 
 	gint margin = allocation->width * 0.15;
 

@@ -2,6 +2,8 @@
 
 int search_wnd_init(GtkBuilder* builder, SEARCH_WINDOW* obj)
 {
+	memset(obj, 0, sizeof(*obj));
+
 	obj->search_wnd					= GTK_WIDGET(				gtk_builder_get_object(builder, "search_wnd"));
 	obj->entry_edited				= FALSE;
 	obj->search_query_entry			= GTK_ENTRY(				gtk_builder_get_object(builder, "search_query_entry"));
