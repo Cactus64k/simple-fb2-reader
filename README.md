@@ -11,6 +11,7 @@ Skils(- not support, ~ some support):
 - full format support(-stylesheet, ~table)
 - table of contents navigation
 - text searching support
+- saving window state, size and position
 
 Depends:
 - libxml			>= 2.8.0, 
