@@ -10,10 +10,11 @@ Skils(- not support, ~ some support):
 - current document links support
 - full format support(-stylesheet, ~table)
 - table of contents navigation
-- text searching support(-regex)
+- text searching support
 
 Depends:
-libxml			>= 2.8.0, 
-libgtk-3-0  >= 3.4.2, 
-libglib     >= 2.33.12, 
-libzip2     >= 0.10.1
+- libxml			>= 2.8.0, 
+- libgtk-3-0  >= 3.4.2, 
+- libglib     >= 2.33.12, 
+- libzip2     >= 0.10.1
+- pkg-config(build depend)
