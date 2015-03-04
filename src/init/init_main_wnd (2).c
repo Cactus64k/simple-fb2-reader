@@ -60,3 +60,4 @@ int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
 	return 0;
 }
 
+

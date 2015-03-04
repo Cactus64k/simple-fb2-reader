@@ -122,10 +122,14 @@ int reader_close()
 	//state = gtk_check_menu_item_get_active(color_check_item);
 	//g_key_file_set_boolean(app_config, "app",				"dark_color_cheme",		state);
 
-	GtkAllocation main_wnd_size;
-	gtk_widget_get_allocation(GTK_WIDGET(main_wnd), &main_wnd_size);
-	g_key_file_set_integer(app_config, "app",				"width",		main_wnd_size.width);
-	g_key_file_set_integer(app_config, "app",				"height",		main_wnd_size.height);
+	//GtkAllocation main_wnd_size;
+	//gtk_widget_get_allocation(GTK_WIDGET(main_wnd), &main_wnd_size);
+	gint width = 0;
+	gint height = 0;
+	gtk_window_get_size(main_wnd, &width, &height);
+
+	g_key_file_set_integer(app_config, "app",				"width",		width);
+	g_key_file_set_integer(app_config, "app",				"height",		height);
 
 	gint main_wnd_x_pos = 0;
 	gint main_wnd_y_pos = 0;
@@ -149,7 +153,7 @@ int reader_close()
 int reader_close_book()
 {
 	GtkTreeStore* section_treestore		= GLOBAL_FB2_READER.book_text_view.sections_treestore;
-	GHashTable* binary_hash_table		= *GLOBAL_FB2_READER.book_text_view.binary_hash_table;
+	GHashTable* binary_hash_table		= GLOBAL_FB2_READER.book_text_view.binary_hash_table;
 	GHashTable* links_hash_table		= GLOBAL_FB2_READER.book_text_view.links_hash_table;
 	GtkWidget* main_wnd					= GLOBAL_FB2_READER.main_wnd;
 	GtkTextBuffer* text_buff			= GLOBAL_FB2_READER.book_text_view.text_buff;
