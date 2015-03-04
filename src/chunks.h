@@ -111,6 +111,7 @@
 	int init_main_reader_text_view(GtkBuilder* builder, FB2_READER* obj0);
 
 	int reader_open_book(char* file_path);
+	int reader_close();
 	int reader_close_book();
 	gboolean test_file_type(char* file_path, const char* file_ext);
 	int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset);

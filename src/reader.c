@@ -7,10 +7,10 @@ int reader_open_book(char* file_path)
 	GtkDialog* encode_dialog			= GLOBAL_ENCODE_DIALOG.dialog;
 	GtkTreeView* sections_treeview		= GLOBAL_FB2_READER.book_text_view.sections_treeview;
 
-	GChecksum* chsum = g_checksum_new(G_CHECKSUM_SHA1);
 	FILE* f = fopen(file_path, "rb");
 	if(f != NULL)
 	{
+		GChecksum* chsum = g_checksum_new(G_CHECKSUM_SHA1);
 		char buff[1024];
 
 		while(!feof(f))
@@ -33,8 +33,8 @@ int reader_open_book(char* file_path)
 
 		if(g_key_file_load_from_file(book_config, book_config_path, G_KEY_FILE_NONE, &key_file_error) == FALSE)
 		{
-			g_key_file_set_int64(book_config, "book", "read_line", 0);
-			g_key_file_set_int64(book_config, "book", "read_line_offset", 0);
+			g_key_file_set_integer(book_config, "book", "read_line", 0);
+			g_key_file_set_integer(book_config, "book", "read_line_offset", 0);
 
 			fprintf(stderr, _C("ERROR: GKeyFile %s\n"), key_file_error->message);
 
@@ -107,6 +107,45 @@ gboolean test_file_type(char* file_path, const char* file_ext)
 	return FALSE;
 }
 
+int reader_close()
+{
+	GKeyFile* app_config	= GLOBAL_FB2_READER.app_config;
+	char* app_config_path	= GLOBAL_FB2_READER.app_config_path;
+	GtkWindow* main_wnd		= GTK_WINDOW(GLOBAL_FB2_READER.main_wnd);
+
+	GValue main_wnd_maximize = G_VALUE_INIT;
+	g_value_init(&main_wnd_maximize, G_TYPE_BOOLEAN);
+	g_object_get_property(G_OBJECT(main_wnd), "is-maximized", &main_wnd_maximize);
+
+	g_key_file_set_boolean(app_config, "app",				"maximize",	g_value_get_boolean(&main_wnd_maximize));
+
+	//state = gtk_check_menu_item_get_active(color_check_item);
+	//g_key_file_set_boolean(app_config, "app",				"dark_color_cheme",		state);
+
+	GtkAllocation main_wnd_size;
+	gtk_widget_get_allocation(GTK_WIDGET(main_wnd), &main_wnd_size);
+	g_key_file_set_integer(app_config, "app",				"width",		main_wnd_size.width);
+	g_key_file_set_integer(app_config, "app",				"height",		main_wnd_size.height);
+
+	gint main_wnd_x_pos = 0;
+	gint main_wnd_y_pos = 0;
+	gtk_window_get_position(main_wnd, &main_wnd_x_pos, &main_wnd_y_pos);
+	g_key_file_set_integer(app_config, "app",				"x_pos",		main_wnd_x_pos);
+	g_key_file_set_integer(app_config, "app",				"y_pos",		main_wnd_y_pos);
+
+
+
+	gsize app_config_len	= 0;
+	char* app_config_data	= g_key_file_to_data(app_config, &app_config_len, NULL);
+
+	FILE* f = fopen(app_config_path, "wb");
+	fwrite(app_config_data, 1, app_config_len,  f);
+	fclose(f);
+	g_free(app_config_data);
+
+	return 0;
+}
+
 int reader_close_book()
 {
 	GtkTreeStore* section_treestore		= GLOBAL_FB2_READER.book_text_view.sections_treestore;
@@ -131,8 +170,8 @@ int reader_close_book()
 
 		get_scroll_line_offset(text_view, &read_line, &read_line_offset);
 
-		g_key_file_set_int64(book_config, "book", "read_line", read_line);
-		g_key_file_set_int64(book_config, "book", "read_line_offset", read_line_offset);
+		g_key_file_set_integer(book_config, "book", "read_line", read_line);
+		g_key_file_set_integer(book_config, "book", "read_line_offset", read_line_offset);
 
 		gsize book_config_len	= 0;
 		char* book_config_data	= g_key_file_to_data(book_config, &book_config_len, NULL);

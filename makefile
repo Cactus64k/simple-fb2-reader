@@ -13,9 +13,9 @@ GUI_TARGET:
 				objcopy	--input binary \
 						--output elf64-x86-64 \
 						--binary-architecture i386 \
-						simple-fb2-reader.glade simple-fb2-reader.glade.o
+						$(PROGNAME).glade $(PROGNAME).glade.o
 
-OBJECTS += ./simple-fb2-reader.glade.o
+OBJECTS += ./$(PROGNAME).glade.o
 
 TRANSLATE_TARGET:
 				msgfmt intl/ru.po	--output-file=intl/locale/ru/LC_MESSAGES/$(PROGNAME).mo

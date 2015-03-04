@@ -36,8 +36,8 @@ void book_position_imagemenuitem_activate_cb(GtkMenuItem* menuitem, gpointer use
 
 	if(book_config != NULL)
 	{
-		gint read_line				= g_key_file_get_int64(book_config, "book", "read_line", NULL);
-		gint read_line_offset		= g_key_file_get_int64(book_config, "book", "read_line_offset", NULL);
+		gint read_line				= g_key_file_get_integer(book_config, "book", "read_line", NULL);
+		gint read_line_offset		= g_key_file_get_integer(book_config, "book", "read_line_offset", NULL);
 
 		GtkTextIter iter;
 		gtk_text_buffer_get_iter_at_line_offset(text_buff, &iter, read_line, read_line_offset);
@@ -47,6 +47,7 @@ void book_position_imagemenuitem_activate_cb(GtkMenuItem* menuitem, gpointer use
 
 void main_wnd_destroy_cb(GtkWidget *object, gpointer user_data)
 {
+	reader_close();
 	reader_close_book();
 	gtk_main_quit();
 }
