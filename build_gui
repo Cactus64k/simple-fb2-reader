@@ -1,8 +1,0 @@
-#!/bin/bash
-export PROGNAME=simple-fb2-reader
-touch $PROGNAME.glade.o
-cd ..
-objcopy	--input binary \
-	--output elf64-x86-64 \
-	--binary-architecture i386 \
-	$PROGNAME.glade $PROGNAME.glade.o
