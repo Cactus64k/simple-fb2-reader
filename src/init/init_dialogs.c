@@ -1,6 +1,6 @@
 #include "../chunks.h"
 
-int search_wnd_init(GtkBuilder* builder, SEARCH_WINDOW* obj)
+int init_search_wnd(GtkBuilder* builder, SEARCH_WINDOW* obj)
 {
 	memset(obj, 0, sizeof(*obj));
 
@@ -16,7 +16,7 @@ int search_wnd_init(GtkBuilder* builder, SEARCH_WINDOW* obj)
 }
 
 
-int encode_wnd_init(GtkBuilder* builder, ENCODE_DIALOG* obj)
+int init_encode_wnd(GtkBuilder* builder, ENCODE_DIALOG* obj)
 {
 	obj->dialog						= GTK_DIALOG(				gtk_builder_get_object(builder, "txt_encode_dialog"));
 	obj->treestore					= GTK_TREE_STORE(			gtk_builder_get_object(builder, "encode_treestore"));

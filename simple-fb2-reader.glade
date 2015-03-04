@@ -1,6 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkImage" id="book_position_icon_image">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-redo</property>
+  </object>
+  <object class="GtkTextBuffer" id="book_textbuff"/>
+  <object class="GtkAdjustment" id="book_textview_horisontal_adjustment">
+    <property name="upper">1000</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="book_textview_vertical_adjustment">
+    <property name="upper">1000</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkTreeStore" id="books_sections_treestore">
+    <columns>
+      <!-- column-name section_name -->
+      <column type="gchararray"/>
+      <!-- column-name section_string -->
+      <column type="gint"/>
+    </columns>
+  </object>
+  <object class="GtkTextBuffer" id="encode_textbuffer"/>
+  <object class="GtkTreeStore" id="encode_treestore">
+    <columns>
+      <!-- column-name is_encode -->
+      <column type="gboolean"/>
+      <!-- column-name encode_name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkFileFilter" id="fb2_files_filter">
+    <patterns>
+      <pattern>*.fb2</pattern>
+      <pattern>*.fb2.zip</pattern>
+      <pattern>*.txt</pattern>
+    </patterns>
+  </object>
   <object class="GtkWindow" id="main_wnd">
     <property name="can_focus">False</property>
     <property name="events">GDK_KEY_PRESS_MASK | GDK_STRUCTURE_MASK</property>
@@ -139,6 +179,31 @@
                 </child>
               </object>
             </child>
+            <child>
+              <object class="GtkMenuItem" id="help_menuitem">
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">About</property>
+                <property name="use_underline">True</property>
+                <child type="submenu">
+                  <object class="GtkMenu" id="menu1">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <child>
+                      <object class="GtkImageMenuItem" id="about_app_imagemenuitem">
+                        <property name="label">gtk-about</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
           </object>
           <packing>
             <property name="expand">False</property>
@@ -242,46 +307,6 @@
       <action-widget response="2">book_filechooserdialog_ok_button</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkImage" id="book_position_icon_image">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-redo</property>
-  </object>
-  <object class="GtkTextBuffer" id="book_textbuff"/>
-  <object class="GtkAdjustment" id="book_textview_horisontal_adjustment">
-    <property name="upper">1000</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="book_textview_vertical_adjustment">
-    <property name="upper">1000</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkTreeStore" id="books_sections_treestore">
-    <columns>
-      <!-- column-name section_name -->
-      <column type="gchararray"/>
-      <!-- column-name section_string -->
-      <column type="gint"/>
-    </columns>
-  </object>
-  <object class="GtkTreeStore" id="encode_treestore">
-    <columns>
-      <!-- column-name is_encode -->
-      <column type="gboolean"/>
-      <!-- column-name encode_name -->
-      <column type="gchararray"/>
-    </columns>
-  </object>
-  <object class="GtkTextBuffer" id="encode_textbuffer"/>
-  <object class="GtkFileFilter" id="fb2_files_filter">
-    <patterns>
-      <pattern>*.fb2</pattern>
-      <pattern>*.fb2.zip</pattern>
-      <pattern>*.txt</pattern>
-    </patterns>
-  </object>
   <object class="GtkDialog" id="navigation_dialog">
     <property name="can_focus">False</property>
     <property name="modal">True</property>
@@ -383,6 +408,38 @@
       <action-widget response="1">navigation_dialog-cancel-button</action-widget>
       <action-widget response="2">navigation_dialog-jump-button</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkAboutDialog" id="reader_aboutdialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_wnd</property>
+    <property name="program_name">Simple FB2 Reader</property>
+    <property name="version">1.0.0</property>
+    <property name="website">https://github.com/Cactus64k/simple-fb2-reader</property>
+    <property name="authors">Cactus &lt;medved_cool@mail.ru&gt;</property>
+    <property name="translator_credits" translatable="yes">Cactus &lt;medved_cool@mail.ru&gt;</property>
+    <property name="logo_icon_name">simple-fb2-reader</property>
+    <property name="license_type">gpl-2-0</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="reader_aboutdialog_vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="reader_aboutdialog_action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
   </object>
   <object class="GtkWindow" id="search_wnd">
     <property name="can_focus">False</property>

@@ -39,9 +39,9 @@ int main(int argc,	char *argv[])
 
 	//**********************************************************************************************
 
-	main_wnd_init(builder, &GLOBAL_FB2_READER);
-	search_wnd_init(builder, &GLOBAL_SEARCH_WND);
-	encode_wnd_init(builder, &GLOBAL_ENCODE_DIALOG);
+	init_main_wnd(builder, &GLOBAL_FB2_READER);
+	init_search_wnd(builder, &GLOBAL_SEARCH_WND);
+	init_encode_wnd(builder, &GLOBAL_ENCODE_DIALOG);
 
 	g_object_unref(G_OBJECT(builder));
 

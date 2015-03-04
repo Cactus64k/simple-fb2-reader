@@ -1,11 +1,12 @@
 #include "../chunks.h"
 
-int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
+int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 {
 	memset(obj, 0, sizeof(*obj));
 
 	create_config_dir();
 	init_main_reader_text_view(builder, obj);
+	init_app_config(obj);
 
 	obj->main_wnd						= GTK_WIDGET(				gtk_builder_get_object(builder, "main_wnd"));
 	obj->filechooserdialog				= GTK_FILE_CHOOSER_DIALOG(	gtk_builder_get_object(builder, "book_filechooserdialog"));
@@ -18,29 +19,6 @@ int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
 	assert(obj->navigation_dialog		!= NULL);
 	const char* conf_dir				= g_get_user_config_dir();
 	assert(conf_dir != NULL);
-
-	obj->app_config						= g_key_file_new();
-	obj->app_config_path				= g_strdup_printf("%s/simple-fb2-reader/config.cfg", conf_dir);
-
-
-	if(g_key_file_load_from_file(obj->app_config, obj->app_config_path, G_KEY_FILE_NONE, NULL) == FALSE)
-	{
-		g_key_file_set_boolean(obj->app_config, "app",				"dark_color_cheme",		FALSE);
-
-		g_key_file_set_integer(obj->app_config, "app",				"x_pos",		640/2);
-		g_key_file_set_integer(obj->app_config, "app",				"y_pos",		480/2);
-		g_key_file_set_integer(obj->app_config, "app",				"width",		640);
-		g_key_file_set_integer(obj->app_config, "app",				"height",		480);
-		g_key_file_set_boolean(obj->app_config, "app",				"maximize",		FALSE);
-
-		g_key_file_set_string(obj->app_config, "default_theme",		"background",	"#ffffff");
-		g_key_file_set_string(obj->app_config, "default_theme",		"text",			"#000000");
-
-		g_key_file_set_string(obj->app_config, "dark_theme",		"background",	"#293134");
-		g_key_file_set_string(obj->app_config, "dark_theme",		"text",			"#e8e2b7");
-
-
-	}
 
 	gboolean color_check_item_state = g_key_file_get_boolean(obj->app_config, "app", "dark_color_cheme", NULL);
 

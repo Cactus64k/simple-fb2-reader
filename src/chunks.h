@@ -115,9 +115,10 @@
 	gboolean test_file_type(char* file_path, const char* file_ext);
 	int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset);
 
-	int main_wnd_init(GtkBuilder* builder, FB2_READER* obj);
-	int search_wnd_init(GtkBuilder* builder, SEARCH_WINDOW* obj);
-	int encode_wnd_init(GtkBuilder* builder, ENCODE_DIALOG* obj);
+	int init_main_wnd(GtkBuilder* builder, FB2_READER* obj);
+	int init_search_wnd(GtkBuilder* builder, SEARCH_WINDOW* obj);
+	int init_encode_wnd(GtkBuilder* builder, ENCODE_DIALOG* obj);
+	int init_app_config(FB2_READER* obj);
 
 
 	#include "fb2/fb2_chunks.h"

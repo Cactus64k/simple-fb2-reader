@@ -175,21 +175,24 @@ void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* check
 	else
 		color_theme = "default_theme";
 
-	GdkRGBA color;
-	GValue value = G_VALUE_INIT;
-	g_value_init(&value, G_TYPE_STRING);
-
 	char* background_color	= g_key_file_get_string(app_config, color_theme, "background", NULL);
 	char* text_color		= g_key_file_get_string(app_config, color_theme, "text", NULL);
 
-	assert(background_color != NULL);
-	assert(text_color != NULL);
+	g_return_if_fail(background_color	!= NULL);
+	g_return_if_fail(text_color			!= NULL);
 
+	GValue value = G_VALUE_INIT;
+	g_value_init(&value, G_TYPE_STRING);
+
+	GdkRGBA color;
 	gdk_rgba_parse(&color, background_color);
 	gtk_widget_override_background_color(GTK_WIDGET(text_view), GTK_STATE_FLAG_NORMAL, &color);
 
 	g_value_set_string(&value, text_color);
 	g_object_set_property(G_OBJECT(default_tag), "foreground", &value);
+
+	g_free(background_color);
+	g_free(text_color);
 
 	g_value_unset(&value);
 
