@@ -11,10 +11,18 @@ Skils(- not support, ~ some support):
 - full format support(-stylesheet, ~table)
 - table of contents navigation
 - text searching support
+- saving window state, size and position
 
 Depends:
-- libxml			>= 2.8.0, 
+- libxml      >= 2.8.0, 
 - libgtk-3-0  >= 3.4.2, 
 - libglib     >= 2.33.12, 
 - libzip2     >= 0.10.1
-- pkg-config(build depend)
+
+Build depends:
+- libxml2-dev     >= 2.8.0, 
+- libgtk-3-dev    >= 3.4.2, 
+- libglib2.0-dev  >= 2.33.12, 
+- libzip-dev      >= 0.10.1
+- pkg-config      >= 0.26
+
