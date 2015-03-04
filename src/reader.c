@@ -6,6 +6,9 @@ int reader_open_book(char* file_path)
 {
 	GtkDialog* encode_dialog			= GLOBAL_ENCODE_DIALOG.dialog;
 	GtkTreeView* sections_treeview		= GLOBAL_FB2_READER.book_text_view.sections_treeview;
+	GtkTextBuffer* text_buff			= GLOBAL_FB2_READER.book_text_view.text_buff;
+	GtkTextIter text_buff_end_iter;
+	GtkTextIter text_buff_start_iter;
 
 	FILE* f = fopen(file_path, "rb");
 	if(f != NULL)
@@ -47,10 +50,15 @@ int reader_open_book(char* file_path)
 
 		g_checksum_free(chsum);
 
-		//###########################################################################################################
+		//###############################
+
+		gboolean is_book = FALSE;
 
 		if(test_file_type(file_path, ".txt") == TRUE)
 		{
+			gtk_text_buffer_get_bounds(text_buff, &text_buff_start_iter, &text_buff_end_iter);
+			gtk_text_buffer_delete(text_buff, &text_buff_start_iter, &text_buff_end_iter);
+
 			char* encode_name = g_key_file_get_string(book_config, "book", "encode", NULL);
 			if(encode_name != NULL)
 				parse_txt(file_path, encode_name);
@@ -73,11 +81,17 @@ int reader_open_book(char* file_path)
 		}
 		else if(test_file_type(file_path, ".fb2") == TRUE)
 		{
+			gtk_text_buffer_get_bounds(text_buff, &text_buff_start_iter, &text_buff_end_iter);
+			gtk_text_buffer_delete(text_buff, &text_buff_start_iter, &text_buff_end_iter);
+
 			parse_fb2(file_path);
 			gtk_tree_view_expand_all(sections_treeview);
 		}
 		else if(test_file_type(file_path, ".fb2.zip") == TRUE)
 		{
+			gtk_text_buffer_get_bounds(text_buff, &text_buff_start_iter, &text_buff_end_iter);
+			gtk_text_buffer_delete(text_buff, &text_buff_start_iter, &text_buff_end_iter);
+
 			parse_fb2_zip(file_path);
 		}
 		else
@@ -96,6 +110,8 @@ int reader_open_book(char* file_path)
 	return 0;
 }
 
+//##############################################################################################################
+
 gboolean test_file_type(char* file_path, const char* file_ext)
 {
 	size_t file_path_len = strlen(file_path);
@@ -106,6 +122,8 @@ gboolean test_file_type(char* file_path, const char* file_ext)
 
 	return FALSE;
 }
+
+//##############################################################################################################
 
 int reader_close()
 {
@@ -148,6 +166,8 @@ int reader_close()
 	return 0;
 }
 
+//##############################################################################################################
+
 int reader_close_book()
 {
 	GtkTreeStore* section_treestore		= GLOBAL_FB2_READER.book_text_view.sections_treestore;
@@ -163,7 +183,7 @@ int reader_close_book()
 	GtkTextIter text_buff_start_iter;
 	GtkTextTagTable* text_tag_table		= gtk_text_buffer_get_tag_table(text_buff);
 
-	//############################################################################################
+	//###############################
 
 	if(book_config != NULL)
 	{
@@ -184,7 +204,7 @@ int reader_close_book()
 		g_free(book_config_data);
 	}
 
-	//############################################################################################
+	//###############################
 
 	//gtk_text_buffer_set_text(text_buff, "", -1);
 
@@ -212,6 +232,8 @@ int reader_close_book()
 	return 0;
 }
 
+//##############################################################################################################
+
 void text_tag_foreach_remove(GtkTextTag* tag, gpointer data)
 {
 	GtkTextTagTable* text_tag_table = (GtkTextTagTable*)data;
@@ -222,6 +244,8 @@ void text_tag_foreach_remove(GtkTextTag* tag, gpointer data)
 		gtk_text_tag_table_remove(text_tag_table, tag);
 
 }
+
+//##############################################################################################################
 
 int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset)
 {

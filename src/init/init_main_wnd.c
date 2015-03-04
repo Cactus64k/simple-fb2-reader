@@ -31,13 +31,21 @@ int main_wnd_init(GtkBuilder* builder, FB2_READER* obj)
 		g_key_file_set_integer(obj->app_config, "app",				"y_pos",		480/2);
 		g_key_file_set_integer(obj->app_config, "app",				"width",		640);
 		g_key_file_set_integer(obj->app_config, "app",				"height",		480);
-		g_key_file_set_boolean(obj->app_config, "app",				"maximize",	FALSE);
+		g_key_file_set_boolean(obj->app_config, "app",				"maximize",		FALSE);
+
+		g_key_file_set_string(obj->app_config, "default_theme",		"background",	"#ffffff");
+		g_key_file_set_string(obj->app_config, "default_theme",		"text",			"#000000");
+
+		g_key_file_set_string(obj->app_config, "dark_theme",		"background",	"#293134");
+		g_key_file_set_string(obj->app_config, "dark_theme",		"text",			"#e8e2b7");
 
 
 	}
 
-	if(g_key_file_get_boolean(obj->app_config, "app", "dark_color_cheme", NULL) == TRUE)
-		gtk_check_menu_item_set_active(obj->color_check_item, TRUE);
+	gboolean color_check_item_state = g_key_file_get_boolean(obj->app_config, "app", "dark_color_cheme", NULL);
+
+	gtk_check_menu_item_set_active(obj->color_check_item, !color_check_item_state);
+	gtk_check_menu_item_set_active(obj->color_check_item, color_check_item_state);
 
 	gint main_wnd_x_pos = g_key_file_get_integer(obj->app_config, "app", "x_pos", NULL);
 	gint main_wnd_y_pos = g_key_file_get_integer(obj->app_config, "app", "y_pos", NULL);
