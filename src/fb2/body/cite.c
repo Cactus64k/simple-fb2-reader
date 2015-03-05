@@ -23,7 +23,7 @@ int parse_cite(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* tex
 			else if(strcmp((char*)node->name, "subtitle") == 0)
 				parse_subtitle(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)
-				gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+				parse_empty_line(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "poem") == 0)
 				parse_poem(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "table") == 0)

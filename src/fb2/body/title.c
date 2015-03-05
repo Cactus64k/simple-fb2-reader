@@ -19,9 +19,9 @@ int parse_title(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* te
 		if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "p") == 0)
-				parse_formated_text(obj, node->children, text_buff_end);
+				parse_p(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)
-				gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+				parse_empty_line(obj, node, text_buff_end);
 		}
 
 		node = node->next;

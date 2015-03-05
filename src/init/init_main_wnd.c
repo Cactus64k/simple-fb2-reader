@@ -11,6 +11,7 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	obj->main_wnd						= GTK_WIDGET(				gtk_builder_get_object(builder, "main_wnd"));
 	obj->filechooserdialog				= GTK_FILE_CHOOSER_DIALOG(	gtk_builder_get_object(builder, "book_filechooserdialog"));
 	obj->navigation_dialog				= GTK_DIALOG(				gtk_builder_get_object(builder, "navigation_dialog"));
+	obj->about_dialog					= GTK_ABOUT_DIALOG(			gtk_builder_get_object(builder, "reader_aboutdialog"));
 
 	obj->color_check_item				= GTK_CHECK_MENU_ITEM(		gtk_builder_get_object(builder, "book_color_dark_scheme_checkmenuitem"));
 

@@ -90,7 +90,6 @@ void book_navigation_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer u
 
 void main_wnd_size_allocate_cb (GtkWidget *widget, GdkRectangle *allocation, gpointer user_data)
 {	GtkTextView* text_view = GTK_TEXT_VIEW(user_data);
-	GKeyFile* app_config	= GLOBAL_FB2_READER.app_config;
 
 	gint margin = allocation->width * 0.15;
 
@@ -158,6 +157,14 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEvent* event, gpoint
 	return TRUE;
 }
 
+
+void about_app_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_data)
+{
+	GtkAboutDialog* about_dialog	= GLOBAL_FB2_READER.about_dialog;
+	gtk_dialog_run(GTK_DIALOG(about_dialog));
+	gtk_widget_hide(GTK_WIDGET(about_dialog));
+
+}
 
 void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)
 {

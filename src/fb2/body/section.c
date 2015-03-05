@@ -58,7 +58,7 @@ int parse_section(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* 
 			else if(strcmp((char*)node->name, "p") == 0)
 				parse_p(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)
-				gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+				parse_empty_line(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "image") == 0)
 				parse_image(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "poem") == 0)

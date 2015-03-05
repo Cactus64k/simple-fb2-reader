@@ -32,19 +32,14 @@ int reader_open_book(char* file_path)
 
 		char* book_config_path		= g_strdup_printf("%s/simple-fb2-reader/books/%s", conf_dir, book_hash);
 		GKeyFile* book_config		= g_key_file_new();
-		GError* key_file_error		= NULL;
 
-		g_key_file_load_from_file(book_config, book_config_path, G_KEY_FILE_NONE, &key_file_error);
+		g_key_file_load_from_file(book_config, book_config_path, G_KEY_FILE_NONE, NULL);
 
 		if(g_key_file_has_key(book_config, "book",				"read_line", NULL) == FALSE)
 			g_key_file_set_integer(book_config, "book",			"read_line", 0);
 
 		if(g_key_file_has_key(book_config, "book",				"read_line_offset", NULL) == FALSE)
 			g_key_file_set_integer(book_config, "book",			"read_line_offset", 0);
-
-		fprintf(stderr, _C("ERROR: GKeyFile %s\n"), key_file_error->message);
-
-		g_error_free(key_file_error);
 
 
 		GLOBAL_FB2_READER.book_config		= book_config;
@@ -53,8 +48,6 @@ int reader_open_book(char* file_path)
 		g_checksum_free(chsum);
 
 		//###############################
-
-		gboolean is_book = FALSE;
 
 		if(test_file_type(file_path, ".txt") == TRUE)
 		{

@@ -1,6 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <interface>
   <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkFileChooserDialog" id="book_filechooserdialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="modal">True</property>
+    <property name="default_width">320</property>
+    <property name="default_height">260</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_wnd</property>
+    <property name="filter">fb2_files_filter</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="book_filechooserdialog-vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="book_filechooserdialog-action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="book_filechooserdialog_cancel_button">
+                <property name="label">gtk-cancel</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="book_filechooserdialog_ok_button">
+                <property name="label">gtk-open</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">book_filechooserdialog_cancel_button</action-widget>
+      <action-widget response="2">book_filechooserdialog_ok_button</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkImage" id="book_position_icon_image">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -198,6 +263,7 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="activate" handler="about_app_imagemenuitem_activate_cb" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -241,71 +307,6 @@
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkFileChooserDialog" id="book_filechooserdialog">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="modal">True</property>
-    <property name="default_width">320</property>
-    <property name="default_height">260</property>
-    <property name="type_hint">dialog</property>
-    <property name="transient_for">main_wnd</property>
-    <property name="filter">fb2_files_filter</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="book_filechooserdialog-vbox">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="book_filechooserdialog-action_area">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="book_filechooserdialog_cancel_button">
-                <property name="label">gtk-cancel</property>
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="book_filechooserdialog_ok_button">
-                <property name="label">gtk-open</property>
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <action-widgets>
-      <action-widget response="1">book_filechooserdialog_cancel_button</action-widget>
-      <action-widget response="2">book_filechooserdialog_ok_button</action-widget>
-    </action-widgets>
   </object>
   <object class="GtkDialog" id="navigation_dialog">
     <property name="can_focus">False</property>
@@ -417,6 +418,9 @@
     <property name="transient_for">main_wnd</property>
     <property name="program_name">Simple FB2 Reader</property>
     <property name="version">1.0.0</property>
+    <property name="comments" translatable="yes">ctrl+f	search(enter - next coincidence)
+ctrl+c	copy selected text
+Have nice reading!</property>
     <property name="website">https://github.com/Cactus64k/simple-fb2-reader</property>
     <property name="authors">Cactus &lt;medved_cool@mail.ru&gt;</property>
     <property name="translator_credits" translatable="yes">Cactus &lt;medved_cool@mail.ru&gt;</property>

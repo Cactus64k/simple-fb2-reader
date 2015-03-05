@@ -46,30 +46,40 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 	{
 		if(event->button.state & GDK_BUTTON1_MASK)
 		{
-			char* href = (char*)g_object_get_data(G_OBJECT(tag), "href");
-
 			GValue value = G_VALUE_INIT;
 			g_value_init(&value, G_TYPE_STRING);
 			g_value_set_string(&value, "purple");
 			g_object_set_property(G_OBJECT(tag), "foreground", &value);
 			g_value_unset(&value);
 
-			gint read_line			= 0;
-			gint read_line_offset	= 0;
+			char* href = (char*)g_object_get_data(G_OBJECT(tag), "href");
 
-			get_scroll_line_offset(text_view, &read_line, &read_line_offset);
+			if(*href == '#')
+			{
+				href++;
+				gint read_line			= 0;
+				gint read_line_offset	= 0;
 
-			g_key_file_set_int64(book_config, "book", "read_line", read_line);
-			g_key_file_set_int64(book_config, "book", "read_line_offset", read_line);
+				get_scroll_line_offset(text_view, &read_line, &read_line_offset);
 
-			//GtkTextMark* pos_mark = g_hash_table_lookup(links_hash_table, href);
+				g_key_file_set_int64(book_config, "book", "read_line", read_line);
+				g_key_file_set_int64(book_config, "book", "read_line_offset", read_line);
 
-			gint link_line_num			= GPOINTER_TO_INT(g_hash_table_lookup(links_hash_table, href));
-			GtkTextIter line_iter;
 
-			gtk_text_buffer_get_iter_at_line(text_buff, &line_iter, link_line_num);
+				gint link_line_num			= GPOINTER_TO_INT(g_hash_table_lookup(links_hash_table, href));
+				GtkTextIter line_iter;
 
-			gtk_text_view_scroll_to_iter(text_view, &line_iter, 0.f, TRUE, 0.f, 0.f);
+				gtk_text_buffer_get_iter_at_line(text_buff, &line_iter, link_line_num);
+
+				gtk_text_view_scroll_to_iter(text_view, &line_iter, 0.f, TRUE, 0.f, 0.f);
+			}
+			else
+			{
+				if(gtk_show_uri(NULL, href, GDK_CURRENT_TIME, NULL) == FALSE)
+				{
+					fprintf(stderr, _C("ERROR: failed to open URI %s\n"), href);
+				}
+			}
 		}
 	}
 	else if(event->type == GDK_MOTION_NOTIFY)

@@ -44,17 +44,17 @@ int parse_formated_text(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkText
 		{
 			if(strcmp((char*)parent_node->name, "strong") == 0)				// жирный
 				tag = "strong_tag";
-			else if(strcmp((char*)parent_node->name, "emphasis") == 0)			// курсив
+			else if(strcmp((char*)parent_node->name, "emphasis") == 0)		// курсив
 				tag = "emphasis_tag";
 			else if(strcmp((char*)parent_node->name, "a") == 0)				// ссылка
-				parse_link(obj, parent_node, text_buff_end);
+				parse_a(obj, parent_node, text_buff_end);
 			else if(strcmp((char*)parent_node->name, "strikethrough") == 0)	// зачеркнутый
 				tag = "strikethrough_tag";
-			else if(strcmp((char*)parent_node->name, "sub") == 0)				// нижний индекс
+			else if(strcmp((char*)parent_node->name, "sub") == 0)			// нижний индекс
 				tag = "sub_tag";
-			else if(strcmp((char*)parent_node->name, "sup") == 0)				// верхний индекс
+			else if(strcmp((char*)parent_node->name, "sup") == 0)			// верхний индекс
 				tag = "sup_tag";
-			else if(strcmp((char*)parent_node->name, "code") == 0)				// код, моноширинный шрифт
+			else if(strcmp((char*)parent_node->name, "code") == 0)			// код, моноширинный шрифт
 				tag = "code_tag";
 			else if(strcmp((char*)parent_node->name, "image") == 0)			// картинка
 				parse_image_inline(obj, parent_node, text_buff_end);

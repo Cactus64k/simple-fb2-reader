@@ -85,6 +85,7 @@
 		GtkFileChooserDialog*	filechooserdialog;
 		GtkDialog*				navigation_dialog;
 		GtkDialog*				notes_dialog;
+		GtkAboutDialog*			about_dialog;
 
 		GdkCursor*				link_cursor;
 		GdkCursor*				def_cursor;

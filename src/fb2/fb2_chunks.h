@@ -11,8 +11,10 @@
 	int parse_book_binary		(FB2_READER_TEXT_VIEW* obj, xmlNode* node);
 	int parse_body				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 	int parse_book_description	(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_empty_line		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_annotation		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 	int parse_title_info		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
-	int parse_link				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_a				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 	int parse_image				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 	int parse_image_inline		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 	int parse_section			(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end, GtkTreeIter* tree_iter);
@@ -27,7 +29,8 @@
 	int parse_subtitle			(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 	int parse_cite				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 	int parse_table				(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
-	int parse_annotation		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_book_title		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+	int parse_coverpage			(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 
 	int parse_id_attribute		(FB2_READER_TEXT_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
 

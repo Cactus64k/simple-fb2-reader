@@ -45,6 +45,8 @@ int create_fb2_tags(GtkTextBuffer* text_buff)
 	gtk_text_buffer_create_tag(text_buff, "table_tag", 			"family",				"Mono",
 																"wrap_mode",			GTK_WRAP_NONE, NULL);
 	//####################################################################################################################################
+	gtk_text_buffer_create_tag(text_buff, "link_descr_tag", 	"size-points",			8.f,			GTK_WRAP_NONE, NULL);
+	//####################################################################################################################################
 
 	return 0;
 }

@@ -34,27 +34,33 @@ int parse_fb2_zip(char* file_path)
 					zip_fclose(zf);
 					xmlParseChunk(ctxt, buff, 0, 1);
 
-					xmlDocPtr xml_doc	= ctxt->myDoc;
+					int parsing_status = ctxt->wellFormed;
 
-					xmlFreeParserCtxt(ctxt);
-
-					if(xml_doc != NULL)
+					if(parsing_status == 1)
 					{
-						xmlNode* file_tree	= xml_doc->children;
-						int xml_state		= ctxt->wellFormed;
+						xmlDocPtr xml_doc	= ctxt->myDoc;
 
-						if(xml_state)
+						if(xml_doc != NULL)
 						{
+							xmlNode* file_tree	= xml_doc->children;
+
 							GtkTextIter text_buff_end;
 							gtk_text_buffer_get_end_iter(text_buff, &text_buff_end);
 
 							parse_function_book(book_text_view, file_tree, &text_buff_end);
-							break;
-						}
 
-						xmlFreeDoc(xml_doc);
+							xmlFreeDoc(xml_doc);
+						}
+						else
+							fprintf(stderr, _C("ERROR: xml is well parsed, but pointer is NULL\n"));
 					}
-					fprintf(stderr, _C("ERROR: failed to parse fb2 file: %s\n"), st.name);
+					else
+						fprintf(stderr, _C("ERROR: failed to parse fb2 file: %s\n"), st.name);
+
+					xmlFreeParserCtxt(ctxt);
+
+					if(parsing_status == 1)
+						break;
 				}
 				else
 					fprintf(stderr, _C("ERROR: failed to unpack fb2 file: %s\n"), z_file_name);
