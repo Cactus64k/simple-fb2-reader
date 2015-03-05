@@ -6,12 +6,12 @@ Skils(- not support, ~ some support):
 - support fb2, fb2.zip and txt files
 - color chemas(black and white)
 - saving reading position
-- search in book text
-- current document links support
-- full format support(-stylesheet, ~table)
-- table of contents navigation
-- text searching support
 - saving window state, size and position
+- search text in book
+- URI
+- full 2.1 format support(-stylesheet, ~table)
+- navigation
+
 
 Depends:
 - libxml      >= 2.8.0, 
