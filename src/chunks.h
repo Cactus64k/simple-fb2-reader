@@ -34,19 +34,27 @@
 
 	enum
 	{
+		BOOK_TYPE_NONE = 0,
+		BOOK_TYPE_FB2,
+		BOOK_TYPE_FB2_ZIP,
+		BOOK_TYPE_TXT
+	} BOOK_TYPE;
+
+	enum
+	{
 		IS_ENCODE_COLUMN = 0,
 		ENCODE_NAME_COLUMN
 	};
 
-	typedef struct SEARCH_WINDOW
+	typedef struct FB2_READER_SEARCH_WINDOW
 	{
 		GtkWidget*		search_wnd;
 		gboolean		entry_edited;
 		GtkEntry*		search_query_entry;
 		GtkTextIter		last_pos;
-	} SEARCH_WINDOW;
+	} FB2_READER_SEARCH_WINDOW;
 
-	typedef struct ENCODE_DIALOG
+	typedef struct FB2_READER_ENCODE_DIALOG
 	{
 		GtkDialog*		dialog;
 		GtkTreeView*	treeview;
@@ -55,21 +63,19 @@
 		size_t			buffer_data_size;
 		char			src_buffer[1024];
 		char			dst_buffer[1024*6];
-	} ENCODE_DIALOG;
+	} FB2_READER_ENCODE_DIALOG;
 
 	typedef struct FB2_READER_TEXT_VIEW
 	{
 		GtkTextBuffer*			text_buff;
 		GtkTextView*			text_view;
 
-		gint					tag_table_default_size;
-
 		GtkTreeStore*			sections_treestore;
 		GtkTreeView*			sections_treeview;
-		gboolean				save_section;
+		gboolean				store_section;
 
 
-		GHashTable*				binary_hash_table;			// должно ссылаться на указатель в глобальном объекте ридера
+		GHashTable*				binary_hash_table;
 		GHashTable*				links_hash_table;
 
 	} FB2_READER_TEXT_VIEW;
@@ -102,9 +108,9 @@
 
 	} FB2_READER;
 
-	ENCODE_DIALOG	GLOBAL_ENCODE_DIALOG;
-	FB2_READER		GLOBAL_FB2_READER;
-	SEARCH_WINDOW	GLOBAL_SEARCH_WND;
+	FB2_READER_ENCODE_DIALOG	GLOBAL_ENCODE_DIALOG;
+	FB2_READER					GLOBAL_FB2_READER;
+	FB2_READER_SEARCH_WINDOW	GLOBAL_SEARCH_WND;
 
 	int create_fb2_tags(GtkTextBuffer* text_buff);
 	int create_config_dir();
@@ -117,8 +123,8 @@
 	int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset);
 
 	int init_main_wnd(GtkBuilder* builder, FB2_READER* obj);
-	int init_search_wnd(GtkBuilder* builder, SEARCH_WINDOW* obj);
-	int init_encode_wnd(GtkBuilder* builder, ENCODE_DIALOG* obj);
+	int init_search_wnd(GtkBuilder* builder, FB2_READER_SEARCH_WINDOW* obj);
+	int init_encode_wnd(GtkBuilder* builder, FB2_READER_ENCODE_DIALOG* obj);
 	int init_app_config(FB2_READER* obj);
 
 

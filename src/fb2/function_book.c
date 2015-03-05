@@ -53,7 +53,7 @@ int parse_function_book(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkText
 			{
 				GtkTextIter text_buff_start;
 
-				obj->save_section	= TRUE;
+				obj->store_section	= TRUE;
 
 				parse_body(obj, node, text_buff_end);
 
@@ -73,7 +73,7 @@ int parse_function_book(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkText
 						{
 							GtkTextIter text_buff_start;
 
-							obj->save_section	= FALSE;
+							obj->store_section	= FALSE;
 
 							parse_body(obj, node, text_buff_end);
 

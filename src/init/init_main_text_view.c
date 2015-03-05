@@ -8,7 +8,7 @@ int init_main_reader_text_view(GtkBuilder* builder, FB2_READER* obj0)
 
 	memset(obj, 0, sizeof(*obj));
 
-	obj->save_section				= FALSE;
+	obj->store_section				= FALSE;
 	obj->text_buff					= GTK_TEXT_BUFFER(			gtk_builder_get_object(builder, "book_textbuff"));
 	obj->text_view					= GTK_TEXT_VIEW(			gtk_builder_get_object(builder, "book_textview"));
 
@@ -30,9 +30,6 @@ int init_main_reader_text_view(GtkBuilder* builder, FB2_READER* obj0)
 
 	gtk_text_buffer_insert_with_tags_by_name(obj->text_buff, &text_buff_end, _C("\n\n\n\nHello! =P \n"), -1, "title_tag", "default_tag", NULL);
 
-	GtkTextTagTable* text_tag_table	= gtk_text_buffer_get_tag_table(obj->text_buff);
-
-	obj->tag_table_default_size		= gtk_text_tag_table_get_size(text_tag_table);
 	obj->binary_hash_table			= g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_object_unref);
 	obj->links_hash_table			= g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);
 

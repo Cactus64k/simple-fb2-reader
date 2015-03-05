@@ -70,7 +70,7 @@ int fill_encode_treestore(GtkTreeStore* tree_store)
 	return 0;
 }
 
-int fill_encode_test_buffer(ENCODE_DIALOG* obj, char* file_path)
+int fill_encode_test_buffer(FB2_READER_ENCODE_DIALOG* obj, char* file_path)
 {
 	char* buffer				= obj->src_buffer;
 	size_t buff_size			= sizeof(obj->src_buffer);
@@ -87,7 +87,7 @@ int fill_encode_test_buffer(ENCODE_DIALOG* obj, char* file_path)
 	return 0;
 }
 
-char* encode_dialog_get_encode_name(ENCODE_DIALOG* obj)
+char* encode_dialog_get_encode_name(FB2_READER_ENCODE_DIALOG* obj)
 {
 	GtkTreeView* tree_view				= obj->treeview;
 	GtkTreeSelection* tree_selection	= gtk_tree_view_get_selection(tree_view);

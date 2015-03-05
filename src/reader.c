@@ -232,12 +232,15 @@ int reader_close_book()
 void text_tag_foreach_remove(GtkTextTag* tag, gpointer data)
 {
 	GtkTextTagTable* text_tag_table = (GtkTextTagTable*)data;
-	gint tag_table_default_size	= GLOBAL_FB2_READER.book_text_view.tag_table_default_size;
 
-	gint priority = gtk_text_tag_get_priority(tag);
-	if(priority >= tag_table_default_size)
+	GValue tag_name = G_VALUE_INIT;
+	g_value_init(&tag_name, G_TYPE_STRING);
+	g_object_get_property(G_OBJECT(tag), "name", &tag_name);
+
+	if(g_value_get_string(&tag_name) == NULL)
 		gtk_text_tag_table_remove(text_tag_table, tag);
 
+	g_value_unset(&tag_name);
 }
 
 //##############################################################################################################

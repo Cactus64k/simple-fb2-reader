@@ -8,14 +8,14 @@ int parse_section(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* 
 	GtkTextBuffer* text_buff			= obj->text_buff;
 	xmlNode* node						= parent_node->children;
 	GtkTreeStore* sections_treestore	= obj->sections_treestore;
-	gboolean save_section				= obj->save_section;
+	gboolean store_section				= obj->store_section;
 
 	parse_id_attribute(obj, parent_node, text_buff_end);
 
 	gboolean has_title		= FALSE;
 	GtkTreeIter section_iter;
 
-	if(save_section == TRUE)
+	if(store_section == TRUE)
 	{
 		gtk_tree_store_append(sections_treestore, &section_iter, tree_iter);
 
@@ -29,7 +29,7 @@ int parse_section(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* 
 		{
 			if(strcmp((char*)node->name, "title") == 0)
 			{
-				if(save_section == TRUE)
+				if(store_section == TRUE)
 				{
 					GtkTextMark* start_tag_mark = gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
 
@@ -74,7 +74,7 @@ int parse_section(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* 
 		node = node->next;
 	}
 
-	if((has_title == FALSE) && (save_section == TRUE))
+	if((has_title == FALSE) && (store_section == TRUE))
 	{
 		gtk_tree_store_set(sections_treestore, &section_iter, SECTION_NAME_COLUMN, "NO NAME", -1);
 	}
