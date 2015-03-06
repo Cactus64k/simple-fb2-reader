@@ -1,10 +1,17 @@
 CC				= gcc
 CFLAGS			= -std=c99 -O3 -Wall -fmessage-length=0 -pedantic -pedantic-errors
 LDFLAGS			= -export-dynamic
-LIBS			= $(shell pkg-config gtk+-3.0 --libs-only-l) -lzip -lxml2
-SOURCES			= $(shell find . -name '*.c' -printf './%P ')
-INCLUDE			= $(shell pkg-config gtk+-3.0 --cflags-only-I) -I/usr/include/libxml2/
+####################################################################################
+LIBS			=	$(shell pkg-config gtk+-3.0 --libs-only-l)\
+					$(shell pkg-config libxml-2.0 --libs-only-l)\
+					$(shell pkg-config libzip --libs-only-l)
+####################################################################################
+INCLUDE			=	$(shell pkg-config gtk+-3.0 --cflags-only-I)\
+					$(shell pkg-config libxml-2.0 --cflags-only-I)\
+					$(shell pkg-config libzip --cflags-only-I)
+####################################################################################
 PROGNAME		= simple-fb2-reader
+SOURCES			= $(shell find . -name '*.c' -printf './%P ')
 OBJECTS			= $(SOURCES:.c=.o)
 
 all: $(SOURCES) GUI_TARGET $(PROGNAME) TRANSLATE_TARGET
@@ -28,4 +35,5 @@ $(PROGNAME): $(OBJECTS)
 				$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
 
 clean:
-				rm  -f $(OBJECTS) $(PROGNAME)
+				find -name "*.o" -delete
+				rm  $(PROGNAME)

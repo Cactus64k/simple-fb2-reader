@@ -78,7 +78,7 @@
     <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="book_textview_vertical_adjustment">
-    <property name="upper">1000</property>
+    <property name="upper">10000</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -296,6 +296,7 @@
                 <property name="cursor_visible">False</property>
                 <property name="buffer">book_textbuff</property>
                 <signal name="motion-notify-event" handler="book_textview_motion_notify_event_cb" swapped="no"/>
+                <signal name="scroll-event" handler="book_textview_scroll_event_cb" swapped="no"/>
               </object>
             </child>
           </object>

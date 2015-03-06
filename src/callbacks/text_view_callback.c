@@ -34,6 +34,43 @@ gboolean book_textview_motion_notify_event_cb(GtkWidget* widget, GdkEventMotion*
 	return FALSE;
 }
 
+gboolean book_textview_scroll_event_cb(GtkTextView *text_view, GdkEventScroll *event, gpointer user_data)
+{
+	if(event->state & GDK_CONTROL_MASK)
+	{
+		GtkTextBuffer* text_buff		= gtk_text_view_get_buffer(text_view);
+		GtkTextTagTable* text_tag_table	= gtk_text_buffer_get_tag_table(text_buff);
+		GtkTextTag* default_tag			= gtk_text_tag_table_lookup(text_tag_table, "default_tag");
+
+		GValue value = G_VALUE_INIT;
+		g_value_init(&value, G_TYPE_DOUBLE);
+
+		g_object_get_property(G_OBJECT(default_tag), "size-points", &value);
+
+		double text_size = 0.f;
+		if(event->direction == GDK_SCROLL_SMOOTH)
+		{
+			text_size = g_value_get_double(&value)+event->delta_y;
+
+			text_size = (text_size<10)? 10: text_size;
+			text_size = (text_size>50)? 50: text_size;
+
+			g_value_set_double(&value, text_size);
+			g_object_set_property(G_OBJECT(default_tag), "size-points", &value);
+
+
+		}
+
+		gtk_widget_queue_draw(GTK_WIDGET(text_view));
+
+		return TRUE;
+	}
+
+	gtk_widget_queue_draw(GTK_WIDGET(text_view));
+
+	return FALSE;
+}
+
 gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data)
 {
 	GtkTextView* text_view			= GTK_TEXT_VIEW(object);

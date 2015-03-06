@@ -123,19 +123,18 @@ void books_section_treeview_row_activated_cb(GtkTreeView* tree_view, GtkTreePath
 }
 
 
-gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEvent* event, gpointer user_data)
+gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpointer user_data)
 {
-	GdkEventKey key_event		= event->key;
 	GtkWidget* search_window	= GLOBAL_SEARCH_WND.search_wnd;
 	GtkEntry* search_entry		= GLOBAL_SEARCH_WND.search_query_entry;
 	GtkTextBuffer* text_buff	= GLOBAL_FB2_READER.book_text_view.text_buff;
 	GtkClipboard* clipboard		= GLOBAL_FB2_READER.clipboard;
 
-	switch(key_event.keyval)
+	switch(event->keyval)
 	{
 		case GDK_KEY_f:
 		case GDK_KEY_F:
-			if(key_event.state & GDK_CONTROL_MASK)
+			if(event->state & GDK_CONTROL_MASK)
 			{
 				gtk_widget_show(search_window);
 				gtk_widget_grab_focus(GTK_WIDGET(search_entry));
@@ -143,7 +142,7 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEvent* event, gpoint
 			break;
 		case GDK_KEY_C:
 		case GDK_KEY_c:
-			if(key_event.state & GDK_CONTROL_MASK)
+			if(event->state & GDK_CONTROL_MASK)
 			{
 				if(gtk_text_buffer_get_has_selection(text_buff) == TRUE)
 					gtk_text_buffer_copy_clipboard(text_buff, clipboard);
