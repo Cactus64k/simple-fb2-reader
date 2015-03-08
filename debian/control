@@ -1,5 +1,5 @@
 Source: simple-fb2-reader
-Section: unknown
+Section: text
 Priority: optional
 Maintainer: Cactus <medved_cool@mail.ru>
 Build-Depends: debhelper (>= 8.0.0), libxml2-dev (>= 2.8.0), libgtk-3-dev (>= 3.4.2), libglib2.0-dev (>= 2.32.4), libzip-dev (>= 0.10.1), pkg-config (>= 0.26), libc-dev-bin (>= 2.13), gettext (>= 0.18.1.1)
@@ -11,10 +11,10 @@ Homepage: https://github.com/Cactus64k/simple-fb2-reader
 Package: simple-fb2-reader
 Architecture: amd64
 Depends: libxml2 (>= 2.8.0), libgtk-3-0 (>= 3.4.2), libglib2.0-0 (>= 2.32.4), libzip2 (>= 0.10.1), libc-bin (>= 2.13)
-Description: Simple tool to read FB2 books on GTK+3
-	Skils(- not support, ~ some support):
-	- support fb2, fb2.zip and txt files
-	- color chemas(black and white)
+Description: Simple tool to read FB2 books. Developed using GTK+3.
+	Features ("-" - not supported yet, "~" - partial support):
+	- supports fb2, fb2.zip and txt files
+	- color themes(black and white)
 	- saving reading position
 	- saving window state, size and position
 	- search text in book

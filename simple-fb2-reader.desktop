@@ -1,5 +1,5 @@
 [Desktop Entry]
-Categories=Utility;
+Categories=Utility;Viewer;
 Comment=Simple tool to read FB2 books on GTK+3
 Comment[ru]=Простая читалка на GTK+3 для чтения FB2 книг
 Exec=simple-fb2-reader %u
@@ -7,4 +7,6 @@ Icon=simple-fb2-reader
 Name=Simple FB2 Reader
 Type=Application
 MimeType=application/x-fictionbook;
-
+Terminal=false
+GenericName=Simple FB2 Reader
+GenericName[ru]=Чтение книг FB2
