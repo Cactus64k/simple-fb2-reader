@@ -9,4 +9,4 @@ Type=Application
 MimeType=application/x-fictionbook;
 Terminal=false
 GenericName=Simple FB2 Reader
-GenericName[ru]=Чтение книг FB2
+GenericName[ru]=Simple FB2 Reader

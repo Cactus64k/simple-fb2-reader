@@ -56,14 +56,15 @@ gboolean book_textview_scroll_event_cb(GtkTextView *text_view, GdkEventScroll *e
 
 			g_value_set_double(&value, text_scale);
 			g_object_set_property(G_OBJECT(default_tag), "scale", &value);
+			g_value_unset(&value);
 		}
 
-		gtk_widget_queue_draw(GTK_WIDGET(text_view));
+		//gtk_widget_queue_draw(GTK_WIDGET(text_view));
 
 		return TRUE;
 	}
 
-	gtk_widget_queue_draw(GTK_WIDGET(text_view));
+	//gtk_widget_queue_draw(GTK_WIDGET(text_view));
 
 	return FALSE;
 }
