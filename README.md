@@ -21,7 +21,7 @@ Depends:
 
 
 Instructions how to build ".deb" package on Debian:
-```bash
+```
 $ cd ~/
 $ git clone https://github.com/Cactus64k/simple-fb2-reader.git
 $ cd simple-fb2-reader
