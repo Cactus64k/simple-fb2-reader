@@ -1,12 +1,14 @@
 #include "../fb2_chunks.h"
 
-int parse_date(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end)
+int parse_date(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	assert(node != NULL);
-	assert(text_buff != NULL);
-	assert(text_buff_end != NULL);
+	g_return_val_if_fail(parent_node != NULL, -1);
+	g_return_val_if_fail(text_buff_end != NULL, -2);
 
-	xmlAttr* properties = node->properties;
+	GtkTextBuffer* text_buff	= obj->text_buff;
+	xmlNode* node				= parent_node->children;
+
+	xmlAttr* properties	= node->properties;
 
 	while(properties != NULL)
 	{

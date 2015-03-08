@@ -1,84 +1,83 @@
 #include "../fb2_chunks.h"
 
-int parse_body_section(xmlNode* parent_node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end)
+int parse_section(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end, GtkTreeIter* tree_iter)
 {
-	assert(parent_node != NULL);
-	assert(text_buff != NULL);
-	assert(text_buff_end != NULL);
+	g_return_val_if_fail(parent_node != NULL, -1);
+	g_return_val_if_fail(text_buff_end != NULL, -2);
 
-	xmlNode* node = parent_node->children;
-	bool section_in_section = false;
+	GtkTextBuffer* text_buff			= obj->text_buff;
+	xmlNode* node						= parent_node->children;
+	GtkTreeStore* sections_treestore	= obj->sections_treestore;
+	gboolean store_section				= obj->store_section;
+
+	parse_id_attribute(obj, parent_node, text_buff_end);
+
+	gboolean has_title		= FALSE;
+	GtkTreeIter section_iter;
+
+	if(store_section == TRUE)
+	{
+		gtk_tree_store_append(sections_treestore, &section_iter, tree_iter);
+
+		gint cur_line = gtk_text_iter_get_line(text_buff_end);
+		gtk_tree_store_set(sections_treestore, &section_iter, SECTION_STRING_COLUMN, cur_line, -1);
+	}
 
 	while(node != NULL)
 	{
-		if((node->type == XML_ELEMENT_NODE) && (strcmp((char*)node->name, "section") == 0))
+		if(node->type == XML_ELEMENT_NODE)
 		{
-			section_in_section = true;
-			break;
+			if(strcmp((char*)node->name, "title") == 0)
+			{
+				if(store_section == TRUE)
+				{
+					GtkTextMark* start_tag_mark = gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
+
+					parse_title(obj, node, text_buff_end);
+
+					GtkTextIter start_tag_iter;
+					gtk_text_buffer_get_iter_at_mark(text_buff, &start_tag_iter, start_tag_mark);
+					gtk_text_buffer_delete_mark(text_buff, start_tag_mark);
+
+					char* title_data = gtk_text_buffer_get_text(text_buff, &start_tag_iter, text_buff_end, TRUE);
+
+					gtk_tree_store_set(sections_treestore, &section_iter,  SECTION_NAME_COLUMN, title_data, -1);
+					g_free(title_data);
+				}
+				else
+					parse_title(obj, node, text_buff_end);
+
+				has_title = TRUE;
+			}
+			else if(strcmp((char*)node->name, "epigraph") == 0)
+				parse_epigraph(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "annotation") == 0)
+				parse_annotation(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "section") == 0)
+				parse_section(obj, node, text_buff_end, &section_iter);
+			else if(strcmp((char*)node->name, "p") == 0)
+				parse_p(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "empty-line") == 0)
+				parse_empty_line(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "image") == 0)
+				parse_image(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "poem") == 0)
+				parse_poem(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "subtitle") == 0)
+				parse_subtitle(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "cite") == 0)
+				parse_cite(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "table") == 0)
+				parse_table(obj, node, text_buff_end);
 		}
 
 		node = node->next;
 	}
 
-	if(section_in_section == true)
+	if((has_title == FALSE) && (store_section == TRUE))
 	{
-		node = parent_node->children;
-
-		while(node != NULL)
-		{
-			if(node->type == XML_ELEMENT_NODE)
-			{
-				if(strcmp((char*)node->name, "title") == 0)
-					parse_title(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "epigraph") == 0)
-					parse_epigraph(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "image") == 0)
-					parse_image(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "annotation") == 0)
-				{
-					print_unsupported_tag("annotation");
-				}
-				else if(strcmp((char*)node->name, "section") == 0)
-					parse_body_section(node, text_buff, text_buff_end);
-			}
-
-			node = node->next;
-		}
+		gtk_tree_store_set(sections_treestore, &section_iter, SECTION_NAME_COLUMN, "NO NAME", -1);
 	}
-	else
-	{
-		node = parent_node->children;
 
-		while(node != NULL)
-		{
-			if(node->type == XML_ELEMENT_NODE)
-			{
-				if(strcmp((char*)node->name, "p") == 0)
-					parse_p(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "empty-line") == 0)		// пустая строка
-					gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
-				else if(strcmp((char*)node->name, "title") == 0)
-					parse_title(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "epigraph") == 0)
-					parse_epigraph(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "image") == 0)
-					parse_image(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "poem") == 0)				// стихотворение
-					parse_poem(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "subtitle") == 0)			// подзаголовок
-					parse_subtitle(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "cite") == 0)				// цитата
-					parse_cite(node, text_buff, text_buff_end);
-				else if(strcmp((char*)node->name, "table") == 0)			// таблица
-				{
-					print_unsupported_tag("table");
-				}
-			}
-
-
-			node = node->next;
-		}
-	}
 	return 0;
 }
-

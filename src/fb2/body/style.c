@@ -1,14 +1,14 @@
 #include "../fb2_chunks.h"
 
-int parse_style(xmlNode* node, GtkTextBuffer* text_buff, GtkTextIter* text_buff_end)
+int parse_style(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	assert(node != NULL);
-	assert(text_buff != NULL);
-	assert(text_buff_end != NULL);
+	g_return_val_if_fail(parent_node != NULL, -1);
+	g_return_val_if_fail(text_buff_end != NULL, -2);
 
-	node = node->children;
-	fputs("tag <style> not fully supported!\n", stderr);
-	parse_formated_text(node, text_buff, text_buff_end);
+	xmlNode* node				= parent_node->children;
+
+	fputs(_C("tag <style> not fully supported!\n"), stderr);
+	parse_formated_text(obj, node, text_buff_end);
 
 	return 0;
 }

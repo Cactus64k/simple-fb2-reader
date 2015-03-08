@@ -1,4 +1,4 @@
-#include "txt_parser.h"
+#include "txt_chunks.h"
 
 const char* european_enc[]	= {"ISO-8859-1", "ISO-8859-2", "ISO-8859-3", "ISO-8859-4", "ISO-8859-5", "ISO-8859-7", \
 								"ISO-8859-9", "ISO-8859-10", "ISO-8859-13", "ISO-8859-14", "ISO-8859-15", "ISO-8859-16", \
@@ -70,36 +70,36 @@ int fill_encode_treestore(GtkTreeStore* tree_store)
 	return 0;
 }
 
-int fill_encode_test_buffer(ENCODE_DIALOG* obj, char* file_path)
+int fill_encode_test_buffer(FB2_READER_ENCODE_DIALOG* obj, char* file_path)
 {
 	char* buffer				= obj->src_buffer;
 	size_t buff_size			= sizeof(obj->src_buffer);
 	size_t* buffer_data_size	= &(obj->buffer_data_size);
-	GtkTextBuffer* text_buffer	= obj->textbuffer;
+	GtkTextBuffer* text_buff	= obj->textbuffer;
 
 	FILE* f = fopen(file_path, "r");
 
 	*buffer_data_size = fread(buffer, 1, buff_size, f);
-	gtk_text_buffer_set_text(text_buffer, "", -1);
+	gtk_text_buffer_set_text(text_buff, "", -1);
 
 	fclose(f);
 
 	return 0;
 }
 
-char* get_encode_name(ENCODE_DIALOG* obj)
+char* encode_dialog_get_encode_name(FB2_READER_ENCODE_DIALOG* obj)
 {
 	GtkTreeView* tree_view				= obj->treeview;
 	GtkTreeSelection* tree_selection	= gtk_tree_view_get_selection(tree_view);
 	GtkTreeModel* tree_model			= GTK_TREE_MODEL(obj->treestore);
 
 	GtkTreeIter tree_iter;
-	gboolean is_encode = false;
+	gboolean is_encode = FALSE;
 
-	if(gtk_tree_selection_get_selected(tree_selection, NULL, &tree_iter) == true)
+	if(gtk_tree_selection_get_selected(tree_selection, NULL, &tree_iter) == TRUE)
 	{
 		gtk_tree_model_get(tree_model, &tree_iter, IS_ENCODE_COLUMN, &is_encode, -1);
-		if(is_encode == true)
+		if(is_encode == TRUE)
 		{
 			char* encode_name = NULL;
 			gtk_tree_model_get(tree_model, &tree_iter, ENCODE_NAME_COLUMN, &encode_name, -1);

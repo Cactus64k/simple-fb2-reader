@@ -1,12 +1,11 @@
-#include "txt_parser.h"
+#include "txt_chunks.h"
 
-int parse_txt(char* file_path, GtkTextBuffer* text_buff, char* encode)
+int parse_txt(char* file_path, char* encode)
 {
-	assert(file_path != NULL);
-	assert(text_buff != NULL);
-	assert(encode != NULL);
+	g_return_val_if_fail(file_path != NULL, -1);
+	g_return_val_if_fail(encode != NULL, -2);
 
-	GtkTextTag* default_tag	= GLOBAL_FB2_READER.default_tag;
+	GtkTextBuffer* text_buff = GLOBAL_FB2_READER.book_text_view.text_buff;
 
 	const size_t buff_src_size = 1024;
 	char buff_src[buff_src_size];
@@ -37,7 +36,7 @@ int parse_txt(char* file_path, GtkTextBuffer* text_buff, char* encode)
 			if(res == (size_t)-1)
 			{
 				char* error_text = strerror(errno);
-				fprintf(stderr, "TXT encode error: %s\n", error_text);
+				fprintf(stderr, _C("ERROR: failed to encode txt file: %s\n"), error_text);
 
 				//break;
 			}
@@ -45,7 +44,7 @@ int parse_txt(char* file_path, GtkTextBuffer* text_buff, char* encode)
 			gtk_text_buffer_insert(text_buff, &text_buff_end, buff_dst, sizeof(buff_dst)-out_buff_left);
 
 			if(in_buff_left != 0)
-				fseek(f, -in_buff_left, SEEK_CUR);
+				fseek(f, -(ssize_t)in_buff_left, SEEK_CUR);
 		}
 
 		iconv_close(cd);
@@ -57,9 +56,9 @@ int parse_txt(char* file_path, GtkTextBuffer* text_buff, char* encode)
 		gtk_text_buffer_get_bounds(text_buff, &text_buff_start_iter, &text_buff_end_iter);
 
 
-		gtk_text_buffer_apply_tag(text_buff, default_tag, &text_buff_start_iter, &text_buff_end_iter);
+		gtk_text_buffer_apply_tag_by_name(text_buff, "default_tag", &text_buff_start_iter, &text_buff_end_iter);
 	}
 	else
-		fprintf(stderr, "Error reading file: %s\n", file_path);
+		fprintf(stderr, _C("ERROR: failed to open txt file: %s\n"), file_path);
 	return 0;
 }
