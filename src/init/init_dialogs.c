@@ -7,6 +7,8 @@ int init_search_wnd(GtkBuilder* builder, FB2_READER_SEARCH_WINDOW* obj)
 	obj->search_wnd					= GTK_WIDGET(				gtk_builder_get_object(builder, "search_wnd"));
 	obj->entry_edited				= FALSE;
 	obj->search_query_entry			= GTK_ENTRY(				gtk_builder_get_object(builder, "search_query_entry"));
+	obj->forward					= GTK_RADIO_BUTTON(			gtk_builder_get_object(builder, "search_forward_radiobutton"));
+	obj->backward					= GTK_RADIO_BUTTON(			gtk_builder_get_object(builder, "search_backward_radiobutton"));
 	//obj->last_pos					=	??;
 
 	assert(obj->search_wnd			!= NULL);

@@ -52,6 +52,8 @@
 		gboolean		entry_edited;
 		GtkEntry*		search_query_entry;
 		GtkTextIter		last_pos;
+		GtkRadioButton*	forward;
+		GtkRadioButton* backward;
 	} FB2_READER_SEARCH_WINDOW;
 
 	typedef struct FB2_READER_ENCODE_DIALOG

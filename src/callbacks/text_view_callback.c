@@ -45,20 +45,17 @@ gboolean book_textview_scroll_event_cb(GtkTextView *text_view, GdkEventScroll *e
 		GValue value = G_VALUE_INIT;
 		g_value_init(&value, G_TYPE_DOUBLE);
 
-		g_object_get_property(G_OBJECT(default_tag), "size-points", &value);
+		g_object_get_property(G_OBJECT(default_tag), "scale", &value);
 
-		double text_size = 0.f;
 		if(event->direction == GDK_SCROLL_SMOOTH)
 		{
-			text_size = g_value_get_double(&value)+event->delta_y;
+			double text_scale = g_value_get_double(&value)+event->delta_y*0.1;
 
-			text_size = (text_size<10)? 10: text_size;
-			text_size = (text_size>50)? 50: text_size;
+			text_scale = (text_scale<0)? 0: text_scale;
+			text_scale = (text_scale>10)? 10: text_scale;
 
-			g_value_set_double(&value, text_size);
-			g_object_set_property(G_OBJECT(default_tag), "size-points", &value);
-
-
+			g_value_set_double(&value, text_scale);
+			g_object_set_property(G_OBJECT(default_tag), "scale", &value);
 		}
 
 		gtk_widget_queue_draw(GTK_WIDGET(text_view));

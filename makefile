@@ -25,8 +25,8 @@ GUI_TARGET:
 OBJECTS += ./$(PROGNAME).glade.o
 
 TRANSLATE_TARGET:
-				msgfmt intl/ru.po	--output-file=intl/locale/ru/LC_MESSAGES/$(PROGNAME).mo
-				msgfmt intl/en_US.po --output-file=intl/locale/en_US/LC_MESSAGES/$(PROGNAME).mo
+				msgfmt intl/ru.po	--output-file=intl/ru/$(PROGNAME).mo
+				msgfmt intl/en_US.po --output-file=intl/en_US/$(PROGNAME).mo
 
 $(PROGNAME): $(OBJECTS) 
 				$(CC) $(LDFLAGS) $(OBJECTS) $(LIBS) -o $@
@@ -36,4 +36,5 @@ $(PROGNAME): $(OBJECTS)
 
 clean:
 				find -name "*.o" -delete
-				rm  $(PROGNAME)
+				find -name "*.mo" -delete
+				rm -f $(PROGNAME)

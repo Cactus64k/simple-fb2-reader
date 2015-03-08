@@ -72,6 +72,8 @@ void book_navigation_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer u
 	GtkTreeIter tree_iter;
 	gint string_number = 0;
 
+	gtk_widget_grab_focus(GTK_WIDGET(dialog));
+
 	if(gtk_dialog_run(dialog) == 2)
 	{
 		gtk_widget_hide(GTK_WIDGET(dialog));
@@ -130,27 +132,29 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpo
 	GtkTextBuffer* text_buff	= GLOBAL_FB2_READER.book_text_view.text_buff;
 	GtkClipboard* clipboard		= GLOBAL_FB2_READER.clipboard;
 
-	switch(event->keyval)
-	{
-		case GDK_KEY_f:
-		case GDK_KEY_F:
-			if(event->state & GDK_CONTROL_MASK)
-			{
-				gtk_widget_show(search_window);
-				gtk_widget_grab_focus(GTK_WIDGET(search_entry));
-			}
-			break;
-		case GDK_KEY_C:
-		case GDK_KEY_c:
-			if(event->state & GDK_CONTROL_MASK)
-			{
-				if(gtk_text_buffer_get_has_selection(text_buff) == TRUE)
-					gtk_text_buffer_copy_clipboard(text_buff, clipboard);
-			}
+	GdkKeymap* default_key_map = gdk_keymap_get_default();
 
-			break;
-		default:
-			break;
+	GdkKeymapKey key = {.keycode	= event->hardware_keycode,
+						.group		= 0,
+						.level		= 0};
+
+	guint keyval = gdk_keymap_lookup_key(default_key_map, &key);
+
+	if(keyval == 'f')
+	{
+		if(event->state & GDK_CONTROL_MASK)
+		{
+			gtk_widget_show(search_window);
+			gtk_widget_grab_focus(GTK_WIDGET(search_entry));
+		}
+	}
+	else if(keyval == 'c')
+	{
+		if(event->state & GDK_CONTROL_MASK)
+		{
+			if(gtk_text_buffer_get_has_selection(text_buff) == TRUE)
+				gtk_text_buffer_copy_clipboard(text_buff, clipboard);
+		}
 	}
 
 	return TRUE;
@@ -183,6 +187,7 @@ void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* check
 
 	char* background_color	= g_key_file_get_string(app_config, color_theme, "background", NULL);
 	char* text_color		= g_key_file_get_string(app_config, color_theme, "text", NULL);
+	char* selection_color	= g_key_file_get_string(app_config, color_theme, "selection", NULL);
 
 	g_return_if_fail(background_color	!= NULL);
 	g_return_if_fail(text_color			!= NULL);
@@ -194,8 +199,12 @@ void settings_color_dark_scheme_checkmenuitem_toggled_cb(GtkCheckMenuItem* check
 	gdk_rgba_parse(&color, background_color);
 	gtk_widget_override_background_color(GTK_WIDGET(text_view), GTK_STATE_FLAG_NORMAL, &color);
 
+	gdk_rgba_parse(&color, selection_color);
+	gtk_widget_override_background_color(GTK_WIDGET(text_view), GTK_STATE_FLAG_SELECTED, &color);
+
 	g_value_set_string(&value, text_color);
 	g_object_set_property(G_OBJECT(default_tag), "foreground", &value);
+
 
 	g_free(background_color);
 	g_free(text_color);
