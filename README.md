@@ -1,5 +1,5 @@
 # simple-fb2-reader
-Simple tool to read FB2 books on GTK+3
+Simple tool to read FB2 books. Developed using GTK+3.
 =======
 
 Features ("-" - not supported yet, "~" - partial support):
