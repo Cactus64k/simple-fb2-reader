@@ -3,7 +3,7 @@
 #define READ_CHUNK_SIZE 1024
 int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf);
 
-int parse_book_binary(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node)
+int parse_book_binary(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node)
 {
 	g_return_val_if_fail(parent_node != NULL, -1);
 

@@ -2,7 +2,7 @@
 
 int parse_fb2_zip(char* file_path)
 {
-	FB2_READER_TEXT_VIEW* book_text_view	= &(GLOBAL_FB2_READER.book_text_view);
+	FB2_READER_BOOK_VIEW* book_text_view	= &(GLOBAL_FB2_READER.book_text_view);
 	GtkTextBuffer* text_buff				= book_text_view->text_buff;
 
 	int zip_error = 0;

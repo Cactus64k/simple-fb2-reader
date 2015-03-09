@@ -1,6 +1,6 @@
-#include "../fb2_chunks.h"
+#include "section_chunks.h"
 
-int parse_epigraph(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_cite(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
 	g_return_val_if_fail(parent_node != NULL, -1);
 	g_return_val_if_fail(text_buff_end != NULL, -2);
@@ -10,7 +10,9 @@ int parse_epigraph(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter*
 
 	parse_id_attribute(obj, parent_node, text_buff_end);
 
-	GtkTextMark* start_tag_mark		= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
+	GtkTextMark* start_tag_mark	= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
+
+	//gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 
 	while(node != NULL)
 	{
@@ -18,12 +20,14 @@ int parse_epigraph(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter*
 		{
 			if(strcmp((char*)node->name, "p") == 0)
 				parse_p(obj, node, text_buff_end);
-			else if(strcmp((char*)node->name, "poem") == 0)
-				parse_poem(obj, node, text_buff_end);
-			else if(strcmp((char*)node->name, "cite") == 0)
-				parse_cite(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "subtitle") == 0)
+				parse_subtitle(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)
 				parse_empty_line(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "poem") == 0)
+				parse_poem(obj, node, text_buff_end);
+			else if(strcmp((char*)node->name, "table") == 0)
+				parse_table(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "text-author") == 0)
 				parse_text_autor(obj, node, text_buff_end);
 		}
@@ -31,11 +35,11 @@ int parse_epigraph(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter*
 		node = node->next;
 	}
 
+	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+
 	GtkTextIter start_tag_iter;
 	gtk_text_buffer_get_iter_at_mark(text_buff, &start_tag_iter, start_tag_mark);
 	gtk_text_buffer_delete_mark(text_buff, start_tag_mark);
-	//g_object_unref(G_OBJECT(start_tag_mark));
-	gtk_text_buffer_apply_tag_by_name(text_buff, "epigraph_tag", &start_tag_iter, text_buff_end);
-
+	gtk_text_buffer_apply_tag_by_name(text_buff, "cite_tag", &start_tag_iter, text_buff_end);
 	return 0;
 }

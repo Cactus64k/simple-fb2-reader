@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2015-03-05 18:45+0300\n"
+        "POT-Creation-Date: 2015-03-09 16:11+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,44 +20,46 @@ msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 msgid   "File"
 msgstr  ""
 
-#: ../simple-fb2-reader.glade:178
+#: ../simple-fb2-reader.glade:195
 msgid   "Book"
 msgstr  ""
 
-#: ../simple-fb2-reader.glade:223
+#: ../simple-fb2-reader.glade:240
 msgid   "Use dark color scheme"
 msgstr  ""
 
-#: ../simple-fb2-reader.glade:234
+#: ../simple-fb2-reader.glade:251
 msgid   "To last read position"
 msgstr  ""
 
-#: ../simple-fb2-reader.glade:252
+#: ../simple-fb2-reader.glade:269
 msgid   "About"
 msgstr  ""
 
-#: ../simple-fb2-reader.glade:421
-msgid   "ctrl+f\tsearch(enter - next coincidence)\n"
+#: ../simple-fb2-reader.glade:440
+msgid   "ctrl+f\tsearch\n"
         "ctrl+c\tcopy selected text\n"
         "Have nice reading!"
 msgstr  ""
 
-#: ../simple-fb2-reader.glade:426
+#: ../simple-fb2-reader.glade:445
 msgid   "Cactus <medved_cool@mail.ru>"
 msgstr  ""
 
-#: ../src/init/init_config_folder.c:13
-#, c-format
-msgid   "ERROR: failed to create folder: %s\n"
-        " %s\n"
+#: ../simple-fb2-reader.glade:476
+msgid   "Save reading position?"
 msgstr  ""
 
-#: ../src/init/init_main_text_view.c:31
-msgid   "\n"
-        "\n"
-        "\n"
-        "\n"
-        "Hello! =P \n"
+#: ../simple-fb2-reader.glade:477
+msgid   "This will overwrite the previous position"
+msgstr  ""
+
+#: ../simple-fb2-reader.glade:627
+msgid   "Forward"
+msgstr  ""
+
+#: ../simple-fb2-reader.glade:646
+msgid   "Backward"
 msgstr  ""
 
 #: ../src/fb2_zip/fb2_zip_parser.c:55
@@ -79,19 +81,37 @@ msgstr  ""
 msgid   "ERROR: failed to open zip file: %s; error code: %d\n"
 msgstr  ""
 
-#: ../src/callbacks/encode_dialog_callbacks.c:38
-#, c-format
-msgid   "ERROR: failed to encode txt file %s\n"
-msgstr  ""
-
-#: ../src/callbacks/text_view_callback.c:80
-#, c-format
-msgid   "ERROR: failed to open URI %s\n"
-msgstr  ""
-
-#: ../src/reader.c:103
+#: ../src/reader/reader_open_book.c:47 ../src/reader/reader_open_book.c:64
+#: ../src/reader/reader_open_book.c:81
 #, c-format
 msgid   "ERROR: failed to open file: %s\n"
+msgstr  ""
+
+#: ../src/init/init_main_book_view.c:32
+msgid   "\n"
+        "\n"
+        "\n"
+        "\n"
+        "Hello! =P \n"
+msgstr  ""
+
+#: ../src/init/init_config_folder.c:13
+#, c-format
+msgid   "ERROR: failed to create folder: %s\n"
+        " %s\n"
+msgstr  ""
+
+#: ../src/fb2/body/section/style.c:10
+msgid   "tag <style> not fully supported!\n"
+msgstr  ""
+
+#: ../src/fb2/body/section/image_inline.c:29 ../src/fb2/body/image.c:32
+#, c-format
+msgid   "Image %s not found in table\n"
+msgstr  ""
+
+#: ../src/fb2/body/section/image_inline.c:32 ../src/fb2/body/image.c:35
+msgid   "Not local links not supported\n"
 msgstr  ""
 
 #: ../src/fb2/attributes/id.c:26
@@ -99,22 +119,13 @@ msgstr  ""
 msgid   "ERROR: id %s already exist in table\n"
 msgstr  ""
 
-#: ../src/fb2/body/style.c:10
-msgid   "tag <style> not fully supported!\n"
-msgstr  ""
-
-#: ../src/fb2/body/image.c:32 ../src/fb2/body/image.c:88
-#, c-format
-msgid   "Image %s not found in table\n"
-msgstr  ""
-
-#: ../src/fb2/body/image.c:35 ../src/fb2/body/image.c:91
-msgid   "Not local links not supported\n"
-msgstr  ""
-
 #: ../src/fb2/fb2_parser.c:33
 #, c-format
 msgid   "ERROR: Failed to parsing fb2 file: %s\n"
+msgstr  ""
+
+#: ../src/fb2/function_book.c:96
+msgid   "End read book\n"
 msgstr  ""
 
 #: ../src/fb2/binary/binary.c:42
@@ -135,10 +146,6 @@ msgstr  ""
 msgid   "ERROR: GdkPixbufLoader: %s\n"
 msgstr  ""
 
-#: ../src/fb2/function_book.c:96
-msgid   "End read book\n"
-msgstr  ""
-
 #: ../src/txt/txt_parser.c:39
 #, c-format
 msgid   "ERROR: failed to encode txt file: %s\n"
@@ -147,4 +154,14 @@ msgstr  ""
 #: ../src/txt/txt_parser.c:62
 #, c-format
 msgid   "ERROR: failed to open txt file: %s\n"
+msgstr  ""
+
+#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:46
+#, c-format
+msgid   "ERROR: failed to open URI %s\n"
+msgstr  ""
+
+#: ../src/callbacks/encode_dialog_callbacks.c:38
+#, c-format
+msgid   "ERROR: failed to encode txt file %s\n"
 msgstr  ""

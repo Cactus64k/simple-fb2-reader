@@ -5,26 +5,27 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	memset(obj, 0, sizeof(*obj));
 
 	create_config_dir();
-	init_main_reader_text_view(builder, obj);
+	init_main_reader_book_view(builder, obj);
 	init_app_config(obj);
 
 	obj->main_wnd						= GTK_WIDGET(				gtk_builder_get_object(builder, "main_wnd"));
 	obj->filechooserdialog				= GTK_FILE_CHOOSER_DIALOG(	gtk_builder_get_object(builder, "book_filechooserdialog"));
 	obj->navigation_dialog				= GTK_DIALOG(				gtk_builder_get_object(builder, "navigation_dialog"));
 	obj->about_dialog					= GTK_ABOUT_DIALOG(			gtk_builder_get_object(builder, "reader_aboutdialog"));
+	obj->save_dialog					= GTK_MESSAGE_DIALOG(		gtk_builder_get_object(builder, "save_position_messagedialog"));
 
 	obj->color_check_item				= GTK_CHECK_MENU_ITEM(		gtk_builder_get_object(builder, "book_color_dark_scheme_checkmenuitem"));
 
 	assert(obj->main_wnd				!= NULL);
 	assert(obj->filechooserdialog		!= NULL);
 	assert(obj->navigation_dialog		!= NULL);
+
 	const char* conf_dir				= g_get_user_config_dir();
 	assert(conf_dir != NULL);
 
 	gboolean color_check_item_state = g_key_file_get_boolean(obj->app_config, "app", "dark_color_cheme", NULL);
-
-	gtk_check_menu_item_set_active(obj->color_check_item, !color_check_item_state);
-	gtk_check_menu_item_set_active(obj->color_check_item, color_check_item_state);
+	if(gtk_check_menu_item_get_active(obj->color_check_item) != color_check_item_state)
+		gtk_check_menu_item_set_active(obj->color_check_item, color_check_item_state);
 
 	gint main_wnd_x_pos = g_key_file_get_integer(obj->app_config, "app", "x_pos", NULL);
 	gint main_wnd_y_pos = g_key_file_get_integer(obj->app_config, "app", "y_pos", NULL);

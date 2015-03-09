@@ -127,7 +127,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkMenuItem" id="file_menuitm">
+              <object class="GtkMenuItem" id="menubar_file_menuitem">
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -149,6 +149,23 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkSeparatorMenuItem" id="separatormenuitem1">
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="file_encode_imagemenuitem">
+                        <property name="label">gtk-refresh</property>
+                        <property name="use_action_appearance">False</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="use_underline">True</property>
+                        <property name="use_stock">True</property>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkSeparatorMenuItem" id="file_separatormenuitem">
                         <property name="use_action_appearance">False</property>
                         <property name="visible">True</property>
@@ -163,7 +180,7 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
-                        <signal name="activate" handler="main_wnd_destroy_cb" swapped="no"/>
+                        <signal name="activate" handler="file_quit_imagemenuitem_activate_cb" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -171,7 +188,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkMenuItem" id="book_menuitm">
+              <object class="GtkMenuItem" id="menubar_book_menuitem">
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -245,7 +262,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkMenuItem" id="help_menuitem">
+              <object class="GtkMenuItem" id="menubar_help_menuitem">
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -420,7 +437,7 @@
     <property name="transient_for">main_wnd</property>
     <property name="program_name">Simple FB2 Reader</property>
     <property name="version">1.0.0</property>
-    <property name="comments" translatable="yes">ctrl+f	search(enter - next coincidence)
+    <property name="comments" translatable="yes">ctrl+f	search
 ctrl+c	copy selected text
 Have nice reading!</property>
     <property name="website">https://github.com/Cactus64k/simple-fb2-reader</property>
@@ -446,6 +463,90 @@ Have nice reading!</property>
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkMessageDialog" id="save_position_messagedialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="resizable">False</property>
+    <property name="modal">True</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="transient_for">main_wnd</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">Save reading position?</property>
+    <property name="secondary_text" translatable="yes">This will overwrite the previous position</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="save_position_messagedialog-vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="save_position_messagedialog_action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="save_position_dialog_cancel_button">
+                <property name="label">gtk-go-back</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="save_position_dialog_no_button">
+                <property name="label">gtk-no</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="save_position_dialog_yes_button">
+                <property name="label">gtk-yes</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="0">save_position_dialog_cancel_button</action-widget>
+      <action-widget response="1">save_position_dialog_no_button</action-widget>
+      <action-widget response="2">save_position_dialog_yes_button</action-widget>
+    </action-widgets>
   </object>
   <object class="GtkWindow" id="search_wnd">
     <property name="can_focus">False</property>

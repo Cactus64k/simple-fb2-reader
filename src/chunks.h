@@ -32,7 +32,7 @@
 		SECTION_STRING_COLUMN
 	};
 
-	enum
+	typedef enum
 	{
 		BOOK_TYPE_NONE = 0,
 		BOOK_TYPE_FB2,
@@ -67,7 +67,7 @@
 		char			dst_buffer[1024*6];
 	} FB2_READER_ENCODE_DIALOG;
 
-	typedef struct FB2_READER_TEXT_VIEW
+	typedef struct FB2_READER_BOOK_VIEW
 	{
 		GtkTextBuffer*			text_buff;
 		GtkTextView*			text_view;
@@ -80,7 +80,12 @@
 		GHashTable*				binary_hash_table;
 		GHashTable*				links_hash_table;
 
-	} FB2_READER_TEXT_VIEW;
+		GKeyFile*				config;
+		char*					config_path;
+
+		BOOK_TYPE				type;
+
+	} FB2_READER_BOOK_VIEW;
 
 	typedef struct FB2_READER
 	{
@@ -88,12 +93,13 @@
 
 		GtkCheckMenuItem*		color_check_item;
 
-		FB2_READER_TEXT_VIEW	book_text_view;
+		FB2_READER_BOOK_VIEW	book_text_view;
 
 		GtkFileChooserDialog*	filechooserdialog;
 		GtkDialog*				navigation_dialog;
 		GtkDialog*				notes_dialog;
 		GtkAboutDialog*			about_dialog;
+		GtkMessageDialog*		save_dialog;
 
 		GdkCursor*				link_cursor;
 		GdkCursor*				def_cursor;
@@ -103,11 +109,6 @@
 		GKeyFile*				app_config;
 		char*					app_config_path;
 
-		GKeyFile*				book_config;
-		char*					book_config_path;
-
-		GHashTable*				binary_hash_table;
-
 	} FB2_READER;
 
 	FB2_READER_ENCODE_DIALOG	GLOBAL_ENCODE_DIALOG;
@@ -116,11 +117,11 @@
 
 	int create_fb2_tags(GtkTextBuffer* text_buff);
 	int create_config_dir();
-	int init_main_reader_text_view(GtkBuilder* builder, FB2_READER* obj0);
+	int init_main_reader_book_view(GtkBuilder* builder, FB2_READER* obj0);
 
 	int reader_open_book(char* file_path);
 	int reader_close_book();
-	int reader_close();
+	int reader_close_app();
 	gboolean test_file_type(char* file_path, const char* file_ext);
 	int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset);
 

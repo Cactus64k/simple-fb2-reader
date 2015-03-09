@@ -4,7 +4,7 @@ int parse_fb2(char* file_path)
 {
 	g_return_val_if_fail(file_path != NULL, -1);
 
-	FB2_READER_TEXT_VIEW* book_text_view	= &(GLOBAL_FB2_READER.book_text_view);
+	FB2_READER_BOOK_VIEW* book_text_view	= &(GLOBAL_FB2_READER.book_text_view);
 	GtkTextBuffer* text_buff				= book_text_view->text_buff;
 
 

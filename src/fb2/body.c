@@ -1,6 +1,6 @@
 #include "fb2_chunks.h"
 
-int parse_body(FB2_READER_TEXT_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_body(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
 	g_return_val_if_fail(parent_node != NULL, -1);
 	g_return_val_if_fail(text_buff_end != NULL, -2);
