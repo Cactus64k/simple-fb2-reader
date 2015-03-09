@@ -113,7 +113,7 @@
     <property name="window_position">center</property>
     <property name="default_width">640</property>
     <property name="default_height">480</property>
-    <signal name="destroy" handler="main_wnd_destroy_cb" swapped="no"/>
+    <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
     <signal name="key-press-event" handler="main_wnd_key_press_event_cb" swapped="no"/>
     <signal name="delete-event" handler="main_wnd_delete_event_cb" swapped="no"/>
     <signal name="size-allocate" handler="main_wnd_size_allocate_cb" object="book_textview" swapped="no"/>

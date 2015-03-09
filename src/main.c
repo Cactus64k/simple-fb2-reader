@@ -53,7 +53,7 @@ int main(int argc,	char *argv[])
 	#ifdef DEBUG
 		char test_path[] = "/home/cactus/Книги/example.fb2";
 
-		reader_open_book(test_path);
+		//reader_open_book(test_path);
 		//open_book("/home/cactus/gamilton_piter_obnazhyonnyi_bog_fenomen.fb2");
 	#endif
 
