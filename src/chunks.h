@@ -49,9 +49,9 @@
 	typedef struct FB2_READER_SEARCH_WINDOW
 	{
 		GtkWidget*		search_wnd;
-		gboolean		entry_edited;
 		GtkEntry*		search_query_entry;
 		GtkTextIter		last_pos;
+		GtkCheckButton*	case_sensitive;
 		GtkRadioButton*	forward;
 		GtkRadioButton* backward;
 	} FB2_READER_SEARCH_WINDOW;
@@ -115,7 +115,7 @@
 	FB2_READER					GLOBAL_FB2_READER;
 	FB2_READER_SEARCH_WINDOW	GLOBAL_SEARCH_WND;
 
-	int create_fb2_tags(GtkTextBuffer* text_buff);
+	int create_fb2_tags(FB2_READER* obj);
 	int create_config_dir();
 	int init_main_reader_book_view(GtkBuilder* builder, FB2_READER* obj0);
 

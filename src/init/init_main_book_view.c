@@ -22,7 +22,7 @@ int init_main_reader_book_view(GtkBuilder* builder, FB2_READER* obj0)
 	assert(obj->sections_treestore	!= NULL);
 	assert(obj->sections_treeview	!= NULL);
 
-	create_fb2_tags(obj->text_buff);
+	create_fb2_tags(obj0);
 
 	//#################################################################################################################
 

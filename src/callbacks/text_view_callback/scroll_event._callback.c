@@ -25,14 +25,21 @@ gboolean book_textview_scroll_event_cb(GtkTextView *text_view, GdkEventScroll *e
 			g_value_unset(&value);
 		}
 
+		GtkAllocation size_allocation = {.width = gtk_widget_get_allocated_width(GTK_WIDGET(text_view))+1,
+										.height = gtk_widget_get_allocated_height(GTK_WIDGET(text_view))};
+		gtk_widget_size_allocate(GTK_WIDGET(text_view), &size_allocation);
+
+		//g_signal_emit_by_name(text_tag_table, "tag-changed", default_tag, TRUE, NULL);
+		//g_signal_emit_by_name(text_buff, "changed", NULL);
+
 		//gtk_widget_queue_draw(GTK_WIDGET(text_view));
 
 		return TRUE;
 	}
 
+
 	//gtk_widget_queue_draw(GTK_WIDGET(text_view));
 
 	return FALSE;
 }
-
 

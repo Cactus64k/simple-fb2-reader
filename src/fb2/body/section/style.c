@@ -7,7 +7,7 @@ int parse_style(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* te
 
 	xmlNode* node				= parent_node->children;
 
-	fputs(_C("tag <style> not fully supported!\n"), stderr);
+	//fputs(_C("tag <style> not fully supported!\n"), stderr);
 	parse_formated_text(obj, node, text_buff_end);
 
 	return 0;

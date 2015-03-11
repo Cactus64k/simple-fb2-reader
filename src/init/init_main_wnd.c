@@ -5,8 +5,9 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	memset(obj, 0, sizeof(*obj));
 
 	create_config_dir();
-	init_main_reader_book_view(builder, obj);
 	init_app_config(obj);
+	init_main_reader_book_view(builder, obj);
+
 
 	obj->main_wnd						= GTK_WIDGET(				gtk_builder_get_object(builder, "main_wnd"));
 	obj->filechooserdialog				= GTK_FILE_CHOOSER_DIALOG(	gtk_builder_get_object(builder, "book_filechooserdialog"));

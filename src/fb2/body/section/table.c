@@ -12,6 +12,8 @@ int parse_table(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* te
 
 	GtkTextMark* start_tag_mark		= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
 
+	GSList* rows_list = NULL;
+
 	while(node != NULL)
 	{
 		if(node->type == XML_ELEMENT_NODE)

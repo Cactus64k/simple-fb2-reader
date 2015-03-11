@@ -1,10 +1,16 @@
 #include "../chunks.h"
 
-int create_fb2_tags(GtkTextBuffer* text_buff)
+int create_fb2_tags(FB2_READER* obj)
 {
+	GtkTextBuffer* text_buff	= obj->book_text_view.text_buff;
+	GKeyFile* app_config		= obj->app_config;
+	double font_scale			= g_key_file_get_double(app_config, "app", "font_scale", NULL);
+
+
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "default_tag", 		"size-points",			15.f,
 																"family",				"DejaVu",
+																"scale",				font_scale,
 																"wrap_mode",			GTK_WRAP_WORD_CHAR, NULL);
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "title_tag", 			"size-points",			17.f,

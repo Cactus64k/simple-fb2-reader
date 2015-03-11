@@ -29,6 +29,9 @@ int init_app_config(FB2_READER* obj)
 	if(g_key_file_has_key(obj->app_config, "app",				"maximize", NULL) == FALSE)
 		g_key_file_set_boolean(obj->app_config, "app",			"maximize", FALSE);
 
+	if(g_key_file_has_key(obj->app_config, "app",				"font_scale", NULL) == FALSE)
+		g_key_file_set_double(obj->app_config, "app",			"font_scale", 1.0);
+
 	//##################################
 
 	if(g_key_file_has_key(obj->app_config, "default_theme",		"background", NULL) == FALSE)
