@@ -8,19 +8,17 @@ int init_main_reader_book_view(GtkBuilder* builder, FB2_READER* obj0)
 
 	memset(obj, 0, sizeof(*obj));
 
-	obj->store_section				= FALSE;
 	obj->text_buff					= GTK_TEXT_BUFFER(			gtk_builder_get_object(builder, "book_textbuff"));
 	obj->text_view					= GTK_TEXT_VIEW(			gtk_builder_get_object(builder, "book_textview"));
 
 	obj->sections_treestore			= GTK_TREE_STORE(			gtk_builder_get_object(builder, "books_sections_treestore"));
-	obj->sections_treeview			= GTK_TREE_VIEW(			gtk_builder_get_object(builder, "books_section_treeview"));
+
 	obj->type						= BOOK_TYPE_NONE;
 
 	assert(obj->text_buff			!= NULL);
 	assert(obj->text_view			!= NULL);
 
 	assert(obj->sections_treestore	!= NULL);
-	assert(obj->sections_treeview	!= NULL);
 
 	create_fb2_tags(obj0);
 

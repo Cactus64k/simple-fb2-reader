@@ -7,9 +7,8 @@ int parse_txt(char* file_path, char* encode)
 
 	GtkTextBuffer* text_buff = GLOBAL_FB2_READER.book_text_view.text_buff;
 
-	const size_t buff_src_size = 1024;
-	char buff_src[buff_src_size];
-	char buff_dst[buff_src_size*6];
+	char buff_src[1024];
+	char buff_dst[1024*6];
 
 	FILE* f = fopen(file_path, "r");
 
@@ -26,7 +25,7 @@ int parse_txt(char* file_path, char* encode)
 			char* in_buff	= buff_src;
 			char* out_buff	= buff_dst;
 
-			size_t read_count = fread(in_buff, 1, buff_src_size, f);
+			size_t read_count = fread(in_buff, 1, sizeof(buff_src), f);
 
 			size_t in_buff_left = read_count;
 			size_t out_buff_left = sizeof(buff_dst);

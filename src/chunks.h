@@ -25,6 +25,8 @@
 	#include <zip.h>
 
 	#define _C(str) gettext(str)
+	#define ENCODE_LIST_PATH "/etc/simple-fb2-reader_encoding_list.cfg"
+	#define ENCODE_BUFF_SIZE 1024
 
 	enum
 	{
@@ -40,12 +42,6 @@
 		BOOK_TYPE_TXT
 	} BOOK_TYPE;
 
-	enum
-	{
-		IS_ENCODE_COLUMN = 0,
-		ENCODE_NAME_COLUMN
-	};
-
 	typedef struct FB2_READER_SEARCH_WINDOW
 	{
 		GtkWidget*		search_wnd;
@@ -60,11 +56,11 @@
 	{
 		GtkDialog*		dialog;
 		GtkTreeView*	treeview;
-		GtkTreeStore*	treestore;
+		GtkListStore*	liststore;
 		GtkTextBuffer*	textbuffer;
-		size_t			buffer_data_size;
-		char			src_buffer[1024];
-		char			dst_buffer[1024*6];
+
+		char			src_text[ENCODE_BUFF_SIZE];
+		size_t			src_text_size;
 	} FB2_READER_ENCODE_DIALOG;
 
 	typedef struct FB2_READER_BOOK_VIEW
@@ -72,10 +68,7 @@
 		GtkTextBuffer*			text_buff;
 		GtkTextView*			text_view;
 
-		GtkTreeStore*			sections_treestore;
-		GtkTreeView*			sections_treeview;
-		gboolean				store_section;
-
+		GtkTreeStore*			sections_treestore;		// REFACTORING
 
 		GHashTable*				binary_hash_table;
 		GHashTable*				links_hash_table;
@@ -84,6 +77,8 @@
 		char*					config_path;
 
 		BOOK_TYPE				type;
+
+		char*					path;
 
 	} FB2_READER_BOOK_VIEW;
 
@@ -94,6 +89,7 @@
 		GtkCheckMenuItem*		color_check_item;
 
 		FB2_READER_BOOK_VIEW	book_text_view;
+		GtkTreeView*			sections_treeview;
 
 		GtkFileChooserDialog*	filechooserdialog;
 		GtkDialog*				navigation_dialog;
@@ -122,6 +118,7 @@
 	int reader_open_book(char* file_path);
 	int reader_close_book();
 	int reader_close_app();
+	int get_book_config(char* file_path, GKeyFile** book_config, char** book_config_path);
 	gboolean test_file_type(char* file_path, const char* file_ext);
 	int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset);
 

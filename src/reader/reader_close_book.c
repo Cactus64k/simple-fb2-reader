@@ -12,6 +12,9 @@ int reader_close_book()
 	GtkTextView* text_view				= GLOBAL_FB2_READER.book_text_view.text_view;
 	GKeyFile* book_config				= GLOBAL_FB2_READER.book_text_view.config;
 	char* book_config_path				= GLOBAL_FB2_READER.book_text_view.config_path;
+	char* book_path						= GLOBAL_FB2_READER.book_text_view.path;
+
+	g_free(book_path);
 
 	GtkTextIter text_buff_end_iter;
 	GtkTextIter text_buff_start_iter;

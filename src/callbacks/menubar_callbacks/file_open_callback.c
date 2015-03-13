@@ -13,7 +13,7 @@ void file_open_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_da
 
 		reader_open_book(file_path);
 
-		g_free(file_path);
+		//g_free(file_path);
 	}
 
 	gtk_widget_hide(GTK_WIDGET(file_open_dialog));

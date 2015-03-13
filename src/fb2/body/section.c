@@ -1,6 +1,6 @@
 #include "../fb2_chunks.h"
 
-int parse_section(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end, GtkTreeIter* tree_iter)
+int parse_section(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end, GtkTreeIter* tree_iter, gboolean store_section)
 {
 	g_return_val_if_fail(parent_node != NULL, -1);
 	g_return_val_if_fail(text_buff_end != NULL, -2);
@@ -8,7 +8,6 @@ int parse_section(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* 
 	GtkTextBuffer* text_buff			= obj->text_buff;
 	xmlNode* node						= parent_node->children;
 	GtkTreeStore* sections_treestore	= obj->sections_treestore;
-	gboolean store_section				= obj->store_section;
 
 	parse_id_attribute(obj, parent_node, text_buff_end);
 
@@ -54,7 +53,7 @@ int parse_section(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* 
 			else if(strcmp((char*)node->name, "annotation") == 0)
 				parse_annotation(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "section") == 0)
-				parse_section(obj, node, text_buff_end, &section_iter);
+				parse_section(obj, node, text_buff_end, &section_iter, store_section);
 			else if(strcmp((char*)node->name, "p") == 0)
 				parse_p(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)

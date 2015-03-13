@@ -5,9 +5,9 @@ void book_navigation_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer u
 	GtkDialog* dialog			= GLOBAL_FB2_READER.navigation_dialog;
 	GtkTextBuffer* text_buff	= GLOBAL_FB2_READER.book_text_view.text_buff;
 	GtkTextView* text_view		= GLOBAL_FB2_READER.book_text_view.text_view;
-	GtkTreeView* tree_view		= GLOBAL_FB2_READER.book_text_view.sections_treeview;
 	GtkTreeStore* section_store	= GLOBAL_FB2_READER.book_text_view.sections_treestore;
 	BOOK_TYPE book_type			= GLOBAL_FB2_READER.book_text_view.type;
+	GtkTreeView* tree_view		= GLOBAL_FB2_READER.sections_treeview;
 
 	GtkTextIter text_iter;
 	GtkTreeIter tree_iter;

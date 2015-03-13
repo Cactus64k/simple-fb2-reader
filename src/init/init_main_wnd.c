@@ -14,12 +14,14 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	obj->navigation_dialog				= GTK_DIALOG(				gtk_builder_get_object(builder, "navigation_dialog"));
 	obj->about_dialog					= GTK_ABOUT_DIALOG(			gtk_builder_get_object(builder, "reader_aboutdialog"));
 	obj->save_dialog					= GTK_MESSAGE_DIALOG(		gtk_builder_get_object(builder, "save_position_messagedialog"));
-
+	obj->sections_treeview				= GTK_TREE_VIEW(			gtk_builder_get_object(builder, "books_section_treeview"));
 	obj->color_check_item				= GTK_CHECK_MENU_ITEM(		gtk_builder_get_object(builder, "book_color_dark_scheme_checkmenuitem"));
+
 
 	assert(obj->main_wnd				!= NULL);
 	assert(obj->filechooserdialog		!= NULL);
 	assert(obj->navigation_dialog		!= NULL);
+	assert(obj->sections_treeview		!= NULL);
 
 	const char* conf_dir				= g_get_user_config_dir();
 	assert(conf_dir != NULL);
