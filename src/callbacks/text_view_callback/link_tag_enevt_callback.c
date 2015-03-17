@@ -29,7 +29,7 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 				get_scroll_line_offset(text_view, &read_line, &read_line_offset);
 
 				g_key_file_set_int64(book_config, "book", "read_line", read_line);
-				g_key_file_set_int64(book_config, "book", "read_line_offset", read_line);
+				g_key_file_set_int64(book_config, "book", "read_line_offset", read_line_offset);
 
 
 				gint link_line_num			= GPOINTER_TO_INT(g_hash_table_lookup(links_hash_table, href));

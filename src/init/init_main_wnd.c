@@ -15,7 +15,9 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	obj->about_dialog					= GTK_ABOUT_DIALOG(			gtk_builder_get_object(builder, "reader_aboutdialog"));
 	obj->save_dialog					= GTK_MESSAGE_DIALOG(		gtk_builder_get_object(builder, "save_position_messagedialog"));
 	obj->sections_treeview				= GTK_TREE_VIEW(			gtk_builder_get_object(builder, "books_section_treeview"));
-	obj->color_check_item				= GTK_CHECK_MENU_ITEM(		gtk_builder_get_object(builder, "book_color_dark_scheme_checkmenuitem"));
+	obj->color_check_item				= GTK_CHECK_MENU_ITEM(		gtk_builder_get_object(builder, "reader_color_dark_theme_checkmenuitem"));
+	obj->forget_books_dialog			= GTK_MESSAGE_DIALOG(		gtk_builder_get_object(builder, "forget_all_books_message_dialog"));
+
 
 
 	assert(obj->main_wnd				!= NULL);

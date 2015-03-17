@@ -1,12 +1,5 @@
 #include "chunks.h"
 
-#define TRANSLATION_DOMAIN "simple-fb2-reader"
-
-
-extern char _binary_simple_fb2_reader_glade_start;
-extern char _binary_simple_fb2_reader_glade_end;
-
-
 int main(int argc,	char *argv[])
 {
 	//g_mem_set_vtable(glib_mem_profiler_table);
@@ -16,24 +9,24 @@ int main(int argc,	char *argv[])
 
 	setlocale(LC_ALL, "");
 
-	char* domain = textdomain(TRANSLATION_DOMAIN);
+	char* domain = textdomain(PACKAGE_NAME);
 	assert(domain != NULL);
 
-	bind_textdomain_codeset(TRANSLATION_DOMAIN, "UTF-8");
-	textdomain(TRANSLATION_DOMAIN);
+	bind_textdomain_codeset(PACKAGE_NAME, "UTF-8");
+	textdomain(PACKAGE_NAME);
 
 	gtk_init(&argc, &argv);
 
 	GtkBuilder* builder = gtk_builder_new();
 
-	gtk_builder_set_translation_domain(builder, TRANSLATION_DOMAIN);
+	gtk_builder_set_translation_domain(builder, PACKAGE_NAME);
 
-	char* gui_start		= &_binary_simple_fb2_reader_glade_start;
-	char* gui_end		= &_binary_simple_fb2_reader_glade_end;
-	uintptr_t gui_len	= gui_end - gui_start;
-
-	guint result = gtk_builder_add_from_string(builder, gui_start, gui_len, NULL);
-	assert(result != 0);
+	guint result = gtk_builder_add_from_file(builder, GUI_CONSTRUCT_PATH, NULL);
+	if(result == 0)
+	{
+		fprintf(stderr, "ERROR: Failed to load gui construct file %s\n", GUI_CONSTRUCT_PATH);
+		exit(EXIT_FAILURE);
+	}
 
 	gtk_builder_connect_signals(builder, NULL);
 
@@ -51,7 +44,7 @@ int main(int argc,	char *argv[])
 	}
 
 	#ifdef DEBUG
-		char test_path[] = "/home/cactus/Книги/example.fb2";
+		//char test_path[] = "/home/cactus/Книги/example.fb2";
 
 		//reader_open_book(test_path);
 		//open_book("/home/cactus/gamilton_piter_obnazhyonnyi_bog_fenomen.fb2");

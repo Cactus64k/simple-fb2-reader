@@ -10,7 +10,7 @@ Homepage: https://github.com/Cactus64k/simple-fb2-reader
 
 Package: simple-fb2-reader
 Architecture: amd64
-Depends: libxml2 (>= 2.8.0), libgtk-3-0 (>= 3.4.2), libglib2.0-0 (>= 2.32.4), libzip2 (>= 0.10.1), libc-bin (>= 2.13)
+Depends: ${shlibs:Depends}
 Description: Simple tool to read FB2 books. Developed using GTK+3.
 	Features ("-" - not supported yet, "~" - partial support):
 	- supports fb2, fb2.zip and txt files

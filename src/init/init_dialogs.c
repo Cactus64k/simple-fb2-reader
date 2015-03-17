@@ -53,6 +53,8 @@ int fill_encode_liststore(GtkListStore* list_store)
 		}
 	}
 
+	fclose(f);
+
 	return 0;
 }
 

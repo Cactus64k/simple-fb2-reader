@@ -11,8 +11,10 @@ void book_position_imagemenuitem_activate_cb(GtkMenuItem* menuitem, gpointer use
 	{
 		if(book_type != BOOK_TYPE_NONE)
 		{
-			gint read_line				= g_key_file_get_int64(book_config, "book", "read_line", NULL);
-			gint read_line_offset		= g_key_file_get_int64(book_config, "book", "read_line_offset", NULL);
+			gint read_line				= g_key_file_get_integer(book_config, "book", "read_line", NULL);
+			gint read_line_offset		= g_key_file_get_integer(book_config, "book", "read_line_offset", NULL);
+
+			printf("%d\t\t%d\n", read_line, read_line_offset);
 
 			GtkTextIter iter;
 			gtk_text_buffer_get_iter_at_line_offset(text_buff, &iter, read_line, read_line_offset);

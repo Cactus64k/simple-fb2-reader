@@ -25,8 +25,21 @@
 	#include <zip.h>
 
 	#define _C(str) gettext(str)
-	#define ENCODE_LIST_PATH "/etc/simple-fb2-reader_encoding_list.cfg"
+
 	#define ENCODE_BUFF_SIZE 1024
+
+	#ifndef PACKAGE_NAME
+		#define PACKAGE_NAME "simple-fb2-reader"
+	#endif
+
+	#ifndef GUI_CONSTRUCT_PATH
+		#define GUI_CONSTRUCT_PATH "/usr/share/simple-fb2-reader/simple-fb2-reader.glade"
+	#endif
+
+	#ifndef ENCODE_LIST_PATH
+		#define ENCODE_LIST_PATH "/etc/simple-fb2-reader_encoding_list.cfg"
+	#endif
+
 
 	enum
 	{
@@ -96,6 +109,7 @@
 		GtkDialog*				notes_dialog;
 		GtkAboutDialog*			about_dialog;
 		GtkMessageDialog*		save_dialog;
+		GtkMessageDialog*		forget_books_dialog;
 
 		GdkCursor*				link_cursor;
 		GdkCursor*				def_cursor;
