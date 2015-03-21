@@ -1,11 +1,9 @@
-#include "../chunks.h"
+#include "reader_chunks.h"
 
-int get_book_config(char* file_path, GKeyFile** book_config, char** book_config_path)
+int reader_load_book_config(FB2_READER_BOOK_VIEW* obj, char* file_path)
 {
 	g_return_val_if_fail(file_path != NULL, -1);
-	g_return_val_if_fail(book_config != NULL, -2);
-
-	*book_config = NULL;
+	g_return_val_if_fail(obj != NULL, -2);
 
 	FILE* f = fopen(file_path, "rb");
 	if(f != NULL)
@@ -29,8 +27,8 @@ int get_book_config(char* file_path, GKeyFile** book_config, char** book_config_
 		const char* conf_dir	= g_get_user_config_dir();
 		g_return_val_if_fail(conf_dir != NULL, -1);
 
-		char* config_path			= g_strdup_printf("%s/simple-fb2-reader/books/%s", conf_dir, book_hash);
-		GKeyFile* config			= g_key_file_new();
+		char* config_path		= g_strdup_printf("%s/simple-fb2-reader/books/%s", conf_dir, book_hash);
+		GKeyFile* config		= g_key_file_new();
 
 		g_key_file_load_from_file(config, config_path, G_KEY_FILE_NONE, NULL);
 
@@ -42,8 +40,8 @@ int get_book_config(char* file_path, GKeyFile** book_config, char** book_config_
 
 		g_checksum_free(chsum);
 
-		*book_config		= config;
-		*book_config_path	= config_path;
+		obj->config			= config;
+		obj->config_path	= config_path;
 
 		return 0;
 	}

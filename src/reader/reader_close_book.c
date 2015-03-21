@@ -1,33 +1,26 @@
-#include "../chunks.h"
+#include "reader_chunks.h"
 
 void text_tag_foreach_remove(GtkTextTag* tag, gpointer data);
 
 int reader_close_book()
 {
+	FB2_READER_BOOK_VIEW* book_view		= &GLOBAL_FB2_READER.book_text_view;
 	GtkWidget* main_wnd					= GLOBAL_FB2_READER.main_wnd;
 	GtkTreeStore* section_treestore		= GLOBAL_FB2_READER.book_text_view.sections_treestore;
 	GHashTable* binary_hash_table		= GLOBAL_FB2_READER.book_text_view.binary_hash_table;
 	GHashTable* links_hash_table		= GLOBAL_FB2_READER.book_text_view.links_hash_table;
 	GtkTextBuffer* text_buff			= GLOBAL_FB2_READER.book_text_view.text_buff;
-	GtkTextView* text_view				= GLOBAL_FB2_READER.book_text_view.text_view;
 	GKeyFile* book_config				= GLOBAL_FB2_READER.book_text_view.config;
+	BOOK_TYPE book_type					= GLOBAL_FB2_READER.book_text_view.type;
 	char* book_config_path				= GLOBAL_FB2_READER.book_text_view.config_path;
 	char* book_path						= GLOBAL_FB2_READER.book_text_view.path;
 
-	g_free(book_path);
-
-	GtkTextIter text_buff_end_iter;
-	GtkTextIter text_buff_start_iter;
-	GtkTextTagTable* text_tag_table		= gtk_text_buffer_get_tag_table(text_buff);
-
-	//###############################
-
-	if(book_config != NULL)
+	if(book_type != BOOK_TYPE_NONE)
 	{
 		gint read_line			= 0;
 		gint read_line_offset	= 0;
 
-		get_scroll_line_offset(text_view, &read_line, &read_line_offset);
+		reader_get_scroll_line_offset(book_view, &read_line, &read_line_offset);
 
 		g_key_file_set_integer(book_config, "book", "read_line", read_line);
 		g_key_file_set_integer(book_config, "book", "read_line_offset", read_line_offset);
@@ -39,48 +32,36 @@ int reader_close_book()
 		fwrite(book_config_data, 1, book_config_len,  f);
 		fclose(f);
 		g_free(book_config_data);
-	}
 
-	//###############################
+		//******************************************************************
 
-	gtk_text_buffer_get_bounds(text_buff, &text_buff_start_iter, &text_buff_end_iter);
-	gtk_text_buffer_delete(text_buff, &text_buff_start_iter, &text_buff_end_iter);
+		GtkTextIter text_buff_end_iter;
+		GtkTextIter text_buff_start_iter;
+		GtkTextTagTable* text_tag_table		= gtk_text_buffer_get_tag_table(text_buff);
 
-	gtk_text_tag_table_foreach(text_tag_table, text_tag_foreach_remove, text_tag_table);
+		gtk_text_buffer_get_bounds(text_buff, &text_buff_start_iter, &text_buff_end_iter);
+		gtk_text_buffer_delete(text_buff, &text_buff_start_iter, &text_buff_end_iter);
 
-	g_hash_table_remove_all(binary_hash_table);
-	g_hash_table_remove_all(links_hash_table);
+		gtk_text_tag_table_foreach(text_tag_table, text_tag_foreach_remove, text_tag_table);
 
-	gtk_window_set_title(GTK_WINDOW(main_wnd), "Simple FB2 reader");
+		g_hash_table_remove_all(binary_hash_table);
+		g_hash_table_remove_all(links_hash_table);
 
-	gtk_tree_store_clear(section_treestore);
+		gtk_window_set_title(GTK_WINDOW(main_wnd), "Simple FB2 reader");
 
-	g_free(book_config_path);
-	GLOBAL_FB2_READER.book_text_view.config_path	= NULL;
+		gtk_tree_store_clear(section_treestore);
 
-	if(book_config != NULL)
-	{
+		g_free(book_config_path);
+		g_free(book_path);
+		GLOBAL_FB2_READER.book_text_view.path			= NULL;
+		GLOBAL_FB2_READER.book_text_view.config_path	= NULL;
+
 		g_key_file_free(book_config);
 		GLOBAL_FB2_READER.book_text_view.config		= NULL;
 	}
 
 	return 0;
 }
-
-int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset)
-{
-	GtkTextIter scroll_iter;
-	GtkAdjustment* adj	= gtk_scrollable_get_vadjustment(GTK_SCROLLABLE(text_view));
-	gint scroll_pos		= (gint)gtk_adjustment_get_value(adj);
-
-	gtk_text_view_get_iter_at_location(text_view, &scroll_iter, 0, scroll_pos);
-
-	*line	= gtk_text_iter_get_line(&scroll_iter);
-	*offset	= gtk_text_iter_get_line_offset(&scroll_iter);
-
-	return 0;
-}
-
 
 void text_tag_foreach_remove(GtkTextTag* tag, gpointer data)
 {

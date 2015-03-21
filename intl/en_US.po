@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2015-03-09 16:11+0300\n"
-"PO-Revision-Date: 2015-03-09 16:11+0300\n"
+"POT-Creation-Date: 2015-03-18 03:23+0300\n"
+"PO-Revision-Date: 2015-03-18 03:23+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_US\n"
@@ -17,55 +17,83 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../simple-fb2-reader.glade:134
-msgid "File"
-msgstr "File"
+#: ../res/simple-fb2-reader.glade:121
+msgid "Forget all books position and endodings?"
+msgstr "Forget all books position and endodings?"
 
-#: ../simple-fb2-reader.glade:195
-msgid "Book"
-msgstr "Book"
+#: ../res/simple-fb2-reader.glade:122
+msgid "without the possibility of restoration"
+msgstr "without the possibility of restoration"
 
-#: ../simple-fb2-reader.glade:240
-msgid "Use dark color scheme"
-msgstr "Use dark color scheme"
-
-#: ../simple-fb2-reader.glade:251
-msgid "To last read position"
-msgstr "To last read position"
-
-#: ../simple-fb2-reader.glade:269
-msgid "About"
-msgstr "About"
-
-#: ../simple-fb2-reader.glade:440
+#: ../res/simple-fb2-reader.glade:294
 msgid ""
 "ctrl+f\tsearch\n"
 "ctrl+c\tcopy selected text\n"
-"Have nice reading!"
+"ctrl+m3 \tfont scale\n"
+"\n"
+"Have nice reading!\n"
 msgstr ""
 "ctrl+f\tsearch\n"
 "ctrl+c\tcopy selected text\n"
-"Have nice reading!"
+"ctrl+m3 \tfont scale\n"
+"\n"
+"Have nice reading!\n"
 
-#: ../simple-fb2-reader.glade:445
-msgid "Cactus <medved_cool@mail.ru>"
-msgstr "Cactus <medved_cool@mail.ru>"
+#: ../res/simple-fb2-reader.glade:354
+msgid "File"
+msgstr "File"
 
-#: ../simple-fb2-reader.glade:476
+#: ../res/simple-fb2-reader.glade:398
+msgid "Book"
+msgstr "Book"
+
+#: ../res/simple-fb2-reader.glade:428
+msgid "To last read position"
+msgstr "To last read position"
+
+#: ../res/simple-fb2-reader.glade:439
+msgid "Save reading position"
+msgstr "Save reading position"
+
+#: ../res/simple-fb2-reader.glade:450
+msgid "Change encode"
+msgstr "Change encode"
+
+#: ../res/simple-fb2-reader.glade:468
+msgid "Reader"
+msgstr "Reader"
+
+#: ../res/simple-fb2-reader.glade:491
+msgid "Use dark color scheme"
+msgstr "Use dark color scheme"
+
+#: ../res/simple-fb2-reader.glade:502
+msgid "Forget all the books"
+msgstr "Forget all the books"
+
+#: ../res/simple-fb2-reader.glade:574
 msgid "Save reading position?"
 msgstr "Save reading position?"
 
-#: ../simple-fb2-reader.glade:477
+#: ../res/simple-fb2-reader.glade:575
 msgid "This will overwrite the previous position"
 msgstr "This will overwrite the previous position"
 
-#: ../simple-fb2-reader.glade:627
+#: ../res/simple-fb2-reader.glade:721
+msgid "Backward"
+msgstr "Backward"
+
+#: ../res/simple-fb2-reader.glade:739
 msgid "Forward"
 msgstr "Forward"
 
-#: ../simple-fb2-reader.glade:646
-msgid "Backward"
-msgstr "Backward"
+#: ../res/simple-fb2-reader.glade:777
+msgid "Case ensitive"
+msgstr "Case ensitive"
+
+#: ../res/simple-fb2-reader.glade:884
+msgid "column"
+msgstr "column"
 
 #: ../src/fb2_zip/fb2_zip_parser.c:55
 msgid "ERROR: xml is well parsed, but pointer is NULL\n"
@@ -86,13 +114,13 @@ msgstr "ERROR: failed to unpack fb2 file: %s\n"
 msgid "ERROR: failed to open zip file: %s; error code: %d\n"
 msgstr "ERROR: failed to open zip file: %s; error code: %d\n"
 
-#: ../src/reader/reader_open_book.c:47 ../src/reader/reader_open_book.c:64
-#: ../src/reader/reader_open_book.c:81
+#: ../src/reader/reader_open_book.c:54 ../src/reader/reader_open_book.c:72
+#: ../src/reader/reader_open_book.c:90
 #, c-format
 msgid "ERROR: failed to open file: %s\n"
 msgstr "ERROR: failed to open file: %s\n"
 
-#: ../src/init/init_main_book_view.c:32
+#: ../src/init/init_main_book_view.c:30
 msgid ""
 "\n"
 "\n"
@@ -115,57 +143,56 @@ msgstr ""
 "ERROR: failed to create folder: %s\n"
 " %s\n"
 
-#: ../src/fb2/body/section/style.c:10
-msgid "tag <style> not fully supported!\n"
-msgstr "tag <style> not fully supported!\n"
-
-#: ../src/fb2/body/section/image_inline.c:29 ../src/fb2/body/image.c:32
-#, c-format
-msgid "Image %s not found in table\n"
-msgstr "Image %s not found in table\n"
-
-#: ../src/fb2/body/section/image_inline.c:32 ../src/fb2/body/image.c:35
-msgid "Not local links not supported\n"
-msgstr "Not local links not supported\n"
-
-#: ../src/fb2/attributes/id.c:26
-#, c-format
-msgid "ERROR: id %s already exist in table\n"
-msgstr "ERROR: id %s already exist in table\n"
+#: ../src/fb2/fiction_book.c:65
+msgid "End read book\n"
+msgstr "End read book\n"
 
 #: ../src/fb2/fb2_parser.c:33
 #, c-format
 msgid "ERROR: Failed to parsing fb2 file: %s\n"
 msgstr "ERROR: Failed to parsing fb2 file: %s\n"
 
-#: ../src/fb2/function_book.c:96
-msgid "End read book\n"
-msgstr "End read book\n"
+#: ../src/fb2/FictionBook/body/section/image_inline.c:29
+#: ../src/fb2/FictionBook/body/image.c:32
+#, c-format
+msgid "Image %s not found in table\n"
+msgstr "Image %s not found in table\n"
 
-#: ../src/fb2/binary/binary.c:42
+#: ../src/fb2/FictionBook/body/section/image_inline.c:32
+#: ../src/fb2/FictionBook/body/image.c:35
+msgid "Not local links not supported\n"
+msgstr "Not local links not supported\n"
+
+#: ../src/fb2/FictionBook/attributes/id.c:26
+#, c-format
+msgid "ERROR: id %s already exist in table\n"
+msgstr "ERROR: id %s already exist in table\n"
+
+#: ../src/fb2/FictionBook/binary/binary.c:42
 msgid "ERROR: no content in <image> tag\n"
 msgstr "ERROR: no content in <image> tag\n"
 
-#: ../src/fb2/binary/binary.c:45
+#: ../src/fb2/FictionBook/binary/binary.c:45
 #, c-format
 msgid "ERROR: image %s already exist in table\n"
 msgstr "ERROR: image %s already exist in table\n"
 
-#: ../src/fb2/binary/binary.c:49
+#: ../src/fb2/FictionBook/binary/binary.c:49
 msgid "ERROR: no id properties in <image> tag\n"
 msgstr "ERROR: no id properties in <image> tag\n"
 
-#: ../src/fb2/binary/binary.c:81 ../src/fb2/binary/binary.c:97
+#: ../src/fb2/FictionBook/binary/binary.c:81
+#: ../src/fb2/FictionBook/binary/binary.c:97
 #, c-format
 msgid "ERROR: GdkPixbufLoader: %s\n"
 msgstr "ERROR: GdkPixbufLoader: %s\n"
 
-#: ../src/txt/txt_parser.c:39
+#: ../src/txt/txt_parser.c:38
 #, c-format
 msgid "ERROR: failed to encode txt file: %s\n"
 msgstr "ERROR: failed to encode txt file: %s\n"
 
-#: ../src/txt/txt_parser.c:62
+#: ../src/txt/txt_parser.c:61
 #, c-format
 msgid "ERROR: failed to open txt file: %s\n"
 msgstr "ERROR: failed to open txt file: %s\n"
@@ -175,7 +202,7 @@ msgstr "ERROR: failed to open txt file: %s\n"
 msgid "ERROR: failed to open URI %s\n"
 msgstr "ERROR: failed to open URI %s\n"
 
-#: ../src/callbacks/encode_dialog_callbacks.c:38
-#, c-format
-msgid "ERROR: failed to encode txt file %s\n"
-msgstr "ERROR: failed to encode txt file %s\n"
+#: ../src/callbacks/encode_dialog_callbacks.c:31
+#: ../src/callbacks/encode_dialog_callbacks.c:37
+msgid "WRONG ENCODE"
+msgstr "WRONG ENCODE"

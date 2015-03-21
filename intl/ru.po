@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2015-03-09 16:11+0300\n"
+"POT-Creation-Date: 2015-03-18 03:23+0300\n"
 "PO-Revision-Date: 2015-02-28 02:11+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,55 +19,75 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../simple-fb2-reader.glade:134
-msgid "File"
-msgstr "Файл"
+#: ../res/simple-fb2-reader.glade:121
+msgid "Forget all books position and endodings?"
+msgstr "Забыть все позиции в книгах и кодировки?"
 
-#: ../simple-fb2-reader.glade:195
-msgid "Book"
-msgstr "Книга"
+#: ../res/simple-fb2-reader.glade:122
+msgid "without the possibility of restoration"
+msgstr "без возможности востановления"
 
-#: ../simple-fb2-reader.glade:240
-msgid "Use dark color scheme"
-msgstr "Использовать темную цветовую схему"
-
-#: ../simple-fb2-reader.glade:251
-msgid "To last read position"
-msgstr "Перейти к позиции чтения"
-
-#: ../simple-fb2-reader.glade:269
-msgid "About"
-msgstr "Справка"
-
-#: ../simple-fb2-reader.glade:440
+#: ../res/simple-fb2-reader.glade:294
 msgid ""
 "ctrl+f\tsearch\n"
 "ctrl+c\tcopy selected text\n"
-"Have nice reading!"
+"ctrl+m3 \tfont scale\n"
+"\n"
+"Have nice reading!\n"
 msgstr ""
 "ctrl+f\tпоиск\n"
-"ctrl+c\tкопирование выделенного текста\n"
-"Приятного чтения!"
+"ctrl+c\tкопировать выделенный текст\n"
+"ctrl+m3 \tразмер шрифта\n"
+"\n"
+"Приятного чтения!\n"
 
-#: ../simple-fb2-reader.glade:445
-msgid "Cactus <medved_cool@mail.ru>"
-msgstr "Cactus <medved_cool@mail.ru>"
+#: ../res/simple-fb2-reader.glade:354
+msgid "File"
+msgstr "Файл"
 
-#: ../simple-fb2-reader.glade:476
+#: ../res/simple-fb2-reader.glade:398
+msgid "Book"
+msgstr "Книга"
+
+#: ../res/simple-fb2-reader.glade:428
+msgid "To last read position"
+msgstr "Перейти к позиции чтения"
+
+#: ../res/simple-fb2-reader.glade:450
+msgid "Change encode"
+msgstr "Изменить кодировку"
+
+#: ../res/simple-fb2-reader.glade:468
+msgid "Reader"
+msgstr "Читалка"
+
+#: ../res/simple-fb2-reader.glade:491
+msgid "Use dark color scheme"
+msgstr "Использовать темную цветовую схему"
+
+#: ../res/simple-fb2-reader.glade:502
+msgid "Forget all the books"
+msgstr "Забыть все книги"
+
+#: ../res/simple-fb2-reader.glade:574
 msgid "Save reading position?"
 msgstr "Сохранить позицию чтения?"
 
-#: ../simple-fb2-reader.glade:477
+#: ../res/simple-fb2-reader.glade:575
 msgid "This will overwrite the previous position"
 msgstr "Это перезапишет предыдущую позицию"
 
-#: ../simple-fb2-reader.glade:627
+#: ../res/simple-fb2-reader.glade:721
+msgid "Backward"
+msgstr "Назад"
+
+#: ../res/simple-fb2-reader.glade:739
 msgid "Forward"
 msgstr "Вперед"
 
-#: ../simple-fb2-reader.glade:646
-msgid "Backward"
-msgstr "Назад"
+#: ../res/simple-fb2-reader.glade:777
+msgid "Case ensitive"
+msgstr "Учитывать регистр"
 
 #: ../src/fb2_zip/fb2_zip_parser.c:55
 msgid "ERROR: xml is well parsed, but pointer is NULL\n"
@@ -88,13 +108,13 @@ msgstr "ОШИБКА: не удалось распаковать fb2 файл: %
 msgid "ERROR: failed to open zip file: %s; error code: %d\n"
 msgstr "ОШИБКА: не удалось открыть zip файл: %s; Код ошибки: %d\n"
 
-#: ../src/reader/reader_open_book.c:47 ../src/reader/reader_open_book.c:64
-#: ../src/reader/reader_open_book.c:81
+#: ../src/reader/reader_open_book.c:54 ../src/reader/reader_open_book.c:72
+#: ../src/reader/reader_open_book.c:90
 #, c-format
 msgid "ERROR: failed to open file: %s\n"
 msgstr "ОШИБКА: не удалось открыть файл: %s\n"
 
-#: ../src/init/init_main_book_view.c:32
+#: ../src/init/init_main_book_view.c:30
 msgid ""
 "\n"
 "\n"
@@ -117,57 +137,56 @@ msgstr ""
 "ОШИБКА: не удалось создать папку: %s\n"
 " %s\n"
 
-#: ../src/fb2/body/section/style.c:10
-msgid "tag <style> not fully supported!\n"
-msgstr "Тег <style> не поддерживается полностью!\n"
-
-#: ../src/fb2/body/section/image_inline.c:29 ../src/fb2/body/image.c:32
-#, c-format
-msgid "Image %s not found in table\n"
-msgstr "Картинка %s не найдена в таблице\n"
-
-#: ../src/fb2/body/section/image_inline.c:32 ../src/fb2/body/image.c:35
-msgid "Not local links not supported\n"
-msgstr "Поддерживаются только локаьные ссылки\n"
-
-#: ../src/fb2/attributes/id.c:26
-#, c-format
-msgid "ERROR: id %s already exist in table\n"
-msgstr "ОШИБКА: id %s уже существует в таблице\n"
+#: ../src/fb2/fiction_book.c:65
+msgid "End read book\n"
+msgstr "Окончание разбора книги\n"
 
 #: ../src/fb2/fb2_parser.c:33
 #, c-format
 msgid "ERROR: Failed to parsing fb2 file: %s\n"
 msgstr "ОШИБКА: не удалось разобрать fb2 файл: %s\n"
 
-#: ../src/fb2/function_book.c:96
-msgid "End read book\n"
-msgstr "Окончание разбора книги\n"
+#: ../src/fb2/FictionBook/body/section/image_inline.c:29
+#: ../src/fb2/FictionBook/body/image.c:32
+#, c-format
+msgid "Image %s not found in table\n"
+msgstr "Картинка %s не найдена в таблице\n"
 
-#: ../src/fb2/binary/binary.c:42
+#: ../src/fb2/FictionBook/body/section/image_inline.c:32
+#: ../src/fb2/FictionBook/body/image.c:35
+msgid "Not local links not supported\n"
+msgstr "Поддерживаются только локаьные ссылки\n"
+
+#: ../src/fb2/FictionBook/attributes/id.c:26
+#, c-format
+msgid "ERROR: id %s already exist in table\n"
+msgstr "ОШИБКА: id %s уже существует в таблице\n"
+
+#: ../src/fb2/FictionBook/binary/binary.c:42
 msgid "ERROR: no content in <image> tag\n"
 msgstr "ОШИБКА: не найдено содержимое тега <image>\n"
 
-#: ../src/fb2/binary/binary.c:45
+#: ../src/fb2/FictionBook/binary/binary.c:45
 #, c-format
 msgid "ERROR: image %s already exist in table\n"
 msgstr "ОШИБКА: картинка %s уже существует в таблице\n"
 
-#: ../src/fb2/binary/binary.c:49
+#: ../src/fb2/FictionBook/binary/binary.c:49
 msgid "ERROR: no id properties in <image> tag\n"
 msgstr "ОШИБКА: не найдено свойство id в теге <image>\n"
 
-#: ../src/fb2/binary/binary.c:81 ../src/fb2/binary/binary.c:97
+#: ../src/fb2/FictionBook/binary/binary.c:81
+#: ../src/fb2/FictionBook/binary/binary.c:97
 #, c-format
 msgid "ERROR: GdkPixbufLoader: %s\n"
 msgstr "ОШИБКА: GdkPixbufLoader %s\n"
 
-#: ../src/txt/txt_parser.c:39
+#: ../src/txt/txt_parser.c:38
 #, c-format
 msgid "ERROR: failed to encode txt file: %s\n"
 msgstr "ОШИБКА: не удалось декодировать txt файл %s\n"
 
-#: ../src/txt/txt_parser.c:62
+#: ../src/txt/txt_parser.c:61
 #, c-format
 msgid "ERROR: failed to open txt file: %s\n"
 msgstr "ОШИБКА: не удалось открыть txt файл: %s\n"
@@ -177,7 +196,19 @@ msgstr "ОШИБКА: не удалось открыть txt файл: %s\n"
 msgid "ERROR: failed to open URI %s\n"
 msgstr "ОШИБКА: не удалось открыть URI %s\n"
 
-#: ../src/callbacks/encode_dialog_callbacks.c:38
-#, c-format
-msgid "ERROR: failed to encode txt file %s\n"
-msgstr "ОШИБКА: не удалось декодировать txt файл %s\n"
+#: ../src/callbacks/encode_dialog_callbacks.c:31
+#: ../src/callbacks/encode_dialog_callbacks.c:37
+msgid "WRONG ENCODE"
+msgstr "Неправильная кодировка!"
+
+#~ msgid "About"
+#~ msgstr "Справка"
+
+#~ msgid "Cactus <medved_cool@mail.ru>"
+#~ msgstr "Cactus <medved_cool@mail.ru>"
+
+#~ msgid "tag <style> not fully supported!\n"
+#~ msgstr "Тег <style> не поддерживается полностью!\n"
+
+#~ msgid "ERROR: failed to encode txt file %s\n"
+#~ msgstr "ОШИБКА: не удалось декодировать txt файл %s\n"

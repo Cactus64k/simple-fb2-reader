@@ -40,8 +40,8 @@ clean:
 
 install:
 				install $(PACKAGE_NAME)									$(DESTDIR)/$(bindir)/$(PACKAGE_NAME)
-				cp intl/ru.mo											$(DESTDIR)/$(prefix)/share/locale/en_US/LC_MESSAGES/$(PACKAGE_NAME).mo
-				cp intl/en_US.mo										$(DESTDIR)/$(prefix)/share/locale/ru/LC_MESSAGES/$(PACKAGE_NAME).mo
+				cp intl/ru.mo											$(DESTDIR)/$(prefix)/share/locale/ru/LC_MESSAGES/$(PACKAGE_NAME).mo
+				cp intl/en_US.mo										$(DESTDIR)/$(prefix)/share/locale/en_US/LC_MESSAGES/$(PACKAGE_NAME).mo
 				mkdir -p												$(DESTDIR)/$(prefix)/share/simple-fb2-reader/
 				cp res/$(PACKAGE_NAME).glade							$(DESTDIR)/$(prefix)/share/simple-fb2-reader/$(PACKAGE_NAME).glade
 				cp res/simple-fb2-reader.desktop						$(DESTDIR)/$(prefix)/share/applications/simple-fb2-reader.desktop

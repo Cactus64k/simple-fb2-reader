@@ -6,7 +6,6 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 	GtkTextBuffer* text_buff		= gtk_text_view_get_buffer(text_view);
 	GdkCursor* link_cusor			= GLOBAL_FB2_READER.link_cursor;
 	GHashTable* links_hash_table	= GLOBAL_FB2_READER.book_text_view.links_hash_table;
-	GKeyFile* book_config			= GLOBAL_FB2_READER.book_text_view.config;
 
 	if(event->type == GDK_BUTTON_RELEASE)
 	{
@@ -23,14 +22,6 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 			if(*href == '#')
 			{
 				href++;
-				gint read_line			= 0;
-				gint read_line_offset	= 0;
-
-				get_scroll_line_offset(text_view, &read_line, &read_line_offset);
-
-				g_key_file_set_int64(book_config, "book", "read_line", read_line);
-				g_key_file_set_int64(book_config, "book", "read_line_offset", read_line_offset);
-
 
 				gint link_line_num			= GPOINTER_TO_INT(g_hash_table_lookup(links_hash_table, href));
 				GtkTextIter line_iter;

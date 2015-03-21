@@ -14,6 +14,7 @@
 
 	#include <sys/stat.h>
 	#include <sys/types.h>
+	#include <dirent.h>
 
 	#include <libxml/parser.h>
 	#include <libxml/tree.h>
@@ -32,12 +33,17 @@
 		#define PACKAGE_NAME "simple-fb2-reader"
 	#endif
 
-	#ifndef GUI_CONSTRUCT_PATH
-		#define GUI_CONSTRUCT_PATH "/usr/share/simple-fb2-reader/simple-fb2-reader.glade"
-	#endif
+	#ifndef DEBUG
+		#ifndef GUI_CONSTRUCT_PATH
+			#define GUI_CONSTRUCT_PATH "/usr/share/simple-fb2-reader/simple-fb2-reader.glade"
+		#endif
 
-	#ifndef ENCODE_LIST_PATH
-		#define ENCODE_LIST_PATH "/etc/simple-fb2-reader_encoding_list.cfg"
+		#ifndef ENCODE_LIST_PATH
+			#define ENCODE_LIST_PATH "/etc/simple-fb2-reader_encoding_list.cfg"
+		#endif
+	#else
+		#define GUI_CONSTRUCT_PATH "./res/simple-fb2-reader.glade"
+		#define ENCODE_LIST_PATH "./res/simple-fb2-reader_encoding_list.cfg"
 	#endif
 
 
@@ -106,9 +112,7 @@
 
 		GtkFileChooserDialog*	filechooserdialog;
 		GtkDialog*				navigation_dialog;
-		GtkDialog*				notes_dialog;
 		GtkAboutDialog*			about_dialog;
-		GtkMessageDialog*		save_dialog;
 		GtkMessageDialog*		forget_books_dialog;
 
 		GdkCursor*				link_cursor;
@@ -129,13 +133,6 @@
 	int create_config_dir();
 	int init_main_reader_book_view(GtkBuilder* builder, FB2_READER* obj0);
 
-	int reader_open_book(char* file_path);
-	int reader_close_book();
-	int reader_close_app();
-	int get_book_config(char* file_path, GKeyFile** book_config, char** book_config_path);
-	gboolean test_file_type(char* file_path, const char* file_ext);
-	int get_scroll_line_offset(GtkTextView* text_view, gint* line, gint* offset);
-
 	int init_main_wnd(GtkBuilder* builder, FB2_READER* obj);
 	int init_search_wnd(GtkBuilder* builder, FB2_READER_SEARCH_WINDOW* obj);
 	int init_encode_wnd(GtkBuilder* builder, FB2_READER_ENCODE_DIALOG* obj);
@@ -145,5 +142,6 @@
 	#include "fb2/fb2_chunks.h"
 	#include "txt/txt_chunks.h"
 	#include "fb2_zip/fb2_zip_chunks.h"
+	#include "reader/reader_chunks.h"
 
 #endif /* CHUNKS_H_ */

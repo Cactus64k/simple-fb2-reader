@@ -18,7 +18,7 @@ int parse_fb2_zip(char* file_path)
 		{
 			zip_stat_index(f, i, 0,  &st);
 			const char* z_file_name = st.name;
-			if(test_file_type((char*)z_file_name, ".fb2") == TRUE)
+			if(reader_test_file_type((char*)z_file_name, ".fb2") == TRUE)
 			{
 				struct zip_file* zf	= zip_fopen_index(f, i, 0);
 				if(zf != NULL)
