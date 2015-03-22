@@ -11,11 +11,10 @@ Features ("-" - not supported yet, "~" - partial support):
 - URI
 - full 2.1 format support(-stylesheet, ~table)
 - navigation
-- encoding selection for txt
 
 
 Depends:
-- libxml2     >= 2.8.0, 
+- libxml2      >= 2.8.0, 
 - libgtk-3-0  >= 3.4.2, 
 - libglib     >= 2.33.12, 
 - libzip2     >= 0.10.1

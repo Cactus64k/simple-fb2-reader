@@ -18,8 +18,8 @@ int create_fb2_tags(FB2_READER* obj)
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "strong_tag", 		"weight",				PANGO_WEIGHT_BOLD, NULL);
 	//####################################################################################################################################
-	gtk_text_buffer_create_tag(text_buff, "sub_tag", 			"size-points",			8.f,
-																"rise",					-5000, NULL);
+	gtk_text_buffer_create_tag(text_buff, "sub_tag", 			"size-points",			8.f,				// FIXME
+																"rise",					-5000, NULL);		//PANGO_SCALE
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "sup_tag", 			"size-points",			8.f,
 																"rise",					7000, NULL);

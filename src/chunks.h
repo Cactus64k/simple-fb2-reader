@@ -11,6 +11,7 @@
 	#include <locale.h>
 	#include <string.h>
 	#include <stdint.h>
+	#include <math.h>
 
 	#include <sys/stat.h>
 	#include <sys/types.h>
@@ -87,7 +88,7 @@
 		GtkTextBuffer*			text_buff;
 		GtkTextView*			text_view;
 
-		GtkTreeStore*			sections_treestore;		// REFACTORING
+		GtkTreeStore*			sections_treestore;
 
 		GHashTable*				binary_hash_table;
 		GHashTable*				links_hash_table;

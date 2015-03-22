@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2015-03-18 03:23+0300\n"
+        "POT-Creation-Date: 2015-03-21 15:48+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,15 +16,39 @@ msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Content-Type: text/plain; charset=CHARSET\n"
         "Content-Transfer-Encoding: 8bit\n"
 
-#: ../res/simple-fb2-reader.glade:121
+#: ../res/simple-fb2-reader.glade:133
+msgid   "File"
+msgstr  ""
+
+#: ../res/simple-fb2-reader.glade:177
+msgid   "Book"
+msgstr  ""
+
+#: ../res/simple-fb2-reader.glade:207
+msgid   "Change encode"
+msgstr  ""
+
+#: ../res/simple-fb2-reader.glade:225
+msgid   "Reader"
+msgstr  ""
+
+#: ../res/simple-fb2-reader.glade:248
+msgid   "Use dark color scheme"
+msgstr  ""
+
+#: ../res/simple-fb2-reader.glade:259
+msgid   "Forget all the books"
+msgstr  ""
+
+#: ../res/simple-fb2-reader.glade:331
 msgid   "Forget all books position and endodings?"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:122
+#: ../res/simple-fb2-reader.glade:332
 msgid   "without the possibility of restoration"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:294
+#: ../res/simple-fb2-reader.glade:499
 msgid   "ctrl+f\tsearch\n"
         "ctrl+c\tcopy selected text\n"
         "ctrl+m3 \tfont scale\n"
@@ -32,59 +56,19 @@ msgid   "ctrl+f\tsearch\n"
         "Have nice reading!\n"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:354
-msgid   "File"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:398
-msgid   "Book"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:428
-msgid   "To last read position"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:439
-msgid   "Save reading position"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:450
-msgid   "Change encode"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:468
-msgid   "Reader"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:491
-msgid   "Use dark color scheme"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:502
-msgid   "Forget all the books"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:574
-msgid   "Save reading position?"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:575
-msgid   "This will overwrite the previous position"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:721
+#: ../res/simple-fb2-reader.glade:605
 msgid   "Backward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:739
+#: ../res/simple-fb2-reader.glade:623
 msgid   "Forward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:777
+#: ../res/simple-fb2-reader.glade:661
 msgid   "Case ensitive"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:884
+#: ../res/simple-fb2-reader.glade:768
 msgid   "column"
 msgstr  ""
 
@@ -181,7 +165,7 @@ msgstr  ""
 msgid   "ERROR: failed to open txt file: %s\n"
 msgstr  ""
 
-#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:46
+#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:37
 #, c-format
 msgid   "ERROR: failed to open URI %s\n"
 msgstr  ""

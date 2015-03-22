@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2015-03-18 03:23+0300\n"
+"POT-Creation-Date: 2015-03-21 15:48+0300\n"
 "PO-Revision-Date: 2015-02-28 02:11+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,15 +19,39 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../res/simple-fb2-reader.glade:121
+#: ../res/simple-fb2-reader.glade:133
+msgid "File"
+msgstr "Файл"
+
+#: ../res/simple-fb2-reader.glade:177
+msgid "Book"
+msgstr "Книга"
+
+#: ../res/simple-fb2-reader.glade:207
+msgid "Change encode"
+msgstr "Изменить кодировку"
+
+#: ../res/simple-fb2-reader.glade:225
+msgid "Reader"
+msgstr "Читалка"
+
+#: ../res/simple-fb2-reader.glade:248
+msgid "Use dark color scheme"
+msgstr "Использовать темную цветовую схему"
+
+#: ../res/simple-fb2-reader.glade:259
+msgid "Forget all the books"
+msgstr "Забыть все книги"
+
+#: ../res/simple-fb2-reader.glade:331
 msgid "Forget all books position and endodings?"
 msgstr "Забыть все позиции в книгах и кодировки?"
 
-#: ../res/simple-fb2-reader.glade:122
+#: ../res/simple-fb2-reader.glade:332
 msgid "without the possibility of restoration"
 msgstr "без возможности востановления"
 
-#: ../res/simple-fb2-reader.glade:294
+#: ../res/simple-fb2-reader.glade:499
 msgid ""
 "ctrl+f\tsearch\n"
 "ctrl+c\tcopy selected text\n"
@@ -41,53 +65,21 @@ msgstr ""
 "\n"
 "Приятного чтения!\n"
 
-#: ../res/simple-fb2-reader.glade:354
-msgid "File"
-msgstr "Файл"
-
-#: ../res/simple-fb2-reader.glade:398
-msgid "Book"
-msgstr "Книга"
-
-#: ../res/simple-fb2-reader.glade:428
-msgid "To last read position"
-msgstr "Перейти к позиции чтения"
-
-#: ../res/simple-fb2-reader.glade:450
-msgid "Change encode"
-msgstr "Изменить кодировку"
-
-#: ../res/simple-fb2-reader.glade:468
-msgid "Reader"
-msgstr "Читалка"
-
-#: ../res/simple-fb2-reader.glade:491
-msgid "Use dark color scheme"
-msgstr "Использовать темную цветовую схему"
-
-#: ../res/simple-fb2-reader.glade:502
-msgid "Forget all the books"
-msgstr "Забыть все книги"
-
-#: ../res/simple-fb2-reader.glade:574
-msgid "Save reading position?"
-msgstr "Сохранить позицию чтения?"
-
-#: ../res/simple-fb2-reader.glade:575
-msgid "This will overwrite the previous position"
-msgstr "Это перезапишет предыдущую позицию"
-
-#: ../res/simple-fb2-reader.glade:721
+#: ../res/simple-fb2-reader.glade:605
 msgid "Backward"
 msgstr "Назад"
 
-#: ../res/simple-fb2-reader.glade:739
+#: ../res/simple-fb2-reader.glade:623
 msgid "Forward"
 msgstr "Вперед"
 
-#: ../res/simple-fb2-reader.glade:777
+#: ../res/simple-fb2-reader.glade:661
 msgid "Case ensitive"
 msgstr "Учитывать регистр"
+
+#: ../res/simple-fb2-reader.glade:768
+msgid "column"
+msgstr ""
 
 #: ../src/fb2_zip/fb2_zip_parser.c:55
 msgid "ERROR: xml is well parsed, but pointer is NULL\n"
@@ -191,7 +183,7 @@ msgstr "ОШИБКА: не удалось декодировать txt файл 
 msgid "ERROR: failed to open txt file: %s\n"
 msgstr "ОШИБКА: не удалось открыть txt файл: %s\n"
 
-#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:46
+#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:37
 #, c-format
 msgid "ERROR: failed to open URI %s\n"
 msgstr "ОШИБКА: не удалось открыть URI %s\n"
@@ -200,6 +192,15 @@ msgstr "ОШИБКА: не удалось открыть URI %s\n"
 #: ../src/callbacks/encode_dialog_callbacks.c:37
 msgid "WRONG ENCODE"
 msgstr "Неправильная кодировка!"
+
+#~ msgid "To last read position"
+#~ msgstr "Перейти к позиции чтения"
+
+#~ msgid "Save reading position?"
+#~ msgstr "Сохранить позицию чтения?"
+
+#~ msgid "This will overwrite the previous position"
+#~ msgstr "Это перезапишет предыдущую позицию"
 
 #~ msgid "About"
 #~ msgstr "Справка"
