@@ -3,8 +3,8 @@
 gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data)
 {
 	GtkTextView* text_view			= GTK_TEXT_VIEW(object);
-	GtkTextBuffer* text_buff		= gtk_text_view_get_buffer(text_view);
-	GdkCursor* link_cusor			= GLOBAL_FB2_READER.link_cursor;
+	GtkTextBuffer* text_buff		= GLOBAL_FB2_READER.book_text_view.text_buff;
+	GdkCursor* cursor_link			= GLOBAL_FB2_READER.cursor_link;
 	GHashTable* links_hash_table	= GLOBAL_FB2_READER.book_text_view.links_hash_table;
 
 	if(event->type == GDK_BUTTON_RELEASE)
@@ -17,7 +17,7 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 			g_object_set_property(G_OBJECT(tag), "foreground", &value);
 			g_value_unset(&value);
 
-			char* href = (char*)g_object_get_data(G_OBJECT(tag), "href");
+			char* href = g_object_get_data(G_OBJECT(tag), "href");
 
 			if(*href == '#')
 			{
@@ -33,16 +33,14 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 			else
 			{
 				if(gtk_show_uri(NULL, href, GDK_CURRENT_TIME, NULL) == FALSE)
-				{
 					fprintf(stderr, _C("ERROR: failed to open URI %s\n"), href);
-				}
 			}
 		}
 	}
 	else if(event->type == GDK_MOTION_NOTIFY)
 	{
 		GdkWindow* text_view_window = gtk_text_view_get_window(text_view, GTK_TEXT_WINDOW_TEXT);
-		gdk_window_set_cursor(text_view_window, link_cusor);
+		gdk_window_set_cursor(text_view_window, cursor_link);
 	}
 
 	return TRUE;

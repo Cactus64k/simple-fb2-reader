@@ -104,73 +104,6 @@
       <mime-type>text/plain</mime-type>
     </mime-types>
   </object>
-  <object class="GtkMessageDialog" id="forget_all_books_message_dialog">
-    <property name="can_focus">False</property>
-    <property name="border_width">5</property>
-    <property name="resizable">False</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="skip_pager_hint">True</property>
-    <property name="transient_for">main_wnd</property>
-    <property name="message_type">question</property>
-    <property name="text" translatable="yes">Forget all books position and endodings?</property>
-    <property name="secondary_text" translatable="yes">without the possibility of restoration</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="forget_all_books_vbox">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="forget_all_books_action_area">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="forget_all_books_no_button">
-                <property name="label">gtk-no</property>
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="forget_all_books_yes_button">
-                <property name="label">gtk-yes</property>
-                <property name="use_action_appearance">False</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_action_appearance">False</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <action-widgets>
-      <action-widget response="1">forget_all_books_no_button</action-widget>
-      <action-widget response="2">forget_all_books_yes_button</action-widget>
-    </action-widgets>
-  </object>
   <object class="GtkWindow" id="main_wnd">
     <property name="can_focus">False</property>
     <property name="events">GDK_KEY_PRESS_MASK | GDK_STRUCTURE_MASK</property>
@@ -385,6 +318,73 @@
         </child>
       </object>
     </child>
+  </object>
+  <object class="GtkMessageDialog" id="forget_all_books_message_dialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="resizable">False</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="skip_pager_hint">True</property>
+    <property name="transient_for">main_wnd</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">Forget all books position and endodings?</property>
+    <property name="secondary_text" translatable="yes">without the possibility of restoration</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="forget_all_books_vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="forget_all_books_action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="forget_all_books_no_button">
+                <property name="label">gtk-no</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="forget_all_books_yes_button">
+                <property name="label">gtk-yes</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">forget_all_books_no_button</action-widget>
+      <action-widget response="2">forget_all_books_yes_button</action-widget>
+    </action-widgets>
   </object>
   <object class="GtkDialog" id="navigation_dialog">
     <property name="can_focus">False</property>

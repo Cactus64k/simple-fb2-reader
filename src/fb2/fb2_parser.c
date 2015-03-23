@@ -13,7 +13,6 @@ int parse_fb2(char* file_path)
 	if(file_tree != NULL)
 	{
 		xmlNode* root = file_tree->children;
-		GtkTextIter text_buff_end;
 
 		while(root != NULL)		// ищем рут
 		{
@@ -23,6 +22,9 @@ int parse_fb2(char* file_path)
 			root = root->next;
 		}
 
+		gtk_text_buffer_set_text(text_buff, "", 0);
+
+		GtkTextIter text_buff_end;
 		gtk_text_buffer_get_end_iter(text_buff, &text_buff_end);
 
 		parse_function_book(book_text_view, root, &text_buff_end);

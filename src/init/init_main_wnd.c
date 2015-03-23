@@ -45,8 +45,8 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 
 	//create_fb2_tags(obj->text_buff);
 
-	obj->link_cursor				= gdk_cursor_new(GDK_HAND2);
-	obj->def_cursor					= gdk_cursor_new(GDK_ARROW);
+	obj->cursor_link				= gdk_cursor_new(GDK_HAND2);
+	obj->cursor_watch				= gdk_cursor_new(GDK_WATCH);
 	obj->clipboard					= gtk_clipboard_get(0);
 
 	gtk_widget_show_all(obj->main_wnd);

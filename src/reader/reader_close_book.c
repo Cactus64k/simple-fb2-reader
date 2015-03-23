@@ -17,13 +17,7 @@ int reader_close_book()
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
-		gint read_line			= 0;
-		gint read_line_offset	= 0;
-
-		reader_get_scroll_line_offset(book_view, &read_line, &read_line_offset);
-
-		g_key_file_set_integer(book_config, "book", "read_line", read_line);
-		g_key_file_set_integer(book_config, "book", "read_line_offset", read_line_offset);
+		reader_scroll_save(book_view);
 
 		gsize book_config_len	= 0;
 		char* book_config_data	= g_key_file_to_data(book_config, &book_config_len, NULL);

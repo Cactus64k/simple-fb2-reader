@@ -15,6 +15,8 @@ int parse_txt(char* file_path, char* encode)
 	if(f != NULL)
 	{
 
+		gtk_text_buffer_set_text(text_buff, "", 0);
+
 		GtkTextIter text_buff_end;
 		gtk_text_buffer_get_end_iter(text_buff, &text_buff_end);
 

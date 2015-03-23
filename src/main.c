@@ -40,13 +40,14 @@ int main(int argc,	char *argv[])
 
 	if(argc == 2)
 	{
-		reader_open_book(argv[1]);
+		char* book_path = g_strdup(argv[1]);
+		reader_open_book(book_path);
 	}
 
 	#ifdef DEBUG
-		//char test_path[] = "/home/cactus/Книги/example.fb2";
+		char* test_path = g_strdup("/home/cactus/Книги/example.fb2");
 
-		//reader_open_book(test_path);
+		reader_open_book(test_path);
 		//open_book("/home/cactus/gamilton_piter_obnazhyonnyi_bog_fenomen.fb2");
 	#endif
 

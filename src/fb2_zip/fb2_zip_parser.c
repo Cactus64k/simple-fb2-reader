@@ -18,7 +18,7 @@ int parse_fb2_zip(char* file_path)
 		{
 			zip_stat_index(f, i, 0,  &st);
 			const char* z_file_name = st.name;
-			if(reader_test_file_type((char*)z_file_name, ".fb2") == TRUE)
+			if(reader_get_book_type((char*)z_file_name) == BOOK_TYPE_FB2)
 			{
 				struct zip_file* zf	= zip_fopen_index(f, i, 0);
 				if(zf != NULL)
@@ -28,9 +28,8 @@ int parse_fb2_zip(char* file_path)
 					xmlParserCtxtPtr ctxt	= xmlCreatePushParserCtxt(NULL, NULL, NULL, 0, NULL);
 
 					while((rc = zip_fread(zf, buff, sizeof(buff))) > 0)
-					{
 						xmlParseChunk(ctxt, buff, rc, 0);
-					}
+
 					zip_fclose(zf);
 					xmlParseChunk(ctxt, buff, 0, 1);
 
@@ -43,6 +42,8 @@ int parse_fb2_zip(char* file_path)
 						if(xml_doc != NULL)
 						{
 							xmlNode* file_tree	= xml_doc->children;
+
+							gtk_text_buffer_set_text(text_buff, "", 0);
 
 							GtkTextIter text_buff_end;
 							gtk_text_buffer_get_end_iter(text_buff, &text_buff_end);

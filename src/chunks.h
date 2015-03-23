@@ -116,8 +116,8 @@
 		GtkAboutDialog*			about_dialog;
 		GtkMessageDialog*		forget_books_dialog;
 
-		GdkCursor*				link_cursor;
-		GdkCursor*				def_cursor;
+		GdkCursor*				cursor_link;
+		GdkCursor*				cursor_watch;
 
 		GtkClipboard* 			clipboard;
 
