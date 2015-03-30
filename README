@@ -11,7 +11,7 @@ Features ("-" - not supported yet, "~" - partial support):
 - URI
 - full 2.1 format support(-stylesheet, ~table)
 - navigation
-- user themes(see ~/.config/simple-fb2-reader/config.cfg
+- user themes(see ~/.config/simple-fb2-reader/config.cfg)
 
 
 Depends:
