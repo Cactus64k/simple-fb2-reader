@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2015-03-21 15:48+0300\n"
-"PO-Revision-Date: 2015-03-18 03:23+0300\n"
+"POT-Creation-Date: 2015-03-30 18:11+0300\n"
+"PO-Revision-Date: 2015-03-30 18:11+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_US\n"
@@ -17,39 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../res/simple-fb2-reader.glade:133
-msgid "File"
-msgstr "File"
-
-#: ../res/simple-fb2-reader.glade:177
-msgid "Book"
-msgstr "Book"
-
-#: ../res/simple-fb2-reader.glade:207
-msgid "Change encode"
-msgstr "Change encode"
-
-#: ../res/simple-fb2-reader.glade:225
-msgid "Reader"
-msgstr "Reader"
-
-#: ../res/simple-fb2-reader.glade:248
-msgid "Use dark color scheme"
-msgstr "Use dark color scheme"
-
-#: ../res/simple-fb2-reader.glade:259
-msgid "Forget all the books"
-msgstr "Forget all the books"
-
-#: ../res/simple-fb2-reader.glade:331
+#: ../res/simple-fb2-reader.glade:135
 msgid "Forget all books position and endodings?"
 msgstr "Forget all books position and endodings?"
 
-#: ../res/simple-fb2-reader.glade:332
+#: ../res/simple-fb2-reader.glade:136
 msgid "without the possibility of restoration"
 msgstr "without the possibility of restoration"
 
-#: ../res/simple-fb2-reader.glade:499
+#: ../res/simple-fb2-reader.glade:341
 msgid ""
 "ctrl+f\tsearch\n"
 "ctrl+c\tcopy selected text\n"
@@ -63,43 +39,43 @@ msgstr ""
 "\n"
 "Have nice reading!\n"
 
-#: ../res/simple-fb2-reader.glade:605
+#: ../res/simple-fb2-reader.glade:442
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:31
 msgid "Backward"
 msgstr "Backward"
 
-#: ../res/simple-fb2-reader.glade:623
+#: ../res/simple-fb2-reader.glade:460
 msgid "Forward"
 msgstr "Forward"
 
-#: ../res/simple-fb2-reader.glade:661
+#: ../res/simple-fb2-reader.glade:498
 msgid "Case ensitive"
 msgstr "Case ensitive"
 
-#: ../res/simple-fb2-reader.glade:768
+#: ../res/simple-fb2-reader.glade:605
 msgid "column"
 msgstr "column"
 
-#: ../src/fb2_zip/fb2_zip_parser.c:55
+#: ../src/fb2_zip/fb2_zip_parser.c:56
 msgid "ERROR: xml is well parsed, but pointer is NULL\n"
 msgstr "ERROR: xml is well parsed, but pointer is NULL\n"
 
-#: ../src/fb2_zip/fb2_zip_parser.c:58
+#: ../src/fb2_zip/fb2_zip_parser.c:59
 #, c-format
 msgid "ERROR: failed to parse fb2 file: %s\n"
 msgstr "ERROR: failed to parse fb2 file: %s\n"
 
-#: ../src/fb2_zip/fb2_zip_parser.c:66
+#: ../src/fb2_zip/fb2_zip_parser.c:67
 #, c-format
 msgid "ERROR: failed to unpack fb2 file: %s\n"
 msgstr "ERROR: failed to unpack fb2 file: %s\n"
 
-#: ../src/fb2_zip/fb2_zip_parser.c:72
+#: ../src/fb2_zip/fb2_zip_parser.c:73
 #, c-format
 msgid "ERROR: failed to open zip file: %s; error code: %d\n"
 msgstr "ERROR: failed to open zip file: %s; error code: %d\n"
 
-#: ../src/reader/reader_open_book.c:54 ../src/reader/reader_open_book.c:72
-#: ../src/reader/reader_open_book.c:90
+#: ../src/reader/reader_open_book.c:62
 #, c-format
 msgid "ERROR: failed to open file: %s\n"
 msgstr "ERROR: failed to open file: %s\n"
@@ -131,7 +107,7 @@ msgstr ""
 msgid "End read book\n"
 msgstr "End read book\n"
 
-#: ../src/fb2/fb2_parser.c:33
+#: ../src/fb2/fb2_parser.c:35
 #, c-format
 msgid "ERROR: Failed to parsing fb2 file: %s\n"
 msgstr "ERROR: Failed to parsing fb2 file: %s\n"
@@ -171,34 +147,54 @@ msgstr "ERROR: no id properties in <image> tag\n"
 msgid "ERROR: GdkPixbufLoader: %s\n"
 msgstr "ERROR: GdkPixbufLoader: %s\n"
 
-#: ../src/txt/txt_parser.c:38
+#: ../src/txt/txt_parser.c:40
 #, c-format
 msgid "ERROR: failed to encode txt file: %s\n"
 msgstr "ERROR: failed to encode txt file: %s\n"
 
-#: ../src/txt/txt_parser.c:61
+#: ../src/txt/txt_parser.c:63
 #, c-format
 msgid "ERROR: failed to open txt file: %s\n"
 msgstr "ERROR: failed to open txt file: %s\n"
 
-#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:37
+#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:40
 #, c-format
 msgid "ERROR: failed to open URI %s\n"
 msgstr "ERROR: failed to open URI %s\n"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:43
+msgid "Navigation"
+msgstr "Navigation"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:50
+msgid "Find"
+msgstr "Find"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:57
+msgid "Change Encode"
+msgstr "Change Encode"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:70
+msgid "Color Theme"
+msgstr "Color Theme"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:99
+msgid "Forget All Books"
+msgstr "Forget All Books"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:106
+msgid "About"
+msgstr "About"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:118
+msgid "Open Book"
+msgstr "Open Book"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:125
+msgid "Exit"
+msgstr "Exit"
 
 #: ../src/callbacks/encode_dialog_callbacks.c:31
 #: ../src/callbacks/encode_dialog_callbacks.c:37
 msgid "WRONG ENCODE"
 msgstr "WRONG ENCODE"
-
-#~ msgid "To last read position"
-#~ msgstr "To last read position"
-
-#~ msgid "Save reading position"
-#~ msgstr "Save reading position"
-
-#~ msgid "Save reading position?"
-#~ msgstr "Save reading position?"
-
-#~ msgid "This will overwrite the previous position"
-#~ msgstr "This will overwrite the previous position"
