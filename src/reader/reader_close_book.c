@@ -1,6 +1,7 @@
 #include "reader_chunks.h"
 
 void text_tag_foreach_remove(GtkTextTag* tag, gpointer data);
+void free_text_mark(gpointer ptr);
 
 int reader_close_book()
 {
@@ -14,6 +15,7 @@ int reader_close_book()
 	BOOK_TYPE book_type					= GLOBAL_FB2_READER.book_text_view.type;
 	char* book_config_path				= GLOBAL_FB2_READER.book_text_view.config_path;
 	char* book_path						= GLOBAL_FB2_READER.book_text_view.path;
+	GList* link_jump_list				= GLOBAL_FB2_READER.book_text_view.link_jump_list;
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
@@ -41,20 +43,32 @@ int reader_close_book()
 		g_hash_table_remove_all(binary_hash_table);
 		g_hash_table_remove_all(links_hash_table);
 
+		g_list_free_full(link_jump_list, free_text_mark);
+
 		gtk_window_set_title(GTK_WINDOW(main_wnd), "Simple FB2 reader");
 
 		gtk_tree_store_clear(section_treestore);
 
 		g_free(book_config_path);
 		g_free(book_path);
+		g_key_file_free(book_config);
+
 		GLOBAL_FB2_READER.book_text_view.path			= NULL;
 		GLOBAL_FB2_READER.book_text_view.config_path	= NULL;
-
-		g_key_file_free(book_config);
-		GLOBAL_FB2_READER.book_text_view.config		= NULL;
+		GLOBAL_FB2_READER.book_text_view.config			= NULL;
+		GLOBAL_FB2_READER.book_text_view.link_jump_list		= NULL;
+		GLOBAL_FB2_READER.book_text_view.type			= BOOK_TYPE_NONE;
 	}
 
 	return 0;
+}
+
+void free_text_mark(gpointer ptr)
+{
+	GtkTextMark* mark			= GTK_TEXT_MARK(ptr);
+	GtkTextBuffer* text_buff	= gtk_text_mark_get_buffer(mark);
+
+	gtk_text_buffer_delete_mark(text_buff, mark);
 }
 
 void text_tag_foreach_remove(GtkTextTag* tag, gpointer data)

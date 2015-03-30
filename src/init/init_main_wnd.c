@@ -14,7 +14,6 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	obj->navigation_dialog				= GTK_DIALOG(				gtk_builder_get_object(builder, "navigation_dialog"));
 	obj->about_dialog					= GTK_ABOUT_DIALOG(			gtk_builder_get_object(builder, "reader_aboutdialog"));
 	obj->sections_treeview				= GTK_TREE_VIEW(			gtk_builder_get_object(builder, "books_section_treeview"));
-	obj->color_check_item				= GTK_CHECK_MENU_ITEM(		gtk_builder_get_object(builder, "reader_color_dark_theme_checkmenuitem"));
 	obj->forget_books_dialog			= GTK_MESSAGE_DIALOG(		gtk_builder_get_object(builder, "forget_all_books_message_dialog"));
 
 
@@ -27,9 +26,9 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	const char* conf_dir				= g_get_user_config_dir();
 	assert(conf_dir != NULL);
 
-	gboolean color_check_item_state = g_key_file_get_boolean(obj->app_config, "app", "dark_color_cheme", NULL);
-	if(gtk_check_menu_item_get_active(obj->color_check_item) != color_check_item_state)
-		gtk_check_menu_item_set_active(obj->color_check_item, color_check_item_state);
+	char* color_theme = g_key_file_get_string(obj->app_config, "app", "color_theme", NULL);
+	reader_set_color_theme(obj, (const char*)color_theme);
+	g_free(color_theme);
 
 	gint main_wnd_x_pos = g_key_file_get_integer(obj->app_config, "app", "x_pos", NULL);
 	gint main_wnd_y_pos = g_key_file_get_integer(obj->app_config, "app", "y_pos", NULL);

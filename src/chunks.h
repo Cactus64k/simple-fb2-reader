@@ -62,6 +62,13 @@
 		BOOK_TYPE_TXT
 	} BOOK_TYPE;
 
+	typedef struct LINK_LIST
+	{
+		GtkTextMark* mark;
+		struct LINK_LIST* next;
+		struct LINK_LIST* prev;
+	} LINK_LIST;
+
 	typedef struct FB2_READER_SEARCH_WINDOW
 	{
 		GtkWidget*		search_wnd;
@@ -93,6 +100,8 @@
 		GHashTable*				binary_hash_table;
 		GHashTable*				links_hash_table;
 
+		GList*					link_jump_list;
+
 		GKeyFile*				config;
 		char*					config_path;
 
@@ -106,9 +115,8 @@
 	{
 		GtkWidget*				main_wnd;
 
-		GtkCheckMenuItem*		color_check_item;
-
 		FB2_READER_BOOK_VIEW	book_text_view;
+
 		GtkTreeView*			sections_treeview;
 
 		GtkFileChooserDialog*	filechooserdialog;

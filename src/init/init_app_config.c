@@ -11,8 +11,8 @@ int init_app_config(FB2_READER* obj)
 	g_key_file_load_from_file(obj->app_config, obj->app_config_path, G_KEY_FILE_NONE, NULL);
 
 
-	if(g_key_file_has_key(obj->app_config, "app",				"dark_color_cheme", NULL) == FALSE)
-		g_key_file_set_boolean(obj->app_config, "app",			"dark_color_cheme", FALSE);
+	if(g_key_file_has_key(obj->app_config, "app",				"color_theme", NULL) == FALSE)
+		g_key_file_set_string(obj->app_config, "app",			"color_theme", "default_theme");
 
 	if(g_key_file_has_key(obj->app_config, "app",				"x_pos", NULL) == FALSE)
 		g_key_file_set_integer(obj->app_config, "app",			"x_pos", 640/2);

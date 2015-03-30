@@ -1,4 +1,4 @@
-#include "../../chunks.h"
+#include "../callbacks_chunk.h"
 
 gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data)
 {
@@ -6,6 +6,7 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 	GtkTextBuffer* text_buff		= GLOBAL_FB2_READER.book_text_view.text_buff;
 	GdkCursor* cursor_link			= GLOBAL_FB2_READER.cursor_link;
 	GHashTable* links_hash_table	= GLOBAL_FB2_READER.book_text_view.links_hash_table;
+	GList* link_jump_list			= GLOBAL_FB2_READER.book_text_view.link_jump_list;
 
 	if(event->type == GDK_BUTTON_RELEASE)
 	{
@@ -23,7 +24,10 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 			{
 				href++;
 
-				gint link_line_num			= GPOINTER_TO_INT(g_hash_table_lookup(links_hash_table, href));
+				GtkTextMark* mark = gtk_text_buffer_create_mark(text_buff, NULL, iter, TRUE);
+				GLOBAL_FB2_READER.book_text_view.link_jump_list = g_list_prepend(link_jump_list, mark);
+
+				gint link_line_num	= GPOINTER_TO_INT(g_hash_table_lookup(links_hash_table, href));
 				GtkTextIter line_iter;
 
 				gtk_text_buffer_get_iter_at_line(text_buff, &line_iter, link_line_num);
@@ -45,3 +49,4 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 
 	return TRUE;
 }
+
