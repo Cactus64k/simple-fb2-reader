@@ -1,0 +1,18 @@
+
+DEBIAN:
+#################################################
+$ cd ~/
+$ git clone https://github.com/Cactus64k/simple-fb2-reader.git
+$ cd simple-fb2-reader
+$ fakeroot dpkg-buildpackage
+$ cd ..
+# dpkg -i simple-fb2-reader_*.deb
+
+ANOTHER SYSTEMS:
+#################################################
+$ cd ~/
+$ git clone https://github.com/Cactus64k/simple-fb2-reader.git
+$ cd simple-fb2-reader
+$ ./configure
+$ make
+$ make install

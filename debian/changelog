@@ -1,0 +1,6 @@
+simple-fb2-reader (1.0.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #nnnn)
+  * Fix navigaiton chapter content
+
+ -- Cactus <medved_cool@mail.ru>  Sun, 08 Mar 2015 00:29:56 +0300
