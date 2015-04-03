@@ -1,12 +1,6 @@
-<<<<<<< HEAD
 simple-fb2-reader (1.0.1-1) unstable; urgency=low
 
   * Initial release (Closes: #nnnn)
   * Fix navigaiton chapter content
-=======
-simple-fb2-reader (1.0.0-1) unstable; urgency=low
-
-  * Initial release (Closes: #nnnn)  <nnnn is the bug number of your ITP>
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 
  -- Cactus <medved_cool@mail.ru>  Sun, 08 Mar 2015 00:29:56 +0300

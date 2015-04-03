@@ -36,7 +36,6 @@ int parse_title(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* te
 
 	return 0;
 }
-<<<<<<< HEAD
 
 int navigation_set_chapter_by_title(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTreeIter* cur_tree_iter)
 {
@@ -67,5 +66,3 @@ int navigation_set_chapter_by_title(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_n
 }
 
 
-=======
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c

@@ -101,11 +101,7 @@ int parse_formated_text_for_link(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node
 		{
 			GtkTextMark* start_tag_mark = gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
 
-<<<<<<< HEAD
 			parse_formated_text_for_link(obj, node->children, text_buff_end);
-=======
-			parse_formated_text(obj, node->children, text_buff_end);
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 
 			GtkTextIter start_tag_iter;
 			gtk_text_buffer_get_iter_at_mark(text_buff, &start_tag_iter, start_tag_mark);

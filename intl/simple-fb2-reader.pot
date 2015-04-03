@@ -7,11 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-<<<<<<< HEAD
         "POT-Creation-Date: 2015-04-03 17:44+0300\n"
-=======
-        "POT-Creation-Date: 2015-03-30 18:11+0300\n"
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -20,7 +16,6 @@ msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Content-Type: text/plain; charset=CHARSET\n"
         "Content-Transfer-Encoding: 8bit\n"
 
-<<<<<<< HEAD
 #: ../res/simple-fb2-reader.glade:87
 msgid   "Forget all books position and endodings?"
 msgstr  ""
@@ -30,17 +25,6 @@ msgid   "without the possibility of restoration"
 msgstr  ""
 
 #: ../res/simple-fb2-reader.glade:150
-=======
-#: ../res/simple-fb2-reader.glade:135
-msgid   "Forget all books position and endodings?"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:136
-msgid   "without the possibility of restoration"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:341
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 msgid   "ctrl+f\tsearch\n"
         "ctrl+c\tcopy selected text\n"
         "ctrl+m3 \tfont scale\n"
@@ -48,7 +32,6 @@ msgid   "ctrl+f\tsearch\n"
         "Have nice reading!\n"
 msgstr  ""
 
-<<<<<<< HEAD
 #: ../res/simple-fb2-reader.glade:249
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:14
 msgid   "Backward"
@@ -63,22 +46,6 @@ msgid   "Case ensitive"
 msgstr  ""
 
 #: ../res/simple-fb2-reader.glade:522
-=======
-#: ../res/simple-fb2-reader.glade:442
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:31
-msgid   "Backward"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:460
-msgid   "Forward"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:498
-msgid   "Case ensitive"
-msgstr  ""
-
-#: ../res/simple-fb2-reader.glade:605
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 msgid   "column"
 msgstr  ""
 
@@ -101,11 +68,7 @@ msgstr  ""
 msgid   "ERROR: failed to open zip file: %s; error code: %d\n"
 msgstr  ""
 
-<<<<<<< HEAD
 #: ../src/reader/reader_open_book.c:61
-=======
-#: ../src/reader/reader_open_book.c:62
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 #, c-format
 msgid   "ERROR: failed to open file: %s\n"
 msgstr  ""
@@ -144,13 +107,10 @@ msgstr  ""
 msgid   "Not local links not supported\n"
 msgstr  ""
 
-<<<<<<< HEAD
 #: ../src/fb2/FictionBook/body/section.c:18 ../src/fb2/FictionBook/body.c:15
 msgid   "No Title"
 msgstr  ""
 
-=======
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 #: ../src/fb2/FictionBook/attributes/id.c:26
 #, c-format
 msgid   "ERROR: id %s already exist in table\n"
@@ -190,7 +150,6 @@ msgstr  ""
 msgid   "ERROR: failed to open URI %s\n"
 msgstr  ""
 
-<<<<<<< HEAD
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:26
 msgid   "Navigation"
 msgstr  ""
@@ -220,37 +179,6 @@ msgid   "Open Book"
 msgstr  ""
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:87
-=======
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:43
-msgid   "Navigation"
-msgstr  ""
-
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:50
-msgid   "Find"
-msgstr  ""
-
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:57
-msgid   "Change Encode"
-msgstr  ""
-
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:70
-msgid   "Color Theme"
-msgstr  ""
-
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:99
-msgid   "Forget All Books"
-msgstr  ""
-
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:106
-msgid   "About"
-msgstr  ""
-
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:118
-msgid   "Open Book"
-msgstr  ""
-
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:125
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 msgid   "Exit"
 msgstr  ""
 

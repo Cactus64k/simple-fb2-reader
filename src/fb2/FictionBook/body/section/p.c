@@ -2,13 +2,8 @@
 
 int parse_p(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-<<<<<<< HEAD
 	g_return_val_if_fail(parent_node	!= NULL, -1);
 	g_return_val_if_fail(text_buff_end	!= NULL, -2);
-=======
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 
 	GtkTextBuffer* text_buff	= obj->text_buff;
 	xmlNode* node				= parent_node->children;
@@ -26,7 +21,6 @@ int parse_p(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_b
 	return 0;
 }
 
-<<<<<<< HEAD
 int get_p_text(xmlNode* parent_node, GString* buff)
 {
 	g_return_val_if_fail(parent_node	!= NULL, -1);
@@ -70,10 +64,6 @@ int get_p_text(xmlNode* parent_node, GString* buff)
 }
 
 int parse_formated_text(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)		// FIXME children
-=======
-
-int parse_formated_text(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 {
 	g_return_val_if_fail(parent_node != NULL, -1);
 	g_return_val_if_fail(text_buff_end != NULL, -2);

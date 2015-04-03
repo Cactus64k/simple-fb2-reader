@@ -4,10 +4,6 @@ int reader_open_book(char* book_path)
 {
 	FB2_READER_BOOK_VIEW* book_view		= &GLOBAL_FB2_READER.book_text_view;
 	GtkDialog* encode_dialog			= GLOBAL_ENCODE_DIALOG.dialog;
-<<<<<<< HEAD
-=======
-	GtkTreeView* sections_treeview		= GLOBAL_FB2_READER.sections_treeview;
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 	GtkTreeView* tree_view				= GLOBAL_ENCODE_DIALOG.treeview;
 	GtkTreeSelection* tree_selection	= gtk_tree_view_get_selection(tree_view);
 	GtkTreeModel* tree_model			= GTK_TREE_MODEL(GLOBAL_ENCODE_DIALOG.liststore);
@@ -16,12 +12,9 @@ int reader_open_book(char* book_path)
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
-<<<<<<< HEAD
 		book_view->type = book_type;
 		book_view->path = book_path;
 
-=======
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 		if(reader_load_book_config(book_view, book_path) == 0)
 		{
 			GKeyFile* config = book_view->config;
@@ -60,18 +53,9 @@ int reader_open_book(char* book_path)
 			}
 			//*****************************************************
 
-<<<<<<< HEAD
 			//gtk_tree_view_expand_all(sections_treeview);
 
 			reader_scroll_restore(book_view);
-=======
-			gtk_tree_view_expand_all(sections_treeview);
-
-			reader_scroll_restore(book_view);
-
-			book_view->type = book_type;
-			book_view->path = book_path;
->>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 		}
 		else
 			fprintf(stderr, _C("ERROR: failed to open file: %s\n"), book_path);
