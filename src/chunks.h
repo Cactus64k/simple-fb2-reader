@@ -11,7 +11,11 @@
 	#include <locale.h>
 	#include <string.h>
 	#include <stdint.h>
+<<<<<<< HEAD
 	#include <limits.h>
+=======
+	#include <math.h>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 
 	#include <sys/stat.h>
 	#include <sys/types.h>

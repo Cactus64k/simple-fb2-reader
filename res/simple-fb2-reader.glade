@@ -1,7 +1,77 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.12"/>
+=======
+<interface>
+  <!-- interface-requires gtk+ 3.0 -->
+  <object class="GtkFileChooserDialog" id="book_filechooserdialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="modal">True</property>
+    <property name="default_width">320</property>
+    <property name="default_height">260</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_wnd</property>
+    <property name="filter">fb2_files_filter</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="book_filechooserdialog-vbox">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="book_filechooserdialog-action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="book_filechooserdialog_cancel_button">
+                <property name="label">gtk-cancel</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="book_filechooserdialog_ok_button">
+                <property name="label">gtk-open</property>
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">book_filechooserdialog_cancel_button</action-widget>
+      <action-widget response="2">book_filechooserdialog_ok_button</action-widget>
+    </action-widgets>
+  </object>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
   <object class="GtkMenu" id="book_mouse_menu">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -37,43 +107,29 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
-  <object class="GtkWindow" id="main_wnd">
-    <property name="can_focus">False</property>
-    <property name="events">GDK_KEY_PRESS_MASK | GDK_STRUCTURE_MASK</property>
-    <property name="title">Simple FB2 Reader</property>
-    <property name="window_position">center</property>
-    <property name="default_width">640</property>
-    <property name="default_height">480</property>
-    <property name="icon_name">simple-fb2-reader</property>
-    <signal name="delete-event" handler="main_wnd_delete_event_cb" swapped="no"/>
-    <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
-    <signal name="key-press-event" handler="main_wnd_key_press_event_cb" swapped="no"/>
-    <signal name="size-allocate" handler="main_wnd_size_allocate_cb" object="book_textview" swapped="no"/>
-    <child>
-      <object class="GtkScrolledWindow" id="book_text_view_scrolledwindow">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="hadjustment">book_textview_horisontal_adjustment</property>
-        <property name="vadjustment">book_textview_vertical_adjustment</property>
-        <property name="shadow_type">in</property>
-        <child>
-          <object class="GtkTextView" id="book_textview">
-            <property name="visible">True</property>
-            <property name="can_focus">True</property>
-            <property name="margin_bottom">10</property>
-            <property name="hadjustment">book_textview_horisontal_adjustment</property>
-            <property name="vadjustment">book_textview_vertical_adjustment</property>
-            <property name="editable">False</property>
-            <property name="wrap_mode">word</property>
-            <property name="cursor_visible">False</property>
-            <property name="buffer">book_textbuff</property>
-            <signal name="motion-notify-event" handler="book_textview_motion_notify_event_cb" swapped="no"/>
-            <signal name="populate-popup" handler="book_textview_populate_popup_cb" swapped="no"/>
-            <signal name="scroll-event" handler="book_textview_scroll_event_cb" swapped="no"/>
-          </object>
-        </child>
-      </object>
-    </child>
+<<<<<<< HEAD
+=======
+  <object class="GtkTreeStore" id="books_sections_treestore">
+    <columns>
+      <!-- column-name section_name -->
+      <column type="gchararray"/>
+      <!-- column-name section_string -->
+      <column type="gint"/>
+    </columns>
+  </object>
+  <object class="GtkListStore" id="encode_liststore">
+    <columns>
+      <!-- column-name encode_name -->
+      <column type="gchararray"/>
+    </columns>
+  </object>
+  <object class="GtkTextBuffer" id="encode_textbuffer"/>
+  <object class="GtkFileFilter" id="fb2_files_filter">
+    <mime-types>
+      <mime-type>application/x-zip-compressed-fb2</mime-type>
+      <mime-type>application/x-fictionbook+xml</mime-type>
+      <mime-type>text/plain</mime-type>
+    </mime-types>
   </object>
   <object class="GtkMessageDialog" id="forget_all_books_message_dialog">
     <property name="can_focus">False</property>
@@ -102,6 +158,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -117,6 +174,7 @@
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+                <property name="use_action_appearance">False</property>
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -138,6 +196,203 @@
     <action-widgets>
       <action-widget response="1">forget_all_books_no_button</action-widget>
       <action-widget response="2">forget_all_books_yes_button</action-widget>
+    </action-widgets>
+  </object>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
+  <object class="GtkWindow" id="main_wnd">
+    <property name="can_focus">False</property>
+    <property name="events">GDK_KEY_PRESS_MASK | GDK_STRUCTURE_MASK</property>
+    <property name="title">Simple FB2 Reader</property>
+    <property name="window_position">center</property>
+    <property name="default_width">640</property>
+    <property name="default_height">480</property>
+    <property name="icon_name">simple-fb2-reader</property>
+<<<<<<< HEAD
+    <signal name="delete-event" handler="main_wnd_delete_event_cb" swapped="no"/>
+    <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
+    <signal name="key-press-event" handler="main_wnd_key_press_event_cb" swapped="no"/>
+=======
+    <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
+    <signal name="key-press-event" handler="main_wnd_key_press_event_cb" swapped="no"/>
+    <signal name="delete-event" handler="main_wnd_delete_event_cb" swapped="no"/>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
+    <signal name="size-allocate" handler="main_wnd_size_allocate_cb" object="book_textview" swapped="no"/>
+    <child>
+      <object class="GtkScrolledWindow" id="book_text_view_scrolledwindow">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="hadjustment">book_textview_horisontal_adjustment</property>
+        <property name="vadjustment">book_textview_vertical_adjustment</property>
+        <property name="shadow_type">in</property>
+        <child>
+          <object class="GtkTextView" id="book_textview">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="margin_bottom">10</property>
+            <property name="hadjustment">book_textview_horisontal_adjustment</property>
+            <property name="vadjustment">book_textview_vertical_adjustment</property>
+            <property name="editable">False</property>
+            <property name="wrap_mode">word</property>
+            <property name="cursor_visible">False</property>
+            <property name="buffer">book_textbuff</property>
+<<<<<<< HEAD
+            <signal name="motion-notify-event" handler="book_textview_motion_notify_event_cb" swapped="no"/>
+            <signal name="populate-popup" handler="book_textview_populate_popup_cb" swapped="no"/>
+=======
+            <signal name="populate-popup" handler="book_textview_populate_popup_cb" swapped="no"/>
+            <signal name="motion-notify-event" handler="book_textview_motion_notify_event_cb" swapped="no"/>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
+            <signal name="scroll-event" handler="book_textview_scroll_event_cb" swapped="no"/>
+          </object>
+        </child>
+      </object>
+    </child>
+  </object>
+<<<<<<< HEAD
+  <object class="GtkMessageDialog" id="forget_all_books_message_dialog">
+    <property name="can_focus">False</property>
+    <property name="border_width">5</property>
+    <property name="resizable">False</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="skip_pager_hint">True</property>
+    <property name="transient_for">main_wnd</property>
+    <property name="message_type">question</property>
+    <property name="text" translatable="yes">Forget all books position and endodings?</property>
+    <property name="secondary_text" translatable="yes">without the possibility of restoration</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="forget_all_books_vbox">
+=======
+  <object class="GtkDialog" id="navigation_dialog">
+    <property name="can_focus">False</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="default_width">400</property>
+    <property name="default_height">400</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_wnd</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="navigation_dialog-vbox">
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+<<<<<<< HEAD
+          <object class="GtkButtonBox" id="forget_all_books_action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="forget_all_books_no_button">
+                <property name="label">gtk-no</property>
+=======
+          <object class="GtkButtonBox" id="navigation_dialog_action_area">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="navigation_dialog-cancel-button">
+                <property name="label">gtk-cancel</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+<<<<<<< HEAD
+=======
+                <property name="use_action_appearance">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+<<<<<<< HEAD
+              <object class="GtkButton" id="forget_all_books_yes_button">
+                <property name="label">gtk-yes</property>
+=======
+              <object class="GtkButton" id="navigation_dialog-jump-button">
+                <property name="label">gtk-jump-to</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
+                <property name="use_action_appearance">False</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+<<<<<<< HEAD
+=======
+                <property name="use_action_appearance">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+<<<<<<< HEAD
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">forget_all_books_no_button</action-widget>
+      <action-widget response="2">forget_all_books_yes_button</action-widget>
+=======
+        <child>
+          <object class="GtkScrolledWindow" id="navigation_dialog-scrolledwindow">
+            <property name="visible">True</property>
+            <property name="can_focus">True</property>
+            <property name="shadow_type">in</property>
+            <child>
+              <object class="GtkTreeView" id="books_section_treeview">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="model">books_sections_treestore</property>
+                <property name="headers_visible">False</property>
+                <property name="headers_clickable">False</property>
+                <property name="enable_grid_lines">horizontal</property>
+                <property name="enable_tree_lines">True</property>
+                <signal name="row-activated" handler="books_section_treeview_row_activated_cb" swapped="no"/>
+                <child internal-child="selection">
+                  <object class="GtkTreeSelection" id="treeview-selection2"/>
+                </child>
+                <child>
+                  <object class="GtkTreeViewColumn" id="treeviewcolumn1">
+                    <property name="resizable">True</property>
+                    <property name="title">Sections</property>
+                    <child>
+                      <object class="GtkCellRendererText" id="section_title_cellrenderertext"/>
+                      <attributes>
+                        <attribute name="text">0</attribute>
+                      </attributes>
+                    </child>
+                  </object>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="1">navigation_dialog-cancel-button</action-widget>
+      <action-widget response="2">navigation_dialog-jump-button</action-widget>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
     </action-widgets>
   </object>
   <object class="GtkAboutDialog" id="reader_aboutdialog">
@@ -183,6 +438,10 @@ Have nice reading!
     <property name="type_hint">dialog</property>
     <property name="deletable">False</property>
     <property name="transient_for">main_wnd</property>
+<<<<<<< HEAD
+=======
+    <property name="has_resize_grip">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
     <signal name="key-press-event" handler="search_wnd_key_press_event_cb" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">
@@ -217,6 +476,10 @@ Have nice reading!
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+<<<<<<< HEAD
+=======
+                <property name="use_action_appearance">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
                 <signal name="clicked" handler="search_wnd_search_button_clicked_cb" object="search_query_entry" swapped="no"/>
                 <child>
                   <object class="GtkImage" id="search_button_icon">
@@ -251,6 +514,10 @@ Have nice reading!
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
+<<<<<<< HEAD
+=======
+                <property name="use_action_appearance">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
                 <property name="xalign">0</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">search_forward_radiobutton</property>
@@ -268,6 +535,10 @@ Have nice reading!
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
+<<<<<<< HEAD
+=======
+                <property name="use_action_appearance">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
                 <property name="xalign">0</property>
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
@@ -287,6 +558,10 @@ Have nice reading!
                 <property name="receives_default">True</property>
                 <property name="halign">end</property>
                 <property name="valign">end</property>
+<<<<<<< HEAD
+=======
+                <property name="use_action_appearance">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
                 <property name="use_stock">True</property>
                 <signal name="clicked" handler="search_wnd_close_button_clicked_cb" object="search_wnd" swapped="no"/>
               </object>
@@ -304,6 +579,10 @@ Have nice reading!
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
+<<<<<<< HEAD
+=======
+                <property name="use_action_appearance">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
                 <property name="xalign">0</property>
                 <property name="draw_indicator">True</property>
               </object>
@@ -323,6 +602,7 @@ Have nice reading!
       </object>
     </child>
   </object>
+<<<<<<< HEAD
   <object class="GtkTreeStore" id="books_sections_treestore">
     <columns>
       <!-- column-name section_name -->
@@ -439,6 +719,8 @@ Have nice reading!
     </columns>
   </object>
   <object class="GtkTextBuffer" id="encode_textbuffer"/>
+=======
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
   <object class="GtkDialog" id="txt_encode_dialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
@@ -463,6 +745,10 @@ Have nice reading!
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+<<<<<<< HEAD
+=======
+                <property name="use_action_appearance">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -478,6 +764,10 @@ Have nice reading!
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
+<<<<<<< HEAD
+=======
+                <property name="use_action_appearance">False</property>
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
                 <property name="use_stock">True</property>
               </object>
               <packing>
@@ -579,6 +869,7 @@ Have nice reading!
       <widget name="txt_encode_dialog"/>
     </widgets>
   </object>
+<<<<<<< HEAD
   <object class="GtkFileFilter" id="fb2_files_filter">
     <mime-types>
       <mime-type>application/x-zip-compressed-fb2</mime-type>
@@ -649,4 +940,6 @@ Have nice reading!
       <action-widget response="2">book_filechooserdialog_ok_button</action-widget>
     </action-widgets>
   </object>
+=======
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 </interface>

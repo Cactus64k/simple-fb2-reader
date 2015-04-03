@@ -45,9 +45,16 @@ int main(int argc,	char *argv[])
 	}
 
 	#ifdef DEBUG
+<<<<<<< HEAD
 		char* test_path = g_strdup("/home/cactus/Книги/Прочитать/Макдональд Йен. Камень, ножницы, бумага - modernlib.ru.fb2.zip");
 
 		reader_open_book(test_path);
+=======
+		char* test_path = g_strdup("/home/cactus/Книги/example.fb2");
+
+		reader_open_book(test_path);
+		//open_book("/home/cactus/gamilton_piter_obnazhyonnyi_bog_fenomen.fb2");
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 	#endif
 
 	gtk_main();

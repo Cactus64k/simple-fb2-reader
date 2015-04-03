@@ -3,13 +3,19 @@
 void color_theme_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)
 {
 	GKeyFile* app_config			= GLOBAL_FB2_READER.app_config;
+<<<<<<< HEAD
 	const char* menu_item_name		= gtk_widget_get_name(GTK_WIDGET(checkmenuitem));
+=======
+
+	const char* menu_item_name = gtk_widget_get_name(GTK_WIDGET(checkmenuitem));
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
 
 	reader_set_color_theme(&GLOBAL_FB2_READER, menu_item_name);
 
 	g_key_file_set_string(app_config, "app", "color_theme", menu_item_name);
 }
 
+<<<<<<< HEAD
 void color_theme_activate_cb(GtkMenuItem* checkmenuitem, gpointer user_data)
 {
 	GKeyFile* app_config			= GLOBAL_FB2_READER.app_config;
@@ -43,3 +49,6 @@ void color_theme_activate_cb(GtkMenuItem* checkmenuitem, gpointer user_data)
 	g_free(color_theme);
 	g_strfreev(groups);
 }
+=======
+
+>>>>>>> d61b624dfca0b7377df2b5526c48864a0b01e95c
