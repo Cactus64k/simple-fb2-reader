@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Generated with glade 3.18.3 -->
 <interface>
-  <requires lib="gtk+" version="3.12"/>
+  <requires lib="gtk+" version="3.2"/>
   <object class="GtkMenu" id="book_mouse_menu">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
@@ -79,6 +79,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="resizable">False</property>
+    <property name="icon_name">edit-delete</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
@@ -143,6 +144,7 @@
   <object class="GtkAboutDialog" id="reader_aboutdialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
+    <property name="icon_name">help-about</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_wnd</property>
     <property name="program_name">Simple FB2 Reader</property>
@@ -180,6 +182,7 @@ Have nice reading!
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
+    <property name="icon_name">system-search</property>
     <property name="type_hint">dialog</property>
     <property name="deletable">False</property>
     <property name="transient_for">main_wnd</property>
@@ -193,6 +196,7 @@ Have nice reading!
         <property name="margin_top">3</property>
         <property name="margin_bottom">3</property>
         <property name="orientation">vertical</property>
+        <property name="spacing">3</property>
         <child>
           <object class="GtkBox" id="search_wnd_box">
             <property name="visible">True</property>
@@ -280,15 +284,20 @@ Have nice reading!
             </child>
             <child>
               <object class="GtkButton" id="search_wnd_close_button">
-                <property name="label">gtk-close</property>
                 <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
                 <property name="halign">end</property>
                 <property name="valign">end</property>
-                <property name="use_stock">True</property>
                 <signal name="clicked" handler="search_wnd_close_button_clicked_cb" object="search_wnd" swapped="no"/>
+                <child>
+                  <object class="GtkImage" id="search_wnd_close_button_icon">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="stock">gtk-close</property>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -519,7 +528,7 @@ Have nice reading!
                     </child>
                     <child>
                       <object class="GtkTreeViewColumn" id="encode_treeviewcolumn">
-                        <property name="title" translatable="yes">column</property>
+                        <property name="title">column</property>
                         <child>
                           <object class="GtkCellRendererText" id="encode_cellrenderertext"/>
                           <attributes>
@@ -585,6 +594,11 @@ Have nice reading!
       <mime-type>application/x-fictionbook+xml</mime-type>
       <mime-type>text/plain</mime-type>
     </mime-types>
+    <patterns>
+      <pattern>*.txt</pattern>
+      <pattern>*.fb2</pattern>
+      <pattern>*.fb2.zip</pattern>
+    </patterns>
   </object>
   <object class="GtkFileChooserDialog" id="book_filechooserdialog">
     <property name="can_focus">False</property>
@@ -595,6 +609,7 @@ Have nice reading!
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_wnd</property>
     <property name="filter">fb2_files_filter</property>
+    <signal name="file-activated" handler="book_filechooserdialog_file_activated_cb" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox" id="book_filechooserdialog-vbox">
         <property name="can_focus">False</property>

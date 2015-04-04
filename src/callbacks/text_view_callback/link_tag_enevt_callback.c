@@ -3,6 +3,7 @@
 gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data)
 {
 	GtkTextView* text_view			= GTK_TEXT_VIEW(object);
+	FB2_READER_BOOK_VIEW* book_view	= &(GLOBAL_FB2_READER.book_text_view);
 	GtkTextBuffer* text_buff		= GLOBAL_FB2_READER.book_text_view.text_buff;
 	GdkCursor* cursor_link			= GLOBAL_FB2_READER.cursor_link;
 	GHashTable* links_hash_table	= GLOBAL_FB2_READER.book_text_view.links_hash_table;
@@ -30,9 +31,7 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 				gint link_line_num	= GPOINTER_TO_INT(g_hash_table_lookup(links_hash_table, href));
 				GtkTextIter line_iter;
 
-				gtk_text_buffer_get_iter_at_line(text_buff, &line_iter, link_line_num);
-
-				gtk_text_view_scroll_to_iter(text_view, &line_iter, 0.f, TRUE, 0.f, 0.f);
+				reader_scroll_at_line_offset(book_view, link_line_num, 0);
 			}
 			else
 			{

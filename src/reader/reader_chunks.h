@@ -11,6 +11,7 @@
 	BOOK_TYPE reader_get_book_type(char* file_path);
 	int reader_scroll_restore(FB2_READER_BOOK_VIEW* obj);
 	int reader_scroll_save(FB2_READER_BOOK_VIEW* obj);
+	int reader_scroll_at_line_offset(FB2_READER_BOOK_VIEW* obj, gint line, gint line_offset);
 
 	LINK_LIST* reader_link_list_add_after(LINK_LIST* list, GtkTextMark* mark);
 	void reader_link_list_free_forward(LINK_LIST* list);

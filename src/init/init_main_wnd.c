@@ -17,7 +17,6 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	obj->forget_books_dialog			= GTK_MESSAGE_DIALOG(		gtk_builder_get_object(builder, "forget_all_books_message_dialog"));
 
 
-
 	assert(obj->main_wnd				!= NULL);
 	assert(obj->filechooserdialog		!= NULL);
 	assert(obj->navigation_dialog		!= NULL);

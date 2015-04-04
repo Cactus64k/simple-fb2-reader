@@ -8,8 +8,6 @@ void forger_books_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user
 
 	if(gtk_dialog_run(GTK_DIALOG(forget_book_dialog)) == 2)
 	{
-		gtk_widget_hide(GTK_WIDGET(forget_book_dialog));
-
 		const char* conf_dir = g_get_user_config_dir();
 		assert(conf_dir != NULL);
 
