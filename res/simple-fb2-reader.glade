@@ -2,30 +2,6 @@
 <!-- Generated with glade 3.18.3 -->
 <interface>
   <requires lib="gtk+" version="3.2"/>
-  <object class="GtkMenu" id="book_mouse_menu">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <child>
-      <object class="GtkImageMenuItem" id="link_navigation_forward_menuitem">
-        <property name="label">gtk-go-forward</property>
-        <property name="use_action_appearance">False</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="use_underline">True</property>
-        <property name="use_stock">True</property>
-      </object>
-    </child>
-    <child>
-      <object class="GtkImageMenuItem" id="link_navigation_backward_menuitem">
-        <property name="label">gtk-go-back</property>
-        <property name="use_action_appearance">False</property>
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="use_underline">True</property>
-        <property name="use_stock">True</property>
-      </object>
-    </child>
-  </object>
   <object class="GtkTextBuffer" id="book_textbuff"/>
   <object class="GtkAdjustment" id="book_textview_horisontal_adjustment">
     <property name="upper">100</property>
@@ -79,7 +55,7 @@
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
     <property name="resizable">False</property>
-    <property name="icon_name">edit-delete</property>
+    <property name="icon_name">simple-fb2-reader</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="skip_pager_hint">True</property>
@@ -144,7 +120,7 @@
   <object class="GtkAboutDialog" id="reader_aboutdialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
-    <property name="icon_name">help-about</property>
+    <property name="icon_name">simple-fb2-reader</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_wnd</property>
     <property name="program_name">Simple FB2 Reader</property>
@@ -182,7 +158,7 @@ Have nice reading!
     <property name="can_focus">False</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
-    <property name="icon_name">system-search</property>
+    <property name="icon_name">simple-fb2-reader</property>
     <property name="type_hint">dialog</property>
     <property name="deletable">False</property>
     <property name="transient_for">main_wnd</property>
@@ -346,6 +322,7 @@ Have nice reading!
     <property name="window_position">center-on-parent</property>
     <property name="default_width">400</property>
     <property name="default_height">400</property>
+    <property name="icon_name">simple-fb2-reader</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_wnd</property>
     <child internal-child="vbox">

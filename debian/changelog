@@ -1,6 +1,7 @@
-simple-fb2-reader (1.0.1-1) unstable; urgency=low
+simple-fb2-reader (1.0.2-1) unstable; urgency=low
 
   * Initial release (Closes: #nnnn)
   * Fix navigaiton chapter content
+  * Refactoring, add in book open dialog "file-activate" handler 
 
  -- Cactus <medved_cool@mail.ru>  Sun, 08 Mar 2015 00:29:56 +0300
