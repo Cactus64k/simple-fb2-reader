@@ -33,5 +33,7 @@
 
 	void color_theme_activate_cb				(GtkMenuItem* checkmenuitem, gpointer user_data);
 
+	void search_wnd_search_button_clicked_cb	(GtkButton *button, gpointer user_data);
+
 
 #endif /* CALLBACKS_CHUNK_H_ */

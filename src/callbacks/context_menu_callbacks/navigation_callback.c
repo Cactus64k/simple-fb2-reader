@@ -3,7 +3,7 @@
 void navigation_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_data)
 {
 	FB2_READER_BOOK_VIEW* book_view	= &(GLOBAL_FB2_READER.book_text_view);
-	GtkDialog* dialog				= GLOBAL_FB2_READER.navigation_dialog;
+	GtkDialog* navigation_dialog	= GLOBAL_FB2_READER.navigation_dialog;
 	GtkTreeStore* section_store		= GLOBAL_FB2_READER.book_text_view.sections_treestore;
 	BOOK_TYPE book_type				= GLOBAL_FB2_READER.book_text_view.type;
 	GtkTreeView* tree_view			= GLOBAL_FB2_READER.sections_treeview;
@@ -13,10 +13,12 @@ void navigation_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_d
 
 	if((book_type != BOOK_TYPE_NONE) && (book_type != BOOK_TYPE_TXT))
 	{
-		gtk_widget_grab_focus(GTK_WIDGET(dialog));
+		gtk_widget_grab_focus(GTK_WIDGET(navigation_dialog));
 
-		if(gtk_dialog_run(dialog) == 2)
+		if(gtk_dialog_run(navigation_dialog) == 2)
 		{
+			gtk_widget_hide(GTK_WIDGET(navigation_dialog));
+
 			GtkTreeModel* tree_model = GTK_TREE_MODEL(section_store);
 
 			GtkTreeSelection* tree_selection = gtk_tree_view_get_selection(tree_view);
@@ -26,6 +28,6 @@ void navigation_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_d
 			reader_scroll_at_line_offset(book_view, line, 0);
 		}
 
-		gtk_widget_hide(GTK_WIDGET(dialog));
+		gtk_widget_hide(GTK_WIDGET(navigation_dialog));
 	}
 }

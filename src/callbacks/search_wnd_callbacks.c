@@ -1,4 +1,4 @@
-#include "../chunks.h"
+#include "callbacks_chunk.h"
 
 void search_wnd_close_button_clicked_cb(GtkButton* widget, gpointer user_data)
 {
@@ -10,12 +10,17 @@ gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpoin
 	GdkEventKey key_event = event->key;
 	if(key_event.keyval == GDK_KEY_Escape)
 		gtk_widget_hide(widget);
+	else if(key_event.keyval == GDK_KEY_Return)
+	{
+		//search_wnd_search_button_clicked_cb(NULL, NULL);
+		// TODO следующая позиция поиска по enter
+	}
 
 	return FALSE;
 }
 
 
-void search_wnd_search_button_clicked_cb(GtkButton *button, gpointer user_data)
+void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 {
 	GtkTextBuffer* text_buff		= GLOBAL_FB2_READER.book_text_view.text_buff;
 	GtkTextView* text_view			= GLOBAL_FB2_READER.book_text_view.text_view;

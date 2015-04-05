@@ -31,10 +31,8 @@ int reader_set_color_theme(FB2_READER* obj, const char* color_theme)
 	gdk_rgba_parse(&color, selection_color);
 	gtk_widget_override_background_color(GTK_WIDGET(book_view->text_view), GTK_STATE_FLAG_SELECTED, &color);
 
-
 	GValue str_value = G_VALUE_INIT;
 	g_value_init(&str_value, G_TYPE_STRING);
-
 
 	g_value_set_string(&str_value, text_color);
 	g_object_set_property(G_OBJECT(default_tag),	"foreground", &str_value);
@@ -50,6 +48,9 @@ int reader_set_color_theme(FB2_READER* obj, const char* color_theme)
 
 	g_value_set_int(&int_value, line_spacing);
 	g_object_set_property(G_OBJECT(default_tag),	"pixels-inside-wrap", &int_value);
+
+	g_value_set_int(&int_value, line_spacing);
+	g_object_set_property(G_OBJECT(default_tag),	"pixels-above-lines", &int_value);
 
 
 	g_free(background_color);

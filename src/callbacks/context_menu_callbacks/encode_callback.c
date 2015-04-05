@@ -16,6 +16,8 @@ void encode_imagemenuitem_activate_cb(GtkMenuItem* menuitem, gpointer user_data)
 	{
 		if(gtk_dialog_run(encode_dialog) == 2)
 		{
+			gtk_widget_hide(GTK_WIDGET(encode_dialog));
+
 			GtkTreeIter tree_iter;
 			char* encode_name = NULL;
 

@@ -56,11 +56,13 @@ int reader_close_book()
 		GLOBAL_FB2_READER.book_text_view.path			= NULL;
 		GLOBAL_FB2_READER.book_text_view.config_path	= NULL;
 		GLOBAL_FB2_READER.book_text_view.config			= NULL;
-		GLOBAL_FB2_READER.book_text_view.link_jump_list		= NULL;
+		GLOBAL_FB2_READER.book_text_view.link_jump_list	= NULL;
 		GLOBAL_FB2_READER.book_text_view.type			= BOOK_TYPE_NONE;
+
+		return 0;
 	}
 
-	return 0;
+	return 1;
 }
 
 void free_text_mark(gpointer ptr)

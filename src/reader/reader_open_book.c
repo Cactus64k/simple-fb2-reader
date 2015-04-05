@@ -59,15 +59,25 @@ int reader_open_book(char* book_path)
 		}
 		else
 			fprintf(stderr, _C("ERROR: failed to open file: %s\n"), book_path);
+
+		return 0;
 	}
 
-	return 0;
+	return 1;		// память нужно освободить руками
 }
 
 int _strncmpr(const char *str1, const char *str2, size_t count)
 {
 	size_t str1_len = strlen(str1);
+	if(str1_len == 0)
+	{
+		return -1;
+	}
 	size_t str2_len = strlen(str2);
+	if(str2_len == 0)
+	{
+		return 1;
+	}
 
 	str1 += str1_len-1;
 	str2 += str2_len-1;

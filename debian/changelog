@@ -1,4 +1,4 @@
-simple-fb2-reader (1.0.5-1) unstable; urgency=low
+simple-fb2-reader (1.0.6-1) unstable; urgency=low
 
   * Initial release (Closes: #nnnn)
   * Fix navigaiton chapter content
@@ -6,5 +6,6 @@ simple-fb2-reader (1.0.5-1) unstable; urgency=low
   * Add command line options
   * Add autotools scripts, more themes options, arrow key scrolling
   * Fix autotools scripts
+  * Fix line spacing, Fix empty start book paramether crash, Fix memory leak if you open non-book file.
 
  -- Cactus <medved_cool@mail.ru>  Sun, 08 Mar 2015 00:29:56 +0300

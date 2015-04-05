@@ -63,7 +63,7 @@ int get_p_text(xmlNode* parent_node, GString* buff)
 	return 0;
 }
 
-int parse_formated_text(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)		// FIXME children
+int parse_formated_text(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)		// FIXME не стандартный вызов функции ->children
 {
 	g_return_val_if_fail(parent_node != NULL, -1);
 	g_return_val_if_fail(text_buff_end != NULL, -2);

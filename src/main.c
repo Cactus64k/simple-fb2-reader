@@ -71,7 +71,11 @@ int main(int argc,	char *argv[])
 			g_object_unref(G_OBJECT(builder));
 
 			if(book_file_path != NULL)
-				reader_open_book(book_file_path);
+			{
+				if(reader_open_book(book_file_path) != 0)
+					g_free(book_file_path);
+			}
+
 
 			gtk_main();
 		}

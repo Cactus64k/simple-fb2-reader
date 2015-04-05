@@ -1,4 +1,4 @@
-#include "../chunks.h"
+#include "callbacks_chunk.h"
 
 gboolean main_wnd_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
@@ -58,7 +58,15 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpo
 				gtk_text_buffer_copy_clipboard(text_buff, clipboard);
 		}
 	}
+	else if(event->keyval == GDK_KEY_space)
+	{
+		//GdkEventKey key_proxy_event = *event;
+		//key_proxy_event.keyval = GDK_KEY_Page_Up;
+		//gboolean result = TRUE;
+		//g_signal_emit_by_name(GLOBAL_FB2_READER.book_text_view.text_view, "key-press-event", &key_proxy_event, &result, NULL);
+	}
 
+	// TODO клавиша на меню "Назад"
 	return FALSE;
 }
 

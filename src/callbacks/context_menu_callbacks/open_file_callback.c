@@ -5,16 +5,17 @@ void open_file_imagemenuitem_activate_cb(GtkMenuItem* menuitem, gpointer user_da
 	GtkFileChooserDialog* file_open_dialog	= GLOBAL_FB2_READER.filechooserdialog;
 	char* book_path							= GLOBAL_FB2_READER.book_text_view.path;
 
-	gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(file_open_dialog), book_path);
+	if(book_path != NULL)
+		gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(file_open_dialog), book_path);
 
 	if(gtk_dialog_run(GTK_DIALOG(file_open_dialog)) == 2)
 	{
+		gtk_widget_hide(GTK_WIDGET(file_open_dialog));
 
 		char* file_path = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(file_open_dialog));
 		reader_close_book();
-		reader_open_book(file_path);
-
-		//g_free(file_path);
+		if(reader_open_book(file_path) != 0)
+			g_free(file_path);
 	}
 
 	gtk_widget_hide(GTK_WIDGET(file_open_dialog));
@@ -31,7 +32,9 @@ void book_filechooserdialog_file_activated_cb(GtkFileChooser* chooser, gpointer 
 		gtk_widget_hide(GTK_WIDGET(file_open_dialog));
 
 		reader_close_book();
-		reader_open_book(book_path);
+		if(reader_open_book(book_path) != 0)
+			g_free(book_path);
+
 	}
 	else
 		g_free(book_path);
