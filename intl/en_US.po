@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2015-04-03 17:44+0300\n"
+"POT-Creation-Date: 2015-04-05 03:14+0300\n"
 "PO-Revision-Date: 2015-03-30 18:11+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -17,15 +17,15 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: ../res/simple-fb2-reader.glade:87
+#: ../res/simple-fb2-reader.glade:64
 msgid "Forget all books position and endodings?"
 msgstr "Forget all books position and endodings?"
 
-#: ../res/simple-fb2-reader.glade:88
+#: ../res/simple-fb2-reader.glade:65
 msgid "without the possibility of restoration"
 msgstr "without the possibility of restoration"
 
-#: ../res/simple-fb2-reader.glade:150
+#: ../res/simple-fb2-reader.glade:128
 msgid ""
 "ctrl+f\tsearch\n"
 "ctrl+c\tcopy selected text\n"
@@ -39,22 +39,18 @@ msgstr ""
 "\n"
 "Have nice reading!\n"
 
-#: ../res/simple-fb2-reader.glade:249
+#: ../res/simple-fb2-reader.glade:229
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:14
 msgid "Backward"
 msgstr "Backward"
 
-#: ../res/simple-fb2-reader.glade:266
+#: ../res/simple-fb2-reader.glade:246
 msgid "Forward"
 msgstr "Forward"
 
-#: ../res/simple-fb2-reader.glade:302
+#: ../res/simple-fb2-reader.glade:287
 msgid "Case ensitive"
 msgstr "Case ensitive"
-
-#: ../res/simple-fb2-reader.glade:522
-msgid "column"
-msgstr "column"
 
 #: ../src/fb2_zip/fb2_zip_parser.c:56
 msgid "ERROR: xml is well parsed, but pointer is NULL\n"
@@ -161,7 +157,7 @@ msgstr "ERROR: failed to encode txt file: %s\n"
 msgid "ERROR: failed to open txt file: %s\n"
 msgstr "ERROR: failed to open txt file: %s\n"
 
-#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:40
+#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:39
 #, c-format
 msgid "ERROR: failed to open URI %s\n"
 msgstr "ERROR: failed to open URI %s\n"
@@ -202,3 +198,26 @@ msgstr "Exit"
 #: ../src/callbacks/encode_dialog_callbacks.c:37
 msgid "WRONG ENCODE"
 msgstr "WRONG ENCODE"
+
+#: ../src/main.c:20
+msgid "Local path to book"
+msgstr ""
+
+#: ../src/main.c:21
+msgid "Print reader version"
+msgstr ""
+
+#: ../src/main.c:37
+#, c-format
+msgid ""
+"ERROR: %s\n"
+"\n"
+msgstr ""
+
+#: ../src/main.c:58
+#, fuzzy, c-format
+msgid "ERROR: Failed to load gui construct file %s\n"
+msgstr "ERROR: failed to encode txt file: %s\n"
+
+#~ msgid "column"
+#~ msgstr "column"

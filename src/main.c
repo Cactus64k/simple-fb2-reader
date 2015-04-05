@@ -16,7 +16,7 @@ int main(int argc,	char *argv[])
 	char* book_file_path = NULL;
 	gboolean print_version = FALSE;
 
-	GOptionEntry options[]		= {
+	GOptionEntry cmd_options[]		= {
 									{"book",	'b',	G_OPTION_FLAG_NONE,	G_OPTION_ARG_FILENAME,	&book_file_path,	_C("Local path to book"), "/local/path/book.fb2"},
 									{"version",	'v',	G_OPTION_FLAG_NONE,	G_OPTION_ARG_NONE, 		&print_version,		_C("Print reader version"), NULL},
 									{NULL}
@@ -27,7 +27,7 @@ int main(int argc,	char *argv[])
 
 	GOptionContext *cmd_context	= g_option_context_new(NULL);
 	g_option_context_set_help_enabled(cmd_context, TRUE);
-	g_option_context_add_main_entries(cmd_context, options, NULL);
+	g_option_context_add_main_entries(cmd_context, cmd_options, NULL);
 
 
 	gchar **cmd_line = g_strdupv(argv);
