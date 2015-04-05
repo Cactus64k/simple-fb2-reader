@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2015-04-05 03:14+0300\n"
+        "POT-Creation-Date: 2015-04-05 18:09+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -141,7 +141,7 @@ msgstr  ""
 msgid   "ERROR: failed to open txt file: %s\n"
 msgstr  ""
 
-#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:39
+#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:38
 #, c-format
 msgid   "ERROR: failed to open URI %s\n"
 msgstr  ""
@@ -191,13 +191,13 @@ msgstr  ""
 msgid   "Print reader version"
 msgstr  ""
 
-#: ../src/main.c:37
+#: ../src/main.c:38
 #, c-format
 msgid   "ERROR: %s\n"
         "\n"
 msgstr  ""
 
-#: ../src/main.c:58
+#: ../src/main.c:59
 #, c-format
 msgid   "ERROR: Failed to load gui construct file %s\n"
 msgstr  ""

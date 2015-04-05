@@ -1,6 +1,8 @@
 #ifndef CHUNKS_H_
 #define CHUNKS_H_
 
+	#include "config.h"
+
 	#include <stdlib.h>
 	#include <stdio.h>
 	//#include <stdbool.h>
@@ -30,24 +32,11 @@
 
 	#define ENCODE_BUFF_SIZE 1024
 
-	#ifndef PACKAGE_NAME
-		#define PACKAGE_NAME "simple-fb2-reader"
-	#endif
-
-	#ifndef PACKAGE_VERSION
-		#define PACKAGE_VERSION "1.0.3"
-	#endif
-
-	#ifndef DEBUG
-		#ifndef GUI_CONSTRUCT_PATH
-			#define GUI_CONSTRUCT_PATH "/usr/share/simple-fb2-reader/simple-fb2-reader.glade"
-		#endif
-
-		#ifndef ENCODE_LIST_PATH
-			#define ENCODE_LIST_PATH "/etc/simple-fb2-reader_encoding_list.cfg"
-		#endif
-	#else
+	#ifdef DEBUG
+		#undef GUI_CONSTRUCT_PATH
 		#define GUI_CONSTRUCT_PATH "./res/simple-fb2-reader.glade"
+
+		#undef ENCODE_LIST_PATH
 		#define ENCODE_LIST_PATH "./res/simple-fb2-reader_encoding_list.cfg"
 	#endif
 

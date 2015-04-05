@@ -17,8 +17,8 @@ int main(int argc,	char *argv[])
 	gboolean print_version = FALSE;
 
 	GOptionEntry cmd_options[]		= {
-									{"book",	'b',	G_OPTION_FLAG_NONE,	G_OPTION_ARG_FILENAME,	&book_file_path,	_C("Local path to book"), "/local/path/book.fb2"},
-									{"version",	'v',	G_OPTION_FLAG_NONE,	G_OPTION_ARG_NONE, 		&print_version,		_C("Print reader version"), NULL},
+									{"book",	'b',	0,	G_OPTION_ARG_FILENAME,	&book_file_path,	_C("Local path to book"), "/local/path/book.fb2"},
+									{"version",	'v',	0,	G_OPTION_ARG_NONE, 		&print_version,		_C("Print reader version"), NULL},
 									{NULL}
 								};
 
@@ -31,8 +31,9 @@ int main(int argc,	char *argv[])
 
 
 	gchar **cmd_line = g_strdupv(argv);
+	gint cmd_count = argc;
 
-	if(g_option_context_parse_strv(cmd_context, &cmd_line, &error) == FALSE)
+	if(g_option_context_parse(cmd_context, &cmd_count, &cmd_line, &error) == FALSE)
 	{
 		fprintf(stderr, _C("ERROR: %s\n\n"), error->message);
 

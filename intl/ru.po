@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2015-04-05 03:14+0300\n"
+"POT-Creation-Date: 2015-04-05 18:09+0300\n"
 "PO-Revision-Date: 2015-03-30 18:11+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -159,7 +159,7 @@ msgstr "ОШИБКА: не удалось раскодировать txt фай�
 msgid "ERROR: failed to open txt file: %s\n"
 msgstr "ОШИБКА: не удалось открыть txt файл: %s\n"
 
-#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:39
+#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:38
 #, c-format
 msgid "ERROR: failed to open URI %s\n"
 msgstr "ОШИБКА: не удалось открыт URI %s\n"
@@ -209,7 +209,7 @@ msgstr "Локальный путь до книги"
 msgid "Print reader version"
 msgstr "Вывести версию"
 
-#: ../src/main.c:37
+#: ../src/main.c:38
 #, c-format
 msgid ""
 "ERROR: %s\n"
@@ -218,7 +218,7 @@ msgstr ""
 "ОШИБКА: %s\n"
 "\n"
 
-#: ../src/main.c:58
+#: ../src/main.c:59
 #, fuzzy, c-format
 msgid "ERROR: Failed to load gui construct file %s\n"
 msgstr "ОШИБКА: не удалось загрузить файл с каркасом gui: %s\n"

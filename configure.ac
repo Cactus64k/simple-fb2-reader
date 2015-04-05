@@ -5,7 +5,7 @@ AC_PREREQ([2.69])
 AC_INIT([simple-fb2-reader], [1.0.4], [medved_cool@mail.ru], [], [https://github.com/Cactus64k/simple-fb2-reader])
 # AM_INIT_AUTOMAKE
 # AC_CONFIG_SRCDIR([src/])
-# AC_CONFIG_HEADERS([src/config.h])
+AC_CONFIG_HEADERS([src/config.h])
 
 # Checks for programs.
 AC_PROG_CC_C99
@@ -27,6 +27,11 @@ AC_TYPE_SSIZE_T
 # Checks for library functions.
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([memset setlocale strchr strerror])
+
+AC_DEFINE_UNQUOTED([GUI_CONSTRUCT_PATH],	"${prefix}/share/${PACKAGE_NAME}/${PACKAGE_NAME}.glade")
+AC_DEFINE_UNQUOTED([ENCODE_LIST_PATH],		"${sysconfdir}/simple-fb2-reader_encoding_list.cfg")
+AC_DEFINE_UNQUOTED([PACKAGE_VERSION],		"${PACKAGE_VERSION}")
+
 
 AC_CONFIG_FILES([makefile])
 AC_OUTPUT

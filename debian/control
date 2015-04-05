@@ -9,7 +9,6 @@ Homepage: https://github.com/Cactus64k/simple-fb2-reader
 #Vcs-Browser: http://git.debian.org/?p=collab-maint/simple-fb2-reader.git;a=summary
 
 Package: simple-fb2-reader
-Version: 1.0.1
 Architecture: amd64
 Depends: ${shlibs:Depends}
 Description: Simple tool to read FB2 books. Developed using GTK+3.

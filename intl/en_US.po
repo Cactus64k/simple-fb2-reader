@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2015-04-05 03:14+0300\n"
-"PO-Revision-Date: 2015-03-30 18:11+0300\n"
+"POT-Creation-Date: 2015-04-05 18:09+0300\n"
+"PO-Revision-Date: 2015-04-05 18:09+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_US\n"
@@ -121,7 +121,7 @@ msgstr "Not local links not supported\n"
 
 #: ../src/fb2/FictionBook/body/section.c:18 ../src/fb2/FictionBook/body.c:15
 msgid "No Title"
-msgstr ""
+msgstr "No Title"
 
 #: ../src/fb2/FictionBook/attributes/id.c:26
 #, c-format
@@ -157,7 +157,7 @@ msgstr "ERROR: failed to encode txt file: %s\n"
 msgid "ERROR: failed to open txt file: %s\n"
 msgstr "ERROR: failed to open txt file: %s\n"
 
-#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:39
+#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:38
 #, c-format
 msgid "ERROR: failed to open URI %s\n"
 msgstr "ERROR: failed to open URI %s\n"
@@ -201,23 +201,22 @@ msgstr "WRONG ENCODE"
 
 #: ../src/main.c:20
 msgid "Local path to book"
-msgstr ""
+msgstr "Local path to book"
 
 #: ../src/main.c:21
 msgid "Print reader version"
-msgstr ""
+msgstr "Print reader version"
 
-#: ../src/main.c:37
+#: ../src/main.c:38
 #, c-format
 msgid ""
 "ERROR: %s\n"
 "\n"
 msgstr ""
+"ERROR: %s\n"
+"\n"
 
-#: ../src/main.c:58
-#, fuzzy, c-format
+#: ../src/main.c:59
+#, c-format
 msgid "ERROR: Failed to load gui construct file %s\n"
-msgstr "ERROR: failed to encode txt file: %s\n"
-
-#~ msgid "column"
-#~ msgstr "column"
+msgstr "ERROR: Failed to load gui construct file %s\n"
