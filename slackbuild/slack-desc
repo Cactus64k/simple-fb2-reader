@@ -1,0 +1,19 @@
+# HOW TO EDIT THIS FILE:
+# The "handy ruler" below makes it easier to edit a package description.
+# Line up the first '|' above the ':' following the base package name, and
+# the '|' on the right side marks the last column you can put a character in.
+# You must make exactly 11 lines for the formatting to be correct.  It's also
+# customary to leave one space after the ':' except on otherwise blank lines.
+
+                 |-----handy-ruler------------------------------------------------------|
+simple-fb2-reader: simple-fb2-reader (simple GTK+3 tool to read FB2 books)
+simple-fb2-reader:
+simple-fb2-reader: The simple tool for reading books in FictionBook format.
+simple-fb2-reader: Developed using GTK+3. Supports FB 2.1 format.
+simple-fb2-reader:
+simple-fb2-reader:
+simple-fb2-reader:
+simple-fb2-reader:
+simple-fb2-reader:
+simple-fb2-reader:
+simple-fb2-reader: Homepage: https://github.com/Cactus64k/simple-fb2-reader
