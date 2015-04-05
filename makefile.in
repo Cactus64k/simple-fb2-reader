@@ -1,0 +1,53 @@
+prefix			= @prefix@
+bindir			= @bindir@
+sysconfdir		= @sysconfdir@
+
+CC			= @CC@
+CFLAGS			= @CFLAGS@
+LDFLAGS			= -export-dynamic
+####################################################################################
+LIBS			=	@GTK_LIBS@\
+				@XML_LIBS@\
+				@GLIB_LIBS@\
+				@ZIP_LIBS@
+####################################################################################
+INCLUDE			=	@GTK_CFLAGS@\
+				@XML_CFLAGS@\
+				@GLIB_CFLAGS@\
+				@ZIP_CFLAGS@
+####################################################################################
+PROGNAME		= @PACKAGE_NAME@
+SOURCES			= $(shell find . -name '*.c' -printf './%P ')
+OBJECTS			= $(SOURCES:.c=.o)
+
+all: $(SOURCES) $(PROGNAME) TRANSLATE_TARGET
+
+TRANSLATE_TARGET:
+				msgfmt intl/ru.po	--output-file=intl/ru.mo
+				msgfmt intl/en_US.po	--output-file=intl/en_US.mo
+
+$(PROGNAME): $(OBJECTS) 
+				$(CC) $(LDFLAGS) $(OBJECTS) $(LIBS) -o $@
+
+.c.o:
+				$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE)
+
+cppcheck_start:
+				cppcheck -j`nproc` -q --inconclusive --library=gtk --enable=all --std=c99 --report-progress --max-configs=1 `pkg-config gtk+-3.0 --cflags-only-I` ./src/
+
+clean:
+				find -name "*.o" -delete
+				find -name "*.mo" -delete
+				rm -f $(PROGNAME)
+
+# FIXME for new project
+install:
+				install $(PROGNAME)				$(DESTDIR)/$(bindir)/$(PROGNAME)
+				cp intl/ru.mo					$(DESTDIR)/$(prefix)/share/locale/en_US/LC_MESSAGES/$(PROGNAME).mo
+				cp intl/en_US.mo				$(DESTDIR)/$(prefix)/share/locale/ru/LC_MESSAGES/$(PROGNAME).mo
+				cp res/$(PROGNAME).desktop			$(DESTDIR)/$(prefix)/share/applications/$(PROGNAME).desktop
+				cp res/$(PROGNAME).svg				$(DESTDIR)/$(prefix)/share/icons/hicolor/scalable/apps/$(PROGNAME).svg	
+				cp res/simple-fb2-reader.xml			$(DESTDIR)/$(prefix)/share/mime/packages/simple-fb2-reader.xml
+				cp res/application-x-fictionbook+xml.svg	$(DESTDIR)/$(prefix)/share/icons/hicolor/scalable/mimetypes/application-x-fictionbook+xml.svg
+				cp res/simple-fb2-reader_encoding_list.cfg	$(DESTDIR)/$(sysconfdir)/simple-fb2-reader_encoding_list.cfg
+

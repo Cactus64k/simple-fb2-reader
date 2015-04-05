@@ -77,7 +77,7 @@
 	{
 		GtkWidget*		search_wnd;
 		GtkEntry*		search_query_entry;
-		GtkTextIter		last_pos;
+		GtkTextIter*	last_pos;
 		GtkCheckButton*	case_sensitive;
 		GtkRadioButton*	forward;
 		GtkRadioButton* backward;

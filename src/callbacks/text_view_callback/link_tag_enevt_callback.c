@@ -29,7 +29,6 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 				GLOBAL_FB2_READER.book_text_view.link_jump_list = g_list_prepend(link_jump_list, mark);
 
 				gint link_line_num	= GPOINTER_TO_INT(g_hash_table_lookup(links_hash_table, href));
-				GtkTextIter line_iter;
 
 				reader_scroll_at_line_offset(book_view, link_line_num, 0);
 			}

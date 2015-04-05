@@ -20,7 +20,12 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	assert(obj->main_wnd				!= NULL);
 	assert(obj->filechooserdialog		!= NULL);
 	assert(obj->navigation_dialog		!= NULL);
+	assert(obj->about_dialog			!= NULL);
 	assert(obj->sections_treeview		!= NULL);
+	assert(obj->forget_books_dialog		!= NULL);
+
+
+	gtk_about_dialog_set_version(obj->about_dialog, PACKAGE_VERSION);
 
 	const char* conf_dir				= g_get_user_config_dir();
 	assert(conf_dir != NULL);

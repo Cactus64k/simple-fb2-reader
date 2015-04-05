@@ -43,6 +43,15 @@ int init_app_config(FB2_READER* obj)
 	if(g_key_file_has_key(obj->app_config, "default_theme",		"selection", NULL) == FALSE)
 		g_key_file_set_string(obj->app_config, "default_theme",	"selection", "rgba(132, 169, 215, 200)");
 
+	if(g_key_file_has_key(obj->app_config, "default_theme",		"font_general", NULL) == FALSE)
+		g_key_file_set_string(obj->app_config, "default_theme",	"font_general", "DejaVu");
+
+	if(g_key_file_has_key(obj->app_config, "default_theme",		"font_monospace", NULL) == FALSE)
+		g_key_file_set_string(obj->app_config, "default_theme",	"font_monospace", "monospace");
+
+	if(g_key_file_has_key(obj->app_config, "default_theme",		"line_spacing", NULL) == FALSE)
+		g_key_file_set_integer(obj->app_config, "default_theme",	"line_spacing", 10);
+
 	//##################################
 
 	if(g_key_file_has_key(obj->app_config, "dark_theme",		"background", NULL) == FALSE)
@@ -53,6 +62,15 @@ int init_app_config(FB2_READER* obj)
 
 	if(g_key_file_has_key(obj->app_config, "dark_theme",		"selection", NULL) == FALSE)
 		g_key_file_set_string(obj->app_config, "dark_theme",	"selection", "rgba(100, 100, 100, 200)");
+
+	if(g_key_file_has_key(obj->app_config, "dark_theme",		"font_general", NULL) == FALSE)
+		g_key_file_set_string(obj->app_config, "dark_theme",	"font_general", "DejaVu");
+
+	if(g_key_file_has_key(obj->app_config, "dark_theme",		"font_monospace", NULL) == FALSE)
+		g_key_file_set_string(obj->app_config, "dark_theme",	"font_monospace", "monospace");
+
+	if(g_key_file_has_key(obj->app_config, "dark_theme",		"line_spacing", NULL) == FALSE)
+		g_key_file_set_integer(obj->app_config, "dark_theme",	"line_spacing", 10);
 
 
 

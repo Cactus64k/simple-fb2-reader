@@ -59,7 +59,7 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpo
 		}
 	}
 
-	return TRUE;
+	return FALSE;
 }
 
 
