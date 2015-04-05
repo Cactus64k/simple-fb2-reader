@@ -134,7 +134,7 @@ Have nice reading!
     <property name="website">https://github.com/Cactus64k/simple-fb2-reader</property>
     <property name="authors">Cactus &lt;medved_cool@mail.ru&gt;</property>
     <property name="logo_icon_name">simple-fb2-reader</property>
-    <property name="license_type">gpl-2-0</property>
+    <property name="license_type">gpl-3-0</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="reader_aboutdialog_vbox">
         <property name="can_focus">False</property>

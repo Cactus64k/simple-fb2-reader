@@ -2,8 +2,6 @@
 
 int main(int argc,	char *argv[])
 {
-	//g_mem_set_vtable(glib_mem_profiler_table);
-
 	setbuf(stdout, NULL);
 	setbuf(stderr, NULL);
 
@@ -15,42 +13,72 @@ int main(int argc,	char *argv[])
 	bind_textdomain_codeset(PACKAGE_NAME, "UTF-8");
 	textdomain(PACKAGE_NAME);
 
-	gtk_init(&argc, &argv);
+	char* book_file_path = NULL;
+	gboolean print_version = FALSE;
 
-	GtkBuilder* builder = gtk_builder_new();
+	GOptionEntry options[]		= {
+									{"book",	'b',	G_OPTION_FLAG_NONE,	G_OPTION_ARG_FILENAME,	&book_file_path,	_C("Local path to book"), "/local/path/book.fb2"},
+									{"version",	'v',	G_OPTION_FLAG_NONE,	G_OPTION_ARG_NONE, 		&print_version,		_C("Print reader version"), NULL},
+									{NULL}
+								};
 
-	gtk_builder_set_translation_domain(builder, PACKAGE_NAME);
 
-	guint result = gtk_builder_add_from_file(builder, GUI_CONSTRUCT_PATH, NULL);
-	if(result == 0)
+	GError *error				= NULL;
+
+	GOptionContext *cmd_context	= g_option_context_new(NULL);
+	g_option_context_set_help_enabled(cmd_context, TRUE);
+	g_option_context_add_main_entries(cmd_context, options, NULL);
+
+
+	gchar **cmd_line = g_strdupv(argv);
+
+	if(g_option_context_parse_strv(cmd_context, &cmd_line, &error) == FALSE)
 	{
-		fprintf(stderr, "ERROR: Failed to load gui construct file %s\n", GUI_CONSTRUCT_PATH);
-		exit(EXIT_FAILURE);
+		fprintf(stderr, _C("ERROR: %s\n\n"), error->message);
+
+		g_error_free(error);
+	}
+	else
+	{
+		if(print_version == TRUE)
+		{
+			printf("Simple FB2 Reader: %s\n", PACKAGE_VERSION);
+		}
+		else
+		{
+			gtk_init(&argc, &argv);
+
+			GtkBuilder* builder = gtk_builder_new();
+
+			gtk_builder_set_translation_domain(builder, PACKAGE_NAME);
+
+			guint result = gtk_builder_add_from_file(builder, GUI_CONSTRUCT_PATH, NULL);
+			if(result == 0)
+			{
+				fprintf(stderr, _C("ERROR: Failed to load gui construct file %s\n"), GUI_CONSTRUCT_PATH);
+				exit(EXIT_FAILURE);
+			}
+
+			gtk_builder_connect_signals(builder, NULL);
+
+			//**********************************************************************************************
+
+			init_main_wnd(builder, &GLOBAL_FB2_READER);
+			init_search_wnd(builder, &GLOBAL_SEARCH_WND);
+			init_encode_wnd(builder, &GLOBAL_ENCODE_DIALOG);
+
+			g_object_unref(G_OBJECT(builder));
+
+			if(book_file_path != NULL)
+				reader_open_book(book_file_path);
+
+			gtk_main();
+		}
 	}
 
-	gtk_builder_connect_signals(builder, NULL);
+	g_option_context_free(cmd_context);
 
-	//**********************************************************************************************
-
-	init_main_wnd(builder, &GLOBAL_FB2_READER);
-	init_search_wnd(builder, &GLOBAL_SEARCH_WND);
-	init_encode_wnd(builder, &GLOBAL_ENCODE_DIALOG);
-
-	g_object_unref(G_OBJECT(builder));
-
-	if(argc == 2)
-	{
-		char* book_path = g_strdup(argv[1]);
-		reader_open_book(book_path);
-	}
-
-	#ifdef DEBUG
-		char* test_path = g_strdup("/home/cactus/Книги/Прочитать/Макдональд Йен. Камень, ножницы, бумага - modernlib.ru.fb2.zip");
-
-		reader_open_book(test_path);
-	#endif
-
-	gtk_main();
+	g_strfreev(cmd_line);
 
 	return 0;
 }

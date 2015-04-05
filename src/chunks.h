@@ -34,6 +34,10 @@
 		#define PACKAGE_NAME "simple-fb2-reader"
 	#endif
 
+	#ifndef PACKAGE_VERSION
+		#define PACKAGE_VERSION "1.0.3"
+	#endif
+
 	#ifndef DEBUG
 		#ifndef GUI_CONSTRUCT_PATH
 			#define GUI_CONSTRUCT_PATH "/usr/share/simple-fb2-reader/simple-fb2-reader.glade"
