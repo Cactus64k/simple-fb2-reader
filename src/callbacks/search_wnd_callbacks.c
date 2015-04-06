@@ -11,10 +11,7 @@ gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpoin
 	if(key_event.keyval == GDK_KEY_Escape)
 		gtk_widget_hide(widget);
 	else if(key_event.keyval == GDK_KEY_Return)
-	{
-		//search_wnd_search_button_clicked_cb(NULL, NULL);
-		// TODO следующая позиция поиска по enter
-	}
+		search_wnd_search_button_clicked_cb(NULL, NULL);
 
 	return FALSE;
 }
@@ -24,12 +21,13 @@ void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 {
 	GtkTextBuffer* text_buff		= GLOBAL_FB2_READER.book_text_view.text_buff;
 	GtkTextView* text_view			= GLOBAL_FB2_READER.book_text_view.text_view;
+	GtkEntry* search_entry			= GLOBAL_SEARCH_WND.search_query_entry;
 	GtkTextIter* last_search_pos	= GLOBAL_SEARCH_WND.last_pos;
 	GtkCheckButton* case_sensitive	= GLOBAL_SEARCH_WND.case_sensitive;
 	GtkRadioButton* backward		= GLOBAL_SEARCH_WND.backward;
 	GtkRadioButton* forward			= GLOBAL_SEARCH_WND.forward;
 
-	const char* query = gtk_entry_get_text(GTK_ENTRY(user_data));
+	const char* query = gtk_entry_get_text(search_entry);
 
 	GtkTextIter text_buff_match_start_iter;
 	GtkTextIter text_buff_match_end_iter;
@@ -58,9 +56,15 @@ void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 		gtk_text_iter_free(last_search_pos);
 
 		GLOBAL_SEARCH_WND.last_pos = gtk_text_iter_copy(&text_buff_match_end_iter);
+		//FIXME ебота выше
 	}
 	else
-		gtk_text_buffer_get_start_iter(text_buff, last_search_pos);
+	{
+		if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(forward)) == TRUE)
+			gtk_text_buffer_get_start_iter(text_buff, last_search_pos);
+		else if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(backward)) == TRUE)
+			gtk_text_buffer_get_end_iter(text_buff, last_search_pos);
+	}
 }
 
 

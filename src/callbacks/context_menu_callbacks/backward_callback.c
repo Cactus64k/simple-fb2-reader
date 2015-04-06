@@ -2,9 +2,7 @@
 
 void backward_itemmenu_cb(GtkMenuItem* menuitem, gpointer user_data)
 {
-	g_return_if_fail(user_data != NULL);
-
-	FB2_READER_BOOK_VIEW* book_view	= (FB2_READER_BOOK_VIEW*)user_data;
+	FB2_READER_BOOK_VIEW* book_view	= &(GLOBAL_FB2_READER.book_text_view);
 	GtkTextView* text_view			= book_view->text_view;
 	GList* link_jump_list			= book_view->link_jump_list;
 

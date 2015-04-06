@@ -197,7 +197,7 @@ Have nice reading!
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
-                <signal name="clicked" handler="search_wnd_search_button_clicked_cb" object="search_query_entry" swapped="no"/>
+                <signal name="clicked" handler="search_wnd_search_button_clicked_cb" swapped="no"/>
                 <child>
                   <object class="GtkImage" id="search_button_icon">
                     <property name="visible">True</property>

@@ -55,32 +55,25 @@
 		BOOK_TYPE_TXT
 	} BOOK_TYPE;
 
-	typedef struct LINK_LIST
-	{
-		GtkTextMark* mark;
-		struct LINK_LIST* next;
-		struct LINK_LIST* prev;
-	} LINK_LIST;
-
 	typedef struct FB2_READER_SEARCH_WINDOW
 	{
-		GtkWidget*		search_wnd;
-		GtkEntry*		search_query_entry;
-		GtkTextIter*	last_pos;
-		GtkCheckButton*	case_sensitive;
-		GtkRadioButton*	forward;
-		GtkRadioButton* backward;
+		GtkWidget*				search_wnd;
+		GtkEntry*				search_query_entry;
+		GtkTextIter*			last_pos;
+		GtkCheckButton*			case_sensitive;
+		GtkRadioButton*			forward;
+		GtkRadioButton* 		backward;
 	} FB2_READER_SEARCH_WINDOW;
 
 	typedef struct FB2_READER_ENCODE_DIALOG
 	{
-		GtkDialog*		dialog;
-		GtkTreeView*	treeview;
-		GtkListStore*	liststore;
-		GtkTextBuffer*	textbuffer;
+		GtkDialog*				dialog;
+		GtkTreeView*			treeview;
+		GtkListStore*			liststore;
+		GtkTextBuffer*			textbuffer;
 
-		char			src_text[ENCODE_BUFF_SIZE];
-		size_t			src_text_size;
+		char					src_text[ENCODE_BUFF_SIZE];
+		size_t					src_text_size;
 	} FB2_READER_ENCODE_DIALOG;
 
 	typedef struct FB2_READER_BOOK_VIEW
@@ -111,9 +104,9 @@
 		FB2_READER_BOOK_VIEW	book_text_view;
 
 		GtkTreeView*			sections_treeview;
+		GtkDialog*				navigation_dialog;
 
 		GtkFileChooserDialog*	filechooserdialog;
-		GtkDialog*				navigation_dialog;
 		GtkAboutDialog*			about_dialog;
 		GtkMessageDialog*		forget_books_dialog;
 

@@ -65,8 +65,11 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpo
 		//gboolean result = TRUE;
 		//g_signal_emit_by_name(GLOBAL_FB2_READER.book_text_view.text_view, "key-press-event", &key_proxy_event, &result, NULL);
 	}
+	else if(event->keyval == GDK_KEY_Left)
+		backward_itemmenu_cb(NULL, NULL);
 
-	// TODO клавиша на меню "Назад"
+	//printf("%x\n", event->keyval);
+
 	return FALSE;
 }
 
