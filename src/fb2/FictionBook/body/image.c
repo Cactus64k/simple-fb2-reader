@@ -7,48 +7,39 @@ int parse_image(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* te
 
 	GtkTextBuffer* text_buff		= obj->text_buff;
 	GHashTable* binary_hash_table	= obj->binary_hash_table;
-	xmlAttr* properties				= parent_node->properties;
 
 	parse_id_attribute(obj, parent_node, text_buff_end);
 
 	GtkTextMark* start_tag_mark		= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
-	char* image_title				= NULL;
-	GdkPixbuf* image				= NULL;
 
 
-	while(properties != NULL)
+	const char* href_attr			= NULL;
+	const char* title_attr			= NULL;
+
+	parse_attribute(obj, parent_node, "href", &href_attr);
+	parse_attribute(obj, parent_node, "title", &title_attr);
+
+	if(href_attr != NULL)
 	{
-		if(properties->type == XML_ATTRIBUTE_NODE)
+		if(*href_attr == '#') // local
 		{
-			if(strcmp((char*)properties->name, "href") == 0)
+			href_attr++;
+
+			GdkPixbuf* image		= g_hash_table_lookup(binary_hash_table, href_attr);
+			if(image != NULL)
 			{
-				char* image_id = (char*)(properties->children->content);
-				if(*image_id == '#') // local
-				{
-					image_id++;
+				gtk_text_buffer_insert_pixbuf(text_buff, text_buff_end, image);
+				gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 
-					image = g_hash_table_lookup(binary_hash_table, image_id);
-					if(image == NULL)
-						fprintf(stderr, _C("Image %s not found in table\n"), image_id);
-				}
-				else
-					fputs(_C("Not local links not supported\n"), stderr);
-
-				break;
+				if(title_attr != NULL)
+					gtk_text_buffer_insert(text_buff, text_buff_end, title_attr, -1);
 			}
-			else if(strcmp((char*)properties->name, "title") == 0)
-				image_title = (char*)properties->children->content;
+			else
+				fprintf(stderr, _C("Image %s not found in table\n"), href_attr);
 		}
-
-		properties = properties->next;
+		else
+			fputs(_C("Not local links not supported\n"), stderr);
 	}
-
-	if(image != NULL)
-		gtk_text_buffer_insert_pixbuf(text_buff, text_buff_end, image);
-
-	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
-	if(image_title != NULL)
-		gtk_text_buffer_insert(text_buff, text_buff_end, image_title, -1);
 
 	GtkTextIter start_tag_iter;
 	gtk_text_buffer_get_iter_at_mark(text_buff, &start_tag_iter, start_tag_mark);

@@ -6,29 +6,24 @@ int parse_id_attribute(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextI
 	g_return_val_if_fail(text_buff_end != NULL, -2);
 
 	GHashTable* links_hash_table	= obj->links_hash_table;
-	xmlAttr* properties				= parent_node->properties;
+	const char* id_attr				= NULL;
 
-	while(properties != NULL)
+	parse_attribute(obj, parent_node, "id", &id_attr);
+	if(id_attr != NULL)
 	{
-		if(properties->type == XML_ATTRIBUTE_NODE)
+		gint pos		= gtk_text_iter_get_line(text_buff_end);
+
+		if(g_hash_table_contains(links_hash_table, id_attr) == FALSE)
 		{
-			if(strcmp((char*)properties->name, "id") == 0)
-			{
-				char* id				= g_strdup((char*)properties->children->content);
-				gint pos 				= gtk_text_iter_get_line(text_buff_end);
-
-				if(g_hash_table_contains(links_hash_table, id) == FALSE)
-				{
-					g_hash_table_insert(links_hash_table, id, GINT_TO_POINTER(pos));
-					break;
-				}
-				else
-					fprintf(stderr, _C("ERROR: id %s already exist in table\n"), id);
-			}
+			char* id	= g_strdup(id_attr);
+			g_hash_table_insert(links_hash_table, id, GINT_TO_POINTER(pos));
 		}
+		else
+			fprintf(stderr, _C("ERROR: id %s already exist in table\n"), id_attr);
 
-		properties = properties->next;
 	}
+
+
 
 	return 0;
 }

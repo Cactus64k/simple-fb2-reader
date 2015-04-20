@@ -1,4 +1,4 @@
-#include "FictionBook_chunks.h"
+#include "body_chunks.h"
 
 int parse_body(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {

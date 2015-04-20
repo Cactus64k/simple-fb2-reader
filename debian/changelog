@@ -7,5 +7,6 @@ simple-fb2-reader (1.0.6-1) unstable; urgency=low
   * Add autotools scripts, more themes options, arrow key scrolling
   * Fix autotools scripts
   * Fix line spacing, Fix empty start book paramether crash, Fix memory leak if you open non-book file.
+  * Refactoring, Fix memory leak on tag attributes, tooltip on link, increase table support, INSTALL file update
 
  -- Cactus <medved_cool@mail.ru>  Sun, 08 Mar 2015 00:29:56 +0300

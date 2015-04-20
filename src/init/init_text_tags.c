@@ -49,9 +49,9 @@ int create_fb2_tags(FB2_READER* obj)
 																"justification",		GTK_JUSTIFY_CENTER, NULL);
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "table_tag", 			"family",				"monospace",
+																"pixels-inside-wrap",	0,
+																"pixels-above-lines",	0,
 																"wrap_mode",			GTK_WRAP_NONE, NULL);
-	//####################################################################################################################################
-	gtk_text_buffer_create_tag(text_buff, "link_descr_tag", 	"size-points",			8.f,			GTK_WRAP_NONE, NULL);
 	//####################################################################################################################################
 
 	return 0;

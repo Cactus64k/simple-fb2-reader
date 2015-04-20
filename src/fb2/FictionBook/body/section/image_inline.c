@@ -11,35 +11,26 @@ int parse_image_inline(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextI
 
 	parse_id_attribute(obj, parent_node, text_buff_end);
 
-	GdkPixbuf* image				= NULL;
+	const char* href_attr			= NULL;
 
-	while(properties != NULL)
+	parse_attribute(obj, parent_node, "href", &href_attr);
+
+	if(href_attr != NULL)
 	{
-		if(properties->type == XML_ATTRIBUTE_NODE)
+		if(*href_attr == '#') // local
 		{
-			if(strcmp((char*)properties->name, "href") == 0)
-			{
-				char* image_id = (char*)(properties->children->content);
-				if(*image_id == '#') // local
-				{
-					image_id++;
+			href_attr++;
 
-					image = g_hash_table_lookup(binary_hash_table, image_id);
-					if(image == NULL)
-						fprintf(stderr, _C("Image %s not found in table\n"), image_id);
-				}
-				else
-					fputs(_C("Not local links not supported\n"), stderr);
-
-				break;
-			}
+			GdkPixbuf* image		= g_hash_table_lookup(binary_hash_table, href_attr);
+			if(image != NULL)
+				gtk_text_buffer_insert_pixbuf(text_buff, text_buff_end, image);
+			else
+				fprintf(stderr, _C("Image %s not found in table\n"), href_attr);
 		}
+		else
+			fputs(_C("Not local links not supported\n"), stderr);
 
-		properties = properties->next;
 	}
-
-	if(image != NULL)
-		gtk_text_buffer_insert_pixbuf(text_buff, text_buff_end, image);
 
 	return 0;
 }

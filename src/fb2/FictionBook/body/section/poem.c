@@ -57,8 +57,7 @@ int parse_stanza(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* t
 				parse_subtitle(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "v") == 0)
 			{
-				xmlNode* v_node = node->children;
-				parse_formated_text(obj, v_node, text_buff_end);
+				parse_formated_text(obj, node, text_buff_end);
 				gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 			}
 		}

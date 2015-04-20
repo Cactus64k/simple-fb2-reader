@@ -9,7 +9,7 @@ int parse_fb2_zip(char* file_path)
 	struct zip* f = zip_open(file_path, ZIP_CHECKCONS, &zip_error);
 	if(f != NULL)
 	{
-		zip_uint64_t file_count = zip_get_num_entries(f, 0);
+		zip_int64_t file_count = zip_get_num_entries(f, 0);
 
 		struct zip_stat st;
 		zip_stat_init(&st);

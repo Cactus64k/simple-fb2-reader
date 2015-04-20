@@ -19,7 +19,7 @@ int parse_title(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* te
 		if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "p") == 0)
-				parse_p(obj, node, text_buff_end);
+				parse_formated_text(obj, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)
 				parse_empty_line(obj, node, text_buff_end);
 		}
@@ -49,7 +49,7 @@ int navigation_set_chapter_by_title(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_n
 		{
 			if(strcmp((char*)node->name, "p") == 0)
 			{
-				get_p_text(node, buff);
+				p_get_text(node, buff);
 				g_string_append_c(buff, ' ');
 			}
 			else if(strcmp((char*)node->name, "empty-line") == 0)

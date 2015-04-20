@@ -14,7 +14,6 @@
 	int parse_book_binary			(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node);
 	int parse_body					(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
 	int parse_id_attribute			(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
-	int parse_body_name_attribute	(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
 	int parse_book_description		(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
 
 #endif /* FB2_CHUNKS_H_ */

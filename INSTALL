@@ -8,6 +8,14 @@ $ fakeroot dpkg-buildpackage
 $ cd ..
 # dpkg -i simple-fb2-reader_*.deb
 
+ARCHLINUX
+################################################
+https://aur.archlinux.org/packages/simple-fb2-reader
+
+SLACKWARE
+################################################
+Use ./slackbuild
+
 ANOTHER SYSTEMS:
 #################################################
 $ cd ~/

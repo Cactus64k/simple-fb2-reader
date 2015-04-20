@@ -6,7 +6,7 @@ int parse_text_autor(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIte
 	g_return_val_if_fail(text_buff_end != NULL, -2);
 
 	GtkTextBuffer* text_buff	= obj->text_buff;
-	xmlNode* node				= parent_node->children;
+	xmlNode* node				= parent_node;//parent_node->children;
 
 	parse_id_attribute(obj, parent_node, text_buff_end);
 

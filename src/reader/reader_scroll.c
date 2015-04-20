@@ -25,18 +25,31 @@ int reader_scroll_at_line_offset(FB2_READER_BOOK_VIEW* obj, gint line, gint line
 	GtkAdjustment* horisontal_adj	= gtk_scrollable_get_hadjustment(GTK_SCROLLABLE(text_view));
 	GtkTextIter scroll_iter;
 
-	gtk_text_buffer_get_iter_at_line_offset(text_buff, &scroll_iter, line, line_offset);
-
-	if(gtk_text_view_scroll_to_iter(text_view, &scroll_iter, 0.0, TRUE, 0.0, 0.0) == FALSE)
+	if(gtk_text_buffer_get_line_count(text_buff) >= line)
 	{
-		GtkTextMark* line_mark = gtk_text_buffer_create_mark(text_buff, NULL, &scroll_iter, TRUE);
-		gtk_text_view_scroll_to_mark(text_view, line_mark, 0.0, TRUE, 0.0, 0.0);
-		gtk_text_buffer_delete_mark(text_buff, line_mark);
+		GtkTextIter test_iter;
+		gtk_text_buffer_get_iter_at_line(text_buff, &test_iter, line);
 
-		gtk_adjustment_set_value(horisontal_adj, 0.0);
+		gtk_text_iter_forward_to_line_end(&test_iter);
+
+		if(gtk_text_iter_get_line_offset(&test_iter) >= line_offset)
+		{
+			gtk_text_buffer_get_iter_at_line_offset(text_buff, &scroll_iter, line, line_offset);
+
+			if(gtk_text_view_scroll_to_iter(text_view, &scroll_iter, 0.0, TRUE, 0.0, 0.0) == FALSE)
+			{
+				GtkTextMark* line_mark = gtk_text_buffer_create_mark(text_buff, NULL, &scroll_iter, TRUE);
+				gtk_text_view_scroll_to_mark(text_view, line_mark, 0.0, TRUE, 0.0, 0.0);
+				gtk_text_buffer_delete_mark(text_buff, line_mark);
+
+				gtk_adjustment_set_value(horisontal_adj, 0.0);
+
+				return 0;
+			}
+		}
 	}
 
-	return 0;
+	return -1;
 }
 
 int reader_scroll_restore(FB2_READER_BOOK_VIEW* obj)

@@ -7,9 +7,10 @@ Features ("-" - not supported yet, "~" - partial support):
 - saving reading position
 - saving window state, size and position
 - search text in book
-- URI(with backward button)
+- URI(with backward button and tooltips)
 - full 2.1 format support(-stylesheet, ~table)
 - navigation
+- russian and english gui
 - user themes(see ~/.config/simple-fb2-reader/config.cfg)
 
 

@@ -82,8 +82,9 @@ int _strncmpr(const char *str1, const char *str2, size_t count)
 	str1 += str1_len-1;
 	str2 += str2_len-1;
 
-	size_t pos = (str1_len < str2_len)? str1_len: str2_len;
-	pos = (pos < count)? pos: count;
+	size_t pos	= MIN(str1_len, str2_len);
+
+	pos			= MIN(pos, count);
 
 	while(pos != 0)
 	{

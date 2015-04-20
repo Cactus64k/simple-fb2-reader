@@ -8,24 +8,13 @@ int parse_book_binary(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node)
 	g_return_val_if_fail(parent_node != NULL, -1);
 
 	GHashTable* binary_hash_table	= obj->binary_hash_table;
-	xmlAttr* properties = parent_node->properties;
-	char* image_id = NULL;
 
+	const char* id_attr				= NULL;
+	parse_attribute(obj, parent_node, "id", &id_attr);
 
-	while(properties != NULL)
+	if(id_attr != NULL)
 	{
-		if((properties->type == XML_ATTRIBUTE_NODE) && (strcmp((char*)properties->name, "id") == 0))
-		{
-			image_id = g_strdup((char*)properties->children->content);
-			break;
-		}
-
-		properties = properties->next;
-	}
-
-	if(image_id != NULL)
-	{
-		if(g_hash_table_contains(binary_hash_table, image_id) == FALSE)
+		if(g_hash_table_contains(binary_hash_table, id_attr) == FALSE)
 		{
 			char* image_data = (char*)parent_node->children->content;
 
@@ -36,18 +25,19 @@ int parse_book_binary(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node)
 				get_pixbuf_from_base64(image_data, &pixbuf);
 
 				if(pixbuf != NULL)
-					g_hash_table_insert(binary_hash_table, image_id, pixbuf);
+				{
+					char* id_dup = g_strdup(id_attr);
+					g_hash_table_insert(binary_hash_table, id_dup, pixbuf);
+				}
 			}
 			else
 				fputs(_C("ERROR: no content in <image> tag\n"), stderr);
 		}
 		else
-			fprintf(stderr, _C("ERROR: image %s already exist in table\n"), image_id);
+			fprintf(stderr, _C("ERROR: image %s already exist in table\n"), id_attr);
 	}
 	else
-	{
 		fputs(_C("ERROR: no id properties in <image> tag\n"), stderr);
-	}
 
 	return 0;
 }
@@ -74,6 +64,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 	while(data_len > position)
 	{
 		size_t count = (position+READ_CHUNK_SIZE < data_len)? READ_CHUNK_SIZE : data_len%1024;
+
 		size_t bytes_count = g_base64_decode_step(image_data, count, out_buff, &state, &save);
 
 		if(gdk_pixbuf_loader_write(loader, out_buff, bytes_count, &loader_error) == FALSE)

@@ -6,25 +6,14 @@ int parse_date(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* tex
 	g_return_val_if_fail(text_buff_end != NULL, -2);
 
 	GtkTextBuffer* text_buff	= obj->text_buff;
-	xmlNode* node				= parent_node->children;
+	const char* value_attr		= NULL;
 
-	xmlAttr* properties	= node->properties;
+	parse_attribute(obj, parent_node, "id", &value_attr);
 
-	while(properties != NULL)
-	{
-		if((properties->type == XML_ATTRIBUTE_NODE) && (strcmp((char*)properties->name, "value") == 0))
-		{
-			char* date = (char*)properties->children->content;
-			gtk_text_buffer_insert(text_buff, text_buff_end, date, -1);
-			break;
-		}
-
-		properties = properties->next;
-	}
+	if(value_attr != NULL)
+		gtk_text_buffer_insert(text_buff, text_buff_end, value_attr, -1);
 
 	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
-
-
 
 	return 0;
 }
