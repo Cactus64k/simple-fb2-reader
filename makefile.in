@@ -3,6 +3,8 @@ exec_prefix		= @exec_prefix@
 bindir			= @bindir@
 exec_prefix		= @exec_prefix@
 sysconfdir		= @sysconfdir@
+datarootdir		= @datarootdir@
+localedir		= @localedir@
 
 CC			= @CC@
 CFLAGS			= @CFLAGS@
@@ -45,25 +47,25 @@ clean:
 # FIXME for new project
 mk_folders:
 				mkdir -p $(DESTDIR)$(prefix)/bin/
-				mkdir -p $(DESTDIR)$(prefix)/share/locale/en_US/LC_MESSAGES/
-				mkdir -p $(DESTDIR)$(prefix)/share/locale/ru/LC_MESSAGES/
-				mkdir -p $(DESTDIR)$(prefix)/share/applications/
-				mkdir -p $(DESTDIR)$(prefix)/share/icons/hicolor/scalable/apps/
-				mkdir -p $(DESTDIR)$(prefix)/share/mime/packages/
-				mkdir -p $(DESTDIR)$(prefix)/share/icons/hicolor/scalable/mimetypes/
+				mkdir -p $(DESTDIR)$(localedir)/en_US/LC_MESSAGES/
+				mkdir -p $(DESTDIR)$(localedir)/ru/LC_MESSAGES/
+				mkdir -p $(DESTDIR)$(datarootdir)/applications/
+				mkdir -p $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/apps/
+				mkdir -p $(DESTDIR)$(datarootdir)/mime/packages/
+				mkdir -p $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/
 				mkdir -p $(DESTDIR)$(sysconfdir)/
-				mkdir -p $(DESTDIR)$(prefix)/share/$(PROGNAME)/
+				mkdir -p $(DESTDIR)$(datarootdir)/$(PROGNAME)/
 
 # FIXME for new project
 install:mk_folders
 				install $(PROGNAME)				$(DESTDIR)$(exec_prefix)/bin/$(PROGNAME)
-				cp intl/ru.mo					$(DESTDIR)$(prefix)/share/locale/ru/LC_MESSAGES/$(PROGNAME).mo
-				cp intl/en_US.mo				$(DESTDIR)$(prefix)/share/locale/en_US/LC_MESSAGES/$(PROGNAME).mo
-				cp res/$(PROGNAME).desktop			$(DESTDIR)$(prefix)/share/applications/$(PROGNAME).desktop
-				cp res/$(PROGNAME).svg				$(DESTDIR)$(prefix)/share/icons/hicolor/scalable/apps/$(PROGNAME).svg	
-				cp res/simple-fb2-reader.xml			$(DESTDIR)$(prefix)/share/mime/packages/simple-fb2-reader.xml
-				cp res/application-x-fictionbook+xml.svg	$(DESTDIR)$(prefix)/share/icons/hicolor/scalable/mimetypes/application-x-fictionbook+xml.svg
+				cp intl/ru.mo					$(DESTDIR)$(localedir)/ru/LC_MESSAGES/$(PROGNAME).mo
+				cp intl/en_US.mo				$(DESTDIR)$(localedir)/en_US/LC_MESSAGES/$(PROGNAME).mo
+				cp res/$(PROGNAME).desktop			$(DESTDIR)$(datarootdir)/applications/$(PROGNAME).desktop
+				cp res/$(PROGNAME).svg				$(DESTDIR)$(datarootdir)/icons/hicolor/scalable/apps/$(PROGNAME).svg	
+				cp res/simple-fb2-reader.xml			$(DESTDIR)$(datarootdir)/mime/packages/simple-fb2-reader.xml
+				cp res/application-x-fictionbook+xml.svg	$(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-fictionbook+xml.svg
 				cp res/simple-fb2-reader_encoding_list.cfg	$(DESTDIR)$(sysconfdir)/simple-fb2-reader_encoding_list.cfg
-				cp res/$(PROGNAME).glade			$(DESTDIR)$(prefix)/share/$(PROGNAME)/$(PROGNAME).glade
+				cp res/$(PROGNAME).glade			$(DESTDIR)$(datarootdir)/$(PROGNAME)/$(PROGNAME).glade
 
 
