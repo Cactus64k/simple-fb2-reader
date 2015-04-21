@@ -11,8 +11,9 @@ PACKAGE_NAME		= @PACKAGE_NAME@
 SOURCES			= $(shell find . -name '*.c' -printf './%P ')
 OBJECTS			= $(SOURCES:.c=.o)
 
+DEFINIONS		= -DGUI_CONSTRUCT_PATH='"$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade"' -DENCODE_LIST_PATH='"$(sysconfdir)/simple-fb2-reader_encoding_list.cfg"'
 CC			= @CC@
-CFLAGS			= @CFLAGS@ -DGUI_CONSTRUCT_PATH='"$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade"' -DENCODE_LIST_PATH='"$(sysconfdir)/simple-fb2-reader_encoding_list.cfg"'
+CFLAGS			= @CFLAGS@ $(DEFINIONS)
 LDFLAGS			= -export-dynamic
 
 ####################################################################################
