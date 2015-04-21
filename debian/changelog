@@ -1,4 +1,4 @@
-simple-fb2-reader (1.0.6-1) unstable; urgency=low
+simple-fb2-reader (1.0.7-1) unstable; urgency=low
 
   * Initial release (Closes: #nnnn)
   * Fix navigaiton chapter content
