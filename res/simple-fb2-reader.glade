@@ -127,13 +127,6 @@
     <property name="transient_for">main_wnd</property>
     <property name="program_name">Simple FB2 Reader</property>
     <property name="version">1.0.0</property>
-    <property name="comments" translatable="yes">&lt;ctrl&gt; + &lt;f&gt;					search
-&lt;ctrl&gt; + &lt;c&gt;					copy selected text
-&lt;ctrl&gt; + &lt;mouse-wheel&gt; 		font scale
-&lt;left-arrow&gt;					link backward
-
-Have nice reading!
-</property>
     <property name="website">https://github.com/Cactus64k/simple-fb2-reader</property>
     <property name="authors">Cactus &lt;medved_cool@mail.ru&gt;</property>
     <property name="logo_icon_name">simple-fb2-reader</property>
@@ -152,6 +145,25 @@ Have nice reading!
             <property name="fill">True</property>
             <property name="pack_type">end</property>
             <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="about_dialog_hotkeys_label">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">
+ctrl + f					search
+ctrl + c					copy selected text
+ctrl + mouse-wheel 		font scale
+left-arrow					link backward
+
+			Have nice reading!
+</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
           </packing>
         </child>
       </object>
