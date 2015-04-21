@@ -67,6 +67,11 @@ int fill_encode_liststore(GtkListStore* list_store)
 
 		fclose(f);
 	}
+	else
+	{
+		fprintf(stderr, _C("ERROR: failed to open file: %s\n"), ENCODE_LIST_PATH);
+		exit(EXIT_FAILURE);
+	}
 
 
 	return 0;

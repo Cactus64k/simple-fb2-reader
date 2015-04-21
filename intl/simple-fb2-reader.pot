@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2015-04-21 13:09+0300\n"
+        "POT-Creation-Date: 2015-04-21 13:29+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -66,7 +66,7 @@ msgstr  ""
 msgid   "ERROR: failed to open zip file: %s; error code: %d\n"
 msgstr  ""
 
-#: ../src/reader/reader_open_book.c:61
+#: ../src/reader/reader_open_book.c:61 ../src/init/init_dialogs.c:72
 #, c-format
 msgid   "ERROR: failed to open file: %s\n"
 msgstr  ""
