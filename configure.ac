@@ -28,9 +28,8 @@ AC_TYPE_SSIZE_T
 AC_FUNC_REALLOC
 AC_CHECK_FUNCS([memset setlocale strchr strerror])
 
-AC_DEFINE_UNQUOTED([GUI_CONSTRUCT_PATH],	"${datarootdir}/${PACKAGE_NAME}/${PACKAGE_NAME}.glade")
-AC_DEFINE_UNQUOTED([ENCODE_LIST_PATH],		"${sysconfdir}/simple-fb2-reader_encoding_list.cfg")
 AC_DEFINE_UNQUOTED([PACKAGE_VERSION],		"${PACKAGE_VERSION}")
+AC_DEFINE_UNQUOTED([PACKAGE_NAME],		"${PACKAGE_NAME}")
 
 
 AC_CONFIG_FILES([makefile])

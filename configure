@@ -4152,15 +4152,11 @@ done
 
 
 cat >>confdefs.h <<_ACEOF
-#define GUI_CONSTRUCT_PATH "${datarootdir}/${PACKAGE_NAME}/${PACKAGE_NAME}.glade"
-_ACEOF
-
-cat >>confdefs.h <<_ACEOF
-#define ENCODE_LIST_PATH "${sysconfdir}/simple-fb2-reader_encoding_list.cfg"
-_ACEOF
-
-cat >>confdefs.h <<_ACEOF
 #define PACKAGE_VERSION "${PACKAGE_VERSION}"
+_ACEOF
+
+cat >>confdefs.h <<_ACEOF
+#define PACKAGE_NAME "${PACKAGE_NAME}"
 _ACEOF
 
 
