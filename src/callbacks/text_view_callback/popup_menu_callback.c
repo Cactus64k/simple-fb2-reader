@@ -37,10 +37,10 @@ void book_textview_populate_popup_cb(GtkTextView* entry, GtkMenu* menu, gpointer
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 	gtk_widget_show(item);
 
-	item = gtk_image_menu_item_new_with_label(_C("Change Encode"));
+	item = gtk_image_menu_item_new_with_label(_C("Change Encoding"));
 	icon = gtk_image_new_from_icon_name("gtk-convert", GTK_ICON_SIZE_MENU);
 	gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(item), icon);
-	g_signal_connect(item, "activate", G_CALLBACK(encode_imagemenuitem_activate_cb), NULL);
+	g_signal_connect(item, "activate", G_CALLBACK(encoding_imagemenuitem_activate_cb), NULL);
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 	gtk_widget_show(item);
 
