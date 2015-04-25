@@ -71,5 +71,6 @@ install:mk_folders
 				cp res/application-x-fictionbook+xml.svg	$(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-fictionbook+xml.svg
 				cp res/simple-fb2-reader_encoding_list.cfg	$(DESTDIR)$(sysconfdir)/simple-fb2-reader_encoding_list.cfg
 				cp res/$(PACKAGE_NAME).glade			$(DESTDIR)$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade
+				ln -s $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-fictionbook+xml.svg $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-zip-compressed-fb2.svg
 
 

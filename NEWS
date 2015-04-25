@@ -24,4 +24,4 @@
 	Fix 1.0.7
 
 1.0.8 (25/04/2015 ):
-	Word wrap in tables, fix memory leak, tables optimisation
+	Word wrap in tables, fix memory leak, tables optimisation, fix book icon link
