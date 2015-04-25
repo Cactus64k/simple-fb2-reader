@@ -25,11 +25,7 @@ int parse_fb2_table(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter
 	for(size_t i=0; i<cells_count; i++)
 		cells_buff[i] = g_string_new(NULL);
 
-<<<<<<< HEAD:src/formats/fb2/FictionBook/body/section/table/table.c
 	parse_fb2_table_put_line(obj, text_buff_end, cells_table, cells_count, "┌", "┬",  "┐\n");
-=======
-	parse_fb2_table_put_line(obj, text_buff_end, cells_table, cells_count, "┌", "┬",  "┐");
->>>>>>> f8cdeee694165396d879ecc32bcc08062082cafd:src/formats/fb2/FictionBook/body/section/table/table.c
 
 	size_t coll_index = 0;
 
@@ -82,15 +78,9 @@ int parse_fb2_table(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter
 
 
 				if(parse_fb2_table_tr_is_next(node) == 0)
-<<<<<<< HEAD:src/formats/fb2/FictionBook/body/section/table/table.c
 					parse_fb2_table_put_line(obj, text_buff_end, cells_table, cells_count, "└", "┴",  "┘\n");
 				else
 					parse_fb2_table_put_line(obj, text_buff_end, cells_table, cells_count, "├", "┼",  "┤\n");
-=======
-					parse_fb2_table_put_line(obj, text_buff_end, cells_table, cells_count, "└", "┴",  "┘");
-				else
-					parse_fb2_table_put_line(obj, text_buff_end, cells_table, cells_count, "├", "┼",  "┤");
->>>>>>> f8cdeee694165396d879ecc32bcc08062082cafd:src/formats/fb2/FictionBook/body/section/table/table.c
 
 				coll_index++;
 
@@ -195,7 +185,7 @@ int td_fill_spaces(GString** cells_buff, glong* cells_table, size_t cells_count,
 			glong need_space = (*max_height+1) * cells_table[i];
 			glong tail = need_space % MAX_CELL_LENGTH;
 
-			//g_string_append_len(cells_buff[i], spaces, tail);
+			g_string_append_len(cells_buff[i], spaces, tail);
 
 			for(glong j=0; j<need_space; j+=MAX_CELL_LENGTH)
 				g_string_append_len(cells_buff[i], spaces, MAX_CELL_LENGTH);
