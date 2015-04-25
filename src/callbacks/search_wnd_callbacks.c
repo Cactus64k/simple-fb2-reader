@@ -27,6 +27,8 @@ void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 	GtkRadioButton* backward		= GLOBAL_SEARCH_WND.backward;
 	GtkRadioButton* forward			= GLOBAL_SEARCH_WND.forward;
 
+	GtkAdjustment* horisontal_adj	= gtk_scrollable_get_hadjustment(GTK_SCROLLABLE(text_view));
+
 	const char* query = gtk_entry_get_text(search_entry);
 
 	GtkTextIter text_buff_match_start_iter;
@@ -49,7 +51,9 @@ void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 	{
 		gtk_text_buffer_select_range(text_buff, &text_buff_match_start_iter, &text_buff_match_end_iter);
 
-		gtk_text_view_scroll_to_iter(text_view, &text_buff_match_start_iter, 0.f, TRUE, 0.f, 0.5f);
+		gtk_text_view_scroll_to_iter(text_view, &text_buff_match_start_iter, 0.0, TRUE, 0.0, 0.0);
+
+		gtk_adjustment_set_value(horisontal_adj, 0.0);
 
 		//*last_search_pos = text_buff_match_end_iter;
 

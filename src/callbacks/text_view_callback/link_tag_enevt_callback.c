@@ -42,6 +42,7 @@ gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTe
 	else if(event->type == GDK_MOTION_NOTIFY)
 	{
 		GdkWindow* text_view_window = gtk_text_view_get_window(text_view, GTK_TEXT_WINDOW_TEXT);
+		GObject* test_obj = G_OBJECT(cursor_link);
 		gdk_window_set_cursor(text_view_window, cursor_link);
 	}
 

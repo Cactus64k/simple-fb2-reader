@@ -3,10 +3,10 @@
 int reader_open_book(char* book_path)
 {
 	FB2_READER_BOOK_VIEW* book_view		= &GLOBAL_FB2_READER.book_text_view;
-	GtkDialog* encode_dialog			= GLOBAL_ENCODE_DIALOG.dialog;
-	GtkTreeView* tree_view				= GLOBAL_ENCODE_DIALOG.treeview;
+	GtkDialog* encode_dialog			= GLOBAL_ENCODING_DIALOG.dialog;
+	GtkTreeView* tree_view				= GLOBAL_ENCODING_DIALOG.treeview;
 	GtkTreeSelection* tree_selection	= gtk_tree_view_get_selection(tree_view);
-	GtkTreeModel* tree_model			= GTK_TREE_MODEL(GLOBAL_ENCODE_DIALOG.liststore);
+	GtkTreeModel* tree_model			= GTK_TREE_MODEL(GLOBAL_ENCODING_DIALOG.liststore);
 
 	BOOK_TYPE book_type = reader_get_book_type(book_path);
 
@@ -21,16 +21,16 @@ int reader_open_book(char* book_path)
 
 			//*****************************************************
 			if(book_type == BOOK_TYPE_FB2)
-				parse_fb2(book_path);
+				parse_fb2_file(book_path);
 			//*****************************************************
 			else if(book_type == BOOK_TYPE_FB2_ZIP)
-				parse_fb2_zip(book_path);
+				parse_fb2_zip_file(book_path);
 			//*****************************************************
 			else if(book_type == BOOK_TYPE_TXT)
 			{
-				char* encode_name = g_key_file_get_string(config, "book", "encode", NULL);
+				char* encode_name = g_key_file_get_string(config, "book", "encoding", NULL);
 				if(encode_name != NULL)
-					parse_txt(book_path, encode_name);
+					parse_txt_file(book_path, encode_name);
 				else
 				{
 					if(gtk_dialog_run(encode_dialog) == 2)
@@ -41,9 +41,9 @@ int reader_open_book(char* book_path)
 						{
 							gtk_tree_model_get(tree_model, &tree_iter, 0, &encode_name, -1);
 
-							g_key_file_set_string(config, "book", "encode", encode_name);
+							g_key_file_set_string(config, "book", "encoding", encode_name);
 
-							parse_txt(book_path, encode_name);
+							parse_txt_file(book_path, encode_name);
 						}
 						g_free(encode_name);
 

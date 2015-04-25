@@ -46,11 +46,10 @@ int init_main_wnd(GtkBuilder* builder, FB2_READER* obj)
 	if(g_key_file_get_boolean(obj->app_config, "app", "maximize", NULL) == TRUE)
 		gtk_window_maximize(GTK_WINDOW(obj->main_wnd));
 
-	//create_fb2_tags(obj->text_buff);
-
 	obj->cursor_link				= gdk_cursor_new(GDK_HAND2);
 	obj->cursor_watch				= gdk_cursor_new(GDK_WATCH);
-	obj->clipboard					= gtk_clipboard_get(0);
+	obj->clipboard					= gtk_widget_get_clipboard(obj->main_wnd, GDK_SELECTION_CLIPBOARD);		//obj->clipboard					= gtk_clipboard_get(0);
+
 
 	gtk_widget_show_all(obj->main_wnd);
 

@@ -17,7 +17,7 @@ void file_quit_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_da
 void main_wnd_size_allocate_cb (GtkWidget *widget, GdkRectangle *allocation, gpointer user_data)
 {	GtkTextView* text_view = GTK_TEXT_VIEW(user_data);
 
-	gint margin = allocation->width * 0.15;
+	gint margin = (allocation->width * 15) / 100;
 
 	gtk_text_view_set_right_margin(text_view, margin);
 	gtk_text_view_set_left_margin(text_view, margin);
@@ -25,8 +25,6 @@ void main_wnd_size_allocate_cb (GtkWidget *widget, GdkRectangle *allocation, gpo
 
 gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpointer user_data)
 {
-	GtkWidget* search_window	= GLOBAL_SEARCH_WND.search_wnd;
-	GtkEntry* search_entry		= GLOBAL_SEARCH_WND.search_query_entry;
 	GtkTextBuffer* text_buff	= GLOBAL_FB2_READER.book_text_view.text_buff;
 	BOOK_TYPE book_type			= GLOBAL_FB2_READER.book_text_view.type;
 	GtkClipboard* clipboard		= GLOBAL_FB2_READER.clipboard;
@@ -39,34 +37,54 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpo
 
 	guint keyval = gdk_keymap_lookup_key(default_key_map, &key);
 
-	if(keyval == 'f')
+	if(event->state & GDK_CONTROL_MASK)
 	{
-		if(event->state & GDK_CONTROL_MASK)
+		if(keyval == 'n')
 		{
-			if(book_type != BOOK_TYPE_NONE)
-			{
-				gtk_widget_show(search_window);
-				gtk_widget_grab_focus(GTK_WIDGET(search_entry));
-			}
+			if(book_type != BOOK_TYPE_NONE && book_type != BOOK_TYPE_TXT)
+				navigation_imagemenuitem_activate_cb(NULL, NULL);
 		}
-	}
-	else if(keyval == 'c')
-	{
-		if(event->state & GDK_CONTROL_MASK)
+		else if(keyval == 'f')
+		{
+			search_imagemenuitem_activate_cb(NULL, NULL);
+		}
+		else if(keyval == 'e')
+		{
+			if(book_type == BOOK_TYPE_TXT)
+				encoding_imagemenuitem_activate_cb(NULL, NULL);
+		}
+		else if(keyval == 't')
+		{
+			//color_theme_activate_cb(NULL, NULL);
+		}
+		else if(keyval == 'd')
+		{
+			forger_books_imagemenuitem_activate_cb(NULL, NULL);
+		}
+		else if(keyval == 'h')
+		{
+			about_imagemenuitem_activate_cb(NULL, NULL);
+		}
+		else if(keyval == 'o')
+		{
+			open_file_imagemenuitem_activate_cb(NULL, NULL);
+		}
+		else if(keyval == 'q')
+		{
+			gtk_main_quit();
+		}
+		else if(keyval == 'c')
 		{
 			if(gtk_text_buffer_get_has_selection(text_buff) == TRUE)
 				gtk_text_buffer_copy_clipboard(text_buff, clipboard);
 		}
 	}
-	else if(event->keyval == GDK_KEY_space)
+	else
 	{
-		//GdkEventKey key_proxy_event = *event;
-		//key_proxy_event.keyval = GDK_KEY_Page_Up;
-		//gboolean result = TRUE;
-		//g_signal_emit_by_name(GLOBAL_FB2_READER.book_text_view.text_view, "key-press-event", &key_proxy_event, &result, NULL);
+		if(event->keyval == GDK_KEY_Left)
+			backward_itemmenu_cb(NULL, NULL);
 	}
-	else if(event->keyval == GDK_KEY_Left)
-		backward_itemmenu_cb(NULL, NULL);
+
 
 	//printf("%x\n", event->keyval);
 

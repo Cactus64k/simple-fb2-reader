@@ -27,7 +27,7 @@ int init_search_wnd(GtkBuilder* builder, FB2_READER_SEARCH_WINDOW* obj)
 
 
 
-int init_encode_wnd(GtkBuilder* builder, FB2_READER_ENCODE_DIALOG* obj)
+int init_encode_wnd(GtkBuilder* builder, FB2_READER_ENCODING_DIALOG* obj)
 {
 	obj->dialog					= GTK_DIALOG(				gtk_builder_get_object(builder, "txt_encode_dialog"));
 	obj->liststore				= GTK_LIST_STORE(			gtk_builder_get_object(builder, "encode_liststore"));

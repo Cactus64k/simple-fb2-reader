@@ -65,7 +65,7 @@
 		GtkRadioButton* 		backward;
 	} FB2_READER_SEARCH_WINDOW;
 
-	typedef struct FB2_READER_ENCODE_DIALOG
+	typedef struct FB2_READER_ENCODING_DIALOG
 	{
 		GtkDialog*				dialog;
 		GtkTreeView*			treeview;
@@ -74,7 +74,7 @@
 
 		char					src_text[ENCODE_BUFF_SIZE];
 		size_t					src_text_size;
-	} FB2_READER_ENCODE_DIALOG;
+	} FB2_READER_ENCODING_DIALOG;
 
 	typedef struct FB2_READER_BOOK_VIEW
 	{
@@ -120,7 +120,7 @@
 
 	} FB2_READER;
 
-	FB2_READER_ENCODE_DIALOG	GLOBAL_ENCODE_DIALOG;
+	FB2_READER_ENCODING_DIALOG	GLOBAL_ENCODING_DIALOG;
 	FB2_READER					GLOBAL_FB2_READER;
 	FB2_READER_SEARCH_WINDOW	GLOBAL_SEARCH_WND;
 
@@ -130,13 +130,12 @@
 
 	int init_main_wnd(GtkBuilder* builder, FB2_READER* obj);
 	int init_search_wnd(GtkBuilder* builder, FB2_READER_SEARCH_WINDOW* obj);
-	int init_encode_wnd(GtkBuilder* builder, FB2_READER_ENCODE_DIALOG* obj);
+	int init_encode_wnd(GtkBuilder* builder, FB2_READER_ENCODING_DIALOG* obj);
 	int init_app_config(FB2_READER* obj);
 
 
-	#include "fb2/fb2_chunks.h"
-	#include "txt/txt_chunks.h"
-	#include "fb2_zip/fb2_zip_chunks.h"
+	#include "formats/formats_chunks.h"
+	#include "callbacks/callbacks_chunk.h"
 	#include "reader/reader_chunks.h"
 
 #endif /* CHUNKS_H_ */

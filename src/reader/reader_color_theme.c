@@ -55,6 +55,7 @@ int reader_set_color_theme(FB2_READER* obj, const char* color_theme)
 
 	g_free(background_color);
 	g_free(text_color);
+	g_free(selection_color);
 
 	g_free(font_general);
 	g_free(font_monospace);

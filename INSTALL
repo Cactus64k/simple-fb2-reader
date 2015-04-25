@@ -1,6 +1,6 @@
 
 DEBIAN:
-#################################################
+################################################
 $ cd ~/
 $ git clone https://github.com/Cactus64k/simple-fb2-reader.git
 $ cd simple-fb2-reader
@@ -16,8 +16,12 @@ SLACKWARE
 ################################################
 Use ./slackbuild
 
+FEDORA
+################################################
+https://copr.fedoraproject.org/coprs/dexpl/simple-fb2-reader/
+
 ANOTHER SYSTEMS:
-#################################################
+################################################
 $ cd ~/
 $ git clone https://github.com/Cactus64k/simple-fb2-reader.git
 $ cd simple-fb2-reader

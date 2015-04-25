@@ -5,7 +5,11 @@ int reader_close_app()
 	GKeyFile* app_config				= GLOBAL_FB2_READER.app_config;
 	char* app_config_path				= GLOBAL_FB2_READER.app_config_path;
 	GtkWidget* main_wnd					= GLOBAL_FB2_READER.main_wnd;
+	GdkCursor* cursor_link				= GLOBAL_FB2_READER.cursor_link;
+	GdkCursor* cursor_watch				= GLOBAL_FB2_READER.cursor_watch;
 	GtkTextBuffer* text_buff			= GLOBAL_FB2_READER.book_text_view.text_buff;
+	GtkListStore* encode_list			= GLOBAL_ENCODING_DIALOG.liststore;
+
 	GtkTextTagTable* text_tag_table		= gtk_text_buffer_get_tag_table(text_buff);
 	GtkTextTag* default_tag				= gtk_text_tag_table_lookup(text_tag_table, "default_tag");
 	//**************************************************************************************************
@@ -42,6 +46,10 @@ int reader_close_app()
 	fwrite(app_config_data, 1, app_config_len,  f);
 	fclose(f);
 	g_free(app_config_data);
+
+	g_object_unref(cursor_link);
+	g_object_unref(cursor_watch);
+	gtk_list_store_clear(encode_list);
 
 	return 0;
 }

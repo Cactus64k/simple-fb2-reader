@@ -1,12 +1,5 @@
-simple-fb2-reader (1.0.8-1) unstable; urgency=low
+simple-fb2-reader (1.0.9-1) unstable; urgency=low
 
   * Initial release (Closes: #nnnn)
-  * Fix navigaiton chapter content
-  * Refactoring, add in book open dialog "file-activate" handler 
-  * Add command line options
-  * Add autotools scripts, more themes options, arrow key scrolling
-  * Fix autotools scripts
-  * Fix line spacing, Fix empty start book paramether crash, Fix memory leak if you open non-book file.
-  * Refactoring, Fix memory leak on tag attributes, tooltip on link, increase table support, INSTALL file update
 
  -- Cactus <medved_cool@mail.ru>  Sun, 08 Mar 2015 00:29:56 +0300
