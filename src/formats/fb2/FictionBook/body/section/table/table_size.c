@@ -1,5 +1,10 @@
 #include "table_chunks.h"
 
+<<<<<<< HEAD:src/formats/fb2/FictionBook/body/section/table/table_size.c
+=======
+#define MAX_CELL_LENGTH 25
+
+>>>>>>> f8cdeee694165396d879ecc32bcc08062082cafd:src/formats/fb2/FictionBook/body/section/table/table_size.c
 int parse_fb2_table_get_size(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, glong** cells_table, size_t* cells_count)
 {
 	g_return_val_if_fail(parent_node != NULL, -1);
