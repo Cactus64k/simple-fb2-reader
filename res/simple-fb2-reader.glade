@@ -161,8 +161,8 @@ ctrl+h				About
 ctrl+o				Open book
 ctrl+q				Exit
 ctrl+c				Copy text
-ctrl + mouse-wheel 	Font scale
-left-arrow				Perevious position(link navigation)
+ctrl+mouse-wheel 		Font scale
+left-arrow				Previous position(link navigation)
 
 				Have nice reading!
 </property>
