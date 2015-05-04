@@ -1,0 +1,241 @@
+# Russian translations for simple-fb2-reader package
+# Английские переводы для пакета simple-fb2-reader.
+# Copyright (C) 2015 THE simple-fb2-reader'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the simple-fb2-reader package.
+# Automatically generated, 2015.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: simple-fb2-reader 1.0.9\n"
+"Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
+"POT-Creation-Date: 2015-04-27 01:56+0300\n"
+"PO-Revision-Date: 2015-03-30 18:11+0300\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: ru\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
+"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+
+#: ../res/simple-fb2-reader.glade:66
+msgid "Forget all books position and endodings?"
+msgstr "Забыть все позиции чтения и кодировки книг?"
+
+#: ../res/simple-fb2-reader.glade:67
+msgid "without the possibility of restoration"
+msgstr "Без возможности востановления"
+
+#: ../res/simple-fb2-reader.glade:155
+msgid ""
+"\n"
+"ctrl+n\t\t\t\tNavigation\n"
+"ctrl+f\t\t\t\tSearch\n"
+"ctrl+e\t\t\t\tChange encoding(txt only)\n"
+"ctrl+d\t\t\t\tForget all books\n"
+"ctrl+h\t\t\t\tAbout\n"
+"ctrl+o\t\t\t\tOpen book\n"
+"ctrl+q\t\t\t\tExit\n"
+"ctrl+c\t\t\t\tCopy text\n"
+"ctrl+mouse-wheel \tFont scale\n"
+"left-arrow\t\t\t\tPrevious position(link navigation)\n"
+"\n"
+"\t\t\t\tHave nice reading!\n"
+msgstr ""
+"\n"
+"ctrl+n\t\t\t\tОглавление\n"
+"ctrl+f\t\t\t\tПоиск\n"
+"ctrl+e\t\t\t\tСмена кодировки(только txt)\n"
+"ctrl+d\t\t\t\tЗабыть все книги\n"
+"ctrl+h\t\t\t\tО программе\n"
+"ctrl+o\t\t\t\tОткрыть книгу\n"
+"ctrl+q\t\t\t\tВыход\n"
+"ctrl+c\t\t\t\tКопировать текст\n"
+"ctrl+колесо-мыши \tРазмер шрифта\n"
+"left-arrow\t\t\t\tПредыдущая позиция(навигация по ссылкам)\n"
+"\n"
+"\t\t\t\tПриятного чтения!\n"
+
+#: ../res/simple-fb2-reader.glade:251
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:14
+msgid "Backward"
+msgstr "Назад"
+
+#: ../res/simple-fb2-reader.glade:268
+msgid "Forward"
+msgstr "Вперед"
+
+#: ../res/simple-fb2-reader.glade:309
+msgid "Case ensitive"
+msgstr "С учетом регистра"
+
+#: ../src/formats/fb2_zip/fb2_zip_parser.c:56
+msgid "ERROR: xml is well parsed, but pointer is NULL\n"
+msgstr "ОШИБКА: xml файл разобран, но указатель равен NULL\n"
+
+#: ../src/formats/fb2_zip/fb2_zip_parser.c:59
+#, c-format
+msgid "ERROR: failed to parse fb2 file: %s\n"
+msgstr "ОШИБКА: не удалось разобрать fb2 файл: %s\n"
+
+#: ../src/formats/fb2_zip/fb2_zip_parser.c:67
+#, c-format
+msgid "ERROR: failed to unpack fb2 file: %s\n"
+msgstr "ОШИБКА: не удалось распаковать fb2 файл: %s\n"
+
+#: ../src/formats/fb2_zip/fb2_zip_parser.c:73
+#, c-format
+msgid "ERROR: failed to open zip file: %s; error code: %d\n"
+msgstr "ОШИБКА: не удалось открыть zip файл: %s; код ошибки: %d\n"
+
+#: ../src/formats/fb2/fiction_book.c:65
+msgid "End read book\n"
+msgstr "Окончание чтения книги\n"
+
+#: ../src/formats/fb2/fb2_parser.c:35
+#, c-format
+msgid "ERROR: Failed to parsing fb2 file: %s\n"
+msgstr "ОШИБКА: не удалось разобрать fb2 файл: %s\n"
+
+#: ../src/formats/fb2/FictionBook/body/section/image_inline.c:28
+#: ../src/formats/fb2/FictionBook/body/image.c:38
+#, c-format
+msgid "Image %s not found in table\n"
+msgstr "Картинка %s не найдена в таблице\n"
+
+#: ../src/formats/fb2/FictionBook/body/section/image_inline.c:31
+#: ../src/formats/fb2/FictionBook/body/image.c:41
+msgid "Not local links not supported\n"
+msgstr "Поддерживаются только локальные ссылки\n"
+
+#: ../src/formats/fb2/FictionBook/body/section/section.c:18
+#: ../src/formats/fb2/FictionBook/body/body.c:15
+msgid "No Title"
+msgstr "Нет Заголовка"
+
+#: ../src/formats/fb2/FictionBook/attributes/id.c:22
+#, c-format
+msgid "ERROR: id %s already exist in table\n"
+msgstr "ОШИБКА: id %s уже присутствует в таблице\n"
+
+#: ../src/formats/fb2/FictionBook/binary/binary.c:34
+msgid "ERROR: no content in <image> tag\n"
+msgstr "ОШИБКА: нет содержимого в теге <image>\n"
+
+#: ../src/formats/fb2/FictionBook/binary/binary.c:37
+#, c-format
+msgid "ERROR: image %s already exist in table\n"
+msgstr "ОШИБКА: картинка %s уже содержится в таблице\n"
+
+#: ../src/formats/fb2/FictionBook/binary/binary.c:40
+msgid "ERROR: no id properties in <image> tag\n"
+msgstr "ОШИБКА: не найдено свойство id в теге <image>\n"
+
+#: ../src/formats/fb2/FictionBook/binary/binary.c:72
+#: ../src/formats/fb2/FictionBook/binary/binary.c:88
+#, c-format
+msgid "ERROR: GdkPixbufLoader: %s\n"
+msgstr "ОШИБКА: GdkPixbufLoader: %s\n"
+
+#: ../src/formats/txt/txt_parser.c:40
+#, c-format
+msgid "ERROR: failed to encode txt file: %s\n"
+msgstr "ОШИБКА: не удалось раскодировать txt файл: %s\n"
+
+#: ../src/formats/txt/txt_parser.c:63
+#, c-format
+msgid "ERROR: failed to open txt file: %s\n"
+msgstr "ОШИБКА: не удалось открыть txt файл: %s\n"
+
+#: ../src/reader/reader_open_book.c:61 ../src/init/init_dialogs.c:72
+#, c-format
+msgid "ERROR: failed to open file: %s\n"
+msgstr "ОШИБКА: не удалось открыть файл: %s\n"
+
+#: ../src/init/init_main_book_view.c:30
+msgid ""
+"\n"
+"\n"
+"\n"
+"\n"
+"Hello! =P \n"
+msgstr ""
+"\n"
+"\n"
+"\n"
+"\n"
+"Привет! =P \n"
+
+#: ../src/init/init_config_folder.c:13
+#, c-format
+msgid ""
+"ERROR: failed to create folder: %s\n"
+" %s\n"
+msgstr ""
+"ОШИБКА: не удалось создать папку: %s\n"
+" %s\n"
+
+#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:38
+#, c-format
+msgid "ERROR: failed to open URI %s\n"
+msgstr "ОШИБКА: не удалось открыт URI %s\n"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:26
+msgid "Navigation"
+msgstr "Навигация"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:33
+msgid "Find"
+msgstr "Найти"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:40
+msgid "Change Encoding"
+msgstr "Изменить Кодировку"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:52
+msgid "Color Theme"
+msgstr "Цветовая Тема"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:61
+msgid "Forget All Books"
+msgstr "Забыть все книги"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:68
+msgid "About"
+msgstr "О программе"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:80
+msgid "Open Book"
+msgstr "Открыть Книгу"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:87
+msgid "Exit"
+msgstr "Выход"
+
+#: ../src/callbacks/encoding_dialog_callbacks.c:31
+#: ../src/callbacks/encoding_dialog_callbacks.c:37
+msgid "WRONG ENCODING"
+msgstr "НЕПРАВИЛЬНАЯ КОДИРОВКА"
+
+#: ../src/main.c:20
+msgid "Local path to book"
+msgstr "Локальный путь до книги"
+
+#: ../src/main.c:21
+msgid "Print reader version"
+msgstr "Вывести версию"
+
+#: ../src/main.c:38
+#, c-format
+msgid ""
+"ERROR: %s\n"
+"\n"
+msgstr ""
+"ОШИБКА: %s\n"
+"\n"
+
+#: ../src/main.c:59
+#, c-format
+msgid "ERROR: Failed to load gui construct file %s\n"
+msgstr "ОШИБКА: не удалось загрузить файл с каркасом gui: %s\n"

@@ -1,0 +1,27 @@
+
+1.0.1 (00/00/0000):
+	Fix navigaiton chapter content
+
+1.0.2 (00/00/0000):
+	Refactoring, add in book open dialog "file-activate" handler
+
+1.0.3 (00/00/0000):
+	Add command line options
+
+1.0.4 (00/00/0000):
+	Add autotools scripts, more themes options, arrow key scrolling
+
+1.0.5 (00/00/0000):
+	Fix autotools scripts
+
+1.0.6 (00/00/0000):
+	Fix line spacing, Fix empty start book paramether crash, Fix memory leak if you open non-book file.
+
+1.0.7 (00/00/0000):
+	Refactoring, Fix memory leak on tag attributes, tooltip on link, increase table support, INSTALL file update
+
+1.0.8 (00/00/0000):
+	Fix 1.0.7
+
+1.0.8 (25/04/2015 ):
+	Word wrap in tables, fix memory leak, tables optimisation, fix book icon link
