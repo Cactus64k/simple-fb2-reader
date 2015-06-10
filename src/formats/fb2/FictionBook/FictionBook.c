@@ -1,4 +1,4 @@
-#include "fb2_chunks.h"
+#include "FictionBook_chunks.h"
 
 int parse_fb2_function_book(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {

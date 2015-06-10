@@ -42,6 +42,7 @@
             <property name="vadjustment">book_textview_vertical_adjustment</property>
             <property name="editable">False</property>
             <property name="wrap_mode">word</property>
+            <property name="justification">fill</property>
             <property name="cursor_visible">False</property>
             <property name="buffer">book_textbuff</property>
             <signal name="motion-notify-event" handler="book_textview_motion_notify_event_cb" swapped="no"/>
