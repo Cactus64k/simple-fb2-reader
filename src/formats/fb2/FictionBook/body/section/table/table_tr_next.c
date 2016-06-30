@@ -2,7 +2,7 @@
 
 int parse_fb2_table_tr_is_next(xmlNode* node)
 {
-	g_return_val_if_fail(node != NULL, -1);
+	g_return_val_if_fail(node != NULL, EXIT_FAILURE);
 
 	node = node->next;
 
@@ -15,5 +15,5 @@ int parse_fb2_table_tr_is_next(xmlNode* node)
 		}
 		node = node->next;
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }

@@ -1,20 +1,22 @@
 #include "callbacks_chunk.h"
 
-gboolean main_wnd_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer user_data)
+G_MODULE_EXPORT gboolean main_wnd_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
-	reader_close_book();
-	reader_close_app();
+	APP* app	= (APP*)user_data;
+	reader_close_book(app);
+	reader_close_app(app);
 	return FALSE;
 }
 
-void file_quit_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_data)
+G_MODULE_EXPORT void file_quit_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_data)
 {
-	reader_close_book();
-	reader_close_app();
+	APP* app	= (APP*)user_data;
+	reader_close_book(app);
+	reader_close_app(app);
 	gtk_main_quit();
 }
 
-void main_wnd_size_allocate_cb (GtkWidget *widget, GdkRectangle *allocation, gpointer user_data)
+G_MODULE_EXPORT void main_wnd_size_allocate_cb (GtkWidget *widget, GdkRectangle *allocation, gpointer user_data)
 {	GtkTextView* text_view = GTK_TEXT_VIEW(user_data);
 
 	gint margin = (allocation->width * 15) / 100;
@@ -23,11 +25,12 @@ void main_wnd_size_allocate_cb (GtkWidget *widget, GdkRectangle *allocation, gpo
 	gtk_text_view_set_left_margin(text_view, margin);
 }
 
-gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpointer user_data)
+G_MODULE_EXPORT gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpointer user_data)
 {
-	GtkTextBuffer* text_buff	= GLOBAL_FB2_READER.book_text_view.text_buff;
-	BOOK_TYPE book_type			= GLOBAL_FB2_READER.book_text_view.type;
-	GtkClipboard* clipboard		= GLOBAL_FB2_READER.clipboard;
+	APP* app					= (APP*)user_data;
+	GtkTextBuffer* text_buff	= app->text_buff;
+	BOOK_TYPE book_type			= app->book_type;
+	GtkClipboard* clipboard		= app->clipboard;
 
 	GdkKeymap* default_key_map = gdk_keymap_get_default();
 
@@ -41,33 +44,24 @@ gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEventKey* event, gpo
 	{
 		if(keyval == 'n')
 		{
-			if(book_type != BOOK_TYPE_NONE && book_type != BOOK_TYPE_TXT)
-				navigation_imagemenuitem_activate_cb(NULL, NULL);
+			if(book_type != BOOK_TYPE_NONE)
+				navigation_menuitem_activate_cb(NULL, NULL);
 		}
 		else if(keyval == 'f')
 		{
-			search_imagemenuitem_activate_cb(NULL, NULL);
-		}
-		else if(keyval == 'e')
-		{
-			if(book_type == BOOK_TYPE_TXT)
-				encoding_imagemenuitem_activate_cb(NULL, NULL);
+			search_menuitem_activate_cb(NULL, NULL);
 		}
 		else if(keyval == 't')
 		{
-			//color_theme_activate_cb(NULL, NULL);
-		}
-		else if(keyval == 'd')
-		{
-			forger_books_imagemenuitem_activate_cb(NULL, NULL);
+			color_theme_activate_cb(NULL, NULL);
 		}
 		else if(keyval == 'h')
 		{
-			about_imagemenuitem_activate_cb(NULL, NULL);
+			about_menuitem_activate_cb(NULL, NULL);
 		}
 		else if(keyval == 'o')
 		{
-			open_file_imagemenuitem_activate_cb(NULL, NULL);
+			open_file_menuitem_activate_cb(NULL, NULL);
 		}
 		else if(keyval == 'q')
 		{

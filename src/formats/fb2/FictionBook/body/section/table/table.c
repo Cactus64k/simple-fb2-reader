@@ -4,28 +4,28 @@
 int td_fill_spaces(GString** cells_buff, glong* cells_table, size_t cells_count, glong* max_height);
 int td_word_wrap(GString** cells_buff, glong* cells_table, size_t cells_count);
 
-int parse_fb2_table(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_fb2_table(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,		EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end != NULL,		EXIT_FAILURE);
 
-	GtkTextBuffer* text_buff	= obj->text_buff;
+	GtkTextBuffer* text_buff	= app->text_buff;
 	xmlNode* node				= parent_node->children;
 
-	parse_fb2_id_attribute(obj, parent_node, text_buff_end);
+	parse_fb2_id_attribute(app, parent_node, text_buff_end);
 
 	GtkTextMark* start_tag_mark	= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
 
 	glong* cells_table			= NULL;
 	size_t cells_count			= 0;
-	parse_fb2_table_get_size(obj, parent_node, &cells_table, &cells_count);
+	parse_fb2_table_get_size(app, parent_node, &cells_table, &cells_count);
 
 	GString** cells_buff		= calloc(sizeof(GString*),	cells_count);
 
 	for(size_t i=0; i<cells_count; i++)
 		cells_buff[i] = g_string_new(NULL);
 
-	parse_fb2_table_put_line(obj, text_buff_end, cells_table, cells_count, "┌", "┬",  "┐\n");
+	parse_fb2_table_put_line(app, text_buff_end, cells_table, cells_count, "┌", "┬",  "┐\n");
 
 	size_t coll_index = 0;
 
@@ -78,9 +78,9 @@ int parse_fb2_table(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter
 
 
 				if(parse_fb2_table_tr_is_next(node) == 0)
-					parse_fb2_table_put_line(obj, text_buff_end, cells_table, cells_count, "└", "┴",  "┘\n");
+					parse_fb2_table_put_line(app, text_buff_end, cells_table, cells_count, "└", "┴",  "┘\n");
 				else
-					parse_fb2_table_put_line(obj, text_buff_end, cells_table, cells_count, "├", "┼",  "┤\n");
+					parse_fb2_table_put_line(app, text_buff_end, cells_table, cells_count, "├", "┼",  "┤\n");
 
 				coll_index++;
 
@@ -101,14 +101,14 @@ int parse_fb2_table(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter
 	free(cells_buff);
 	free(cells_table);
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 
 int td_word_wrap(GString** cells_buff, glong* cells_table, size_t cells_count)
 {
-	g_return_val_if_fail(cells_buff != NULL, -1);
-	g_return_val_if_fail(cells_table != NULL, -2);
+	g_return_val_if_fail(cells_buff != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(cells_table != NULL,	EXIT_FAILURE);
 
 	char spaces[MAX_CELL_LENGTH];
 	memset(spaces, ' ', sizeof(spaces));
@@ -148,15 +148,15 @@ int td_word_wrap(GString** cells_buff, glong* cells_table, size_t cells_count)
 		}
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 
 int td_fill_spaces(GString** cells_buff, glong* cells_table, size_t cells_count, glong* max_height)
 {
-	g_return_val_if_fail(cells_buff != NULL, -1);
-	g_return_val_if_fail(cells_table != NULL, -2);
-	g_return_val_if_fail(max_height != NULL, -2);
+	g_return_val_if_fail(cells_buff != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(cells_table != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(max_height != NULL,	EXIT_FAILURE);
 
 	char spaces[MAX_CELL_LENGTH];
 		memset(spaces, ' ', sizeof(spaces));
@@ -195,7 +195,7 @@ int td_fill_spaces(GString** cells_buff, glong* cells_table, size_t cells_count,
 
 	free(cell_len);
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 

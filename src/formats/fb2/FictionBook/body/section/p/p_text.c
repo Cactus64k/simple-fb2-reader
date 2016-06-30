@@ -2,8 +2,8 @@
 
 int parse_fb2_p_get_text(xmlNode* parent_node, GString* buff)
 {
-	g_return_val_if_fail(parent_node	!= NULL, -1);
-	g_return_val_if_fail(buff			!= NULL, -2);
+	g_return_val_if_fail(parent_node	!= NULL, EXIT_FAILURE);
+	g_return_val_if_fail(buff			!= NULL, EXIT_FAILURE);
 
 	xmlNode* node = parent_node->children;
 
@@ -39,5 +39,5 @@ int parse_fb2_p_get_text(xmlNode* parent_node, GString* buff)
 	}
 
 
-	return 0;
+	return EXIT_SUCCESS;
 }

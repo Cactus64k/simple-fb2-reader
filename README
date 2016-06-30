@@ -2,31 +2,31 @@
 Simple tool to read FB2 books. Developed using GTK+3.
 =====================================================
 
-Features ("-" - not supported yet, "~" - partial support):
-- supports fb2, fb2.zip and txt files
+Features:
+- supports fb2 and fb2.zip
 - saving reading position
 - saving window state, size and position
 - search text in book
 - URI(with backward button and tooltips)
-- full 2.1 format support(-stylesheet, ~table)
+- full 2.1 format support(without stylesheet and partial table tag support)
 - navigation
 - russian and english gui
 - user themes(see ~/.config/simple-fb2-reader/config.cfg)
 
 
 Depends:
-- libxml2		>= 2.8.0
-- libgtk-3-0		>= 3.4.2
-- libglib		>= 2.33.12
-- libzip2		>= 0.10.1
+- libxml2		>= 2.9.1
+- libgtk-3-0	>= 3.14.5
+- libzip2		>= 0.11.2
+- libsqlite3-0	>= 3.8.7.1
 
 
 Build Depends:
-- debhelper		>= 8.0.0
-- libxml2-dev		>= 2.8.0
-- libgtk-3-dev		>= 3.4.2
-- libglib2.0-dev	>= 2.32.4
-- libzip-dev		>= 0.10.1
-- pkg-config		>= 0.26
-- libc-dev-bin		>= 2.13
-- gettext		>= 0.18.1.1
+- debhelper			>= 9.0.0
+- libxml2-dev		>= 2.9.1
+- libgtk-3-dev		>= 3.14.5
+- libzip-dev		>= 0.11.2
+- pkg-config		>= 0.28
+- libc-dev-bin		>= 2.19
+- gettext			>= 0.19.3
+- libsqlite3-dev 	>= 3.8.7.1

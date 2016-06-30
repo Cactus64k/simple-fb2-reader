@@ -1,11 +1,10 @@
 #include "reader_chunks.h"
 
-int reader_set_color_theme(FB2_READER* obj, const char* color_theme)
+int reader_set_color_theme(APP* app, const char* color_theme)
 {
-	FB2_READER_BOOK_VIEW* book_view = &(obj->book_text_view);
-	GKeyFile* app_config			= obj->app_config;
+	GKeyFile* app_config		= app->app_config;
 
-	GtkTextTagTable* tag_table	= gtk_text_buffer_get_tag_table(book_view->text_buff);
+	GtkTextTagTable* tag_table	= gtk_text_buffer_get_tag_table(app->text_buff);
 	GtkTextTag* default_tag		= gtk_text_tag_table_lookup(tag_table, "default_tag");
 	GtkTextTag* code_tag		= gtk_text_tag_table_lookup(tag_table, "code_tag");
 
@@ -26,10 +25,10 @@ int reader_set_color_theme(FB2_READER* obj, const char* color_theme)
 
 	GdkRGBA color;
 	gdk_rgba_parse(&color, background_color);
-	gtk_widget_override_background_color(GTK_WIDGET(book_view->text_view), GTK_STATE_FLAG_NORMAL, &color);
+	gtk_widget_override_background_color(GTK_WIDGET(app->text_view), GTK_STATE_FLAG_NORMAL, &color);
 
 	gdk_rgba_parse(&color, selection_color);
-	gtk_widget_override_background_color(GTK_WIDGET(book_view->text_view), GTK_STATE_FLAG_SELECTED, &color);
+	gtk_widget_override_background_color(GTK_WIDGET(app->text_view), GTK_STATE_FLAG_SELECTED, &color);
 
 	GValue str_value = G_VALUE_INIT;
 	g_value_init(&str_value, G_TYPE_STRING);
@@ -63,5 +62,5 @@ int reader_set_color_theme(FB2_READER* obj, const char* color_theme)
 	g_value_unset(&str_value);
 	g_value_unset(&int_value);
 
-	return 0;
+	return EXIT_SUCCESS;
 }

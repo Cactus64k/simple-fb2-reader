@@ -60,20 +60,24 @@ int main(int argc,	char *argv[])
 				exit(EXIT_FAILURE);
 			}
 
-			gtk_builder_connect_signals(builder, NULL);
+			APP app;
+			memset(&app, 0, sizeof(APP));
+
+			init_app(builder, &app);
+			init_search_wnd(builder, &(app.search_window));
+			reader_books_db_init(&app);
+
+
+			gtk_builder_connect_signals(builder, &app);
 
 			//**********************************************************************************************
 
-			init_main_wnd(builder, &GLOBAL_FB2_READER);
-			init_search_wnd(builder, &GLOBAL_SEARCH_WND);
-			init_encode_wnd(builder, &GLOBAL_ENCODING_DIALOG);
 
-			g_object_unref(G_OBJECT(builder));
 
 			if(book_file_path != NULL)
 			{
-				if(reader_open_book(book_file_path) != 0)
-					g_free(book_file_path);
+				reader_open_book(&app, book_file_path);
+				g_free(book_file_path);
 			}
 
 
@@ -85,5 +89,5 @@ int main(int argc,	char *argv[])
 
 	g_strfreev(cmd_line);
 
-	return 0;
+	return EXIT_SUCCESS;
 }

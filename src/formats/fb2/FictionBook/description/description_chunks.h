@@ -3,10 +3,10 @@
 
 	#include "../FictionBook_chunks.h"
 
-	int parse_fb2_annotation		(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
-	int parse_fb2_book_title		(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
-	int parse_fb2_coverpage			(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
-	int parse_fb2_title_info		(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
-	int parse_fb2_book_description	(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_annotation		(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_book_title		(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_coverpage			(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_title_info		(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_book_description	(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
 
 #endif /* DESCRIPTION_CHUNKS_H_ */

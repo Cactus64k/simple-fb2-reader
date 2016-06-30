@@ -1,6 +1,6 @@
 #include "../callbacks_chunk.h"
 
-gboolean book_textview_scroll_event_cb(GtkTextView *text_view, GdkEventScroll *event, gpointer user_data)
+G_MODULE_EXPORT gboolean book_textview_scroll_event_cb(GtkTextView *text_view, GdkEventScroll *event, gpointer user_data)
 {
 	if(event->state & GDK_CONTROL_MASK)
 	{

@@ -1,9 +1,8 @@
 #include "../fb2_zip/fb2_zip_chunks.h"
 
-int parse_fb2_zip_file(char* file_path)
+int parse_fb2_zip_file(APP* app, char* file_path)
 {
-	FB2_READER_BOOK_VIEW* book_text_view	= &(GLOBAL_FB2_READER.book_text_view);
-	GtkTextBuffer* text_buff				= book_text_view->text_buff;
+	GtkTextBuffer* text_buff				= app->text_buff;
 
 	int zip_error = 0;
 	struct zip* f = zip_open(file_path, ZIP_CHECKCONS, &zip_error);
@@ -48,15 +47,15 @@ int parse_fb2_zip_file(char* file_path)
 							GtkTextIter text_buff_end;
 							gtk_text_buffer_get_end_iter(text_buff, &text_buff_end);
 
-							parse_fb2_function_book(book_text_view, file_tree, &text_buff_end);
+							parse_fb2_function_book(app, file_tree, &text_buff_end);
 
 							xmlFreeDoc(xml_doc);
 						}
 						else
-							fprintf(stderr, _C("ERROR: xml is well parsed, but pointer is NULL\n"));
+							reader_show_error(app, _C("ERROR: xml is well parsed, but pointer is NULL\n"));
 					}
 					else
-						fprintf(stderr, _C("ERROR: failed to parse fb2 file: %s\n"), st.name);
+						reader_show_error(app, _C("ERROR: Failed to parsing fb2 file.\n"));
 
 					xmlFreeParserCtxt(ctxt);
 
@@ -64,13 +63,13 @@ int parse_fb2_zip_file(char* file_path)
 						break;
 				}
 				else
-					fprintf(stderr, _C("ERROR: failed to unpack fb2 file: %s\n"), z_file_name);
+					fputs(_C("ERROR: failed to unpack fb2 file.\n"), stderr);
 			}
 		}
 		zip_close(f);
 	}
 	else
-		fprintf(stderr, _C("ERROR: failed to open zip file: %s; error code: %d\n"), file_path, zip_error);
+		reader_show_error(app, _C("ERROR: failed to open zip file.\n"));
 
-	return 0;
+	return EXIT_SUCCESS;
 }

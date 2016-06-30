@@ -1,28 +1,28 @@
 #include "p_chunks.h"
 
-int parse_fb2_p(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_fb2_p(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node	!= NULL, -1);
-	g_return_val_if_fail(text_buff_end	!= NULL, -2);
+	g_return_val_if_fail(parent_node	!= NULL, EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end	!= NULL, EXIT_FAILURE);
 
-	GtkTextBuffer* text_buff	= obj->text_buff;
+	GtkTextBuffer* text_buff	= app->text_buff;
 	xmlNode* node				= parent_node;//parent_node->children;
 
-	parse_fb2_id_attribute(obj, parent_node, text_buff_end);
+	parse_fb2_id_attribute(app, parent_node, text_buff_end);
 
 	gtk_text_buffer_insert(text_buff, text_buff_end, "\t", -1);
-	parse_fb2_formated_text(obj, node, text_buff_end);
+	parse_fb2_p__(app, node, text_buff_end);
 	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
-int parse_fb2_formated_text(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_fb2_p__(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
-	GtkTextBuffer* text_buff	= obj->text_buff;
+	GtkTextBuffer* text_buff	= app->text_buff;
 	xmlNode* node				= parent_node->children;
 
 	const char* tag = NULL;
@@ -43,9 +43,9 @@ int parse_fb2_formated_text(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, Gtk
 			else if(strcmp((char*)node->name, "emphasis") == 0)			// курсив
 				tag = "emphasis_tag";
 			else if(strcmp((char*)node->name, "style") == 0)			// стилевое оформление
-				parse_fb2_style(obj, node, text_buff_end);
+				parse_fb2_style(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "a") == 0)				// ссылка
-				parse_fb2_a(obj, node, text_buff_end);
+				parse_fb2_a(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "strikethrough") == 0)	// зачеркнутый
 				tag = "strikethrough_tag";
 			else if(strcmp((char*)node->name, "sub") == 0)				// нижний индекс
@@ -55,7 +55,7 @@ int parse_fb2_formated_text(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, Gtk
 			else if(strcmp((char*)parent_node->name, "code") == 0)		// код, моноширинный шрифт
 				tag = "code_tag";
 			else if(strcmp((char*)node->name, "image") == 0)			// картинка
-				parse_fb2_image_inline(obj, node, text_buff_end);
+				parse_fb2_image_inline(app, node, text_buff_end);
 		}
 
 
@@ -64,7 +64,7 @@ int parse_fb2_formated_text(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, Gtk
 		{
 			GtkTextMark* start_tag_mark = gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
 
-			parse_fb2_formated_text(obj, node, text_buff_end);
+			parse_fb2_p__(app, node, text_buff_end);
 
 			GtkTextIter start_tag_iter;
 			gtk_text_buffer_get_iter_at_mark(text_buff, &start_tag_iter, start_tag_mark);
@@ -76,5 +76,5 @@ int parse_fb2_formated_text(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, Gtk
 
 		node = node->next;
 	}
-	return 0;
+	return EXIT_SUCCESS;
 }

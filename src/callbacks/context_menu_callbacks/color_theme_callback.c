@@ -1,19 +1,20 @@
 #include "../callbacks_chunk.h"
 
-void color_theme_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)
+G_MODULE_EXPORT void color_theme_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)
 {
-	GKeyFile* app_config			= GLOBAL_FB2_READER.app_config;
+	APP* app						= (APP*)user_data;
+	GKeyFile* app_config			= app->app_config;
 	const char* menu_item_name		= gtk_widget_get_name(GTK_WIDGET(checkmenuitem));
 
-	reader_set_color_theme(&GLOBAL_FB2_READER, menu_item_name);
+	reader_set_color_theme(app, menu_item_name);
 
 	g_key_file_set_string(app_config, "app", "color_theme", menu_item_name);
 }
 
-void color_theme_activate_cb(GtkMenuItem* checkmenuitem, gpointer user_data)
+G_MODULE_EXPORT void color_theme_activate_cb(GtkMenuItem* checkmenuitem, gpointer user_data)
 {
-	GKeyFile* app_config			= GLOBAL_FB2_READER.app_config;
-	FB2_READER_BOOK_VIEW* book_view	= &(GLOBAL_FB2_READER.book_text_view);
+	APP* app						= (APP*)user_data;
+	GKeyFile* app_config			= app->app_config;
 	GtkWidget* sub_menu				= gtk_menu_item_get_submenu(checkmenuitem);
 
 	GList* items_list				= gtk_container_get_children(GTK_CONTAINER(sub_menu));
@@ -35,7 +36,7 @@ void color_theme_activate_cb(GtkMenuItem* checkmenuitem, gpointer user_data)
 			if(strcmp(groups[i], color_theme) == 0)
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), TRUE);
 
-			g_signal_connect(item, "toggled", G_CALLBACK(color_theme_checkmenuitem_toggled_cb), book_view);
+			g_signal_connect(item, "toggled", G_CALLBACK(color_theme_checkmenuitem_toggled_cb), app);
 			gtk_menu_shell_append(GTK_MENU_SHELL(sub_menu), item);
 			gtk_widget_show(item);
 		}

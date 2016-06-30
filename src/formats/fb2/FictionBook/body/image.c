@@ -1,9 +1,9 @@
 #include "body_chunks.h"
 
-int parse_fb2_image(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_fb2_image(APP* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
 	GtkTextBuffer* text_buff		= obj->text_buff;
 	GHashTable* binary_hash_table	= obj->binary_hash_table;
@@ -46,5 +46,5 @@ int parse_fb2_image(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter
 	gtk_text_buffer_delete_mark(text_buff, start_tag_mark);
 	gtk_text_buffer_apply_tag_by_name(text_buff, "image_tag", &start_tag_iter, text_buff_end);
 
-	return 0;
+	return EXIT_SUCCESS;
 }

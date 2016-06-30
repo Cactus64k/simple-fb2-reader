@@ -1,20 +1,20 @@
 #include "fb2_chunks.h"
 
-int parse_fb2_file(char* file_path)
+int parse_fb2_file(APP* app, char* file_path)
 {
-	g_return_val_if_fail(file_path != NULL, -1);
+	g_return_val_if_fail(file_path != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
 
-	FB2_READER_BOOK_VIEW* book_text_view	= &(GLOBAL_FB2_READER.book_text_view);
-	GtkTextBuffer* text_buff				= book_text_view->text_buff;
+	GtkTextBuffer* text_buff	= app->text_buff;
 
 
-	xmlDocPtr file_tree = xmlReadFile(file_path, NULL, XML_PARSE_COMPACT | XML_PARSE_NONET);
+	xmlDocPtr doc = xmlReadFile(file_path, NULL, XML_PARSE_COMPACT | XML_PARSE_NONET | XML_PARSE_NOERROR);
 
-	if(file_tree != NULL)
+	if(doc != NULL)
 	{
-		xmlNode* root = file_tree->children;
+		xmlNode* root = xmlDocGetRootElement(doc);
 
-		while(root != NULL)		// ищем рут
+		while(root != NULL)
 		{
 			if((root->type == XML_ELEMENT_NODE) && (strcmp((char*)root->name, "FictionBook") == 0))
 				break;
@@ -27,14 +27,14 @@ int parse_fb2_file(char* file_path)
 		GtkTextIter text_buff_end;
 		gtk_text_buffer_get_end_iter(text_buff, &text_buff_end);
 
-		parse_fb2_function_book(book_text_view, root, &text_buff_end);
+		parse_fb2_function_book(app, root, &text_buff_end);
 
-		xmlFreeDoc(file_tree);
+		xmlFreeDoc(doc);
 	}
 	else
-		fprintf(stderr, _C("ERROR: Failed to parsing fb2 file: %s\n"), file_path);
+		reader_show_error(app, _C("ERROR: Failed to parsing fb2 file: %s\n"));
 
 	xmlCleanupParser();
 
-	return 0;
+	return EXIT_SUCCESS;
 }

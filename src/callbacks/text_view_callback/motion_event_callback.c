@@ -1,6 +1,6 @@
 #include "../callbacks_chunk.h"
 
-gboolean book_textview_motion_notify_event_cb(GtkWidget* widget, GdkEventMotion* event, gpointer user_data)
+G_MODULE_EXPORT gboolean book_textview_motion_notify_event_cb(GtkWidget* widget, GdkEventMotion* event, gpointer user_data)
 {
 	GtkTextView* text_view		= GTK_TEXT_VIEW(widget);
 

@@ -1,14 +1,14 @@
 #include "body_chunks.h"
 
-int parse_fb2_epigraph(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_fb2_epigraph(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
-	GtkTextBuffer* text_buff	= obj->text_buff;
+	GtkTextBuffer* text_buff	= app->text_buff;
 	xmlNode* node				= parent_node->children;
 
-	parse_fb2_id_attribute(obj, parent_node, text_buff_end);
+	parse_fb2_id_attribute(app, parent_node, text_buff_end);
 
 	GtkTextMark* start_tag_mark		= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
 
@@ -17,15 +17,15 @@ int parse_fb2_epigraph(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextI
 		if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "p") == 0)
-				parse_fb2_p(obj, node, text_buff_end);
+				parse_fb2_p(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "poem") == 0)
-				parse_fb2_poem(obj, node, text_buff_end);
+				parse_fb2_poem(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "cite") == 0)
-				parse_fb2_cite(obj, node, text_buff_end);
+				parse_fb2_cite(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)
-				parse_fb2_empty_line(obj, node, text_buff_end);
+				parse_fb2_empty_line(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "text-author") == 0)
-				parse_fb2_text_autor(obj, node, text_buff_end);
+				parse_fb2_text_autor(app, node, text_buff_end);
 		}
 
 		node = node->next;
@@ -37,5 +37,5 @@ int parse_fb2_epigraph(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextI
 	//g_object_unref(G_OBJECT(start_tag_mark));
 	gtk_text_buffer_apply_tag_by_name(text_buff, "epigraph_tag", &start_tag_iter, text_buff_end);
 
-	return 0;
+	return EXIT_SUCCESS;
 }

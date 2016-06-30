@@ -5,9 +5,9 @@
 
 	#include "section/section_chunks.h"
 
-	int parse_fb2_body				(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
-	int parse_fb2_epigraph			(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
-	int parse_fb2_image				(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
-	int parse_fb2_title				(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_body				(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_epigraph			(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_image				(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_title				(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
 
 #endif /* BODY_CHUNKS_H_ */

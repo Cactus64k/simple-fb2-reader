@@ -1,10 +1,11 @@
 #include "../callbacks_chunk.h"
 
-void navigation_treeview_row_activated_cb(GtkTreeView* tree_view, GtkTreePath* path, GtkTreeViewColumn* column, gpointer user_data)
+G_MODULE_EXPORT void navigation_treeview_row_activated_cb(GtkTreeView* tree_view, GtkTreePath* path, GtkTreeViewColumn* column, gpointer user_data)
 {
-	FB2_READER_BOOK_VIEW* book_view	= &(GLOBAL_FB2_READER.book_text_view);
-	GtkDialog* dialog				= GLOBAL_FB2_READER.navigation_dialog;
-	GtkTreeStore* section_store		= GLOBAL_FB2_READER.book_text_view.sections_treestore;
+
+	APP* app						= (APP*)user_data;
+	GtkDialog* dialog				= app->navigation_dialog;
+	GtkTreeStore* section_store		= app->sections_treestore;
 	GtkTreeIter tree_iter;
 	gint line = 0;
 
@@ -14,6 +15,6 @@ void navigation_treeview_row_activated_cb(GtkTreeView* tree_view, GtkTreePath* p
 	{
 		gtk_tree_model_get(GTK_TREE_MODEL(section_store), &tree_iter, SECTION_STRING_COLUMN, &line, -1);
 
-		reader_scroll_at_line_offset(book_view, line, 0);
+		reader_scroll_at_line_offset(app, line, 0);
 	}
 }

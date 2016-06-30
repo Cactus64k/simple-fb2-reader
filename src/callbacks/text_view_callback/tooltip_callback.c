@@ -1,6 +1,6 @@
 #include "../callbacks_chunk.h"
 
-gboolean book_textview_query_tooltip_cb(GtkWidget* widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip* tooltip, gpointer user_data)
+G_MODULE_EXPORT gboolean book_textview_query_tooltip_cb(GtkWidget* widget, gint x, gint y, gboolean keyboard_mode, GtkTooltip* tooltip, gpointer user_data)
 {
 	if(keyboard_mode != TRUE)
 	{

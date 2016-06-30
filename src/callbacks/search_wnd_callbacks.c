@@ -1,11 +1,11 @@
 #include "callbacks_chunk.h"
 
-void search_wnd_close_button_clicked_cb(GtkButton* widget, gpointer user_data)
+G_MODULE_EXPORT void search_wnd_close_button_clicked_cb(GtkButton* widget, gpointer user_data)
 {
 	gtk_widget_hide(GTK_WIDGET(user_data));
 }
 
-gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpointer user_data)
+G_MODULE_EXPORT gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpointer user_data)
 {
 	GdkEventKey key_event = event->key;
 	if(key_event.keyval == GDK_KEY_Escape)
@@ -17,15 +17,16 @@ gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpoin
 }
 
 
-void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
+G_MODULE_EXPORT void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 {
-	GtkTextBuffer* text_buff		= GLOBAL_FB2_READER.book_text_view.text_buff;
-	GtkTextView* text_view			= GLOBAL_FB2_READER.book_text_view.text_view;
-	GtkEntry* search_entry			= GLOBAL_SEARCH_WND.search_query_entry;
-	GtkTextIter* last_search_pos	= GLOBAL_SEARCH_WND.last_pos;
-	GtkCheckButton* case_sensitive	= GLOBAL_SEARCH_WND.case_sensitive;
-	GtkRadioButton* backward		= GLOBAL_SEARCH_WND.backward;
-	GtkRadioButton* forward			= GLOBAL_SEARCH_WND.forward;
+	APP* app						= (APP*)user_data;
+	GtkTextBuffer* text_buff		= app->text_buff;
+	GtkTextView* text_view			= app->text_view;
+	GtkEntry* search_entry			= app->search_window.search_query_entry;
+	GtkTextIter* last_search_pos	= app->search_window.last_pos;
+	GtkCheckButton* case_sensitive	= app->search_window.case_sensitive;
+	GtkRadioButton* backward		= app->search_window.backward;
+	GtkRadioButton* forward			= app->search_window.forward;
 
 	GtkAdjustment* horisontal_adj	= gtk_scrollable_get_hadjustment(GTK_SCROLLABLE(text_view));
 
@@ -59,7 +60,7 @@ void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 
 		gtk_text_iter_free(last_search_pos);
 
-		GLOBAL_SEARCH_WND.last_pos = gtk_text_iter_copy(&text_buff_match_end_iter);
+		app->search_window.last_pos = gtk_text_iter_copy(&text_buff_match_end_iter);
 		//FIXME ебота выше
 	}
 	else
@@ -72,10 +73,11 @@ void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 }
 
 
-void search_query_changed_cb(GtkEditable* editable, gpointer user_data)
+G_MODULE_EXPORT void search_query_changed_cb(GtkEditable* editable, gpointer user_data)
 {
-	GtkTextBuffer* text_buff		= GLOBAL_FB2_READER.book_text_view.text_buff;
-	GtkTextIter* last_search_pos	= GLOBAL_SEARCH_WND.last_pos;
+	APP* app						= (APP*)user_data;
+	GtkTextBuffer* text_buff		= app->text_buff;
+	GtkTextIter* last_search_pos	= app->search_window.last_pos;
 	gtk_text_buffer_get_start_iter(text_buff, last_search_pos);
 }
 

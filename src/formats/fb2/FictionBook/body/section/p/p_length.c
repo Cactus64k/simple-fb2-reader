@@ -2,8 +2,8 @@
 
 int parse_fb2_p_get_length(xmlNode* parent_node, glong* len)
 {
-	g_return_val_if_fail(parent_node	!= NULL, -1);
-	g_return_val_if_fail(len			!= NULL, -2);
+	g_return_val_if_fail(parent_node	!= NULL, EXIT_FAILURE);
+	g_return_val_if_fail(len			!= NULL, EXIT_FAILURE);
 
 	xmlNode* node = parent_node->children;
 
@@ -40,5 +40,5 @@ int parse_fb2_p_get_length(xmlNode* parent_node, glong* len)
 		node = node->next;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }

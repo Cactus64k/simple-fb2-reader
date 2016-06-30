@@ -3,14 +3,14 @@
 #define READ_CHUNK_SIZE 1024
 int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf);
 
-int parse_fb2_book_binary(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node)
+int parse_fb2_book_binary(APP* app, xmlNode* parent_node)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
+	g_return_val_if_fail(parent_node != NULL, EXIT_FAILURE);
 
-	GHashTable* binary_hash_table	= obj->binary_hash_table;
+	GHashTable* binary_hash_table	= app->binary_hash_table;
 
 	const char* id_attr				= NULL;
-	parse_fb2_attribute(obj, parent_node, "id", &id_attr);
+	parse_fb2_attribute(app, parent_node, "id", &id_attr);
 
 	if(id_attr != NULL)
 	{
@@ -39,14 +39,14 @@ int parse_fb2_book_binary(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node)
 	else
 		fputs(_C("ERROR: no id properties in <image> tag\n"), stderr);
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
 
 int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 {
-	g_return_val_if_fail(pixbuf != NULL, -1);
-	g_return_val_if_fail(base64 != NULL, -2);
+	g_return_val_if_fail(pixbuf != NULL, EXIT_FAILURE);
+	g_return_val_if_fail(base64 != NULL, EXIT_FAILURE);
 
 	guchar out_buff[(READ_CHUNK_SIZE/4)*3];
 
@@ -99,5 +99,5 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 
 	g_object_unref(loader);
 
-	return 0;
+	return EXIT_SUCCESS;
 }

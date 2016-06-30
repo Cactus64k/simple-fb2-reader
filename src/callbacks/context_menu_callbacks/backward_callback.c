@@ -1,10 +1,10 @@
 #include "../callbacks_chunk.h"
 
-void backward_itemmenu_cb(GtkMenuItem* menuitem, gpointer user_data)
+G_MODULE_EXPORT void backward_itemmenu_cb(GtkMenuItem* menuitem, gpointer user_data)
 {
-	FB2_READER_BOOK_VIEW* book_view	= &(GLOBAL_FB2_READER.book_text_view);
-	GtkTextView* text_view			= book_view->text_view;
-	GList* link_jump_list			= book_view->link_jump_list;
+	APP* app						= (APP*)user_data;
+	GtkTextView* text_view			= app->text_view;
+	GList* link_jump_list			= app->link_jump_list;
 
 	GtkAdjustment* horisontal_adj	= gtk_scrollable_get_hadjustment(GTK_SCROLLABLE(text_view));
 
@@ -15,6 +15,6 @@ void backward_itemmenu_cb(GtkMenuItem* menuitem, gpointer user_data)
 
 		gtk_adjustment_set_value(horisontal_adj, 0.0);
 
-		book_view->link_jump_list = g_list_remove(link_jump_list, mark);
+		app->link_jump_list = g_list_remove(link_jump_list, mark);
 	}
 }

@@ -3,31 +3,19 @@
 void text_tag_foreach_remove(GtkTextTag* tag, gpointer data);
 void free_text_mark(gpointer ptr);
 
-int reader_close_book()
+int reader_close_book(APP* app)
 {
-	FB2_READER_BOOK_VIEW* book_view		= &GLOBAL_FB2_READER.book_text_view;
-	GtkWidget* main_wnd					= GLOBAL_FB2_READER.main_wnd;
-	GtkTreeStore* section_treestore		= GLOBAL_FB2_READER.book_text_view.sections_treestore;
-	GHashTable* binary_hash_table		= GLOBAL_FB2_READER.book_text_view.binary_hash_table;
-	GHashTable* links_hash_table		= GLOBAL_FB2_READER.book_text_view.links_hash_table;
-	GtkTextBuffer* text_buff			= GLOBAL_FB2_READER.book_text_view.text_buff;
-	GKeyFile* book_config				= GLOBAL_FB2_READER.book_text_view.config;
-	BOOK_TYPE book_type					= GLOBAL_FB2_READER.book_text_view.type;
-	char* book_config_path				= GLOBAL_FB2_READER.book_text_view.config_path;
-	char* book_path						= GLOBAL_FB2_READER.book_text_view.path;
-	GList* link_jump_list				= GLOBAL_FB2_READER.book_text_view.link_jump_list;
+	GtkWidget* main_wnd					= app->main_wnd;
+	GtkTreeStore* section_treestore		= app->sections_treestore;
+	GHashTable* binary_hash_table		= app->binary_hash_table;
+	GHashTable* links_hash_table		= app->links_hash_table;
+	GtkTextBuffer* text_buff			= app->text_buff;
+	BOOK_TYPE book_type					= app->book_type;
+	GList* link_jump_list				= app->link_jump_list;
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
-		reader_scroll_save(book_view);
-
-		gsize book_config_len	= 0;
-		char* book_config_data	= g_key_file_to_data(book_config, &book_config_len, NULL);
-
-		FILE* f = fopen(book_config_path, "wb");
-		fwrite(book_config_data, 1, book_config_len,  f);
-		fclose(f);
-		g_free(book_config_data);
+		reader_scroll_save(app);
 
 		//******************************************************************
 
@@ -49,20 +37,14 @@ int reader_close_book()
 
 		gtk_tree_store_clear(section_treestore);
 
-		g_free(book_config_path);
-		g_free(book_path);
-		g_key_file_free(book_config);
+		app->link_jump_list			= NULL;
+		app->book_type				= BOOK_TYPE_NONE;
+		app->book_index				= -1;
 
-		GLOBAL_FB2_READER.book_text_view.path			= NULL;
-		GLOBAL_FB2_READER.book_text_view.config_path	= NULL;
-		GLOBAL_FB2_READER.book_text_view.config			= NULL;
-		GLOBAL_FB2_READER.book_text_view.link_jump_list	= NULL;
-		GLOBAL_FB2_READER.book_text_view.type			= BOOK_TYPE_NONE;
-
-		return 0;
+		return EXIT_SUCCESS;
 	}
 
-	return 1;
+	return EXIT_FAILURE;
 }
 
 void free_text_mark(gpointer ptr)

@@ -1,14 +1,14 @@
 #include "attributes_chunks.h"
 
-int parse_fb2_id_attribute(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_fb2_id_attribute(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
-	GHashTable* links_hash_table	= obj->links_hash_table;
+	GHashTable* links_hash_table	= app->links_hash_table;
 	const char* id_attr				= NULL;
 
-	parse_fb2_attribute(obj, parent_node, "id", &id_attr);
+	parse_fb2_attribute(app, parent_node, "id", &id_attr);
 	if(id_attr != NULL)
 	{
 		gint pos		= gtk_text_iter_get_line(text_buff_end);
@@ -25,5 +25,5 @@ int parse_fb2_id_attribute(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkT
 
 
 
-	return 0;
+	return EXIT_SUCCESS;
 }

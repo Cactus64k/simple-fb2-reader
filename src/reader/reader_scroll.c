@@ -1,27 +1,29 @@
 #include "reader_chunks.h"
 
-int reader_scroll_save(FB2_READER_BOOK_VIEW* obj)
+int reader_scroll_save(APP* app)
 {
-	GtkTextView* text_view		= obj->text_view;
-	GtkTextIter scroll_iter;
+	GtkTextView* text_view		= app->text_view;
 	GtkAdjustment* vertical_adj	= gtk_scrollable_get_vadjustment(GTK_SCROLLABLE(text_view));
 	double scroll_pos			= gtk_adjustment_get_value(vertical_adj);
+	int64_t book_index			= app->book_index;
+	GtkTextIter scroll_iter;
 
 	gtk_text_view_get_iter_at_location(text_view, &scroll_iter, 0, scroll_pos);
 
-	gint read_line				= gtk_text_iter_get_line(&scroll_iter);
-	g_key_file_set_integer(obj->config, "book", "read_line", read_line);
+	gint line					= gtk_text_iter_get_line(&scroll_iter);
+	gint line_offset			= gtk_text_iter_get_line_offset(&scroll_iter);
 
-	gint read_line_offset	= gtk_text_iter_get_line_offset(&scroll_iter);
-	g_key_file_set_integer(obj->config, "book", "read_line_offset", read_line_offset);
+	reader_books_db_set_int_by_index(app, book_index, "line", line);
+	reader_books_db_set_int_by_index(app, book_index, "line_offset", line_offset);
 
-	return 0;
+
+	return EXIT_SUCCESS;
 }
 
-int reader_scroll_at_line_offset(FB2_READER_BOOK_VIEW* obj, gint line, gint line_offset)
+int reader_scroll_at_line_offset(APP* app, gint line, gint line_offset)
 {
-	GtkTextBuffer* text_buff		= obj->text_buff;
-	GtkTextView* text_view			= obj->text_view;
+	GtkTextBuffer* text_buff		= app->text_buff;
+	GtkTextView* text_view			= app->text_view;
 	GtkAdjustment* horisontal_adj	= gtk_scrollable_get_hadjustment(GTK_SCROLLABLE(text_view));
 	GtkTextIter scroll_iter;
 
@@ -47,18 +49,15 @@ int reader_scroll_at_line_offset(FB2_READER_BOOK_VIEW* obj, gint line, gint line
 		}
 	}
 
-	return -1;
+	return EXIT_FAILURE;
 }
 
-int reader_scroll_restore(FB2_READER_BOOK_VIEW* obj)
+int reader_scroll_restore(APP* app, int line, int line_offset)
 {
 	while(gtk_events_pending())
 		gtk_main_iteration();
 
-	gint line					= g_key_file_get_integer(obj->config, "book", "read_line", NULL);
-	gint offset					= g_key_file_get_integer(obj->config, "book", "read_line_offset", NULL);
+	reader_scroll_at_line_offset(app, line, line_offset);
 
-	reader_scroll_at_line_offset(obj, line, offset);
-
-	return 0;
+	return EXIT_SUCCESS;
 }

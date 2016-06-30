@@ -1,10 +1,10 @@
 #include "table_chunks.h"
 
-int parse_fb2_table_get_size(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, glong** cells_table, size_t* cells_count)
+int parse_fb2_table_get_size(APP* app, xmlNode* parent_node, glong** cells_table, size_t* cells_count)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(cells_table != NULL, -2);
-	g_return_val_if_fail(cells_count != NULL, -3);
+	g_return_val_if_fail(parent_node != NULL, EXIT_FAILURE);
+	g_return_val_if_fail(cells_table != NULL, EXIT_FAILURE);
+	g_return_val_if_fail(cells_count != NULL, EXIT_FAILURE);
 
 	xmlNode* node = parent_node->children;
 
@@ -56,5 +56,5 @@ int parse_fb2_table_get_size(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, gl
 		node = node->next;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }

@@ -1,69 +1,42 @@
 #include "reader_chunks.h"
 
-int reader_open_book(char* book_path)
+int reader_open_book(APP* app, char* book_path)
 {
-	FB2_READER_BOOK_VIEW* book_view		= &GLOBAL_FB2_READER.book_text_view;
-	GtkDialog* encode_dialog			= GLOBAL_ENCODING_DIALOG.dialog;
-	GtkTreeView* tree_view				= GLOBAL_ENCODING_DIALOG.treeview;
-	GtkTreeSelection* tree_selection	= gtk_tree_view_get_selection(tree_view);
-	GtkTreeModel* tree_model			= GTK_TREE_MODEL(GLOBAL_ENCODING_DIALOG.liststore);
-
 	BOOK_TYPE book_type = reader_get_book_type(book_path);
+
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
-		book_view->type = book_type;
-		book_view->path = book_path;
-
-		if(reader_load_book_config(book_view, book_path) == 0)
+		char* book_hash		= reader_get_book_hash(app, book_path);
+		int64_t book_index	= reader_books_db_get_index_by_hash(app, book_hash);
+		if(book_hash != NULL)
 		{
-			GKeyFile* config = book_view->config;
+			if(book_index == -1)
+				book_index = reader_books_db_add_new(app, book_hash);
+
+			app->book_type	= book_type;
+			app->book_index = book_index;
 
 			//*****************************************************
 			if(book_type == BOOK_TYPE_FB2)
-				parse_fb2_file(book_path);
+				parse_fb2_file(app, book_path);
 			//*****************************************************
 			else if(book_type == BOOK_TYPE_FB2_ZIP)
-				parse_fb2_zip_file(book_path);
-			//*****************************************************
-			else if(book_type == BOOK_TYPE_TXT)
-			{
-				char* encode_name = g_key_file_get_string(config, "book", "encoding", NULL);
-				if(encode_name != NULL)
-					parse_txt_file(book_path, encode_name);
-				else
-				{
-					if(gtk_dialog_run(encode_dialog) == 2)
-					{
-						GtkTreeIter tree_iter;
-
-						if(gtk_tree_selection_get_selected(tree_selection, NULL, &tree_iter) == TRUE)
-						{
-							gtk_tree_model_get(tree_model, &tree_iter, 0, &encode_name, -1);
-
-							g_key_file_set_string(config, "book", "encoding", encode_name);
-
-							parse_txt_file(book_path, encode_name);
-						}
-						g_free(encode_name);
-
-					}
-					gtk_widget_hide(GTK_WIDGET(encode_dialog));
-				}
-			}
+				parse_fb2_zip_file(app, book_path);
 			//*****************************************************
 
-			//gtk_tree_view_expand_all(sections_treeview);
 
-			reader_scroll_restore(book_view);
+			int line		= reader_books_db_get_int_by_index(app, book_index, "line");
+			int line_offset	= reader_books_db_get_int_by_index(app, book_index, "line_offset");
+
+			reader_scroll_restore(app, line, line_offset);
 		}
-		else
-			fprintf(stderr, _C("ERROR: failed to open file: %s\n"), book_path);
+		g_free(book_hash);
 
-		return 0;
+		return EXIT_SUCCESS;
 	}
 
-	return 1;		// память нужно освободить руками
+	return EXIT_FAILURE;		// память нужно освободить руками
 }
 
 int _strncmpr(const char *str1, const char *str2, size_t count)
@@ -89,7 +62,7 @@ int _strncmpr(const char *str1, const char *str2, size_t count)
 	while(pos != 0)
 	{
 		if(*str1 != *str2)
-			return str1_len - str2_len;
+			return (int)(str1_len - str2_len);			// FIXME
 
 		str1--;
 		str2--;
@@ -105,8 +78,6 @@ BOOK_TYPE reader_get_book_type(char* file_path)
 		return BOOK_TYPE_FB2;
 	else if(_strncmpr(".fb2.zip", file_path, sizeof(".fb2.zip")-1) == 0)
 		return BOOK_TYPE_FB2_ZIP;
-	else if(_strncmpr(".txt", file_path, sizeof(".txt")-1) == 0)
-		return BOOK_TYPE_TXT;
 
 	return BOOK_TYPE_NONE;
 }

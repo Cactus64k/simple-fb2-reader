@@ -1,10 +1,11 @@
 #include "../callbacks_chunk.h"
 
-void search_imagemenuitem_activate_cb(GtkMenuItem* menuitem, gpointer user_data)
+G_MODULE_EXPORT void search_menuitem_activate_cb(GtkMenuItem* menuitem, gpointer user_data)
 {
-	GtkWidget* search_window	= GLOBAL_SEARCH_WND.search_wnd;
-	GtkEntry* search_entry		= GLOBAL_SEARCH_WND.search_query_entry;
-	BOOK_TYPE book_type			= GLOBAL_FB2_READER.book_text_view.type;
+	APP* app					= (APP*)user_data;
+	GtkWidget* search_window	= app->search_window.search_wnd;
+	GtkEntry* search_entry		= app->search_window.search_query_entry;
+	BOOK_TYPE book_type			= app->book_type;
 
 	if(book_type != BOOK_TYPE_NONE)
 	{

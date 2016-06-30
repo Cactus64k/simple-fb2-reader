@@ -1,16 +1,16 @@
 #include "section_chunks.h"
 
-int parse_stanza(FB2_READER_BOOK_VIEW* obj, xmlNode* node, GtkTextIter* text_buff_end);
+int parse_stanza(APP* app, xmlNode* node, GtkTextIter* text_buff_end);
 
-int parse_fb2_poem(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_fb2_poem(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
-	GtkTextBuffer* text_buff	= obj->text_buff;
+	GtkTextBuffer* text_buff	= app->text_buff;
 	xmlNode* node				= parent_node->children;
 
-	parse_fb2_id_attribute(obj, parent_node, text_buff_end);
+	parse_fb2_id_attribute(app, parent_node, text_buff_end);
 
 
 	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
@@ -20,29 +20,29 @@ int parse_fb2_poem(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter*
 		if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "title") == 0)
-				parse_fb2_title(obj, node, text_buff_end);
+				parse_fb2_title(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "epigraph") == 0)
-				parse_fb2_epigraph(obj, node, text_buff_end);
+				parse_fb2_epigraph(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "stanza") == 0)
-				parse_stanza(obj, node, text_buff_end);
+				parse_stanza(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "text-author") == 0)
-				parse_fb2_text_autor(obj, node, text_buff_end);
+				parse_fb2_text_autor(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "date") == 0)
-				parse_fb2_date(obj, node, text_buff_end);
+				parse_fb2_date(app, node, text_buff_end);
 		}
 
 		node = node->next;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 
-int parse_stanza(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_stanza(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
-	GtkTextBuffer* text_buff	= obj->text_buff;
+	GtkTextBuffer* text_buff	= app->text_buff;
 	xmlNode* node				= parent_node->children;
 
 	GtkTextMark* start_tag_mark	= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
@@ -52,12 +52,12 @@ int parse_stanza(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* t
 		if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "title") == 0)
-				parse_fb2_title(obj, node, text_buff_end);
+				parse_fb2_title(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "subtitle") == 0)
-				parse_fb2_subtitle(obj, node, text_buff_end);
+				parse_fb2_subtitle(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "v") == 0)
 			{
-				parse_fb2_formated_text(obj, node, text_buff_end);
+				parse_fb2_p__(app, node, text_buff_end);
 				gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 			}
 		}

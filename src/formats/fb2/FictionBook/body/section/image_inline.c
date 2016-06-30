@@ -1,19 +1,18 @@
 #include "section_chunks.h"
 
-int parse_fb2_image_inline(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_fb2_image_inline(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
-	GtkTextBuffer* text_buff		= obj->text_buff;
-	GHashTable* binary_hash_table	= obj->binary_hash_table;
-	xmlAttr* properties				= parent_node->properties;
+	GtkTextBuffer* text_buff		= app->text_buff;
+	GHashTable* binary_hash_table	= app->binary_hash_table;
 
-	parse_fb2_id_attribute(obj, parent_node, text_buff_end);
+	parse_fb2_id_attribute(app, parent_node, text_buff_end);
 
 	const char* href_attr			= NULL;
 
-	parse_fb2_attribute(obj, parent_node, "href", &href_attr);
+	parse_fb2_attribute(app, parent_node, "href", &href_attr);
 
 	if(href_attr != NULL)
 	{
@@ -32,6 +31,6 @@ int parse_fb2_image_inline(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkT
 
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }
 

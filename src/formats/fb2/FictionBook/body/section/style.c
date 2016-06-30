@@ -1,14 +1,14 @@
 #include "section_chunks.h"
 
-int parse_fb2_style(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
+int parse_fb2_style(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(text_buff_end != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
 	xmlNode* node				= parent_node;//parent_node->children;
 
 	//fputs(_C("tag <style> not fully supported!\n"), stderr);
-	parse_fb2_formated_text(obj, node, text_buff_end);
+	parse_fb2_p__(app, node, text_buff_end);
 
-	return 0;
+	return EXIT_SUCCESS;
 }

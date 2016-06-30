@@ -1,14 +1,14 @@
 #include "reader_chunks.h"
 
-int reader_close_app()
+int reader_close_app(APP* app)
 {
-	GKeyFile* app_config				= GLOBAL_FB2_READER.app_config;
-	char* app_config_path				= GLOBAL_FB2_READER.app_config_path;
-	GtkWidget* main_wnd					= GLOBAL_FB2_READER.main_wnd;
-	GdkCursor* cursor_link				= GLOBAL_FB2_READER.cursor_link;
-	GdkCursor* cursor_watch				= GLOBAL_FB2_READER.cursor_watch;
-	GtkTextBuffer* text_buff			= GLOBAL_FB2_READER.book_text_view.text_buff;
-	GtkListStore* encode_list			= GLOBAL_ENCODING_DIALOG.liststore;
+	GKeyFile* app_config				= app->app_config;
+	char* app_config_path				= app->app_config_path;
+	GtkWidget* main_wnd					= app->main_wnd;
+	GdkCursor* cursor_link				= app->cursor_link;
+	GdkCursor* cursor_watch				= app->cursor_watch;
+	GtkTextBuffer* text_buff			= app->text_buff;
+	sqlite3* books_db					= app->books_db;
 
 	GtkTextTagTable* text_tag_table		= gtk_text_buffer_get_tag_table(text_buff);
 	GtkTextTag* default_tag				= gtk_text_tag_table_lookup(text_tag_table, "default_tag");
@@ -49,7 +49,9 @@ int reader_close_app()
 
 	g_object_unref(cursor_link);
 	g_object_unref(cursor_watch);
-	gtk_list_store_clear(encode_list);
 
-	return 0;
+
+	sqlite3_close(books_db);
+
+	return EXIT_SUCCESS;
 }

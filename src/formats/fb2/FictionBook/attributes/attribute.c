@@ -1,10 +1,10 @@
 #include "attributes_chunks.h"
 
-int parse_fb2_attribute(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, const char* attribute_name, const char** value)
+int parse_fb2_attribute(APP* app, xmlNode* parent_node, const char* attribute_name, const char** value)
 {
-	g_return_val_if_fail(parent_node != NULL, -1);
-	g_return_val_if_fail(attribute_name != NULL, -2);
-	g_return_val_if_fail(value != NULL, -2);
+	g_return_val_if_fail(parent_node != NULL,		EXIT_FAILURE);
+	g_return_val_if_fail(attribute_name != NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(value != NULL,				EXIT_FAILURE);
 
 	xmlAttr* properties				= parent_node->properties;
 
@@ -22,5 +22,5 @@ int parse_fb2_attribute(FB2_READER_BOOK_VIEW* obj, xmlNode* parent_node, const c
 		properties = properties->next;
 	}
 
-	return 0;
+	return EXIT_SUCCESS;
 }

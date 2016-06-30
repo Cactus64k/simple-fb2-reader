@@ -11,7 +11,7 @@ PACKAGE_NAME	= @PACKAGE_NAME@
 SOURCES			= $(shell find . -name '*.c' -printf './%P ')
 OBJECTS			= $(SOURCES:.c=.o)
 
-DEFINIONS		= -DGUI_CONSTRUCT_PATH='"$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade"' -DENCODE_LIST_PATH='"$(sysconfdir)/simple-fb2-reader_encoding_list.cfg"'
+DEFINIONS		= -DGUI_CONSTRUCT_PATH='"$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade"'
 CC				= @CC@
 CFLAGS			= @CFLAGS@ $(DEFINIONS)
 LDFLAGS			= -export-dynamic
@@ -20,18 +20,20 @@ LDFLAGS			= -export-dynamic
 LIBS			=	@GTK_LIBS@\
 				@XML_LIBS@\
 				@GLIB_LIBS@\
-				@ZIP_LIBS@
+				@ZIP_LIBS@\
+				@SQLITE3_LIBS@
 
 ####################################################################################
 INCLUDE			=	@GTK_CFLAGS@\
 				@XML_CFLAGS@\
 				@GLIB_CFLAGS@\
-				@ZIP_CFLAGS@
+				@ZIP_CFLAGS@\
+				@SQLITE3_CFLAGS@
 
 all: $(SOURCES) $(PACKAGE_NAME) TRANSLATE_TARGET
 
 TRANSLATE_TARGET:
-				msgfmt intl/ru.po	--output-file=intl/ru.mo
+				msgfmt intl/ru.po		--output-file=intl/ru.mo
 				msgfmt intl/en_US.po	--output-file=intl/en_US.mo
 
 $(PACKAGE_NAME): $(OBJECTS) 
@@ -57,7 +59,6 @@ mk_folders:
 				mkdir -p $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/apps/
 				mkdir -p $(DESTDIR)$(datarootdir)/mime/packages/
 				mkdir -p $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/
-				mkdir -p $(DESTDIR)$(sysconfdir)/
 				mkdir -p $(DESTDIR)$(datarootdir)/$(PACKAGE_NAME)/
 
 # FIXME for new project
@@ -69,7 +70,6 @@ install:mk_folders
 				cp res/$(PACKAGE_NAME).svg					$(DESTDIR)$(datarootdir)/icons/hicolor/scalable/apps/$(PACKAGE_NAME).svg	
 				cp res/simple-fb2-reader.xml				$(DESTDIR)$(datarootdir)/mime/packages/simple-fb2-reader.xml
 				cp res/application-x-fictionbook+xml.svg	$(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-fictionbook+xml.svg
-				cp res/simple-fb2-reader_encoding_list.cfg	$(DESTDIR)$(sysconfdir)/simple-fb2-reader_encoding_list.cfg
 				cp res/$(PACKAGE_NAME).glade				$(DESTDIR)$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade
 				ln -sr $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-fictionbook+xml.svg $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-zip-compressed-fb2.svg
 
