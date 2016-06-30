@@ -45,23 +45,23 @@ G_MODULE_EXPORT gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEven
 		if(keyval == 'n')
 		{
 			if(book_type != BOOK_TYPE_NONE)
-				navigation_menuitem_activate_cb(NULL, NULL);
+				navigation_menuitem_activate_cb(NULL, app);
 		}
 		else if(keyval == 'f')
 		{
-			search_menuitem_activate_cb(NULL, NULL);
+			search_menuitem_activate_cb(NULL, app);
 		}
 		else if(keyval == 't')
 		{
-			color_theme_activate_cb(NULL, NULL);
+			color_theme_activate_cb(NULL, app);
 		}
 		else if(keyval == 'h')
 		{
-			about_menuitem_activate_cb(NULL, NULL);
+			about_menuitem_activate_cb(NULL, app);
 		}
 		else if(keyval == 'o')
 		{
-			open_file_menuitem_activate_cb(NULL, NULL);
+			open_file_menuitem_activate_cb(NULL, app);
 		}
 		else if(keyval == 'q')
 		{
