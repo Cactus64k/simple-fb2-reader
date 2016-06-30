@@ -17,8 +17,8 @@ G_MODULE_EXPORT gboolean book_textview_scroll_event_cb(GtkTextView *text_view, G
 		{
 			double text_scale = g_value_get_double(&value)+event->delta_y*0.1;
 
-			text_scale = MIN(text_scale, 0);
-			text_scale = MIN(text_scale, 10);
+			text_scale = MAX(text_scale, 1);
+			text_scale = MIN(text_scale, 20);
 
 			g_value_set_double(&value, text_scale);
 			g_object_set_property(G_OBJECT(default_tag), "scale", &value);
