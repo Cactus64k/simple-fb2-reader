@@ -2,16 +2,19 @@
 
 G_MODULE_EXPORT void search_wnd_close_button_clicked_cb(GtkButton* widget, gpointer user_data)
 {
-	gtk_widget_hide(GTK_WIDGET(user_data));
+	APP* app			= (APP*)user_data;
+	GtkWidget* s_wnd	= app->search_window.search_wnd;
+	gtk_widget_hide(s_wnd);
 }
 
 G_MODULE_EXPORT gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpointer user_data)
 {
-	GdkEventKey key_event = event->key;
+	APP* app				= (APP*)user_data;
+	GdkEventKey key_event	= event->key;
 	if(key_event.keyval == GDK_KEY_Escape)
 		gtk_widget_hide(widget);
 	else if(key_event.keyval == GDK_KEY_Return)
-		search_wnd_search_button_clicked_cb(NULL, NULL);
+		search_wnd_search_button_clicked_cb(NULL, app);
 
 	return FALSE;
 }

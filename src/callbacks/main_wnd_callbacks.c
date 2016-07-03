@@ -76,7 +76,7 @@ G_MODULE_EXPORT gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEven
 	else
 	{
 		if(event->keyval == GDK_KEY_Left)
-			backward_itemmenu_cb(NULL, NULL);
+			backward_itemmenu_cb(NULL, app);
 	}
 
 

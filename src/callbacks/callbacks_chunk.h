@@ -35,8 +35,6 @@
 	void recent_books_activate_cb				(GtkMenuItem* checkmenuitem, gpointer user_data);
 	void select_recent_book_activate_cb			(GtkMenuItem* checkmenuitem, gpointer user_data);
 
-	void search_wnd_search_button_clicked_cb	(GtkButton *button, gpointer user_data);
-
 
 	gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data);
 

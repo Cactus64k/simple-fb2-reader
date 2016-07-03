@@ -222,7 +222,7 @@ left-arrow				Previous position(link navigation)
                 <property name="receives_default">True</property>
                 <property name="halign">end</property>
                 <property name="valign">end</property>
-                <signal name="clicked" handler="search_wnd_close_button_clicked_cb" object="search_wnd" swapped="no"/>
+                <signal name="clicked" handler="search_wnd_close_button_clicked_cb" swapped="no"/>
                 <child>
                   <object class="GtkImage" id="search_wnd_close_button_icon">
                     <property name="visible">True</property>
