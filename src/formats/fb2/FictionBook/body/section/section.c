@@ -15,7 +15,7 @@ int parse_fb2_section(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end
 	gtk_tree_store_append(sections_treestore, &section_iter, tree_iter);
 	gint cur_line = gtk_text_iter_get_line(text_buff_end);
 	gtk_tree_store_set(sections_treestore, &section_iter,	SECTION_STRING_COLUMN,	cur_line,
-															SECTION_NAME_COLUMN,	_C("No Title"),-1);
+															SECTION_NAME_COLUMN,	_C("Section without title"),-1);
 
 	while(node != NULL)
 	{

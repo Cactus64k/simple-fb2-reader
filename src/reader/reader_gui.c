@@ -1,13 +1,7 @@
 #include "../chunks.h"
 
-int init_app(GtkBuilder* builder, APP* app)
+int reader_gui(APP* app, GtkBuilder* builder)
 {
-	memset(app, 0, sizeof(*app));
-
-	//create_config_dir();
-	init_app_config(app);
-
-
 	app->main_wnd						= GTK_WIDGET(				gtk_builder_get_object(builder, "main_wnd"));
 	app->filechooserdialog				= GTK_FILE_CHOOSER_DIALOG(	gtk_builder_get_object(builder, "book_filechooserdialog"));
 	app->navigation_dialog				= GTK_DIALOG(				gtk_builder_get_object(builder, "navigation_dialog"));
@@ -31,17 +25,7 @@ int init_app(GtkBuilder* builder, APP* app)
 	assert(app->text_view				!= NULL);
 	assert(app->sections_treestore		!= NULL);
 
-	create_fb2_tags(app);
-
-
 	gtk_about_dialog_set_version(app->about_dialog, PACKAGE_VERSION);
-
-	const char* conf_dir				= g_get_user_config_dir();
-	assert(conf_dir != NULL);
-
-	char* color_theme = g_key_file_get_string(app->app_config, "app", "color_theme", NULL);
-	reader_set_color_theme(app, (const char*)color_theme);
-	g_free(color_theme);
 
 	gint main_wnd_x_pos = g_key_file_get_integer(app->app_config, "app", "x_pos", NULL);
 	gint main_wnd_y_pos = g_key_file_get_integer(app->app_config, "app", "y_pos", NULL);
@@ -50,7 +34,6 @@ int init_app(GtkBuilder* builder, APP* app)
 	gint main_wnd_width = g_key_file_get_integer(app->app_config, "app", "width", NULL);
 	gint main_wnd_height = g_key_file_get_integer(app->app_config, "app", "height", NULL);
 	gtk_window_resize(GTK_WINDOW(app->main_wnd), main_wnd_width, main_wnd_height);
-
 
 	if(g_key_file_get_boolean(app->app_config, "app", "maximize", NULL) == TRUE)
 		gtk_window_maximize(GTK_WINDOW(app->main_wnd));

@@ -16,12 +16,12 @@ int reader_set_color_theme(APP* app, const char* color_theme)
 	char* font_monospace		= g_key_file_get_string(app_config, color_theme, "font_monospace", NULL);
 	gint line_spacing			= g_key_file_get_integer(app_config, color_theme, "line_spacing", NULL);
 
-	g_return_val_if_fail(background_color	!= NULL, -1);
-	g_return_val_if_fail(text_color			!= NULL, -1);
-	g_return_val_if_fail(selection_color	!= NULL, -1);
+	g_return_val_if_fail(background_color	!= NULL, EXIT_FAILURE);
+	g_return_val_if_fail(text_color			!= NULL, EXIT_FAILURE);
+	g_return_val_if_fail(selection_color	!= NULL, EXIT_FAILURE);
 
-	g_return_val_if_fail(text_color			!= NULL, -1);
-	g_return_val_if_fail(selection_color	!= NULL, -1);
+	g_return_val_if_fail(text_color			!= NULL, EXIT_FAILURE);
+	g_return_val_if_fail(selection_color	!= NULL, EXIT_FAILURE);
 
 	GdkRGBA color;
 	gdk_rgba_parse(&color, background_color);

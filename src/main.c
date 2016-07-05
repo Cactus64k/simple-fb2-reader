@@ -63,9 +63,16 @@ int main(int argc,	char *argv[])
 			APP app;
 			memset(&app, 0, sizeof(APP));
 
-			init_app(builder, &app);
-			init_search_wnd(builder, &(app.search_window));
+			reader_read_config(&app);
+			reader_gui(&app, builder);
+			reader_search_wnd(&app, builder);
+			reader_create_text_tags(&app);
 			reader_books_db_init(&app);
+
+			char* color_theme = g_key_file_get_string(app.app_config, "app", "color_theme", NULL);
+			reader_set_color_theme(&app, color_theme);
+			g_free(color_theme);
+
 
 
 			gtk_builder_connect_signals(builder, &app);

@@ -1,6 +1,6 @@
 #include "../chunks.h"
 
-int create_fb2_tags(APP* app)
+int reader_create_text_tags(APP* app)
 {
 	GtkTextBuffer* text_buff	= app->text_buff;
 	GKeyFile* app_config		= app->app_config;
@@ -27,7 +27,8 @@ int create_fb2_tags(APP* app)
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "emphasis_tag", 		"style",				PANGO_STYLE_ITALIC, NULL);
 	//####################################################################################################################################
-	gtk_text_buffer_create_tag(text_buff, "code_tag", 			"family",				"monospace", NULL);
+	gtk_text_buffer_create_tag(text_buff, "code_tag", 			"family",				"monospace",
+																"wrap_mode",			GTK_WRAP_NONE, NULL);
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "subtitle_tag", 		"justification",		GTK_JUSTIFY_CENTER, NULL);
 	//####################################################################################################################################
@@ -41,8 +42,8 @@ int create_fb2_tags(APP* app)
 																"justification",		GTK_JUSTIFY_RIGHT, NULL);
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "epigraph_tag", 		"accumulative-margin",	TRUE,
-																"left-margin",			40,
-																"right-margin",			40, NULL);
+																"style",				PANGO_STYLE_ITALIC,
+																"justification",		GTK_JUSTIFY_RIGHT, NULL);
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "stanza_tag", 		"style",				PANGO_STYLE_ITALIC,
 																"justification",		GTK_JUSTIFY_CENTER, NULL);

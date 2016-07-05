@@ -17,8 +17,8 @@ G_MODULE_EXPORT gboolean search_wnd_delete_event_cb(GtkWidget *widget, GdkEvent 
 
 G_MODULE_EXPORT gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpointer user_data)
 {
-	APP* app				= (APP*)user_data;
-	GdkEventKey key_event	= event->key;
+	APP* app					= (APP*)user_data;
+	GdkEventKey key_event		= event->key;
 	if(key_event.keyval == GDK_KEY_Escape)
 		gtk_widget_hide(widget);
 	else if(key_event.keyval == GDK_KEY_Return)

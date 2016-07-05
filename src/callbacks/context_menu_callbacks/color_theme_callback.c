@@ -37,6 +37,7 @@ G_MODULE_EXPORT void color_theme_activate_cb(GtkMenuItem* checkmenuitem, gpointe
 				gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(item), TRUE);
 
 			g_signal_connect(item, "toggled", G_CALLBACK(color_theme_checkmenuitem_toggled_cb), app);
+
 			gtk_menu_shell_append(GTK_MENU_SHELL(sub_menu), item);
 			gtk_widget_show(item);
 		}

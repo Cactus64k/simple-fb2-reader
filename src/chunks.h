@@ -86,16 +86,6 @@
 
 	} APP;
 
-
-	int create_fb2_tags(APP* obj);
-	int create_config_dir();
-	int init_main_reader_book_view(GtkBuilder* builder, APP* obj0);
-
-	int init_app(GtkBuilder* builder, APP* obj);
-	int init_search_wnd(GtkBuilder* builder, SEARCH_WINDOW* obj);
-	int init_app_config(APP* obj);
-
-
 	#include "formats/formats_chunks.h"
 	#include "callbacks/callbacks_chunk.h"
 	#include "reader/reader_chunks.h"
