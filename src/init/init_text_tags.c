@@ -9,11 +9,10 @@ int create_fb2_tags(APP* app)
 
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "default_tag", 		"size-points",			15.f,
-																//"family",				"DejaVu",
 																"scale",				font_scale,
 																"wrap_mode",			GTK_WRAP_WORD_CHAR, NULL);
 	//####################################################################################################################################
-	gtk_text_buffer_create_tag(text_buff, "title_tag", 			"size-points",			17.f,
+	gtk_text_buffer_create_tag(text_buff, "title_tag", 			"size-points",			19.f,
 																"justification",		GTK_JUSTIFY_CENTER, NULL);
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "strong_tag", 		"weight",				PANGO_WEIGHT_BOLD, NULL);

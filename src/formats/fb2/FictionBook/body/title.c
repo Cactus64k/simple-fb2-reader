@@ -19,7 +19,7 @@ int parse_fb2_title(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 		if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "p") == 0)
-				parse_fb2_p__(app, node, text_buff_end);
+				parse_fb2_p(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)
 				parse_fb2_empty_line(app, node, text_buff_end);
 		}
@@ -53,7 +53,7 @@ int parse_fb2_navigation_set_chapter_by_title(APP* app, xmlNode* parent_node, Gt
 			if(strcmp((char*)node->name, "p") == 0)
 			{
 				parse_fb2_p_get_text(node, buff);
-				g_string_append_c(buff, ' ');
+				//g_string_append_c(buff, ' ');
 			}
 			else if(strcmp((char*)node->name, "empty-line") == 0)
 				g_string_append_c(buff, '\n');
