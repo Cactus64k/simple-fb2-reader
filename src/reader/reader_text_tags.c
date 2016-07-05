@@ -41,16 +41,15 @@ int reader_create_text_tags(APP* app)
 	gtk_text_buffer_create_tag(text_buff, "text_author_tag", 	"size-points",			12.f,
 																"justification",		GTK_JUSTIFY_RIGHT, NULL);
 	//####################################################################################################################################
-	gtk_text_buffer_create_tag(text_buff, "epigraph_tag", 		"accumulative-margin",	TRUE,
-																"style",				PANGO_STYLE_ITALIC,
+	gtk_text_buffer_create_tag(text_buff, "epigraph_tag", 		"style",				PANGO_STYLE_ITALIC,
 																"justification",		GTK_JUSTIFY_RIGHT, NULL);
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "stanza_tag", 		"style",				PANGO_STYLE_ITALIC,
 																"justification",		GTK_JUSTIFY_CENTER, NULL);
 	//####################################################################################################################################
 	gtk_text_buffer_create_tag(text_buff, "table_tag", 			"family",				"monospace",
-																"pixels-inside-wrap",	0,
 																"pixels-above-lines",	0,
+																//"justification",		GTK_JUSTIFY_CENTER,
 																"wrap_mode",			GTK_WRAP_NONE, NULL);
 	//####################################################################################################################################
 

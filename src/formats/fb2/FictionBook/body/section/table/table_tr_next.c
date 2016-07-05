@@ -1,8 +1,8 @@
 #include "table_chunks.h"
 
-int parse_fb2_table_tr_is_next(xmlNode* node)
+gboolean parse_fb2_table_tr_is_next(xmlNode* node)
 {
-	g_return_val_if_fail(node != NULL, EXIT_FAILURE);
+	g_return_val_if_fail(node != NULL, FALSE);
 
 	node = node->next;
 
@@ -11,9 +11,9 @@ int parse_fb2_table_tr_is_next(xmlNode* node)
 		if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "tr") == 0)
-				return 1;
+				return TRUE;
 		}
 		node = node->next;
 	}
-	return EXIT_SUCCESS;
+	return FALSE;
 }

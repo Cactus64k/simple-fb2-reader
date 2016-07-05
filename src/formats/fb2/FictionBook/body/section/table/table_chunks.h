@@ -6,7 +6,9 @@
 	int parse_fb2_table					(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
 	int parse_fb2_table_put_line		(APP* app, GtkTextIter* text_buff_end, glong* cells_width, size_t cells_count, const char* start, const char* middle, const char* end);
 	int parse_fb2_table_get_size		(APP* app, xmlNode* parent_node, glong** width, size_t* cells_count);
-	int parse_fb2_table_tr_is_next		(xmlNode* node);
+	gboolean parse_fb2_table_tr_is_next	(xmlNode* node);
+
+	int fb2_parse_tr(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end, GString** cells_buff, glong* cells_table, size_t cells_count);
 
 	#define MAX_CELL_LENGTH 25
 
