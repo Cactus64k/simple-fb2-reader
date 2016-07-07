@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2016-06-30 14:26+0300\n"
+        "POT-Creation-Date: 2016-07-07 13:05+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -30,16 +30,16 @@ msgid   "\n"
         "\t\t\t\tHave nice reading!\n"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:185
+#: ../res/simple-fb2-reader.glade:186
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:12
 msgid   "Backward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:202
+#: ../res/simple-fb2-reader.glade:203
 msgid   "Forward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:243
+#: ../res/simple-fb2-reader.glade:244
 msgid   "Case ensitive"
 msgstr  ""
 
@@ -81,6 +81,14 @@ msgstr  ""
 msgid   "ERROR: id %s already exist in table\n"
 msgstr  ""
 
+#: ../src/formats/fb2/FictionBook/description/book_title.c:19
+msgid   "ERROR: no content in <book-title> tag\n"
+msgstr  ""
+
+#: ../src/formats/fb2/FictionBook/description/title-info.c:44
+msgid   "ERROR: no content in <title-info> tag\n"
+msgstr  ""
+
 #: ../src/formats/fb2/FictionBook/body/section/image_inline.c:27
 #: ../src/formats/fb2/FictionBook/body/image.c:38
 #, c-format
@@ -93,29 +101,32 @@ msgid   "Not local links not supported\n"
 msgstr  ""
 
 #: ../src/formats/fb2/FictionBook/body/section/section.c:18
+msgid   "Section without title"
+msgstr  ""
+
 #: ../src/formats/fb2/FictionBook/body/body.c:15
-msgid   "No Title"
+msgid   "Body tag without title"
 msgstr  ""
 
 #: ../src/formats/fb2/FictionBook/FictionBook.c:64
 msgid   "End read book\n"
 msgstr  ""
 
-#: ../src/formats/fb2/FictionBook/binary/binary.c:34
+#: ../src/formats/fb2/FictionBook/binary/binary.c:37
 msgid   "ERROR: no content in <image> tag\n"
 msgstr  ""
 
-#: ../src/formats/fb2/FictionBook/binary/binary.c:37
+#: ../src/formats/fb2/FictionBook/binary/binary.c:40
 #, c-format
 msgid   "ERROR: image %s already exist in table\n"
 msgstr  ""
 
-#: ../src/formats/fb2/FictionBook/binary/binary.c:40
+#: ../src/formats/fb2/FictionBook/binary/binary.c:43
 msgid   "ERROR: no id properties in <image> tag\n"
 msgstr  ""
 
-#: ../src/formats/fb2/FictionBook/binary/binary.c:72
-#: ../src/formats/fb2/FictionBook/binary/binary.c:88
+#: ../src/formats/fb2/FictionBook/binary/binary.c:75
+#: ../src/formats/fb2/FictionBook/binary/binary.c:91
 #, c-format
 msgid   "ERROR: GdkPixbufLoader: %s\n"
 msgstr  ""

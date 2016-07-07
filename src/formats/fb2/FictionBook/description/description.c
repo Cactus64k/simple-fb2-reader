@@ -13,28 +13,6 @@ int parse_fb2_book_description(APP* app, xmlNode* parent_node, GtkTextIter* text
 		{
 			parse_fb2_title_info(app, node, text_buff_end);
 		}
-		else if(strcmp((char*)node->name, "src-title-info") == 0)
-		{
-			//print_unsupported_tag("src-title-info");
-		}
-		else if(strcmp((char*)node->name, "document-info") == 0)
-		{
-			//print_unsupported_tag("document-info");
-		}
-		else if(strcmp((char*)node->name, "publish-info") == 0)
-		{
-			//print_unsupported_tag("publish-info");
-		}
-		else if(strcmp((char*)node->name, "custom-info") == 0)
-		{
-			//print_unsupported_tag("custom-info");
-		}
-		else if(strcmp((char*)node->name, "output") == 0)
-		{
-			//print_unsupported_tag("output");
-		}
-
-
 		node = node->next;
 	}
 	return EXIT_SUCCESS;

@@ -52,7 +52,7 @@ int fb2_parse_tr(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end, GSt
 }
 
 
-int td_word_wrap(GString** cells_buff, glong* cells_table, size_t cells_count)
+int td_word_wrap(GString** cells_buff, glong* cells_table, size_t cells_count)		// TODO aligned
 {
 	g_return_val_if_fail(cells_buff != NULL,	EXIT_FAILURE);
 	g_return_val_if_fail(cells_table != NULL,	EXIT_FAILURE);

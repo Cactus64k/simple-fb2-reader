@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.9\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2016-06-30 14:26+0300\n"
+"POT-Creation-Date: 2016-07-07 13:05+0300\n"
 "PO-Revision-Date: 2015-03-30 18:11+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -45,16 +45,16 @@ msgstr ""
 "\n"
 "\t\t\t\tПриятного чтения!\n"
 
-#: ../res/simple-fb2-reader.glade:185
+#: ../res/simple-fb2-reader.glade:186
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:12
 msgid "Backward"
 msgstr "Назад"
 
-#: ../res/simple-fb2-reader.glade:202
+#: ../res/simple-fb2-reader.glade:203
 msgid "Forward"
 msgstr "Вперед"
 
-#: ../res/simple-fb2-reader.glade:243
+#: ../res/simple-fb2-reader.glade:244
 msgid "Case ensitive"
 msgstr "С учетом регистра"
 
@@ -96,6 +96,14 @@ msgstr "ОШИБКА: не удалось разобрать fb2 файл: %s\n"
 msgid "ERROR: id %s already exist in table\n"
 msgstr "ОШИБКА: id %s уже присутствует в таблице\n"
 
+#: ../src/formats/fb2/FictionBook/description/book_title.c:19
+msgid "ERROR: no content in <book-title> tag\n"
+msgstr "ОШИБКА: нет содержимого в теге <book-title>\n"
+
+#: ../src/formats/fb2/FictionBook/description/title-info.c:44
+msgid "ERROR: no content in <title-info> tag\n"
+msgstr "ОШИБКА: нет содержимого в теге <title-info>\n"
+
 #: ../src/formats/fb2/FictionBook/body/section/image_inline.c:27
 #: ../src/formats/fb2/FictionBook/body/image.c:38
 #, c-format
@@ -108,29 +116,32 @@ msgid "Not local links not supported\n"
 msgstr "Поддерживаются только локальные ссылки\n"
 
 #: ../src/formats/fb2/FictionBook/body/section/section.c:18
+msgid "Section without title"
+msgstr "Раздел без заголовка"
+
 #: ../src/formats/fb2/FictionBook/body/body.c:15
-msgid "No Title"
-msgstr "Нет Заголовка"
+msgid "Body tag without title"
+msgstr "Тег body без заголовка"
 
 #: ../src/formats/fb2/FictionBook/FictionBook.c:64
 msgid "End read book\n"
 msgstr "Окончание чтения книги\n"
 
-#: ../src/formats/fb2/FictionBook/binary/binary.c:34
+#: ../src/formats/fb2/FictionBook/binary/binary.c:37
 msgid "ERROR: no content in <image> tag\n"
 msgstr "ОШИБКА: нет содержимого в теге <image>\n"
 
-#: ../src/formats/fb2/FictionBook/binary/binary.c:37
+#: ../src/formats/fb2/FictionBook/binary/binary.c:40
 #, c-format
 msgid "ERROR: image %s already exist in table\n"
 msgstr "ОШИБКА: картинка %s уже содержится в таблице\n"
 
-#: ../src/formats/fb2/FictionBook/binary/binary.c:40
+#: ../src/formats/fb2/FictionBook/binary/binary.c:43
 msgid "ERROR: no id properties in <image> tag\n"
 msgstr "ОШИБКА: не найдено свойство id в теге <image>\n"
 
-#: ../src/formats/fb2/FictionBook/binary/binary.c:72
-#: ../src/formats/fb2/FictionBook/binary/binary.c:88
+#: ../src/formats/fb2/FictionBook/binary/binary.c:75
+#: ../src/formats/fb2/FictionBook/binary/binary.c:91
 #, c-format
 msgid "ERROR: GdkPixbufLoader: %s\n"
 msgstr "ОШИБКА: GdkPixbufLoader: %s\n"
@@ -169,5 +180,9 @@ msgstr ""
 "\n"
 
 #: ../src/main.c:59
+#, c-format
 msgid "ERROR: Failed to load gui construct file %s\n"
 msgstr "ОШИБКА: не удалось загрузить файл с каркасом gui %s\n"
+
+#~ msgid "No Title"
+#~ msgstr "Нет Заголовка"

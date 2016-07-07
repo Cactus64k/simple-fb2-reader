@@ -5,7 +5,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf);
 
 int parse_fb2_book_binary(APP* app, xmlNode* parent_node)
 {
-	g_return_val_if_fail(parent_node != NULL, EXIT_FAILURE);
+	g_return_val_if_fail(parent_node	!= NULL, EXIT_FAILURE);
 
 	GHashTable* binary_hash_table	= app->binary_hash_table;
 
@@ -16,18 +16,21 @@ int parse_fb2_book_binary(APP* app, xmlNode* parent_node)
 	{
 		if(g_hash_table_contains(binary_hash_table, id_attr) == FALSE)
 		{
-			char* image_data = (char*)parent_node->children->content;
-
-			if(image_data != NULL)
+			if(parent_node->children != NULL)
 			{
-				GdkPixbuf* pixbuf = NULL;
+				char* image_data = (char*)parent_node->children->content;
 
-				get_pixbuf_from_base64(image_data, &pixbuf);
-
-				if(pixbuf != NULL)
+				if(image_data != NULL)
 				{
-					char* id_dup = g_strdup(id_attr);
-					g_hash_table_insert(binary_hash_table, id_dup, pixbuf);
+					GdkPixbuf* pixbuf = NULL;
+
+					get_pixbuf_from_base64(image_data, &pixbuf);
+
+					if(pixbuf != NULL)
+					{
+						char* id_dup = g_strdup(id_attr);
+						g_hash_table_insert(binary_hash_table, id_dup, pixbuf);
+					}
 				}
 			}
 			else
@@ -45,8 +48,8 @@ int parse_fb2_book_binary(APP* app, xmlNode* parent_node)
 
 int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 {
-	g_return_val_if_fail(pixbuf != NULL, EXIT_FAILURE);
-	g_return_val_if_fail(base64 != NULL, EXIT_FAILURE);
+	g_return_val_if_fail(pixbuf	!= NULL, EXIT_FAILURE);
+	g_return_val_if_fail(base64	!= NULL, EXIT_FAILURE);
 
 	guchar out_buff[(READ_CHUNK_SIZE/4)*3];
 
