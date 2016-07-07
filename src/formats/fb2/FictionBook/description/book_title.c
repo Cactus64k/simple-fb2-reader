@@ -2,8 +2,8 @@
 
 int parse_fb2_book_title(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
-	assert(parent_node != NULL);
-	assert(text_buff_end != NULL);
+	g_return_val_if_fail(parent_node 	!= NULL,	EXIT_FAILURE);
+	g_return_val_if_fail(text_buff_end 	!= NULL,	EXIT_FAILURE);
 
 	xmlNode* node = parent_node->children;
 
