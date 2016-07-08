@@ -36,9 +36,80 @@ int reader_read_config(APP* app)
 		g_key_file_set_string(app_config,	"dark_theme",		"font_general", "DejaVu");
 		g_key_file_set_string(app_config,	"dark_theme",		"font_monospace", "monospace");
 		g_key_file_set_integer(app_config,	"dark_theme",		"line_spacing", 10);
-	}
 
-	reader_hndl_GError(app, &error);
+		g_warning("%s: %s", error->message, app->app_config_path);
+
+		g_error_free(error);
+	}
+	else
+	{
+		if(g_key_file_has_key(app_config,		"app",				"color_theme", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"app",				"color_theme", "default_theme");
+
+		if(g_key_file_has_key(app_config,		"app",				"x_pos", NULL) == FALSE)
+			g_key_file_set_integer(app_config,	"app",				"x_pos", 640/2);
+
+		if(g_key_file_has_key(app_config,		"app",				"y_pos", NULL) == FALSE)
+			g_key_file_set_integer(app_config,	"app",				"y_pos", 480/2);
+
+		if(g_key_file_has_key(app_config,		"app",				"width", NULL) == FALSE)
+			g_key_file_set_integer(app_config,	"app",				"width", 640);
+
+		if(g_key_file_has_key(app_config,		"app",				"height", NULL) == FALSE)
+			g_key_file_set_integer(app_config,	"app",				"height", 480);
+
+		if(g_key_file_has_key(app_config,		"app",				"maximize", NULL) == FALSE)
+			g_key_file_set_boolean(app_config,	"app",				"maximize", FALSE);
+
+		if(g_key_file_has_key(app_config,		"app",				"auto_scroll", NULL) == FALSE)
+			g_key_file_set_boolean(app_config,	"app",				"auto_scroll", FALSE);
+
+		if(g_key_file_has_key(app_config,		"app",				"auto_scroll_divider", NULL) == FALSE)
+			g_key_file_set_double(app_config,	"app",				"auto_scroll_divider", 4096);
+
+		if(g_key_file_has_key(app_config,		"app",				"font_scale", NULL) == FALSE)
+			g_key_file_set_double(app_config,	"app",				"font_scale", 1.0);
+
+		//####################################################################################
+
+		if(g_key_file_has_key(app_config,		"default_theme",	"background", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"default_theme",	"background", "#ffffff");
+
+		if(g_key_file_has_key(app_config,		"default_theme",	"text", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"default_theme",	"text", "#000000");
+
+		if(g_key_file_has_key(app_config,		"default_theme",	"selection", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"default_theme",	"selection", "rgba(132, 169, 215, 200)");
+
+		if(g_key_file_has_key(app_config,		"default_theme",	"font_general", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"default_theme",	"font_general", "DejaVu");
+
+		if(g_key_file_has_key(app_config,		"default_theme",	"font_monospace", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"default_theme",	"font_monospace", "monospace");
+
+		if(g_key_file_has_key(app_config,		"default_theme",	"line_spacing", NULL) == FALSE)
+			g_key_file_set_integer(app_config,	"default_theme",	"line_spacing", 10);
+
+		//####################################################################################
+
+		if(g_key_file_has_key(app_config,		"dark_theme",		"background", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"dark_theme",		"background", "#293134");
+
+		if(g_key_file_has_key(app_config,		"dark_theme",		"text", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"dark_theme",		"text", "#e8e2b7");
+
+		if(g_key_file_has_key(app_config,		"dark_theme",		"selection", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"dark_theme",		"selection", "rgba(100, 100, 100, 200)");
+
+		if(g_key_file_has_key(app_config,		"dark_theme",		"font_general", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"dark_theme",		"font_general", "DejaVu");
+
+		if(g_key_file_has_key(app_config,		"dark_theme",		"font_monospace", NULL) == FALSE)
+			g_key_file_set_string(app_config,	"dark_theme",		"font_monospace", "monospace");
+
+		if(g_key_file_has_key(app_config,		"dark_theme",		"line_spacing", NULL) == FALSE)
+			g_key_file_set_integer(app_config,	"dark_theme",		"line_spacing", 10);
+	}
 
 	app->app_config						= app_config;
 

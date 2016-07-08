@@ -27,40 +27,24 @@ int reader_gui(APP* app, GtkBuilder* builder)
 
 	gtk_about_dialog_set_version(app->about_dialog, PACKAGE_VERSION);
 
-	GError* error			= NULL;
-
-	gint main_wnd_x_pos		= g_key_file_get_integer(app->app_config, "app", "x_pos", &error);
-	reader_hndl_GError(app, &error);
-
-	gint main_wnd_y_pos		= g_key_file_get_integer(app->app_config, "app", "y_pos", &error);
-	reader_hndl_GError(app, &error);
+	gint main_wnd_x_pos		= g_key_file_get_integer(app->app_config, "app", "x_pos", NULL);
+	gint main_wnd_y_pos		= g_key_file_get_integer(app->app_config, "app", "y_pos", NULL);
 	gtk_window_move(GTK_WINDOW(app->main_wnd), main_wnd_x_pos, main_wnd_y_pos);
 
-	gint main_wnd_width		= g_key_file_get_integer(app->app_config, "app", "width", &error);
-	reader_hndl_GError(app, &error);
-
-	gint main_wnd_height	= g_key_file_get_integer(app->app_config, "app", "height", &error);
-	reader_hndl_GError(app, &error);
+	gint main_wnd_width		= g_key_file_get_integer(app->app_config, "app", "width", NULL);
+	gint main_wnd_height	= g_key_file_get_integer(app->app_config, "app", "height", NULL);
 	gtk_window_resize(GTK_WINDOW(app->main_wnd), main_wnd_width, main_wnd_height);
 
 	if(g_key_file_get_boolean(app->app_config, "app", "maximize", NULL) == TRUE)
 		gtk_window_maximize(GTK_WINDOW(app->main_wnd));
 
-	app->auto_scroll_divider		= g_key_file_get_double(app->app_config, "app", "auto_scroll_divider", &error);
-	reader_hndl_GError(app, &error);
-	if(app->auto_scroll_divider == 0)
-	{
-		app->auto_scroll_divider = 4096;
-		reader_show_error(app, "auto_scroll_divider set 4096");
-	}
+	app->auto_scroll_divider		= g_key_file_get_double(app->app_config, "app", "auto_scroll_divider", NULL);
 
-	if(g_key_file_get_boolean(app->app_config, "app", "auto_scroll", &error) == TRUE)
+	if(g_key_file_get_boolean(app->app_config, "app", "auto_scroll", NULL) == TRUE)
 	{
 		app->auto_scroll = TRUE;
 		g_timeout_add(10, auto_scroll_update, app);
 	}
-
-	reader_hndl_GError(app, &error);
 
 	app->cursor_link				= gdk_cursor_new(GDK_HAND2);
 	app->cursor_watch				= gdk_cursor_new(GDK_WATCH);

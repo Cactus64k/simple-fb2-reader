@@ -17,7 +17,7 @@ int parse_fb2_book_title(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_
 		g_free(window_title);
 	}
 	else
-		fputs(_C("ERROR: no content in <book-title> tag\n"), stderr);
+		g_warning("No content in <book-title> tag");
 
 	return EXIT_SUCCESS;
 }

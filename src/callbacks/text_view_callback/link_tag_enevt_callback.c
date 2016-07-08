@@ -35,7 +35,7 @@ G_MODULE_EXPORT gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEve
 			else
 			{
 				if(gtk_show_uri(NULL, href, GDK_CURRENT_TIME, NULL) == FALSE)
-					reader_show_error(app, _C("ERROR: failed to open URI.\n"));
+					g_warning("Failed to open URI: %s", href);
 			}
 		}
 	}

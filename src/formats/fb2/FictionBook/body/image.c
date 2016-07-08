@@ -35,10 +35,10 @@ int parse_fb2_image(APP* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 					gtk_text_buffer_insert(text_buff, text_buff_end, title_attr, -1);
 			}
 			else
-				fprintf(stderr, _C("Image %s not found in table\n"), href_attr);
+				g_warning("Image %s not found in table", href_attr);
 		}
 		else
-			fputs(_C("Not local links not supported\n"), stderr);
+			g_error("Not local links not supported");
 	}
 
 	GtkTextIter start_tag_iter;

@@ -35,8 +35,7 @@ int main(int argc,	char *argv[])
 
 	if(g_option_context_parse(cmd_context, &cmd_count, &cmd_line, &error) == FALSE)
 	{
-		fprintf(stderr, _C("ERROR: %s\n\n"), error->message);
-
+		g_error(error->message);
 		g_error_free(error);
 		error = NULL;
 	}
@@ -57,7 +56,7 @@ int main(int argc,	char *argv[])
 			guint result = gtk_builder_add_from_file(builder, GUI_CONSTRUCT_PATH, NULL);
 			if(result == 0)
 			{
-				fprintf(stderr, _C("ERROR: Failed to load gui construct file %s\n"), GUI_CONSTRUCT_PATH);
+				g_warning("Failed to load gui construct file %s", GUI_CONSTRUCT_PATH);
 				exit(EXIT_FAILURE);
 			}
 
@@ -70,8 +69,7 @@ int main(int argc,	char *argv[])
 			reader_create_text_tags(&app);
 			reader_books_db_init(&app);
 
-			char* color_theme	= g_key_file_get_string(app.app_config, "app", "color_theme", &error);
-			reader_hndl_GError(&app, &error);
+			char* color_theme	= g_key_file_get_string(app.app_config, "app", "color_theme", NULL);
 			reader_set_color_theme(&app, color_theme);
 			g_free(color_theme);
 

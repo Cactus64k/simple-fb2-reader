@@ -32,7 +32,7 @@ int parse_fb2_file(APP* app, char* file_path)
 		xmlFreeDoc(doc);
 	}
 	else
-		reader_show_error(app, _C("ERROR: Failed to parsing fb2 file: %s\n"));
+		g_error("Failed to parsing fb2 file");
 
 	xmlCleanupParser();
 

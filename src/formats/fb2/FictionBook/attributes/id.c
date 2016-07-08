@@ -19,8 +19,7 @@ int parse_fb2_id_attribute(APP* app, xmlNode* parent_node, GtkTextIter* text_buf
 			g_hash_table_insert(links_hash_table, id, GINT_TO_POINTER(pos));
 		}
 		else
-			fprintf(stderr, _C("ERROR: id %s already exist in table\n"), id_attr);
-
+			g_warning("Id %s already exist in table", id_attr);
 	}
 
 

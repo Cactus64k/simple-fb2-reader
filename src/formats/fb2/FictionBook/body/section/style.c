@@ -7,7 +7,7 @@ int parse_fb2_style(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 
 	xmlNode* node				= parent_node;//parent_node->children;
 
-	//fputs(_C("tag <style> not fully supported!\n"), stderr);
+	g_warning("Tag <style> not supported!");
 	parse_fb2_p__(app, node, text_buff_end);
 
 	return EXIT_SUCCESS;

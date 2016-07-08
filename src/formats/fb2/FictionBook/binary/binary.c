@@ -34,13 +34,13 @@ int parse_fb2_book_binary(APP* app, xmlNode* parent_node)
 				}
 			}
 			else
-				fputs(_C("ERROR: no content in <image> tag\n"), stderr);
+				g_warning("No content in <image> tag");
 		}
 		else
-			fprintf(stderr, _C("ERROR: image %s already exist in table\n"), id_attr);
+			g_warning("Image %s already exist in table", id_attr);
 	}
 	else
-		fputs(_C("ERROR: no id properties in <image> tag\n"), stderr);
+		g_warning("No id properties in <image> tag");
 
 	return EXIT_SUCCESS;
 }
@@ -72,7 +72,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 
 		if(gdk_pixbuf_loader_write(loader, out_buff, bytes_count, &loader_error) == FALSE)
 		{
-			fprintf(stderr, _C("ERROR: GdkPixbufLoader: %s\n"), loader_error->message);
+			g_error("GdkPixbufLoader: %s", loader_error->message);
 			g_error_free(loader_error);
 			has_error = TRUE;
 
@@ -88,8 +88,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 
 	if(loader_error != NULL)
 	{
-		fprintf(stderr, _C("ERROR: GdkPixbufLoader: %s\n"), loader_error->message);
-
+		g_error("GdkPixbufLoader: %s", loader_error->message);
 		g_error_free(loader_error);
 		has_error = TRUE;
 	}

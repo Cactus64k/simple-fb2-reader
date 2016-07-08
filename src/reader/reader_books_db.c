@@ -12,13 +12,13 @@ int reader_books_db_init(APP* app)
 	{
 		if(sqlite3_exec(*books_db, "CREATE TABLE IF NOT EXISTS books(hash TEXT, line INT, line_offset INT);", NULL, NULL, NULL) != SQLITE_OK)
 		{
-			fprintf(stderr, "ERROR: Failed to create books table. %s\n", sqlite3_errmsg(*books_db));
+			g_error("Failed to create books table. %s", sqlite3_errmsg(*books_db));
 			return EXIT_FAILURE;
 		}
 	}
 	else
 	{
-		fprintf(stderr, "ERROR: Failed to open books database. %s\n", sqlite3_errmsg(*books_db));
+		g_error("Failed to open books database. %s", sqlite3_errmsg(*books_db));
 		return EXIT_FAILURE;
 	}
 
@@ -78,7 +78,7 @@ int reader_books_db_get_int_by_index(APP* app, int64_t index, const char* param)
 
 	if(sqlite3_prepare(books_db, buff, -1, &query, NULL) != SQLITE_OK)
 	{
-		fprintf(stderr, "ERROR: Failed to create books table. %s\n", sqlite3_errmsg(books_db));
+		g_warning("Failed to get row from books table. %s", sqlite3_errmsg(books_db));
 		return EXIT_FAILURE;
 	}
 
@@ -105,7 +105,7 @@ int reader_books_db_set_int_by_index(APP* app, int64_t index, const char* param,
 
 	if(sqlite3_prepare(books_db, buff, -1, &query, NULL) != SQLITE_OK)
 	{
-		fprintf(stderr, "ERROR: Failed to create books table. %s\n", sqlite3_errmsg(books_db));
+		g_warning("Failed to update row from books table. %s", sqlite3_errmsg(books_db));
 		return EXIT_FAILURE;
 	}
 

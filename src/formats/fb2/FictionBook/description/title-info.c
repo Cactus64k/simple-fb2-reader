@@ -42,7 +42,7 @@ int parse_fb2_title_info(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_
 		gtk_text_buffer_insert(text_buff, text_buff_end, "\n\n\n\n", -1);
 	}
 	else
-		fputs(_C("ERROR: no content in <title-info> tag\n"), stderr);
+		g_warning("No content in <title-info> tag");
 
 
 	return EXIT_SUCCESS;

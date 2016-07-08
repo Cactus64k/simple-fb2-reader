@@ -11,8 +11,6 @@
 	int reader_scroll_save						(APP* app);
 	int reader_scroll_at_line_offset			(APP* app, gint line, gint line_offset);
 	int reader_set_color_theme					(APP* app, const char* color_theme);
-	int reader_show_error						(APP* app, const char* message);
-	int reader_hndl_GError						(APP* app, GError** error);
 	int reader_read_config						(APP* app);
 	int reader_gui								(APP* app, GtkBuilder* builder);
 	int reader_search_wnd						(APP* app, GtkBuilder* builder);

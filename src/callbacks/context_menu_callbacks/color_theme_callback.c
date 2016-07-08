@@ -23,14 +23,13 @@ G_MODULE_EXPORT void color_theme_activate_cb(GtkMenuItem* menuitem, gpointer use
 	g_return_if_fail(sub_menu != NULL);
 	g_return_if_fail(app_config != NULL);
 
-	GError* error				= NULL;
+	gsize groups_size	= 0;
+	char** groups		= g_key_file_get_groups(app_config, &groups_size);
+	char* color_theme	= g_key_file_get_string(app_config, "app", "color_theme", NULL);
+	if(color_theme == NULL)
+		color_theme = g_strdup("default_theme");
 
-	char** groups		= g_key_file_get_groups(app_config, NULL);
-	char* color_theme	= g_key_file_get_string(app_config, "app", "color_theme", &error);
-	reader_hndl_GError(app, &error);
-
-
-	for(size_t i=0;groups[i] != NULL; i++)
+	for(size_t i=0;groups_size < i; i++)
 	{
 		if(strcmp(groups[i], "app") != 0)
 		{
