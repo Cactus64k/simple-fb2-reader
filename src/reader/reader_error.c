@@ -9,3 +9,15 @@ int reader_show_error(APP* app, const char* message)
 
 	return EXIT_SUCCESS;
 }
+
+int reader_hndl_GError(APP* app, GError** error)
+{
+	if(*error != NULL)
+	{
+		reader_show_error(app, (*error)->message);
+		g_error_free(*error);
+		*error = NULL;
+	}
+
+	return EXIT_SUCCESS;
+}

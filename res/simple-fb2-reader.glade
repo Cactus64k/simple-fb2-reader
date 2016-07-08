@@ -96,9 +96,9 @@ ctrl+o				Open book
 ctrl+q				Exit
 ctrl+c				Copy text
 ctrl+mouse-wheel 		Font scale
-left-arrow				Previous position(link navigation)
+left-arrow			Previous position(link navigation)
 
-				Have nice reading!
+			Have nice reading!
 </property>
           </object>
           <packing>

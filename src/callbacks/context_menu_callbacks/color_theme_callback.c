@@ -11,11 +11,11 @@ G_MODULE_EXPORT void color_theme_checkmenuitem_toggled_cb(GtkCheckMenuItem* chec
 	g_key_file_set_string(app_config, "app", "color_theme", menu_item_name);
 }
 
-G_MODULE_EXPORT void color_theme_activate_cb(GtkMenuItem* checkmenuitem, gpointer user_data)
+G_MODULE_EXPORT void color_theme_activate_cb(GtkMenuItem* menuitem, gpointer user_data)
 {
 	APP* app						= (APP*)user_data;
 	GKeyFile* app_config			= app->app_config;
-	GtkWidget* sub_menu				= gtk_menu_item_get_submenu(checkmenuitem);
+	GtkWidget* sub_menu				= gtk_menu_item_get_submenu(menuitem);
 
 	GList* items_list				= gtk_container_get_children(GTK_CONTAINER(sub_menu));
 	g_list_free_full(items_list, (GDestroyNotify)gtk_widget_destroy);
@@ -23,8 +23,13 @@ G_MODULE_EXPORT void color_theme_activate_cb(GtkMenuItem* checkmenuitem, gpointe
 	g_return_if_fail(sub_menu != NULL);
 	g_return_if_fail(app_config != NULL);
 
+	GError* error				= NULL;
+
 	char** groups		= g_key_file_get_groups(app_config, NULL);
-	char* color_theme	= g_key_file_get_string(app_config, "app", "color_theme", NULL);
+	char* color_theme	= g_key_file_get_string(app_config, "app", "color_theme", &error);
+	reader_hndl_GError(app, &error);
+
+
 	for(size_t i=0;groups[i] != NULL; i++)
 	{
 		if(strcmp(groups[i], "app") != 0)

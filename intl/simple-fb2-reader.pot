@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2016-07-07 13:05+0300\n"
+        "POT-Creation-Date: 2016-07-08 23:09+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,9 +25,9 @@ msgid   "\n"
         "ctrl+q\t\t\t\tExit\n"
         "ctrl+c\t\t\t\tCopy text\n"
         "ctrl+mouse-wheel \t\tFont scale\n"
-        "left-arrow\t\t\t\tPrevious position(link navigation)\n"
+        "left-arrow\t\t\tPrevious position(link navigation)\n"
         "\n"
-        "\t\t\t\tHave nice reading!\n"
+        "\t\t\tHave nice reading!\n"
 msgstr  ""
 
 #: ../res/simple-fb2-reader.glade:186
@@ -52,23 +52,35 @@ msgid   "Find"
 msgstr  ""
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:37
-msgid   "Color Theme"
+msgid   "Auto scrolling"
 msgstr  ""
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:44
+msgid   "Color Theme"
+msgstr  ""
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:51
 msgid   "About"
 msgstr  ""
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:49
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:56
 msgid   "Open Book"
 msgstr  ""
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:58
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:65
 msgid   "Exit"
 msgstr  ""
 
 #: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:38
 msgid   "ERROR: failed to open URI.\n"
+msgstr  ""
+
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:35
+msgid   "Enable"
+msgstr  ""
+
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:40
+msgid   "Disable"
 msgstr  ""
 
 #: ../src/formats/fb2/fb2_parser.c:35
@@ -81,11 +93,11 @@ msgstr  ""
 msgid   "ERROR: id %s already exist in table\n"
 msgstr  ""
 
-#: ../src/formats/fb2/FictionBook/description/book_title.c:19
+#: ../src/formats/fb2/FictionBook/description/book_title.c:20
 msgid   "ERROR: no content in <book-title> tag\n"
 msgstr  ""
 
-#: ../src/formats/fb2/FictionBook/description/title-info.c:44
+#: ../src/formats/fb2/FictionBook/description/title-info.c:45
 msgid   "ERROR: no content in <title-info> tag\n"
 msgstr  ""
 

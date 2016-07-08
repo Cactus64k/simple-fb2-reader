@@ -49,7 +49,8 @@ G_MODULE_EXPORT gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEven
 		}
 		else if(keyval == 'f')
 		{
-			search_menuitem_activate_cb(NULL, app);
+			if(book_type != BOOK_TYPE_NONE)
+				search_menuitem_activate_cb(NULL, app);
 		}
 		else if(keyval == 't')
 		{
@@ -75,7 +76,7 @@ G_MODULE_EXPORT gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEven
 	}
 	else
 	{
-		if(event->keyval == GDK_KEY_Left)
+		if((event->keyval == GDK_KEY_Left) && (book_type != BOOK_TYPE_NONE))
 			backward_itemmenu_cb(NULL, app);
 	}
 

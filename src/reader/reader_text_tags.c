@@ -4,7 +4,9 @@ int reader_create_text_tags(APP* app)
 {
 	GtkTextBuffer* text_buff	= app->text_buff;
 	GKeyFile* app_config		= app->app_config;
-	double font_scale			= g_key_file_get_double(app_config, "app", "font_scale", NULL);
+	GError* error				= NULL;
+	double font_scale			= g_key_file_get_double(app_config, "app", "font_scale", &error);
+	reader_hndl_GError(app, &error);
 
 
 	//####################################################################################################################################

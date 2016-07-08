@@ -34,6 +34,13 @@ G_MODULE_EXPORT void book_textview_populate_popup_cb(GtkTextView* entry, GtkMenu
 	gtk_widget_show(item);
 	//*************************************************************************************************
 
+	item = gtk_menu_item_new_with_label(_C("Auto scrolling"));
+	sub_menu = gtk_menu_new();
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+	g_signal_connect(item, "activate", G_CALLBACK(auto_scroll_activate_cb), app);
+	gtk_menu_item_set_submenu(GTK_MENU_ITEM(item), sub_menu);
+	gtk_widget_show(item);
+
 	item = gtk_menu_item_new_with_label(_C("Color Theme"));
 	sub_menu = gtk_menu_new();
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);

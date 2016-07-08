@@ -38,6 +38,7 @@ int main(int argc,	char *argv[])
 		fprintf(stderr, _C("ERROR: %s\n\n"), error->message);
 
 		g_error_free(error);
+		error = NULL;
 	}
 	else
 	{
@@ -69,7 +70,8 @@ int main(int argc,	char *argv[])
 			reader_create_text_tags(&app);
 			reader_books_db_init(&app);
 
-			char* color_theme = g_key_file_get_string(app.app_config, "app", "color_theme", NULL);
+			char* color_theme	= g_key_file_get_string(app.app_config, "app", "color_theme", &error);
+			reader_hndl_GError(&app, &error);
 			reader_set_color_theme(&app, color_theme);
 			g_free(color_theme);
 
@@ -80,13 +82,11 @@ int main(int argc,	char *argv[])
 			//**********************************************************************************************
 
 
-
 			if(book_file_path != NULL)
 			{
 				reader_open_book(&app, book_file_path);
 				g_free(book_file_path);
 			}
-
 
 			gtk_main();
 		}

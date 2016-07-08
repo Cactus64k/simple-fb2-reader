@@ -1,5 +1,20 @@
 #include "reader_chunks.h"
 
+gboolean auto_scroll_update(gpointer user_data)
+{
+	APP* app 					= (APP*)user_data;
+	GtkWidget* scrolled_window	= gtk_widget_get_parent(GTK_WIDGET(app->text_view));
+	GtkAdjustment* adj			= gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrolled_window));
+	double divider				= app->auto_scroll_divider;
+
+	double page_incr			= gtk_adjustment_get_page_increment(adj);
+	double scroll_pos			= gtk_adjustment_get_value(adj);
+
+	gtk_adjustment_set_value(adj, scroll_pos + page_incr/divider);
+
+	return app->auto_scroll;
+}
+
 int reader_scroll_save(APP* app)
 {
 	GtkTextView* text_view		= app->text_view;

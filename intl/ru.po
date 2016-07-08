@@ -6,9 +6,9 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: simple-fb2-reader 1.0.9\n"
+"Project-Id-Version: simple-fb2-reader 1.1.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2016-07-07 13:05+0300\n"
+"POT-Creation-Date: 2016-07-08 23:07+0300\n"
 "PO-Revision-Date: 2015-03-30 18:11+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -29,9 +29,9 @@ msgid ""
 "ctrl+q\t\t\t\tExit\n"
 "ctrl+c\t\t\t\tCopy text\n"
 "ctrl+mouse-wheel \t\tFont scale\n"
-"left-arrow\t\t\t\tPrevious position(link navigation)\n"
+"left-arrow\t\t\tPrevious position(link navigation)\n"
 "\n"
-"\t\t\t\tHave nice reading!\n"
+"\t\t\tHave nice reading!\n"
 msgstr ""
 "\n"
 "ctrl+n\t\t\t\tОглавление\n"
@@ -41,9 +41,9 @@ msgstr ""
 "ctrl+q\t\t\t\tВыход\n"
 "ctrl+c\t\t\t\tКопировать текст\n"
 "ctrl+колесо-мыши \t\tРазмер шрифта\n"
-"left-arrow\t\t\t\tПредыдущая позиция(навигация по ссылкам)\n"
+"left-arrow\t\t\tПредыдущая позиция(навигация по ссылкам)\n"
 "\n"
-"\t\t\t\tПриятного чтения!\n"
+"\t\t\tПриятного чтения!\n"
 
 #: ../res/simple-fb2-reader.glade:186
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:12
@@ -67,24 +67,36 @@ msgid "Find"
 msgstr "Найти"
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:37
+msgid "Auto scrolling"
+msgstr "Авто прокрутка"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:44
 msgid "Color Theme"
 msgstr "Цветовая Тема"
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:44
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:51
 msgid "About"
 msgstr "О программе"
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:49
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:56
 msgid "Open Book"
 msgstr "Открыть Книгу"
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:58
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:65
 msgid "Exit"
 msgstr "Выход"
 
 #: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:38
 msgid "ERROR: failed to open URI.\n"
 msgstr "ОШИБКА: не удалось открыт URI\n"
+
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:35
+msgid "Enable"
+msgstr "Включить"
+
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:40
+msgid "Disable"
+msgstr "Выключить"
 
 #: ../src/formats/fb2/fb2_parser.c:35
 #, c-format
@@ -96,11 +108,11 @@ msgstr "ОШИБКА: не удалось разобрать fb2 файл: %s\n"
 msgid "ERROR: id %s already exist in table\n"
 msgstr "ОШИБКА: id %s уже присутствует в таблице\n"
 
-#: ../src/formats/fb2/FictionBook/description/book_title.c:19
+#: ../src/formats/fb2/FictionBook/description/book_title.c:20
 msgid "ERROR: no content in <book-title> tag\n"
 msgstr "ОШИБКА: нет содержимого в теге <book-title>\n"
 
-#: ../src/formats/fb2/FictionBook/description/title-info.c:44
+#: ../src/formats/fb2/FictionBook/description/title-info.c:45
 msgid "ERROR: no content in <title-info> tag\n"
 msgstr "ОШИБКА: нет содержимого в теге <title-info>\n"
 

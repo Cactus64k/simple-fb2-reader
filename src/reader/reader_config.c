@@ -9,7 +9,9 @@ int reader_read_config(APP* app)
 
 	app->app_config_path				= g_strdup_printf("%s/simple-fb2-reader/config.cfg", conf_dir);
 
-	if(g_key_file_load_from_file(app_config, app->app_config_path, G_KEY_FILE_NONE, NULL) == FALSE)
+	GError* error						= NULL;
+
+	if(g_key_file_load_from_file(app_config, app->app_config_path, G_KEY_FILE_NONE, &error) == FALSE)
 	{
 		g_key_file_set_string(app_config,	"app",				"color_theme", "default_theme");
 		g_key_file_set_integer(app_config,	"app",				"x_pos", 640/2);
@@ -17,6 +19,8 @@ int reader_read_config(APP* app)
 		g_key_file_set_integer(app_config,	"app",				"width", 640);
 		g_key_file_set_integer(app_config,	"app",				"height", 480);
 		g_key_file_set_boolean(app_config,	"app",				"maximize", FALSE);
+		g_key_file_set_boolean(app_config,	"app",				"auto_scroll", FALSE);
+		g_key_file_set_double(app_config,	"app",				"auto_scroll_divider", 4096);
 		g_key_file_set_double(app_config,	"app",				"font_scale", 1.0);
 
 		g_key_file_set_string(app_config,	"default_theme",	"background", "#ffffff");
@@ -33,6 +37,8 @@ int reader_read_config(APP* app)
 		g_key_file_set_string(app_config,	"dark_theme",		"font_monospace", "monospace");
 		g_key_file_set_integer(app_config,	"dark_theme",		"line_spacing", 10);
 	}
+
+	reader_hndl_GError(app, &error);
 
 	app->app_config						= app_config;
 

@@ -12,7 +12,7 @@ int reader_open_book(APP* app, char* book_path)
 		if(book_hash != NULL)
 		{
 			if(book_index == -1)
-				book_index = reader_books_db_add_new(app, book_hash);
+				book_index = reader_books_db_add_new(app, book_hash);			// TODO make new row in db only if line and offset is not zero
 
 			app->book_type	= book_type;
 			app->book_index = book_index;

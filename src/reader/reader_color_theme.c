@@ -8,13 +8,21 @@ int reader_set_color_theme(APP* app, const char* color_theme)
 	GtkTextTag* default_tag		= gtk_text_tag_table_lookup(tag_table, "default_tag");
 	GtkTextTag* code_tag		= gtk_text_tag_table_lookup(tag_table, "code_tag");
 
-	char* background_color		= g_key_file_get_string(app_config, color_theme, "background", NULL);
-	char* text_color			= g_key_file_get_string(app_config, color_theme, "text", NULL);
-	char* selection_color		= g_key_file_get_string(app_config, color_theme, "selection", NULL);
+	GError* error				= NULL;
 
-	char* font_general			= g_key_file_get_string(app_config, color_theme, "font_general", NULL);
-	char* font_monospace		= g_key_file_get_string(app_config, color_theme, "font_monospace", NULL);
-	gint line_spacing			= g_key_file_get_integer(app_config, color_theme, "line_spacing", NULL);
+	char* background_color		= g_key_file_get_string(app_config, color_theme, "background", &error);
+	reader_hndl_GError(app, &error);
+	char* text_color			= g_key_file_get_string(app_config, color_theme, "text", &error);
+	reader_hndl_GError(app, &error);
+	char* selection_color		= g_key_file_get_string(app_config, color_theme, "selection", &error);
+	reader_hndl_GError(app, &error);
+
+	char* font_general			= g_key_file_get_string(app_config, color_theme, "font_general", &error);
+	reader_hndl_GError(app, &error);
+	char* font_monospace		= g_key_file_get_string(app_config, color_theme, "font_monospace", &error);
+	reader_hndl_GError(app, &error);
+	gint line_spacing			= g_key_file_get_integer(app_config, color_theme, "line_spacing", &error);
+	reader_hndl_GError(app, &error);
 
 	g_return_val_if_fail(background_color	!= NULL, EXIT_FAILURE);
 	g_return_val_if_fail(text_color			!= NULL, EXIT_FAILURE);

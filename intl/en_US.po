@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2016-07-07 13:05+0300\n"
-"PO-Revision-Date: 2016-06-30 14:26+0300\n"
+"POT-Creation-Date: 2016-07-08 23:09+0300\n"
+"PO-Revision-Date: 2016-07-08 23:09+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_US\n"
@@ -27,9 +27,9 @@ msgid ""
 "ctrl+q\t\t\t\tExit\n"
 "ctrl+c\t\t\t\tCopy text\n"
 "ctrl+mouse-wheel \t\tFont scale\n"
-"left-arrow\t\t\t\tPrevious position(link navigation)\n"
+"left-arrow\t\t\tPrevious position(link navigation)\n"
 "\n"
-"\t\t\t\tHave nice reading!\n"
+"\t\t\tHave nice reading!\n"
 msgstr ""
 "\n"
 "ctrl+n\t\t\t\tNavigation\n"
@@ -39,9 +39,9 @@ msgstr ""
 "ctrl+q\t\t\t\tExit\n"
 "ctrl+c\t\t\t\tCopy text\n"
 "ctrl+mouse-wheel \t\tFont scale\n"
-"left-arrow\t\t\t\tPrevious position(link navigation)\n"
+"left-arrow\t\t\tPrevious position(link navigation)\n"
 "\n"
-"\t\t\t\tHave nice reading!\n"
+"\t\t\tHave nice reading!\n"
 
 #: ../res/simple-fb2-reader.glade:186
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:12
@@ -65,24 +65,36 @@ msgid "Find"
 msgstr "Find"
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:37
+msgid "Auto scrolling"
+msgstr "Auto scrolling"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:44
 msgid "Color Theme"
 msgstr "Color Theme"
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:44
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:51
 msgid "About"
 msgstr "About"
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:49
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:56
 msgid "Open Book"
 msgstr "Open Book"
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:58
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:65
 msgid "Exit"
 msgstr "Exit"
 
 #: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:38
 msgid "ERROR: failed to open URI.\n"
 msgstr "ERROR: failed to open URI.\n"
+
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:35
+msgid "Enable"
+msgstr "Enable"
+
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:40
+msgid "Disable"
+msgstr "Disable"
 
 #: ../src/formats/fb2/fb2_parser.c:35
 #, c-format
@@ -94,15 +106,13 @@ msgstr "ERROR: Failed to parsing fb2 file: %s\n"
 msgid "ERROR: id %s already exist in table\n"
 msgstr "ERROR: id %s already exist in table\n"
 
-#: ../src/formats/fb2/FictionBook/description/book_title.c:19
-#, fuzzy
+#: ../src/formats/fb2/FictionBook/description/book_title.c:20
 msgid "ERROR: no content in <book-title> tag\n"
-msgstr "ERROR: no content in <image> tag\n"
+msgstr "ERROR: no content in <book-title> tag\n"
 
-#: ../src/formats/fb2/FictionBook/description/title-info.c:44
-#, fuzzy
+#: ../src/formats/fb2/FictionBook/description/title-info.c:45
 msgid "ERROR: no content in <title-info> tag\n"
-msgstr "ERROR: no content in <image> tag\n"
+msgstr "ERROR: no content in <title-info> tag\n"
 
 #: ../src/formats/fb2/FictionBook/body/section/image_inline.c:27
 #: ../src/formats/fb2/FictionBook/body/image.c:38
@@ -117,11 +127,11 @@ msgstr "Not local links not supported\n"
 
 #: ../src/formats/fb2/FictionBook/body/section/section.c:18
 msgid "Section without title"
-msgstr ""
+msgstr "Section without title"
 
 #: ../src/formats/fb2/FictionBook/body/body.c:15
 msgid "Body tag without title"
-msgstr ""
+msgstr "Body tag without title"
 
 #: ../src/formats/fb2/FictionBook/FictionBook.c:64
 msgid "End read book\n"
@@ -183,6 +193,3 @@ msgstr ""
 #, c-format
 msgid "ERROR: Failed to load gui construct file %s\n"
 msgstr "ERROR: Failed to load gui construct file %s\n"
-
-#~ msgid "No Title"
-#~ msgstr "No Title"
