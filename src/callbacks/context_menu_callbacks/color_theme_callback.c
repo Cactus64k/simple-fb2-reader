@@ -29,7 +29,7 @@ G_MODULE_EXPORT void color_theme_activate_cb(GtkMenuItem* menuitem, gpointer use
 	if(color_theme == NULL)
 		color_theme = g_strdup("default_theme");
 
-	for(size_t i=0;groups_size < i; i++)
+	for(size_t i=0;groups_size > i; i++)
 	{
 		if(strcmp(groups[i], "app") != 0)
 		{
