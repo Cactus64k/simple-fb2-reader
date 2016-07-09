@@ -40,12 +40,6 @@ int reader_gui(APP* app, GtkBuilder* builder)
 
 	app->auto_scroll_divider		= g_key_file_get_double(app->app_config, "app", "auto_scroll_divider", NULL);
 
-	if(g_key_file_get_boolean(app->app_config, "app", "auto_scroll", NULL) == TRUE)
-	{
-		app->auto_scroll = TRUE;
-		g_timeout_add(10, auto_scroll_update, app);
-	}
-
 	app->cursor_link				= gdk_cursor_new(GDK_HAND2);
 	app->cursor_watch				= gdk_cursor_new(GDK_WATCH);
 	app->clipboard					= gtk_widget_get_clipboard(app->main_wnd, GDK_SELECTION_CLIPBOARD);		//app->clipboard					= gtk_clipboard_get(0);

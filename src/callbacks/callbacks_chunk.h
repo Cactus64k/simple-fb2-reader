@@ -35,6 +35,8 @@
 	void auto_scroll_enable_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data);
 	void auto_scroll_activate_cb				(GtkMenuItem* menuitem,			gpointer user_data);
 
+	G_MODULE_EXPORT void exit_menuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_data);
+
 
 	gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEvent* event, GtkTextIter* iter, gpointer user_data);
 

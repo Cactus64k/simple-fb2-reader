@@ -15,8 +15,6 @@ int reader_close_book(APP* app)
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
-		reader_scroll_save(app);
-
 		//******************************************************************
 
 		GtkTextIter text_buff_end_iter;

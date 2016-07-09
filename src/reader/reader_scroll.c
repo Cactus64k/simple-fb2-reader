@@ -74,5 +74,11 @@ int reader_scroll_restore(APP* app, int line, int line_offset)
 
 	reader_scroll_at_line_offset(app, line, line_offset);
 
+//	if(app->auto_scroll == TRUE)			// TODO autoscroll
+//	{
+//		app->auto_scroll = TRUE;
+//		g_timeout_add(10, auto_scroll_update, app);
+//	}
+
 	return EXIT_SUCCESS;
 }

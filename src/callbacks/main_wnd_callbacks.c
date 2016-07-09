@@ -3,23 +3,31 @@
 G_MODULE_EXPORT gboolean main_wnd_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
 	APP* app	= (APP*)user_data;
+	reader_scroll_save(app);
 	reader_close_book(app);
 	reader_close_app(app);
 	return FALSE;
 }
 
-G_MODULE_EXPORT void file_quit_imagemenuitem_activate_cb(GtkMenuItem *menuitem, gpointer user_data)
+gboolean main_wnd_window_state_event_cb(GtkWidget* widget, GdkEventWindowState* event, gpointer user_data)
 {
 	APP* app	= (APP*)user_data;
-	reader_close_book(app);
-	reader_close_app(app);
-	gtk_main_quit();
+	if((event->new_window_state & GDK_WINDOW_STATE_ICONIFIED)
+			||
+		(event->new_window_state & GDK_WINDOW_STATE_WITHDRAWN)
+			||
+		(event->new_window_state & GDK_WINDOW_STATE_BELOW))
+	{
+		app->auto_scroll = FALSE;
+	}
+
+	return TRUE;
 }
 
 G_MODULE_EXPORT void main_wnd_size_allocate_cb (GtkWidget *widget, GdkRectangle *allocation, gpointer user_data)
 {	GtkTextView* text_view = GTK_TEXT_VIEW(user_data);
 
-	gint margin = (allocation->width * 15) / 100;
+	gint margin = (allocation->width * 15) / 100;		// 15%
 
 	gtk_text_view_set_right_margin(text_view, margin);
 	gtk_text_view_set_left_margin(text_view, margin);

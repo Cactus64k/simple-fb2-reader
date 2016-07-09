@@ -3,21 +3,14 @@
 G_MODULE_EXPORT void auto_scroll_enable_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)
 {
 	APP* app						= (APP*)user_data;
-	GKeyFile* app_config			= app->app_config;
-
 	app->auto_scroll				= TRUE;
 	g_timeout_add(10, auto_scroll_update, app);
-
-	g_key_file_set_boolean(app_config, "app", "auto_scroll", TRUE);
 }
 
 G_MODULE_EXPORT void auto_scroll_disable_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)
 {
 	APP* app						= (APP*)user_data;
-	GKeyFile* app_config			= app->app_config;
-
 	app->auto_scroll					= FALSE;
-	g_key_file_set_boolean(app_config, "app", "auto_scroll", FALSE);
 }
 
 G_MODULE_EXPORT void auto_scroll_activate_cb(GtkMenuItem* menuitem, gpointer user_data)

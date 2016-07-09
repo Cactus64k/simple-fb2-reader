@@ -25,6 +25,7 @@
     <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
     <signal name="key-press-event" handler="main_wnd_key_press_event_cb" swapped="no"/>
     <signal name="size-allocate" handler="main_wnd_size_allocate_cb" object="book_textview" swapped="no"/>
+    <signal name="window-state-event" handler="main_wnd_window_state_event_cb" swapped="no"/>
     <child>
       <object class="GtkScrolledWindow" id="book_text_view_scrolledwindow">
         <property name="visible">True</property>

@@ -25,8 +25,6 @@ int reader_close_app(APP* app)
 	g_key_file_set_double(app_config, "app",				"font_scale",		font_scale);
 	g_value_unset(&value);
 	//**************************************************************************************************
-	//g_key_file_set_string(app_config, "app",				"color_theme",		"default_theme");
-	//**************************************************************************************************
 	gint main_wnd_width = 0;
 	gint main_wnd_height = 0;
 	gtk_window_get_size(GTK_WINDOW(main_wnd), &main_wnd_width, &main_wnd_height);

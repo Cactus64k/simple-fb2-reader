@@ -10,6 +10,7 @@ G_MODULE_EXPORT void open_file_menuitem_activate_cb(GtkMenuItem* menuitem, gpoin
 		gtk_widget_hide(GTK_WIDGET(file_open_dialog));
 
 		char* file_path = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(file_open_dialog));
+		reader_scroll_save(app);
 		reader_close_book(app);
 		reader_open_book(app, file_path);
 		g_free(file_path);
@@ -29,6 +30,7 @@ G_MODULE_EXPORT void book_filechooserdialog_file_activated_cb(GtkFileChooser* ch
 	{
 		gtk_widget_hide(GTK_WIDGET(file_open_dialog));
 
+		reader_scroll_save(app);
 		reader_close_book(app);
 		reader_open_book(app, book_path);
 		g_free(book_path);
