@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2016-07-08 23:09+0300\n"
+        "POT-Creation-Date: 2016-07-09 03:03+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -71,45 +71,12 @@ msgstr  ""
 msgid   "Exit"
 msgstr  ""
 
-#: ../src/callbacks/text_view_callback/link_tag_enevt_callback.c:38
-msgid   "ERROR: failed to open URI.\n"
-msgstr  ""
-
 #: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:35
 msgid   "Enable"
 msgstr  ""
 
 #: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:40
 msgid   "Disable"
-msgstr  ""
-
-#: ../src/formats/fb2/fb2_parser.c:35
-#, c-format
-msgid   "ERROR: Failed to parsing fb2 file: %s\n"
-msgstr  ""
-
-#: ../src/formats/fb2/FictionBook/attributes/id.c:22
-#, c-format
-msgid   "ERROR: id %s already exist in table\n"
-msgstr  ""
-
-#: ../src/formats/fb2/FictionBook/description/book_title.c:20
-msgid   "ERROR: no content in <book-title> tag\n"
-msgstr  ""
-
-#: ../src/formats/fb2/FictionBook/description/title-info.c:45
-msgid   "ERROR: no content in <title-info> tag\n"
-msgstr  ""
-
-#: ../src/formats/fb2/FictionBook/body/section/image_inline.c:27
-#: ../src/formats/fb2/FictionBook/body/image.c:38
-#, c-format
-msgid   "Image %s not found in table\n"
-msgstr  ""
-
-#: ../src/formats/fb2/FictionBook/body/section/image_inline.c:30
-#: ../src/formats/fb2/FictionBook/body/image.c:41
-msgid   "Not local links not supported\n"
 msgstr  ""
 
 #: ../src/formats/fb2/FictionBook/body/section/section.c:18
@@ -124,56 +91,10 @@ msgstr  ""
 msgid   "End read book\n"
 msgstr  ""
 
-#: ../src/formats/fb2/FictionBook/binary/binary.c:37
-msgid   "ERROR: no content in <image> tag\n"
-msgstr  ""
-
-#: ../src/formats/fb2/FictionBook/binary/binary.c:40
-#, c-format
-msgid   "ERROR: image %s already exist in table\n"
-msgstr  ""
-
-#: ../src/formats/fb2/FictionBook/binary/binary.c:43
-msgid   "ERROR: no id properties in <image> tag\n"
-msgstr  ""
-
-#: ../src/formats/fb2/FictionBook/binary/binary.c:75
-#: ../src/formats/fb2/FictionBook/binary/binary.c:91
-#, c-format
-msgid   "ERROR: GdkPixbufLoader: %s\n"
-msgstr  ""
-
-#: ../src/formats/fb2_zip/fb2_zip_parser.c:55
-msgid   "ERROR: xml is well parsed, but pointer is NULL\n"
-msgstr  ""
-
-#: ../src/formats/fb2_zip/fb2_zip_parser.c:58
-msgid   "ERROR: Failed to parsing fb2 file.\n"
-msgstr  ""
-
-#: ../src/formats/fb2_zip/fb2_zip_parser.c:66
-msgid   "ERROR: failed to unpack fb2 file.\n"
-msgstr  ""
-
-#: ../src/formats/fb2_zip/fb2_zip_parser.c:72
-msgid   "ERROR: failed to open zip file.\n"
-msgstr  ""
-
 #: ../src/main.c:20
 msgid   "Local path to book"
 msgstr  ""
 
 #: ../src/main.c:21
 msgid   "Print reader version"
-msgstr  ""
-
-#: ../src/main.c:38
-#, c-format
-msgid   "ERROR: %s\n"
-        "\n"
-msgstr  ""
-
-#: ../src/main.c:59
-#, c-format
-msgid   "ERROR: Failed to load gui construct file %s\n"
 msgstr  ""
