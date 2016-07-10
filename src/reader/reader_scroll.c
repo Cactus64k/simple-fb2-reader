@@ -2,13 +2,12 @@
 
 gboolean auto_scroll_update(gpointer user_data)
 {
-	APP* app 					= (APP*)user_data;
-	GtkWidget* scrolled_window	= gtk_widget_get_parent(GTK_WIDGET(app->text_view));
-	GtkAdjustment* adj			= gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrolled_window));
-	double divider				= app->auto_scroll_divider;
-
-	double page_incr			= gtk_adjustment_get_page_increment(adj);
-	double scroll_pos			= gtk_adjustment_get_value(adj);
+	APP* app 								= (APP*)user_data;
+	GtkScrolledWindow* scrolled_window		= app->text_scrolledwindow;
+	double divider							= app->auto_scroll_divider;
+	GtkAdjustment* adj						= gtk_scrolled_window_get_vadjustment(scrolled_window);
+	double page_incr						= gtk_adjustment_get_page_increment(adj);
+	double scroll_pos						= gtk_adjustment_get_value(adj);
 
 	gtk_adjustment_set_value(adj, scroll_pos + page_incr/divider);
 
@@ -18,24 +17,32 @@ gboolean auto_scroll_update(gpointer user_data)
 int reader_scroll_save(APP* app)
 {
 	GtkTextView* text_view		= app->text_view;
+	int64_t book_index			= app->book_index;
+	char* book_hash				= app->book_hash;
 	GtkAdjustment* vertical_adj	= gtk_scrollable_get_vadjustment(GTK_SCROLLABLE(text_view));
 	double scroll_pos			= gtk_adjustment_get_value(vertical_adj);
-	int64_t book_index			= app->book_index;
 	GtkTextIter scroll_iter;
 
-	gtk_text_view_get_iter_at_location(text_view, &scroll_iter, 0, scroll_pos);
+	gtk_text_view_get_iter_at_location(text_view, &scroll_iter, 0, (gint)scroll_pos);
 
 	gint line					= gtk_text_iter_get_line(&scroll_iter);
 	gint line_offset			= gtk_text_iter_get_line_offset(&scroll_iter);
 
-	reader_books_db_set_int_by_index(app, book_index, "line", line);
-	reader_books_db_set_int_by_index(app, book_index, "line_offset", line_offset);
+	if((line != 0) && (line_offset != 0))
+	{
+		if(book_index == -1)
+			reader_books_db_add_new(app, book_hash, &book_index);
 
+		reader_books_db_set_int_by_index(app, book_index, "line", line);
+		reader_books_db_set_int_by_index(app, book_index, "line_offset", line_offset);
+
+		app->book_index = book_index;
+	}
 
 	return EXIT_SUCCESS;
 }
 
-int reader_scroll_at_line_offset(APP* app, gint line, gint line_offset)
+int reader_scroll_to_line_offset(APP* app, gint line, gint line_offset)
 {
 	GtkTextBuffer* text_buff		= app->text_buff;
 	GtkTextView* text_view			= app->text_view;
@@ -72,13 +79,7 @@ int reader_scroll_restore(APP* app, int line, int line_offset)
 	while(gtk_events_pending())
 		gtk_main_iteration();
 
-	reader_scroll_at_line_offset(app, line, line_offset);
-
-//	if(app->auto_scroll == TRUE)			// TODO autoscroll
-//	{
-//		app->auto_scroll = TRUE;
-//		g_timeout_add(10, auto_scroll_update, app);
-//	}
+	reader_scroll_to_line_offset(app, line, line_offset);
 
 	return EXIT_SUCCESS;
 }

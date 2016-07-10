@@ -15,6 +15,6 @@ G_MODULE_EXPORT void navigation_treeview_row_activated_cb(GtkTreeView* tree_view
 	{
 		gtk_tree_model_get(GTK_TREE_MODEL(section_store), &tree_iter, SECTION_STRING_COLUMN, &line, -1);
 
-		reader_scroll_at_line_offset(app, line, 0);
+		reader_scroll_to_line_offset(app, line, 0);
 	}
 }

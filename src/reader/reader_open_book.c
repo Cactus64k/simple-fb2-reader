@@ -8,14 +8,16 @@ int reader_open_book(APP* app, char* book_path)
 	if(book_type != BOOK_TYPE_NONE)
 	{
 		char* book_hash		= reader_get_book_hash(app, book_path);
-		int64_t book_index	= reader_books_db_get_index_by_hash(app, book_hash);
+		int64_t book_index	= -1;
+
+		reader_books_db_get_index_by_hash(app, book_hash, &book_index);
 		if(book_hash != NULL)
 		{
-			if(book_index == -1)
-				book_index = reader_books_db_add_new(app, book_hash);			// TODO make new row in db only if line and offset is not zero
-
-			app->book_type	= book_type;
-			app->book_index = book_index;
+			app->book_type			= book_type;
+			app->book_index			= book_index;
+			app->book_hash			= book_hash;
+			app->book_img_table		= g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_object_unref);
+			app->book_id_table		= g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);		// integer inside table
 
 			//*****************************************************
 			if(book_type == BOOK_TYPE_FB2)
@@ -25,13 +27,18 @@ int reader_open_book(APP* app, char* book_path)
 				parse_fb2_zip_file(app, book_path);
 			//*****************************************************
 
+			if(book_index != -1)
+			{
+				int line				= 0;
+				int line_offset			= 0;
+				reader_books_db_get_int_by_index(app, book_index, "line", &line);
+				reader_books_db_get_int_by_index(app, book_index, "line_offset", &line_offset);
 
-			int line		= reader_books_db_get_int_by_index(app, book_index, "line");
-			int line_offset	= reader_books_db_get_int_by_index(app, book_index, "line_offset");
-
-			reader_scroll_restore(app, line, line_offset);
+				reader_scroll_restore(app, line, line_offset);
+			}
 		}
-		g_free(book_hash);
+		else
+			g_warning("Failed to generate book hash");
 
 		return EXIT_SUCCESS;
 	}
@@ -78,6 +85,6 @@ BOOK_TYPE reader_get_book_type(char* file_path)
 		return BOOK_TYPE_FB2;
 	else if(_strncmpr(".fb2.zip", file_path, sizeof(".fb2.zip")-1) == 0)
 		return BOOK_TYPE_FB2_ZIP;
-
-	return BOOK_TYPE_NONE;
+	else
+		return BOOK_TYPE_NONE;
 }

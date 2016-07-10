@@ -18,8 +18,8 @@ int reader_read_config(APP* app)
 		g_key_file_set_integer(app_config,	"app",				"y_pos", 480/2);
 		g_key_file_set_integer(app_config,	"app",				"width", 640);
 		g_key_file_set_integer(app_config,	"app",				"height", 480);
-		g_key_file_set_boolean(app_config,	"app",				"maximize", FALSE);
-		g_key_file_set_boolean(app_config,	"app",				"auto_scroll", FALSE);
+		g_key_file_set_boolean(app_config,"app",				"maximize", FALSE);
+		g_key_file_set_boolean(app_config,"app",				"auto_scroll", FALSE);
 		g_key_file_set_double(app_config,	"app",				"auto_scroll_divider", 4096);
 		g_key_file_set_double(app_config,	"app",				"font_scale", 1.0);
 
@@ -59,7 +59,7 @@ int reader_read_config(APP* app)
 			g_key_file_set_integer(app_config,	"app",				"height", 480);
 
 		if(g_key_file_has_key(app_config,		"app",				"maximize", NULL) == FALSE)
-			g_key_file_set_boolean(app_config,	"app",				"maximize", FALSE);
+			g_key_file_set_boolean(app_config,"app",				"maximize", FALSE);
 
 		if(g_key_file_has_key(app_config,		"app",				"auto_scroll_divider", NULL) == FALSE)
 			g_key_file_set_double(app_config,	"app",				"auto_scroll_divider", 4096);

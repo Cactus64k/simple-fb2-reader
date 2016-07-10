@@ -7,15 +7,16 @@ int reader_close_book(APP* app)
 {
 	GtkWidget* main_wnd					= app->main_wnd;
 	GtkTreeStore* section_treestore		= app->sections_treestore;
-	GHashTable* binary_hash_table		= app->binary_hash_table;
-	GHashTable* links_hash_table		= app->links_hash_table;
 	GtkTextBuffer* text_buff			= app->text_buff;
+	GHashTable* book_img_table			= app->book_img_table;
+	GHashTable* book_id_table			= app->book_id_table;
 	BOOK_TYPE book_type					= app->book_type;
-	GList* link_jump_list				= app->link_jump_list;
+	GList* book_jump_list				= app->book_jump_list;
+	char* book_hash						= app->book_hash;
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
-		//******************************************************************
+		reader_scroll_save(app);
 
 		GtkTextIter text_buff_end_iter;
 		GtkTextIter text_buff_start_iter;
@@ -26,18 +27,22 @@ int reader_close_book(APP* app)
 
 		gtk_text_tag_table_foreach(text_tag_table, text_tag_foreach_remove, text_tag_table);
 
-		g_hash_table_remove_all(binary_hash_table);
-		g_hash_table_remove_all(links_hash_table);
+		g_hash_table_destroy(book_img_table);
+		g_hash_table_destroy(book_id_table);
 
-		g_list_free_full(link_jump_list, free_text_mark);
+		g_list_free_full(book_jump_list, free_text_mark);
 
 		gtk_window_set_title(GTK_WINDOW(main_wnd), "Simple FB2 reader");
 
 		gtk_tree_store_clear(section_treestore);
 
-		app->link_jump_list			= NULL;
+		g_free(book_hash);
+
+		app->book_jump_list			= NULL;
+		app->book_hash				= NULL;
 		app->book_type				= BOOK_TYPE_NONE;
 		app->book_index				= -1;
+
 
 		return EXIT_SUCCESS;
 	}

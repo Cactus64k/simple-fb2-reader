@@ -6,8 +6,8 @@ G_MODULE_EXPORT gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEve
 	GtkTextView* text_view			= GTK_TEXT_VIEW(object);
 	GtkTextBuffer* text_buff		= app->text_buff;
 	GdkCursor* cursor_link			= app->cursor_link;
-	GHashTable* links_hash_table	= app->links_hash_table;
-	GList* link_jump_list			= app->link_jump_list;
+	GHashTable* book_id_table		= app->book_id_table;
+	GList* book_jump_list			= app->book_jump_list;
 
 	if(event->type == GDK_BUTTON_RELEASE)
 	{
@@ -26,11 +26,11 @@ G_MODULE_EXPORT gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEve
 				href++;
 
 				GtkTextMark* mark = gtk_text_buffer_create_mark(text_buff, NULL, iter, TRUE);
-				app->link_jump_list = g_list_prepend(link_jump_list, mark);
+				app->book_jump_list = g_list_prepend(book_jump_list, mark);
 
-				gint link_line_num	= GPOINTER_TO_INT(g_hash_table_lookup(links_hash_table, href));
+				gint link_line_num	= GPOINTER_TO_INT(g_hash_table_lookup(book_id_table, href));
 
-				reader_scroll_at_line_offset(app, link_line_num, 0);
+				reader_scroll_to_line_offset(app, link_line_num, 0);
 			}
 			else
 			{

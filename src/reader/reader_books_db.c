@@ -7,71 +7,74 @@ int reader_books_db_init(APP* app)
 
 	const char* conf_dir		= g_get_user_config_dir();
 	char* db_path				= g_strdup_printf("%s/simple-fb2-reader/books.sqlite3", conf_dir);
-	sqlite3** books_db			= &(app->books_db);
-	if(sqlite3_open(db_path, books_db) == SQLITE_OK)
+	sqlite3** db				= &(app->book_db);
+	if(sqlite3_open(db_path, db) == SQLITE_OK)
 	{
-		if(sqlite3_exec(*books_db, "CREATE TABLE IF NOT EXISTS books(hash TEXT, line INT, line_offset INT);", NULL, NULL, NULL) != SQLITE_OK)
+		if(sqlite3_exec(*db, "CREATE TABLE IF NOT EXISTS books(hash TEXT, line INT, line_offset INT);", NULL, NULL, NULL) != SQLITE_OK)
 		{
-			g_error("Failed to create books table. %s", sqlite3_errmsg(*books_db));
+			g_error("Failed to create books table. %s", sqlite3_errmsg(*db));
 			return EXIT_FAILURE;
 		}
 	}
 	else
 	{
-		g_error("Failed to open books database. %s", sqlite3_errmsg(*books_db));
+		g_error("Failed to open books database. %s", sqlite3_errmsg(*db));
 		return EXIT_FAILURE;
 	}
 
 	return EXIT_SUCCESS;
 }
 
-int64_t reader_books_db_add_new(APP* app, const char* hash)
+int reader_books_db_add_new(APP* app, const char* hash, int64_t* index)
 {
 	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
 	g_return_val_if_fail(hash != NULL,		EXIT_FAILURE);
 
-	sqlite3* books_db			= app->books_db;
+	sqlite3* db					= app->book_db;
 	sqlite3_stmt* query			= NULL;
 
-	sqlite3_prepare(books_db, "INSERT INTO books VALUES(?, 0, 0);", -1, &query, NULL);
+	sqlite3_prepare(db, "INSERT INTO books VALUES(?, 0, 0);", -1, &query, NULL);
 	sqlite3_bind_text(query, 1, hash, -1, NULL);
 	sqlite3_step(query);
 
+	*index = sqlite3_last_insert_rowid(db);
+
 	sqlite3_finalize(query);
 
-	return sqlite3_last_insert_rowid(books_db);
+	return EXIT_SUCCESS;
 }
 
-int64_t reader_books_db_get_index_by_hash(APP* app, const char* hash)
+int reader_books_db_get_index_by_hash(APP* app, const char* hash, int64_t* index)
 {
 	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
 	g_return_val_if_fail(hash != NULL,		EXIT_FAILURE);
 
-	sqlite3* books_db			= app->books_db;
+	sqlite3* db					= app->book_db;
 	sqlite3_stmt* query			= NULL;
-	int64_t index				= -1;
+	*index				= -1;
 
-	sqlite3_prepare(books_db, "SELECT rowid FROM books WHERE hash IS ?;", -1, &query, NULL);
+	sqlite3_prepare(db, "SELECT rowid FROM books WHERE hash IS ?;", -1, &query, NULL);
 	sqlite3_bind_text(query, 1, hash, -1, NULL);
 	if(sqlite3_step(query) == SQLITE_ROW)
-		index = sqlite3_column_int64(query, 0);
+		*index = sqlite3_column_int64(query, 0);
 
 	sqlite3_finalize(query);
 
-	return index;
+	return EXIT_SUCCESS;
 }
 
 
 //##################################################################################################
 
-int reader_books_db_get_int_by_index(APP* app, int64_t index, const char* param)
+int reader_books_db_get_int_by_index(APP* app, int64_t index, const char* param, int* value)
 {
 	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
 	g_return_val_if_fail(param != NULL,		EXIT_FAILURE);
+	g_return_val_if_fail(index != -1,		EXIT_FAILURE);
 
-	sqlite3* books_db			= app->books_db;
+	sqlite3* books_db			= app->book_db;
 	sqlite3_stmt* query			= NULL;
-	int value					= 0;
+	*value						= 0;
 	char buff[512];
 
 	snprintf(buff, sizeof(buff), "SELECT %s FROM books WHERE rowid IS ?;", param);
@@ -85,11 +88,11 @@ int reader_books_db_get_int_by_index(APP* app, int64_t index, const char* param)
 	sqlite3_bind_int64(query, 1, index);
 
 	if(sqlite3_step(query) == SQLITE_ROW)
-		value = sqlite3_column_int(query, 0);
+		*value = sqlite3_column_int(query, 0);
 
 	sqlite3_finalize(query);
 
-	return value;
+	return EXIT_SUCCESS;
 }
 
 int reader_books_db_set_int_by_index(APP* app, int64_t index, const char* param, int value)
@@ -97,7 +100,7 @@ int reader_books_db_set_int_by_index(APP* app, int64_t index, const char* param,
 	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
 	g_return_val_if_fail(param != NULL,		EXIT_FAILURE);
 
-	sqlite3* books_db			= app->books_db;
+	sqlite3* books_db			= app->book_db;
 	sqlite3_stmt* query			= NULL;
 	char buff[512];
 

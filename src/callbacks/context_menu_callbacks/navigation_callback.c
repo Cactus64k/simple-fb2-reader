@@ -25,7 +25,7 @@ G_MODULE_EXPORT void navigation_menuitem_activate_cb(GtkMenuItem *menuitem, gpoi
 			gtk_tree_selection_get_selected(tree_selection, &tree_model, &tree_iter);
 			gtk_tree_model_get(GTK_TREE_MODEL(section_store), &tree_iter, SECTION_STRING_COLUMN, &line, -1);
 
-			reader_scroll_at_line_offset(app, line, 0);
+			reader_scroll_to_line_offset(app, line, 0);
 		}
 
 		gtk_widget_hide(GTK_WIDGET(navigation_dialog));

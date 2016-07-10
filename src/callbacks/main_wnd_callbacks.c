@@ -3,7 +3,6 @@
 G_MODULE_EXPORT gboolean main_wnd_delete_event_cb(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
 	APP* app	= (APP*)user_data;
-	reader_scroll_save(app);
 	reader_close_book(app);
 	reader_close_app(app);
 	return FALSE;

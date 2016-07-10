@@ -27,7 +27,7 @@
     <signal name="size-allocate" handler="main_wnd_size_allocate_cb" object="book_textview" swapped="no"/>
     <signal name="window-state-event" handler="main_wnd_window_state_event_cb" swapped="no"/>
     <child>
-      <object class="GtkScrolledWindow" id="book_text_view_scrolledwindow">
+      <object class="GtkScrolledWindow" id="book_scrolledwindow">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="hadjustment">book_textview_horisontal_adjustment</property>
@@ -375,42 +375,6 @@ left-arrow			Previous position(link navigation)
       <action-widget response="1">navigation_dialog-cancel-button</action-widget>
       <action-widget response="2">navigation_dialog-jump-button</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkImage" id="error_image">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-dialog-error</property>
-    <property name="icon_size">6</property>
-  </object>
-  <object class="GtkMessageDialog" id="error_messagedialog">
-    <property name="can_focus">False</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="icon_name">simple-fb2-reader</property>
-    <property name="type_hint">dialog</property>
-    <property name="transient_for">main_wnd</property>
-    <property name="message_type">other</property>
-    <property name="buttons">ok</property>
-    <property name="image">error_image</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="messagedialog-vbox">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="messagedialog-action_area">
-            <property name="can_focus">False</property>
-            <property name="homogeneous">True</property>
-            <property name="layout_style">end</property>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
   </object>
   <object class="GtkFileFilter" id="fb2_files_filter">
     <mime-types>

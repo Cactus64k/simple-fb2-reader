@@ -22,8 +22,6 @@ char* reader_get_book_hash(APP* app, char* file_path)
 
 		fclose(f);
 
-		//###############################
-
 		const char* book_hash	= g_checksum_get_string(chsum);
 		hash_out				= g_strdup(book_hash);
 

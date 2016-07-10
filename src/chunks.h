@@ -44,37 +44,35 @@
 	{
 		GtkWidget*				search_wnd;
 		GtkEntry*				search_query_entry;
-		GtkTextIter*			last_pos;
+		GtkTextIter				last_pos;
 		GtkCheckButton*			case_sensitive;
 		GtkRadioButton*			forward;
-		GtkRadioButton* 		backward;
 	} SEARCH_WINDOW;
 
 	typedef struct APP
 	{
-		GtkTextBuffer*			text_buff;
-		GtkTextView*			text_view;
-
-		sqlite3*				books_db;
-
+		sqlite3*				book_db;
 		BOOK_TYPE				book_type;
-		char*					book_path;
-		GHashTable*				binary_hash_table;
-		GHashTable*				links_hash_table;
-		GList*					link_jump_list;
-		GtkTreeStore*			sections_treestore;
+		char*					book_hash;
 		int64_t					book_index;
-
-		GtkWidget*				main_wnd;
+		GList*					book_jump_list;
+		GHashTable*				book_id_table;
+		GHashTable*				book_img_table;
 
 		SEARCH_WINDOW			search_window;
 
+		GtkWidget*				main_wnd;
+
+		GtkTextBuffer*			text_buff;
+		GtkTextView*			text_view;
+		GtkScrolledWindow*		text_scrolledwindow;
+
+		GtkTreeStore*			sections_treestore;
 		GtkTreeView*			sections_treeview;
 		GtkDialog*				navigation_dialog;
 
 		GtkFileChooserDialog*	filechooserdialog;
 		GtkAboutDialog*			about_dialog;
-		GtkMessageDialog*		error_messagedialog;
 
 		GdkCursor*				cursor_link;
 		GdkCursor*				cursor_watch;

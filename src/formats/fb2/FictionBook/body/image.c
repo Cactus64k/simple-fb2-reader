@@ -6,7 +6,7 @@ int parse_fb2_image(APP* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
 	GtkTextBuffer* text_buff		= obj->text_buff;
-	GHashTable* binary_hash_table	= obj->binary_hash_table;
+	GHashTable* book_img_table		= obj->book_img_table;
 
 	parse_fb2_id_attribute(obj, parent_node, text_buff_end);
 
@@ -25,7 +25,7 @@ int parse_fb2_image(APP* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 		{
 			href_attr++;
 
-			GdkPixbuf* image		= g_hash_table_lookup(binary_hash_table, href_attr);
+			GdkPixbuf* image		= g_hash_table_lookup(book_img_table, href_attr);
 			if(image != NULL)
 			{
 				gtk_text_buffer_insert_pixbuf(text_buff, text_buff_end, image);

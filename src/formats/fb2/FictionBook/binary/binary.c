@@ -7,14 +7,14 @@ int parse_fb2_book_binary(APP* app, xmlNode* parent_node)
 {
 	g_return_val_if_fail(parent_node	!= NULL, EXIT_FAILURE);
 
-	GHashTable* binary_hash_table	= app->binary_hash_table;
+	GHashTable* book_img_table		= app->book_img_table;
 
 	const char* id_attr				= NULL;
 	parse_fb2_attribute(app, parent_node, "id", &id_attr);
 
 	if(id_attr != NULL)
 	{
-		if(g_hash_table_contains(binary_hash_table, id_attr) == FALSE)
+		if(g_hash_table_contains(book_img_table, id_attr) == FALSE)
 		{
 			if(parent_node->children != NULL)
 			{
@@ -29,7 +29,7 @@ int parse_fb2_book_binary(APP* app, xmlNode* parent_node)
 					if(pixbuf != NULL)
 					{
 						char* id_dup = g_strdup(id_attr);
-						g_hash_table_insert(binary_hash_table, id_dup, pixbuf);
+						g_hash_table_insert(book_img_table, id_dup, pixbuf);
 					}
 				}
 			}
