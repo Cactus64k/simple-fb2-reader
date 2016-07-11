@@ -2,10 +2,10 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT([simple-fb2-reader], [1.1.0], [medved_cool@mail.ru], [], [https://github.com/Cactus64k/simple-fb2-reader])
+AC_INIT([simple-fb2-reader], [1.1.1], [medved_cool@mail.ru], [], [https://github.com/Cactus64k/simple-fb2-reader])
 # AM_INIT_AUTOMAKE
 # AC_CONFIG_SRCDIR([src/])
-AC_CONFIG_HEADERS([src/config.h])
+# AC_CONFIG_HEADERS([src/config.h.in])
 
 # Checks for programs.
 AC_PROG_CC_C99

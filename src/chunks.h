@@ -1,7 +1,7 @@
 #ifndef CHUNKS_H_
 #define CHUNKS_H_
 
-	#include "config.h"
+	//#include "config.h"
 
 	#include <stdlib.h>
 	#include <stdio.h>

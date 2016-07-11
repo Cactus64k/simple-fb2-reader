@@ -8,27 +8,30 @@ localedir		= @localedir@
 
 ####################################################################################
 PACKAGE_NAME	= @PACKAGE_NAME@
+PACKAGE_VERSION	= @PACKAGE_VERSION@
 SOURCES			= $(shell find . -name '*.c' -printf './%P ')
 OBJECTS			= $(SOURCES:.c=.o)
 
-DEFINIONS		= -DGUI_CONSTRUCT_PATH='"$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade"'
+DEFINIONS		=	-DGUI_CONSTRUCT_PATH='"$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade"' \
+					-DPACKAGE_VERSION='"$(PACKAGE_VERSION)"' \
+					-DPACKAGE_NAME='"$(PACKAGE_NAME)"'
 CC				= @CC@
 CFLAGS			= @CFLAGS@ $(DEFINIONS)
 LDFLAGS			= -export-dynamic
 
 ####################################################################################
 LIBS			=	@GTK_LIBS@\
-				@XML_LIBS@\
-				@GLIB_LIBS@\
-				@ZIP_LIBS@\
-				@SQLITE3_LIBS@
+					@XML_LIBS@\
+					@GLIB_LIBS@\
+					@ZIP_LIBS@\
+					@SQLITE3_LIBS@
 
 ####################################################################################
 INCLUDE			=	@GTK_CFLAGS@\
-				@XML_CFLAGS@\
-				@GLIB_CFLAGS@\
-				@ZIP_CFLAGS@\
-				@SQLITE3_CFLAGS@
+					@XML_CFLAGS@\
+					@GLIB_CFLAGS@\
+					@ZIP_CFLAGS@\
+					@SQLITE3_CFLAGS@
 
 all: $(SOURCES) $(PACKAGE_NAME) TRANSLATE_TARGET
 
