@@ -9,7 +9,6 @@
 	#include <stddef.h>
 	#include <assert.h>
 	#include <locale.h>
-	#include <string.h>
 	#include <stdint.h>
 
 	#include <libxml/parser.h>
@@ -24,6 +23,14 @@
 	#ifdef DEBUG
 		#undef GUI_CONSTRUCT_PATH
 		#define GUI_CONSTRUCT_PATH "./res/simple-fb2-reader.glade"
+	#endif
+
+	#ifndef PACKAGE_NAME
+		#define PACKAGE_NAME "simple-fb2-reader"
+	#endif
+
+	#ifndef PACKAGE_VERSION
+		#define PACKAGE_VERSION "simple-fb2-reader"
 	#endif
 
 

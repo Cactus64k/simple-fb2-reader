@@ -19,7 +19,7 @@ PKG_CHECK_MODULES([SQLITE3],	[sqlite3 >= 3.8.7.1])
 
 
 # Checks for header files.
-AC_CHECK_HEADERS([libintl.h locale.h stddef.h stdint.h stdlib.h string.h])
+AC_CHECK_HEADERS([libintl.h locale.h stddef.h stdint.h stdlib.h string.h stdint.h stdio.h assert.h])
 
 # Checks for typedefs, structures, and compiler characteristics.
 AC_TYPE_SIZE_T

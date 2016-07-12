@@ -28,7 +28,7 @@ int reader_scroll_save(APP* app)
 	gint line					= gtk_text_iter_get_line(&scroll_iter);
 	gint line_offset			= gtk_text_iter_get_line_offset(&scroll_iter);
 
-	if((line != 0) && (line_offset != 0))
+	if((line != 0) || (line_offset != 0))
 	{
 		if(book_index == -1)
 			reader_books_db_add_new(app, book_hash, &book_index);
