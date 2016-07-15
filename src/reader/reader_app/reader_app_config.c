@@ -1,17 +1,15 @@
-#include "../chunks.h"
+#include "../reader_chunks.h"
 
-int reader_read_config(APP* app)
+int reader_app_config(APP* app)
 {
-	const char* conf_dir				= g_get_user_config_dir();
+	const char* conf_dir		= g_get_user_config_dir();
 	assert(conf_dir != NULL);
 
-	GKeyFile* app_config				= g_key_file_new();
+	GKeyFile* app_config		= g_key_file_new();
+	char* app_config_path		= g_strdup_printf("%s/simple-fb2-reader/config.cfg", conf_dir);
+	GError* error				= NULL;
 
-	app->app_config_path				= g_strdup_printf("%s/simple-fb2-reader/config.cfg", conf_dir);
-
-	GError* error						= NULL;
-
-	if(g_key_file_load_from_file(app_config, app->app_config_path, G_KEY_FILE_NONE, &error) == FALSE)
+	if(g_key_file_load_from_file(app_config, app_config_path, G_KEY_FILE_NONE, &error) == FALSE)
 	{
 		g_key_file_set_string(app_config,	"app",				"color_theme", "default_theme");
 		g_key_file_set_integer(app_config,	"app",				"x_pos", 640/2);
@@ -37,7 +35,7 @@ int reader_read_config(APP* app)
 		g_key_file_set_string(app_config,	"dark_theme",		"font_monospace", "monospace");
 		g_key_file_set_integer(app_config,	"dark_theme",		"line_spacing", 10);
 
-		g_warning("%s: %s", error->message, app->app_config_path);
+		g_warning("%s: %s", error->message, app_config_path);
 
 		g_error_free(error);
 	}
@@ -94,7 +92,8 @@ int reader_read_config(APP* app)
 
 	}
 
-	app->app_config						= app_config;
+	app->app_config				= app_config;
+	app->app_config_path		= app_config_path;
 
 	return EXIT_SUCCESS;
 }

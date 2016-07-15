@@ -36,20 +36,20 @@ int parse_fb2_zip_file(APP* app, char* file_path)
 
 					if(parsing_status == 1)
 					{
-						xmlDocPtr xml_doc	= ctxt->myDoc;
+						xmlDocPtr doc	= ctxt->myDoc;
 
-						if(xml_doc != NULL)
+						if(doc != NULL)
 						{
-							xmlNode* file_tree	= xml_doc->children;
+							xmlNode* root = xmlDocGetRootElement(doc);
 
 							gtk_text_buffer_set_text(text_buff, "", 0);
 
 							GtkTextIter text_buff_end;
 							gtk_text_buffer_get_end_iter(text_buff, &text_buff_end);
 
-							parse_fb2_function_book(app, file_tree, &text_buff_end);
+							parse_fb2_function_book(app, root, &text_buff_end);
 
-							xmlFreeDoc(xml_doc);
+							xmlFreeDoc(doc);
 						}
 						else
 							g_error("Xml is well parsed, but pointer is NULL");

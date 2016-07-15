@@ -1,4 +1,4 @@
-#include "../chunks.h"
+#include "reader_chunks.h"
 
 int reader_create_text_tags(APP* app)
 {

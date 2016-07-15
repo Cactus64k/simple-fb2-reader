@@ -1,4 +1,4 @@
-#include "reader_chunks.h"
+#include "reader_book_chunks.h"
 
 
 int reader_books_db_init(APP* app)
@@ -12,7 +12,19 @@ int reader_books_db_init(APP* app)
 	{
 		if(sqlite3_exec(*db, "CREATE TABLE IF NOT EXISTS books(hash TEXT, line INT, line_offset INT);", NULL, NULL, NULL) != SQLITE_OK)
 		{
-			g_error("Failed to create books table. %s", sqlite3_errmsg(*db));
+			g_error("Failed to create books table: %s", sqlite3_errmsg(*db));
+			return EXIT_FAILURE;
+		}
+
+		if(sqlite3_exec(*db, "CREATE TABLE IF NOT EXISTS recent_books(name TEXT, hash TEXT, path TEXT);", NULL, NULL, NULL) != SQLITE_OK)
+		{
+			g_error("Failed to create recent_books table: %s", sqlite3_errmsg(*db));
+			return EXIT_FAILURE;
+		}
+
+		if(sqlite3_exec(*db, "DELETE FROM recent_books WHERE rowid <(SELECT MAX(rowid) FROM recent_books)-5;", NULL, NULL, NULL) != SQLITE_OK)
+		{
+			g_error("Failed to create delete_tail trigger: %s", sqlite3_errmsg(*db));
 			return EXIT_FAILURE;
 		}
 	}
@@ -25,7 +37,9 @@ int reader_books_db_init(APP* app)
 	return EXIT_SUCCESS;
 }
 
-int reader_books_db_add_new(APP* app, const char* hash, int64_t* index)
+//##################################################################################################
+
+int reader_books_table_add_new(APP* app, const char* hash, int64_t* index)
 {
 	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
 	g_return_val_if_fail(hash != NULL,		EXIT_FAILURE);
@@ -44,14 +58,14 @@ int reader_books_db_add_new(APP* app, const char* hash, int64_t* index)
 	return EXIT_SUCCESS;
 }
 
-int reader_books_db_get_index_by_hash(APP* app, const char* hash, int64_t* index)
+int reader_books_table_get_index_by_hash(APP* app, const char* hash, int64_t* index)
 {
 	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
 	g_return_val_if_fail(hash != NULL,		EXIT_FAILURE);
 
 	sqlite3* db					= app->book_db;
 	sqlite3_stmt* query			= NULL;
-	*index				= -1;
+	*index						= -1;
 
 	sqlite3_prepare(db, "SELECT rowid FROM books WHERE hash IS ?;", -1, &query, NULL);
 	sqlite3_bind_text(query, 1, hash, -1, NULL);
@@ -66,11 +80,11 @@ int reader_books_db_get_index_by_hash(APP* app, const char* hash, int64_t* index
 
 //##################################################################################################
 
-int reader_books_db_get_int_by_index(APP* app, int64_t index, const char* param, int* value)
+int reader_books_table_get_int_by_index(APP* app, int64_t index, const char* param, int* value)
 {
-	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
-	g_return_val_if_fail(param != NULL,		EXIT_FAILURE);
-	g_return_val_if_fail(index != -1,		EXIT_FAILURE);
+	g_return_val_if_fail(app	!= NULL,		EXIT_FAILURE);
+	g_return_val_if_fail(param	!= NULL,		EXIT_FAILURE);
+	g_return_val_if_fail(index	!= -1,		EXIT_FAILURE);
 
 	sqlite3* books_db			= app->book_db;
 	sqlite3_stmt* query			= NULL;
@@ -95,10 +109,10 @@ int reader_books_db_get_int_by_index(APP* app, int64_t index, const char* param,
 	return EXIT_SUCCESS;
 }
 
-int reader_books_db_set_int_by_index(APP* app, int64_t index, const char* param, int value)
+int reader_books_table_set_int_by_index(APP* app, int64_t index, const char* param, int value)
 {
-	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
-	g_return_val_if_fail(param != NULL,		EXIT_FAILURE);
+	g_return_val_if_fail(app	!= NULL,		EXIT_FAILURE);
+	g_return_val_if_fail(param	!= NULL,		EXIT_FAILURE);
 
 	sqlite3* books_db			= app->book_db;
 	sqlite3_stmt* query			= NULL;

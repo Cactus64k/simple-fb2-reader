@@ -1,4 +1,4 @@
-#include "../chunks.h"
+#include "reader_app.h"
 
 int reader_search_wnd(APP* app, GtkBuilder* builder)
 {

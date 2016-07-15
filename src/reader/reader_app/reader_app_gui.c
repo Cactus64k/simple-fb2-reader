@@ -1,6 +1,6 @@
-#include "../chunks.h"
+#include "reader_app.h"
 
-int reader_gui(APP* app, GtkBuilder* builder)
+int reader_app_gui(APP* app, GtkBuilder* builder)
 {
 	app->main_wnd						= GTK_WIDGET(				gtk_builder_get_object(builder, "main_wnd"));
 	app->filechooserdialog				= GTK_FILE_CHOOSER_DIALOG(	gtk_builder_get_object(builder, "book_filechooserdialog"));

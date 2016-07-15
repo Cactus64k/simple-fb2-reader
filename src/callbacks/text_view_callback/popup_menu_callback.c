@@ -58,6 +58,11 @@ G_MODULE_EXPORT void book_textview_populate_popup_cb(GtkTextView* entry, GtkMenu
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 	gtk_widget_show(item);
 
+	item = gtk_menu_item_new_with_label(_C("Close Book"));
+	g_signal_connect(item, "activate", G_CALLBACK(close_book_menuitem_activate_cb), app);
+	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
+	gtk_widget_show(item);
+
 	item = gtk_separator_menu_item_new();
 	gtk_menu_shell_append(GTK_MENU_SHELL(menu), item);
 	gtk_widget_show(item);

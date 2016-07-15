@@ -30,7 +30,7 @@
 	#endif
 
 	#ifndef PACKAGE_VERSION
-		#define PACKAGE_VERSION "simple-fb2-reader"
+		#define PACKAGE_VERSION "1.0.0"
 	#endif
 
 
@@ -60,6 +60,7 @@
 	{
 		sqlite3*				book_db;
 		BOOK_TYPE				book_type;
+		char*					book_title;
 		char*					book_hash;
 		int64_t					book_index;
 		GList*					book_jump_list;
@@ -94,8 +95,8 @@
 
 	} APP;
 
+	#include "reader/reader_chunks.h"
 	#include "formats/formats_chunks.h"
 	#include "callbacks/callbacks_chunk.h"
-	#include "reader/reader_chunks.h"
 
 #endif /* CHUNKS_H_ */

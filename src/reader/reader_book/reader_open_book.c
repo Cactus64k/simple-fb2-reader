@@ -1,16 +1,15 @@
-#include "reader_chunks.h"
+#include "reader_book_chunks.h"
 
 int reader_open_book(APP* app, char* book_path)
 {
 	BOOK_TYPE book_type = reader_get_book_type(book_path);
-
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
 		char* book_hash		= reader_get_book_hash(app, book_path);
 		int64_t book_index	= -1;
 
-		reader_books_db_get_index_by_hash(app, book_hash, &book_index);
+		reader_books_table_get_index_by_hash(app, book_hash, &book_index);
 		if(book_hash != NULL)
 		{
 			app->book_type			= book_type;
@@ -27,15 +26,24 @@ int reader_open_book(APP* app, char* book_path)
 				parse_fb2_zip_file(app, book_path);
 			//*****************************************************
 
+
+			char* window_title = g_strdup_printf("Simple FB2 reader: %s", app->book_title);
+			gtk_window_set_title(GTK_WINDOW(app->main_wnd), window_title);
+			g_free(window_title);
+
+
+
 			if(book_index != -1)
 			{
 				int line				= 0;
 				int line_offset			= 0;
-				reader_books_db_get_int_by_index(app, book_index, "line", &line);
-				reader_books_db_get_int_by_index(app, book_index, "line_offset", &line_offset);
+				reader_books_table_get_int_by_index(app, book_index, "line", &line);
+				reader_books_table_get_int_by_index(app, book_index, "line_offset", &line_offset);
 
 				reader_scroll_restore(app, line, line_offset);
 			}
+
+			reader_add_book_to_start_screen(app, app->book_title, book_hash, book_path);
 		}
 		else
 			g_warning("Failed to generate book hash");

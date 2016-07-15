@@ -20,6 +20,8 @@
 
 	void open_file_menuitem_activate_cb			(GtkMenuItem *menuitem,			gpointer user_data);
 
+	void close_book_menuitem_activate_cb		(GtkMenuItem *menuitem, gpointer user_data);
+
 	void search_menuitem_activate_cb			(GtkMenuItem* menuitem,			gpointer user_data);
 	void navigation_treeview_row_activated_cb	(GtkTreeView* tree_view,		GtkTreePath* path, GtkTreeViewColumn* column, gpointer user_data);
 	void navigation_menuitem_activate_cb		(GtkMenuItem *menuitem,			gpointer user_data);

@@ -6,9 +6,8 @@ int parse_fb2_id_attribute(APP* app, xmlNode* parent_node, GtkTextIter* text_buf
 	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
 	GHashTable* book_id_table		= app->book_id_table;
-	const char* id_attr				= NULL;
+	char* id_attr					= (char*)xmlGetProp(parent_node, (xmlChar*)"id");
 
-	parse_fb2_attribute(app, parent_node, "id", &id_attr);
 	if(id_attr != NULL)
 	{
 		gint pos	= gtk_text_iter_get_line(text_buff_end);
@@ -21,6 +20,8 @@ int parse_fb2_id_attribute(APP* app, xmlNode* parent_node, GtkTextIter* text_buf
 		else
 			g_warning("Id %s already exist in table", id_attr);
 	}
+
+	xmlFree(id_attr);
 
 
 

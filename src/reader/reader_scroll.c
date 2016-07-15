@@ -31,10 +31,10 @@ int reader_scroll_save(APP* app)
 	if((line != 0) || (line_offset != 0))
 	{
 		if(book_index == -1)
-			reader_books_db_add_new(app, book_hash, &book_index);
+			reader_books_table_add_new(app, book_hash, &book_index);
 
-		reader_books_db_set_int_by_index(app, book_index, "line", line);
-		reader_books_db_set_int_by_index(app, book_index, "line_offset", line_offset);
+		reader_books_table_set_int_by_index(app, book_index, "line", line);
+		reader_books_table_set_int_by_index(app, book_index, "line_offset", line_offset);
 
 		app->book_index = book_index;
 	}

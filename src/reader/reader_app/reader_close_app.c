@@ -1,4 +1,4 @@
-#include "reader_chunks.h"
+#include "reader_app.h"
 
 int reader_close_app(APP* app)
 {

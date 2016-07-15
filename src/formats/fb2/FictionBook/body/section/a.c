@@ -15,15 +15,16 @@ int parse_fb2_a(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 	GtkTextTag* a_tag				= gtk_text_buffer_create_tag(text_buff, NULL, 	"foreground",		"blue",
 																					"underline",		PANGO_UNDERLINE_SINGLE, NULL);
 
-	const char* href_attr			= NULL;
+	char* href_attr			= (char*)xmlGetProp(parent_node, (xmlChar*)"href");
 
-	parse_fb2_attribute(app, parent_node, "href", &href_attr);
 	if(href_attr != NULL)
 	{
 		char* href_dup				= g_strdup(href_attr);
 		g_signal_connect(G_OBJECT(a_tag), "event", G_CALLBACK(a_tag_event_cb), app);
 		g_object_set_data_full(G_OBJECT(a_tag), "href", href_dup, g_free);
 	}
+
+	xmlFree(href_attr);
 
 	parse_fb2_a__(app, node, text_buff_end);
 

@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2016-07-09 03:03+0300\n"
+        "POT-Creation-Date: 2016-07-13 23:52+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Content-Type: text/plain; charset=CHARSET\n"
         "Content-Transfer-Encoding: 8bit\n"
 
-#: ../res/simple-fb2-reader.glade:91
+#: ../res/simple-fb2-reader.glade:92
 msgid   "\n"
         "ctrl+n\t\t\t\tNavigation\n"
         "ctrl+f\t\t\t\tSearch\n"
@@ -30,17 +30,28 @@ msgid   "\n"
         "\t\t\tHave nice reading!\n"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:186
+#: ../res/simple-fb2-reader.glade:187
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:12
 msgid   "Backward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:203
+#: ../res/simple-fb2-reader.glade:204
 msgid   "Forward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:244
+#: ../res/simple-fb2-reader.glade:245
 msgid   "Case ensitive"
+msgstr  ""
+
+#: ../src/reader/reader_start_screen.c:16
+msgid   "\n"
+        "\n"
+        "Recent books:\n"
+        "\n"
+msgstr  ""
+
+#: ../src/reader/reader_start_screen.c:35
+msgid   "No name book"
 msgstr  ""
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:22
@@ -67,15 +78,19 @@ msgstr  ""
 msgid   "Open Book"
 msgstr  ""
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:65
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:61
+msgid   "Close Book"
+msgstr  ""
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:70
 msgid   "Exit"
 msgstr  ""
 
-#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:35
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:28
 msgid   "Enable"
 msgstr  ""
 
-#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:40
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:33
 msgid   "Disable"
 msgstr  ""
 
@@ -87,7 +102,7 @@ msgstr  ""
 msgid   "Body tag without title"
 msgstr  ""
 
-#: ../src/formats/fb2/FictionBook/FictionBook.c:64
+#: ../src/formats/fb2/FictionBook/FictionBook.c:60
 msgid   "End read book\n"
 msgstr  ""
 

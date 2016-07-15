@@ -10,26 +10,24 @@ int parse_fb2_image_inline(APP* app, xmlNode* parent_node, GtkTextIter* text_buf
 
 	parse_fb2_id_attribute(app, parent_node, text_buff_end);
 
-	const char* href_attr			= NULL;
-
-	parse_fb2_attribute(app, parent_node, "href", &href_attr);
+	char* href_attr			= (char*)xmlGetProp(parent_node, (xmlChar*)"href");
 
 	if(href_attr != NULL)
 	{
 		if(*href_attr == '#') // local
 		{
-			href_attr++;
-
-			GdkPixbuf* image		= g_hash_table_lookup(book_img_table, href_attr);
+			GdkPixbuf* image		= g_hash_table_lookup(book_img_table, href_attr+1);
 			if(image != NULL)
 				gtk_text_buffer_insert_pixbuf(text_buff, text_buff_end, image);
 			else
-				g_warning("Image %s not found in table", href_attr);
+				g_warning("Image %s not found in table", href_attr+1);
 		}
 		else
 			g_error("Not local links not supported");
 
 	}
+
+	xmlFree(href_attr);
 
 	return EXIT_SUCCESS;
 }

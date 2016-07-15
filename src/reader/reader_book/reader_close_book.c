@@ -1,4 +1,4 @@
-#include "reader_chunks.h"
+#include "reader_book_chunks.h"
 
 void text_tag_foreach_remove(GtkTextTag* tag, gpointer data);
 void free_text_mark(gpointer ptr);
@@ -13,6 +13,7 @@ int reader_close_book(APP* app)
 	BOOK_TYPE book_type					= app->book_type;
 	GList* book_jump_list				= app->book_jump_list;
 	char* book_hash						= app->book_hash;
+	char* book_name						= app->book_title;
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
@@ -37,9 +38,11 @@ int reader_close_book(APP* app)
 		gtk_tree_store_clear(section_treestore);
 
 		g_free(book_hash);
+		g_free(book_name);
 
 		app->book_jump_list			= NULL;
 		app->book_hash				= NULL;
+		app->book_title				= NULL;
 		app->book_type				= BOOK_TYPE_NONE;
 		app->book_index				= -1;
 

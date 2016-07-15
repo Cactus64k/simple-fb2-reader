@@ -15,11 +15,7 @@ int parse_fb2_function_book(APP* app, xmlNode* parent_node, GtkTextIter* text_bu
 	{
 		if(node->type == XML_ELEMENT_NODE)
 		{
-			if(strcmp((char*)node->name, "stylesheet") == 0)
-			{
-
-			}
-			else if(strcmp((char*)node->name, "binary") == 0)
+			if(strcmp((char*)node->name, "binary") == 0)
 				parse_fb2_book_binary(app, node);
 		}
 

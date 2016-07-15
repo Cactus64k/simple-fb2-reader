@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.1.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2016-07-09 03:02+0300\n"
+"POT-Creation-Date: 2016-07-13 23:51+0300\n"
 "PO-Revision-Date: 2015-03-30 18:11+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 
-#: ../res/simple-fb2-reader.glade:91
+#: ../res/simple-fb2-reader.glade:92
 msgid ""
 "\n"
 "ctrl+n\t\t\t\tNavigation\n"
@@ -45,18 +45,33 @@ msgstr ""
 "\n"
 "\t\t\tПриятного чтения!\n"
 
-#: ../res/simple-fb2-reader.glade:186
+#: ../res/simple-fb2-reader.glade:187
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:12
 msgid "Backward"
 msgstr "Назад"
 
-#: ../res/simple-fb2-reader.glade:203
+#: ../res/simple-fb2-reader.glade:204
 msgid "Forward"
 msgstr "Вперед"
 
-#: ../res/simple-fb2-reader.glade:244
+#: ../res/simple-fb2-reader.glade:245
 msgid "Case ensitive"
 msgstr "С учетом регистра"
+
+#: ../src/reader/reader_start_screen.c:16
+msgid ""
+"\n"
+"\n"
+"Recent books:\n"
+"\n"
+msgstr ""
+"\n"
+"\n"
+"Последние книги:\n"
+"\n"
+#: ../src/reader/reader_start_screen.c:35
+msgid "No name book"
+msgstr ""
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:22
 msgid "Navigation"
@@ -82,15 +97,19 @@ msgstr "О программе"
 msgid "Open Book"
 msgstr "Открыть Книгу"
 
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:65
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:61
+msgid "Close Book"
+msgstr "Закрыть Книгу"
+
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:70
 msgid "Exit"
 msgstr "Выход"
 
-#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:35
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:28
 msgid "Enable"
 msgstr "Включить"
 
-#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:40
+#: ../src/callbacks/context_menu_callbacks/auto_scroll_callback.c:33
 msgid "Disable"
 msgstr "Выключить"
 
@@ -102,7 +121,7 @@ msgstr "Раздел без заголовка"
 msgid "Body tag without title"
 msgstr "Тег body без заголовка"
 
-#: ../src/formats/fb2/FictionBook/FictionBook.c:64
+#: ../src/formats/fb2/FictionBook/FictionBook.c:60
 msgid "End read book\n"
 msgstr "Окончание чтения книги\n"
 

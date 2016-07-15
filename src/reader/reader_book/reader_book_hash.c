@@ -1,4 +1,4 @@
-#include "reader_chunks.h"
+#include "reader_book_chunks.h"
 
 char* reader_get_book_hash(APP* app, char* file_path)
 {
@@ -16,8 +16,7 @@ char* reader_get_book_hash(APP* app, char* file_path)
 		{
 			size_t read_count = fread(buff, 1, sizeof(buff), f);
 
-			const unsigned char* buff_pointer = (unsigned char*)buff;
-			g_checksum_update(chsum, buff_pointer, (gssize)read_count);
+			g_checksum_update(chsum, (const unsigned char*)buff, (gssize)read_count);
 		}
 
 		fclose(f);

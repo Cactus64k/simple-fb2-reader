@@ -13,11 +13,11 @@ int main(int argc,	char *argv[])
 	bind_textdomain_codeset(PACKAGE_NAME, "UTF-8");
 	textdomain(PACKAGE_NAME);
 
-	char* book_file_path = NULL;
+	char* book_path = NULL;
 	gboolean print_version = FALSE;
 
 	GOptionEntry cmd_options[]	= {
-									{"book",	'b',	0,	G_OPTION_ARG_FILENAME,	&book_file_path,	_C("Local path to book"), "/local/path/book.fb2"},
+									{"book",	'b',	0,	G_OPTION_ARG_FILENAME,	&book_path,	_C("Local path to book"), "/local/path/book.fb2"},
 									{"version",	'v',	0,	G_OPTION_ARG_NONE, 		&print_version,		_C("Print reader version"), NULL},
 									{NULL}
 								};
@@ -63,8 +63,8 @@ int main(int argc,	char *argv[])
 			APP app;
 			memset(&app, 0, sizeof(APP));
 
-			reader_read_config(&app);
-			reader_gui(&app, builder);
+			reader_app_config(&app);
+			reader_app_gui(&app, builder);
 			reader_search_wnd(&app, builder);
 			reader_create_text_tags(&app);
 			reader_books_db_init(&app);
@@ -73,18 +73,14 @@ int main(int argc,	char *argv[])
 			reader_set_color_theme(&app, color_theme);
 			g_free(color_theme);
 
-
-
 			gtk_builder_connect_signals(builder, &app);
 
-			//**********************************************************************************************
+			if((book_path != NULL) && (g_file_test(book_path, G_FILE_TEST_EXISTS | G_FILE_TEST_IS_REGULAR) == TRUE))
+				reader_open_book(&app, book_path);
+			else
+				reader_start_screen(&app);
 
-
-			if(book_file_path != NULL)
-			{
-				reader_open_book(&app, book_file_path);
-				g_free(book_file_path);
-			}
+			g_free(book_path);
 
 			gtk_main();
 		}
