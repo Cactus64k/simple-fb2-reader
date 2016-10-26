@@ -6,6 +6,11 @@ int reader_app_config(APP* app)
 	assert(conf_dir != NULL);
 
 	GKeyFile* app_config		= g_key_file_new();
+
+	char* app_config_folder		= g_strdup_printf("%s/simple-fb2-reader/", conf_dir);
+	g_mkdir_with_parents(app_config_folder, 0666);
+	g_free(app_config_folder);
+
 	char* app_config_path		= g_strdup_printf("%s/simple-fb2-reader/config.cfg", conf_dir);
 	GError* error				= NULL;
 
@@ -16,8 +21,8 @@ int reader_app_config(APP* app)
 		g_key_file_set_integer(app_config,	"app",				"y_pos", 480/2);
 		g_key_file_set_integer(app_config,	"app",				"width", 640);
 		g_key_file_set_integer(app_config,	"app",				"height", 480);
-		g_key_file_set_boolean(app_config,"app",				"maximize", FALSE);
-		g_key_file_set_boolean(app_config,"app",				"auto_scroll", FALSE);
+		g_key_file_set_boolean(app_config,	"app",				"maximize", FALSE);
+		g_key_file_set_boolean(app_config,	"app",				"auto_scroll", FALSE);
 		g_key_file_set_double(app_config,	"app",				"auto_scroll_divider", 4096);
 		g_key_file_set_double(app_config,	"app",				"font_scale", 1.0);
 
