@@ -31,7 +31,7 @@ int parse_fb2_image(APP* obj, xmlNode* parent_node, GtkTextIter* text_buff_end)
 				g_warning("Image %s not found in table", href_attr+1);
 		}
 		else
-			g_error("Not local links not supported");
+			g_log(NULL, G_LOG_LEVEL_ERROR, "Not local links not supported");
 	}
 
 	xmlFree(href_attr);

@@ -52,10 +52,10 @@ int parse_fb2_zip_file(APP* app, char* file_path)
 							xmlFreeDoc(doc);
 						}
 						else
-							g_error("Xml is well parsed, but pointer is NULL");
+							g_log(NULL, G_LOG_LEVEL_ERROR, "Xml is well parsed, but pointer is NULL");
 					}
 					else
-						g_error("Failed to parsing fb2 file");
+						g_log(NULL, G_LOG_LEVEL_ERROR, "Failed to parsing fb2 file");
 
 					xmlFreeParserCtxt(ctxt);
 
@@ -63,13 +63,13 @@ int parse_fb2_zip_file(APP* app, char* file_path)
 						break;
 				}
 				else
-					g_error("Failed to unpack fb2 file");
+					g_log(NULL, G_LOG_LEVEL_ERROR, "Failed to unpack fb2 file");
 			}
 		}
 		zip_close(f);
 	}
 	else
-		g_error("Failed to open zip file");
+		g_log(NULL, G_LOG_LEVEL_ERROR, "Failed to open zip file");
 
 	return EXIT_SUCCESS;
 }

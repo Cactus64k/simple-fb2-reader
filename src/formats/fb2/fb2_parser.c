@@ -32,7 +32,7 @@ int parse_fb2_file(APP* app, char* file_path)
 		xmlFreeDoc(doc);
 	}
 	else
-		g_error("Failed to parsing fb2 file");
+		g_log(NULL, G_LOG_LEVEL_ERROR, "Failed to parsing fb2 file");
 
 	xmlCleanupParser();
 

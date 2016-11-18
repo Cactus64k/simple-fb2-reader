@@ -12,25 +12,25 @@ int reader_books_db_init(APP* app)
 	{
 		if(sqlite3_exec(*db, "CREATE TABLE IF NOT EXISTS books(hash TEXT, line INT, line_offset INT);", NULL, NULL, NULL) != SQLITE_OK)
 		{
-			g_error("Failed to create books table: %s", sqlite3_errmsg(*db));
+			g_log(NULL, G_LOG_LEVEL_ERROR, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
 			return EXIT_FAILURE;
 		}
 
 		if(sqlite3_exec(*db, "CREATE TABLE IF NOT EXISTS recent_books(name TEXT, hash TEXT, path TEXT);", NULL, NULL, NULL) != SQLITE_OK)
 		{
-			g_error("Failed to create recent_books table: %s", sqlite3_errmsg(*db));
+			g_log(NULL, G_LOG_LEVEL_ERROR, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
 			return EXIT_FAILURE;
 		}
 
 		if(sqlite3_exec(*db, "DELETE FROM recent_books WHERE rowid <(SELECT MAX(rowid) FROM recent_books)-5;", NULL, NULL, NULL) != SQLITE_OK)
 		{
-			g_error("Failed to create delete_tail trigger: %s", sqlite3_errmsg(*db));
+			g_log(NULL, G_LOG_LEVEL_ERROR, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
 			return EXIT_FAILURE;
 		}
 	}
 	else
 	{
-		g_error("Failed to open books database. %s", sqlite3_errmsg(*db));
+		g_log(NULL, G_LOG_LEVEL_ERROR, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
 		return EXIT_FAILURE;
 	}
 

@@ -35,7 +35,7 @@ int main(int argc,	char *argv[])
 
 	if(g_option_context_parse(cmd_context, &cmd_count, &cmd_line, &error) == FALSE)
 	{
-		g_error(error->message);
+		g_log(NULL, G_LOG_LEVEL_ERROR, "%s", error->message);
 		g_error_free(error);
 		error = NULL;
 	}

@@ -66,7 +66,7 @@ int reader_add_book_to_start_screen(APP* app, const char* book_title, const char
 		sqlite3_bind_text(insert_query, 2, book_hash, -1, NULL);
 		sqlite3_bind_text(insert_query, 3, book_path, -1, NULL);
 		if(sqlite3_step(insert_query) == SQLITE_ERROR)
-			g_error("Failed add books in recent_table: %s", sqlite3_errmsg(db));
+			g_log(NULL, G_LOG_LEVEL_ERROR, "Failed add books in recent_table: %s", sqlite3_errmsg(db));
 		sqlite3_finalize(insert_query);
 	}
 	else

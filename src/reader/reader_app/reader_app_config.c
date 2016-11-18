@@ -8,7 +8,7 @@ int reader_app_config(APP* app)
 	GKeyFile* app_config		= g_key_file_new();
 
 	char* app_config_folder		= g_strdup_printf("%s/simple-fb2-reader/", conf_dir);
-	g_mkdir_with_parents(app_config_folder, 0666);
+	g_mkdir_with_parents(app_config_folder, 0755);
 	g_free(app_config_folder);
 
 	char* app_config_path		= g_strdup_printf("%s/simple-fb2-reader/config.cfg", conf_dir);

@@ -74,7 +74,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 
 		if(gdk_pixbuf_loader_write(loader, out_buff, bytes_count, &loader_error) == FALSE)
 		{
-			g_error("GdkPixbufLoader: %s", loader_error->message);
+			g_log(NULL, G_LOG_LEVEL_ERROR, "GdkPixbufLoader: %s", loader_error->message);
 			g_error_free(loader_error);
 			has_error = TRUE;
 
@@ -90,7 +90,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 
 	if(loader_error != NULL)
 	{
-		g_error("GdkPixbufLoader: %s", loader_error->message);
+		g_log(NULL, G_LOG_LEVEL_ERROR, "GdkPixbufLoader: %s", loader_error->message);
 		g_error_free(loader_error);
 		has_error = TRUE;
 	}
