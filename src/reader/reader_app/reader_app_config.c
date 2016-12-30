@@ -40,7 +40,7 @@ int reader_app_config(APP* app)
 		g_key_file_set_string(app_config,	"dark_theme",		"font_monospace", "monospace");
 		g_key_file_set_integer(app_config,	"dark_theme",		"line_spacing", 10);
 
-		g_warning("%s: %s", error->message, app_config_path);
+		g_log(NULL, G_LOG_LEVEL_WARNING, "%s: %s", error->message, app_config_path);
 
 		g_error_free(error);
 	}

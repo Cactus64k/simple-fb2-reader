@@ -18,7 +18,7 @@ int parse_fb2_id_attribute(APP* app, xmlNode* parent_node, GtkTextIter* text_buf
 			g_hash_table_insert(book_id_table, id, GINT_TO_POINTER(pos));
 		}
 		else
-			g_warning("Id %s already exist in table", id_attr);
+			g_log(NULL, G_LOG_LEVEL_WARNING, "Id %s already exist in table", id_attr);
 	}
 
 	xmlFree(id_attr);

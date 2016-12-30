@@ -68,7 +68,7 @@ int reader_add_book_to_start_screen(APP* app, const char* book_title, const char
 		sqlite3_bind_text(insert_query, 2, book_hash, -1, NULL);
 		sqlite3_bind_text(insert_query, 3, book_path, -1, NULL);
 		if(sqlite3_step(insert_query) == SQLITE_ERROR)
-			g_log(NULL, G_LOG_LEVEL_ERROR, "Failed add books in recent_table: %s", sqlite3_errmsg(db));
+			g_log(NULL, G_LOG_LEVEL_WARNING, "Failed add books in recent_table: %s", sqlite3_errmsg(db));
 		sqlite3_finalize(insert_query);
 
 		g_message("Add new book in recent_table");
@@ -81,7 +81,7 @@ int reader_add_book_to_start_screen(APP* app, const char* book_title, const char
 		sqlite3_bind_text(update_query, 1, book_path, -1, NULL);
 		sqlite3_bind_text(update_query, 2, book_hash, -1, NULL);
 		if(sqlite3_step(update_query) == SQLITE_ERROR)
-			g_log(NULL, G_LOG_LEVEL_ERROR, "Failed to update book in recent_table: %s", sqlite3_errmsg(db));
+			g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to update book in recent_table: %s", sqlite3_errmsg(db));
 		sqlite3_finalize(update_query);
 
 		g_message("Book already exist in recent_table. Update path.");

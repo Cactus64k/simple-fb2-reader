@@ -46,7 +46,9 @@ int reader_open_book(APP* app, char* book_path)
 			reader_add_book_to_start_screen(app, app->book_title, book_hash, book_path);
 		}
 		else
-			g_warning("Failed to generate book hash");
+			g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to generate book hash");
+
+
 
 		return EXIT_SUCCESS;
 	}

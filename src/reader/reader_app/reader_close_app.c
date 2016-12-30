@@ -41,7 +41,7 @@ int reader_close_app(APP* app)
 	//**************************************************************************************************
 
 	if(g_key_file_save_to_file(app_config, app_config_path, NULL) == FALSE)
-			g_warning("Failed to write app config");
+		g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to write app config");
 
 	g_object_unref(cursor_link);
 	g_object_unref(cursor_watch);

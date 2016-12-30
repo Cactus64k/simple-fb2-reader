@@ -12,25 +12,25 @@ int reader_books_db_init(APP* app)
 	{
 		if(sqlite3_exec(*db, "CREATE TABLE IF NOT EXISTS books(hash TEXT, line INT, line_offset INT);", NULL, NULL, NULL) != SQLITE_OK)
 		{
-			g_log(NULL, G_LOG_LEVEL_ERROR, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
+			g_log(NULL, G_LOG_LEVEL_WARNING, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
 			return EXIT_FAILURE;
 		}
 
 		if(sqlite3_exec(*db, "CREATE TABLE IF NOT EXISTS recent_books(name TEXT, hash TEXT, path TEXT);", NULL, NULL, NULL) != SQLITE_OK)
 		{
-			g_log(NULL, G_LOG_LEVEL_ERROR, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
+			g_log(NULL, G_LOG_LEVEL_WARNING, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
 			return EXIT_FAILURE;
 		}
 
 		if(sqlite3_exec(*db, "DELETE FROM recent_books WHERE rowid <(SELECT MAX(rowid) FROM recent_books)-5;", NULL, NULL, NULL) != SQLITE_OK)
 		{
-			g_log(NULL, G_LOG_LEVEL_ERROR, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
+			g_log(NULL, G_LOG_LEVEL_WARNING, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
 			return EXIT_FAILURE;
 		}
 	}
 	else
 	{
-		g_log(NULL, G_LOG_LEVEL_ERROR, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
+		g_log(NULL, G_LOG_LEVEL_WARNING, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
 		return EXIT_FAILURE;
 	}
 
@@ -95,7 +95,7 @@ int reader_books_table_get_int_by_index(APP* app, int64_t index, const char* par
 
 	if(sqlite3_prepare(books_db, buff, -1, &query, NULL) != SQLITE_OK)
 	{
-		g_warning("Failed to get row from books table. %s", sqlite3_errmsg(books_db));
+		g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to get row from books table. %s", sqlite3_errmsg(books_db));
 		return EXIT_FAILURE;
 	}
 
@@ -122,7 +122,7 @@ int reader_books_table_set_int_by_index(APP* app, int64_t index, const char* par
 
 	if(sqlite3_prepare(books_db, buff, -1, &query, NULL) != SQLITE_OK)
 	{
-		g_warning("Failed to update row from books table. %s", sqlite3_errmsg(books_db));
+		g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to update row from books table. %s", sqlite3_errmsg(books_db));
 		return EXIT_FAILURE;
 	}
 

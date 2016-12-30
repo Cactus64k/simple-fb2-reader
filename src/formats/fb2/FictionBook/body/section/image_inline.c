@@ -20,10 +20,10 @@ int parse_fb2_image_inline(APP* app, xmlNode* parent_node, GtkTextIter* text_buf
 			if(image != NULL)
 				gtk_text_buffer_insert_pixbuf(text_buff, text_buff_end, image);
 			else
-				g_warning("Image %s not found in table", href_attr+1);
+				g_log(NULL, G_LOG_LEVEL_WARNING, "Image %s not found in table", href_attr+1);
 		}
 		else
-			g_log(NULL, G_LOG_LEVEL_ERROR, "Not local links not supported");
+			g_log(NULL, G_LOG_LEVEL_WARNING, "Not local links not supported");
 
 	}
 

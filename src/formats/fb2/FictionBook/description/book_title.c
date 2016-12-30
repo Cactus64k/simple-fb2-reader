@@ -13,7 +13,7 @@ int parse_fb2_book_title(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_
 		app->book_title = g_strdup(book_title);
 	}
 	else
-		g_warning("No content in <book-title> tag");
+		g_log(NULL, G_LOG_LEVEL_WARNING, "No content in <book-title> tag");
 
 	return EXIT_SUCCESS;
 }

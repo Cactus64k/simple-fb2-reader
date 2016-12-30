@@ -34,13 +34,13 @@ int parse_fb2_book_binary(APP* app, xmlNode* parent_node)
 				xmlFree(image_data);
 			}
 			else
-				g_warning("No content in <image> tag");
+				g_log(NULL, G_LOG_LEVEL_WARNING, "No content in <image> tag");
 		}
 		else
-			g_warning("Image %s already exist in table", id_attr);
+			g_log(NULL, G_LOG_LEVEL_WARNING, "Image %s already exist in table", id_attr);
 	}
 	else
-		g_warning("No id properties in <image> tag");
+		g_log(NULL, G_LOG_LEVEL_WARNING, "No id properties in <image> tag");
 
 	xmlFree(id_attr);
 
@@ -53,22 +53,19 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 	g_return_val_if_fail(pixbuf	!= NULL, EXIT_FAILURE);
 	g_return_val_if_fail(base64	!= NULL, EXIT_FAILURE);
 
-	guchar out_buff[(READ_CHUNK_SIZE/4)*3];
-
-	GdkPixbufLoader* loader = gdk_pixbuf_loader_new();
-	GError* loader_error = NULL;
-	gboolean has_error = FALSE;
-
-	char* image_data	= base64;
-	size_t data_len		= strlen(image_data);
-	size_t position		= 0;
-
-	gint state = 0;
-	guint save = 0;
+	guchar* out_buff		= g_malloc((READ_CHUNK_SIZE));
+	GdkPixbufLoader* loader	= gdk_pixbuf_loader_new();
+	GError* loader_error	= NULL;
+	gboolean has_error		= FALSE;
+	char* image_data		= base64;
+	size_t data_len			= strlen(image_data);
+	size_t position			= 0;
+	gint state				= 0;
+	guint save				= 0;
 
 	while(data_len > position)
 	{
-		size_t count = (position+READ_CHUNK_SIZE < data_len)? READ_CHUNK_SIZE : data_len%1024;
+		size_t count = (position+READ_CHUNK_SIZE < data_len)? READ_CHUNK_SIZE : data_len%READ_CHUNK_SIZE;
 
 		size_t bytes_count = g_base64_decode_step(image_data, count, out_buff, &state, &save);
 
@@ -90,7 +87,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 
 	if(loader_error != NULL)
 	{
-		g_log(NULL, G_LOG_LEVEL_ERROR, "GdkPixbufLoader: %s", loader_error->message);
+		g_log(NULL, G_LOG_LEVEL_WARNING, "GdkPixbufLoader: %s", loader_error->message);
 		g_error_free(loader_error);
 		has_error = TRUE;
 	}
@@ -102,6 +99,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 	}
 
 	g_object_unref(loader);
+	g_free(out_buff);
 
 	return EXIT_SUCCESS;
 }

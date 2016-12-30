@@ -35,7 +35,7 @@ int main(int argc,	char *argv[])
 
 	if(g_option_context_parse(cmd_context, &cmd_count, &cmd_line, &error) == FALSE)
 	{
-		g_log(NULL, G_LOG_LEVEL_ERROR, "%s", error->message);
+		g_log(NULL, G_LOG_LEVEL_WARNING, "%s", error->message);
 		g_error_free(error);
 		error = NULL;
 	}
@@ -56,7 +56,7 @@ int main(int argc,	char *argv[])
 			guint result = gtk_builder_add_from_file(builder, GUI_CONSTRUCT_PATH, NULL);
 			if(result == 0)
 			{
-				g_warning("Failed to load gui construct file %s", GUI_CONSTRUCT_PATH);
+				g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to load gui construct file %s", GUI_CONSTRUCT_PATH);
 				exit(EXIT_FAILURE);
 			}
 
