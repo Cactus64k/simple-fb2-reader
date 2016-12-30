@@ -53,7 +53,7 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 	g_return_val_if_fail(pixbuf	!= NULL, EXIT_FAILURE);
 	g_return_val_if_fail(base64	!= NULL, EXIT_FAILURE);
 
-	guchar* out_buff		= g_malloc((READ_CHUNK_SIZE));
+	guchar* out_buff		= g_malloc((READ_CHUNK_SIZE/4)*3 + 3);
 	GdkPixbufLoader* loader	= gdk_pixbuf_loader_new();
 	GError* loader_error	= NULL;
 	gboolean has_error		= FALSE;

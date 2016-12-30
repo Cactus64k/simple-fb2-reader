@@ -90,13 +90,13 @@ G_MODULE_EXPORT gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEven
 			g_object_set_property(G_OBJECT(default_tag), "scale", &value);
 			g_value_unset(&value);
 
-//			GtkAllocation size_allocation = {.width = gtk_widget_get_allocated_width(GTK_WIDGET(text_view)),
-//											.height = gtk_widget_get_allocated_height(GTK_WIDGET(text_view))};
-//
-//			size_allocation.width++;
-//			gtk_widget_size_allocate(GTK_WIDGET(text_view), &size_allocation);
-//			size_allocation.width--;
-//			gtk_widget_size_allocate(GTK_WIDGET(text_view), &size_allocation);
+			GtkAllocation size_allocation = {.width = gtk_widget_get_allocated_width(GTK_WIDGET(text_view)),
+											.height = gtk_widget_get_allocated_height(GTK_WIDGET(text_view))};
+
+			size_allocation.width++;
+			gtk_widget_size_allocate(GTK_WIDGET(text_view), &size_allocation);
+			size_allocation.width--;
+			gtk_widget_size_allocate(GTK_WIDGET(text_view), &size_allocation);
 		}
 		else if(keyval == 'q')
 		{

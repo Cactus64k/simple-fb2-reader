@@ -11,42 +11,29 @@ G_MODULE_EXPORT gboolean book_textview_scroll_event_cb(GtkTextView *text_view, G
 
 		g_value_init(&value, G_TYPE_DOUBLE);
 		g_object_get_property(G_OBJECT(default_tag), "scale", &value);
-		double text_scale		= g_value_get_double(&value);
+		double text_scale = g_value_get_double(&value);
 
 		if(event->direction == GDK_SCROLL_DOWN)
-		{
-			printf("scroll down\n");
-		}
+			text_scale = text_scale - 0.1;
 		else if(event->direction == GDK_SCROLL_UP)
-		{
-			printf("scroll up\n");
-		}
+			text_scale = text_scale + 0.1;
 		else if(event->direction == GDK_SCROLL_SMOOTH)
-		{
-			printf("scroll smooth\n");
-			text_scale				= text_scale+event->delta_y*0.1;
-			gboolean need_update	= TRUE;
+			text_scale = text_scale + event->delta_y*0.1;
 
-			if(text_scale < 1)
-				need_update = FALSE;
+		text_scale = MAX(text_scale, 1);
+		text_scale = MIN(text_scale, 20);
 
-			text_scale = MAX(text_scale, 1);
-			text_scale = MIN(text_scale, 20);
+		g_value_set_double(&value, text_scale);
+		g_object_set_property(G_OBJECT(default_tag), "scale", &value);
+		g_value_unset(&value);
 
-			g_value_set_double(&value, text_scale);
-			g_object_set_property(G_OBJECT(default_tag), "scale", &value);
-			g_value_unset(&value);
-
-			if(need_update)			// FIXME tag-changed signal is not working
-			{
-				GtkAllocation size_allocation = {.width = gtk_widget_get_allocated_width(GTK_WIDGET(text_view)),
-												.height = gtk_widget_get_allocated_height(GTK_WIDGET(text_view))};
-				size_allocation.width++;
-				gtk_widget_size_allocate(GTK_WIDGET(text_view), &size_allocation);
-				size_allocation.width--;
-				gtk_widget_size_allocate(GTK_WIDGET(text_view), &size_allocation);
-			}
-		}
+		// FIXME tag-changed signal is not working
+		GtkAllocation size_allocation = {.width = gtk_widget_get_allocated_width(GTK_WIDGET(text_view)),
+										.height = gtk_widget_get_allocated_height(GTK_WIDGET(text_view))};
+		size_allocation.width++;
+		gtk_widget_size_allocate(GTK_WIDGET(text_view), &size_allocation);
+		size_allocation.width--;
+		gtk_widget_size_allocate(GTK_WIDGET(text_view), &size_allocation);
 
 		return TRUE;
 	}
