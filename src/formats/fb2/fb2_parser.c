@@ -7,6 +7,7 @@ int parse_fb2_file(APP* app, char* file_path)
 
 	GtkTextBuffer* text_buff	= app->text_buff;
 	xmlDocPtr doc				= xmlReadFile(file_path, NULL, XML_PARSE_COMPACT | XML_PARSE_NONET | XML_PARSE_NOERROR);
+	int status					= EXIT_SUCCESS;
 
 	if(doc != NULL)
 	{
@@ -30,9 +31,12 @@ int parse_fb2_file(APP* app, char* file_path)
 		xmlFreeDoc(doc);
 	}
 	else
-		g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to parsing fb2 file");
+	{
+		g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to parsing fb2 file %s", file_path);
+		status = EXIT_FAILURE;
+	}
 
 	xmlCleanupParser();
 
-	return EXIT_SUCCESS;
+	return status;
 }

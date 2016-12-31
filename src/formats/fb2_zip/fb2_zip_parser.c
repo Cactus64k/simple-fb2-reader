@@ -3,9 +3,9 @@
 int parse_fb2_zip_file(APP* app, char* file_path)
 {
 	GtkTextBuffer* text_buff	= app->text_buff;
-
-	int zip_error = 0;
-	struct zip* f = zip_open(file_path, ZIP_CHECKCONS, &zip_error);
+	int status					= EXIT_SUCCESS;
+	int zip_error				= 0;
+	struct zip* f				= zip_open(file_path, ZIP_CHECKCONS, &zip_error);
 	if(f != NULL)
 	{
 		zip_int64_t file_count = zip_get_num_entries(f, 0);
@@ -52,10 +52,16 @@ int parse_fb2_zip_file(APP* app, char* file_path)
 							xmlFreeDoc(doc);
 						}
 						else
+						{
 							g_log(NULL, G_LOG_LEVEL_WARNING, "Xml is well parsed, but pointer is NULL");
+							status = EXIT_FAILURE;
+						}
 					}
 					else
+					{
 						g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to parsing fb2 file");
+						status = EXIT_FAILURE;
+					}
 
 					xmlFreeParserCtxt(ctxt);
 
@@ -63,13 +69,19 @@ int parse_fb2_zip_file(APP* app, char* file_path)
 						break;
 				}
 				else
+				{
 					g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to unpack fb2 file");
+					status = EXIT_FAILURE;
+				}
 			}
 		}
 		zip_close(f);
 	}
 	else
+	{
 		g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to open zip file");
+		status = EXIT_FAILURE;
+	}
 
-	return EXIT_SUCCESS;
+	return status;
 }

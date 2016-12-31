@@ -18,37 +18,45 @@ int reader_open_book(APP* app, char* book_path)
 			app->book_img_table		= g_hash_table_new_full(g_str_hash, g_str_equal, g_free, g_object_unref);
 			app->book_id_table		= g_hash_table_new_full(g_str_hash, g_str_equal, g_free, NULL);		// integer inside table
 
+			int status = 0;
 			//*****************************************************
 			if(book_type == BOOK_TYPE_FB2)
-				parse_fb2_file(app, book_path);
+				status = parse_fb2_file(app, book_path);
 			//*****************************************************
 			else if(book_type == BOOK_TYPE_FB2_ZIP)
-				parse_fb2_zip_file(app, book_path);
+				status = parse_fb2_zip_file(app, book_path);
 			//*****************************************************
 
 
-			char* window_title = g_strdup_printf("Simple FB2 reader: %s", app->book_title);
-			gtk_window_set_title(GTK_WINDOW(app->main_wnd), window_title);
-			g_free(window_title);
-
-
-
-			if(book_index != -1)
+			if(status == EXIT_SUCCESS)
 			{
-				int line				= 0;
-				int line_offset			= 0;
-				reader_books_table_get_int_by_index(app, book_index, "line", &line);
-				reader_books_table_get_int_by_index(app, book_index, "line_offset", &line_offset);
+				char* window_title = g_strdup_printf("Simple FB2 reader: %s", app->book_title);
+				gtk_window_set_title(GTK_WINDOW(app->main_wnd), window_title);
+				g_free(window_title);
 
-				reader_scroll_restore(app, line, line_offset);
+				if(book_index != -1)
+				{
+					int line				= 0;
+					int line_offset			= 0;
+					reader_books_table_get_int_by_index(app, book_index, "line", &line);
+					reader_books_table_get_int_by_index(app, book_index, "line_offset", &line_offset);
+
+					reader_scroll_restore(app, line, line_offset);
+				}
+
+				reader_add_book_to_start_screen(app, app->book_title, book_hash, book_path);
 			}
-
-			reader_add_book_to_start_screen(app, app->book_title, book_hash, book_path);
+			else if(status == EXIT_FAILURE)
+			{
+				GtkDialog* dialog = GTK_DIALOG(gtk_message_dialog_new(GTK_WINDOW(app->main_wnd), GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "Failed to open book:\n%s", book_path));
+				gtk_window_set_default_icon_name("simple-fb2-reader");
+				gtk_dialog_run(dialog);
+				gtk_widget_hide(GTK_WIDGET(dialog));
+				gtk_widget_destroy(GTK_WIDGET(dialog));
+			}
 		}
 		else
 			g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to generate book hash");
-
-
 
 		return EXIT_SUCCESS;
 	}
