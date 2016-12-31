@@ -48,7 +48,7 @@ int reader_open_book(APP* app, char* book_path)
 			}
 			else if(status == EXIT_FAILURE)
 			{
-				GtkDialog* dialog = GTK_DIALOG(gtk_message_dialog_new(GTK_WINDOW(app->main_wnd), GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, "Failed to open book:\n%s", book_path));
+				GtkDialog* dialog = GTK_DIALOG(gtk_message_dialog_new(GTK_WINDOW(app->main_wnd), GTK_DIALOG_MODAL, GTK_MESSAGE_ERROR, GTK_BUTTONS_CLOSE, _C("Failed to open book:\n%s"), book_path));
 				gtk_window_set_default_icon_name("simple-fb2-reader");
 				gtk_dialog_run(dialog);
 				gtk_widget_hide(GTK_WIDGET(dialog));

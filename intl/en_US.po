@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2016-12-30 19:08+0300\n"
+"POT-Creation-Date: 2016-12-31 15:24+0300\n"
 "PO-Revision-Date: 2016-12-30 19:08+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -73,6 +73,13 @@ msgstr ""
 #: ../src/reader/reader_start_screen.c:34
 msgid "No name book"
 msgstr "No name book"
+
+#: ../src/reader/reader_book/reader_open_book.c:51
+#, c-format
+msgid ""
+"Failed to open book:\n"
+"%s"
+msgstr ""
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:22
 msgid "Navigation"

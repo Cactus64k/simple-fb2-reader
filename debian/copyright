@@ -2,7 +2,7 @@ Format: http://www.debian.org/doc/packaging-manuals/copyright-format/1.0/
 Upstream-Name: simple-fb2-reader
 Source: https://github.com/Cactus64k/simple-fb2-reader
 
-Files: *
+Files: ALL
 Copyright: 2015 Cactus <medved_cool@mail.ru>
 License: GPL-3+
  This package is free software; you can redistribute it and/or modify
