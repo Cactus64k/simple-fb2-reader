@@ -63,13 +63,15 @@ int get_pixbuf_from_base64(char* base64, GdkPixbuf** pixbuf)
 	gint state				= 0;
 	guint save				= 0;
 
+
 	while(data_len > position)
 	{
-		size_t count = (position+READ_CHUNK_SIZE < data_len)? READ_CHUNK_SIZE : data_len%READ_CHUNK_SIZE;
+		size_t in_count		= (position+READ_CHUNK_SIZE < data_len)? READ_CHUNK_SIZE : data_len%READ_CHUNK_SIZE;
+		in_count			= (in_count == 0)? READ_CHUNK_SIZE : in_count;
 
-		size_t bytes_count = g_base64_decode_step(image_data, count, out_buff, &state, &save);
+		size_t out_count	= g_base64_decode_step(image_data, in_count, out_buff, &state, &save);
 
-		if(gdk_pixbuf_loader_write(loader, out_buff, bytes_count, &loader_error) == FALSE)
+		if(gdk_pixbuf_loader_write(loader, out_buff, out_count, &loader_error) == FALSE)
 		{
 			g_log(NULL, G_LOG_LEVEL_ERROR, "GdkPixbufLoader: %s", loader_error->message);
 			g_error_free(loader_error);

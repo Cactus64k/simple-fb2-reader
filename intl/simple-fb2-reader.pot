@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2016-07-13 23:52+0300\n"
+        "POT-Creation-Date: 2016-12-30 19:08+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,22 +24,23 @@ msgid   "\n"
         "ctrl+o\t\t\t\tOpen book\n"
         "ctrl+q\t\t\t\tExit\n"
         "ctrl+c\t\t\t\tCopy text\n"
-        "ctrl+mouse-wheel \t\tFont scale\n"
+        "ctrl+mouse-wheel \tFont scale\n"
+        "ctrl+0\t\t\t \tDefault font scale\n"
         "left-arrow\t\t\tPrevious position(link navigation)\n"
         "\n"
         "\t\t\tHave nice reading!\n"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:187
+#: ../res/simple-fb2-reader.glade:188
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:12
 msgid   "Backward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:204
+#: ../res/simple-fb2-reader.glade:205
 msgid   "Forward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:245
+#: ../res/simple-fb2-reader.glade:246
 msgid   "Case ensitive"
 msgstr  ""
 
@@ -50,7 +51,7 @@ msgid   "\n"
         "\n"
 msgstr  ""
 
-#: ../src/reader/reader_start_screen.c:35
+#: ../src/reader/reader_start_screen.c:34
 msgid   "No name book"
 msgstr  ""
 

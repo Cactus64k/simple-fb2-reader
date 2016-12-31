@@ -1,15 +1,15 @@
 # Russian translations for simple-fb2-reader package
 # Английские переводы для пакета simple-fb2-reader.
-# Copyright (C) 2015 THE simple-fb2-reader'S COPYRIGHT HOLDER
+# Copyright (C) 2016 THE simple-fb2-reader'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the simple-fb2-reader package.
-# Automatically generated, 2015.
+# Automatically generated, 2016.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: simple-fb2-reader 1.1.0\n"
+"Project-Id-Version: simple-fb2-reader 1.0.0\n"
 "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-"POT-Creation-Date: 2016-07-13 23:51+0300\n"
-"PO-Revision-Date: 2015-03-30 18:11+0300\n"
+"POT-Creation-Date: 2016-12-30 19:08+0300\n"
+"PO-Revision-Date: 2016-12-30 19:08+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: ru\n"
@@ -28,35 +28,37 @@ msgid ""
 "ctrl+o\t\t\t\tOpen book\n"
 "ctrl+q\t\t\t\tExit\n"
 "ctrl+c\t\t\t\tCopy text\n"
-"ctrl+mouse-wheel \t\tFont scale\n"
+"ctrl+mouse-wheel \tFont scale\n"
+"ctrl+0\t\t\t \tDefault font scale\n"
 "left-arrow\t\t\tPrevious position(link navigation)\n"
 "\n"
 "\t\t\tHave nice reading!\n"
 msgstr ""
 "\n"
-"ctrl+n\t\t\t\tОглавление\n"
+"ctrl+n\t\t\t\tНавигация\n"
 "ctrl+f\t\t\t\tПоиск\n"
 "ctrl+h\t\t\t\tО программе\n"
 "ctrl+o\t\t\t\tОткрыть книгу\n"
 "ctrl+q\t\t\t\tВыход\n"
 "ctrl+c\t\t\t\tКопировать текст\n"
-"ctrl+колесо-мыши \t\tРазмер шрифта\n"
-"left-arrow\t\t\tПредыдущая позиция(навигация по ссылкам)\n"
+"ctrl+mouse-wheel \tРазмер шрифта\n"
+"ctrl+0\t\t\t \tСтандартный размер шрифта\n"
+"left-arrow\t\t\tПредыдущая позиция(переходы по ссылкам)\n"
 "\n"
 "\t\t\tПриятного чтения!\n"
 
-#: ../res/simple-fb2-reader.glade:187
+#: ../res/simple-fb2-reader.glade:188
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:12
 msgid "Backward"
 msgstr "Назад"
 
-#: ../res/simple-fb2-reader.glade:204
+#: ../res/simple-fb2-reader.glade:205
 msgid "Forward"
 msgstr "Вперед"
 
-#: ../res/simple-fb2-reader.glade:245
+#: ../res/simple-fb2-reader.glade:246
 msgid "Case ensitive"
-msgstr "С учетом регистра"
+msgstr "Учитывать регистр"
 
 #: ../src/reader/reader_start_screen.c:16
 msgid ""
@@ -69,9 +71,10 @@ msgstr ""
 "\n"
 "Последние книги:\n"
 "\n"
-#: ../src/reader/reader_start_screen.c:35
+
+#: ../src/reader/reader_start_screen.c:34
 msgid "No name book"
-msgstr ""
+msgstr "Книга без имени"
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:22
 msgid "Navigation"
@@ -87,7 +90,7 @@ msgstr "Авто прокрутка"
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:44
 msgid "Color Theme"
-msgstr "Цветовая Тема"
+msgstr "Цветовая тема"
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:51
 msgid "About"
@@ -95,11 +98,11 @@ msgstr "О программе"
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:56
 msgid "Open Book"
-msgstr "Открыть Книгу"
+msgstr "Открыть книгу"
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:61
 msgid "Close Book"
-msgstr "Закрыть Книгу"
+msgstr "Закрыть книгу"
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:70
 msgid "Exit"
@@ -115,19 +118,19 @@ msgstr "Выключить"
 
 #: ../src/formats/fb2/FictionBook/body/section/section.c:18
 msgid "Section without title"
-msgstr "Раздел без заголовка"
+msgstr "Секция без заголовка"
 
 #: ../src/formats/fb2/FictionBook/body/body.c:15
 msgid "Body tag without title"
-msgstr "Тег body без заголовка"
+msgstr "Тело без заголовка"
 
 #: ../src/formats/fb2/FictionBook/FictionBook.c:60
 msgid "End read book\n"
-msgstr "Окончание чтения книги\n"
+msgstr "Окончание чтения книги"
 
 #: ../src/main.c:20
 msgid "Local path to book"
-msgstr "Локальный путь до книги"
+msgstr "Локальный путь к книге"
 
 #: ../src/main.c:21
 msgid "Print reader version"
