@@ -16,13 +16,7 @@ int reader_books_db_init(APP* app)
 			return EXIT_FAILURE;
 		}
 
-		if(sqlite3_exec(*db, "CREATE TABLE IF NOT EXISTS recent_books(name TEXT, hash TEXT, path TEXT);", NULL, NULL, NULL) != SQLITE_OK)
-		{
-			g_log(NULL, G_LOG_LEVEL_WARNING, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
-			return EXIT_FAILURE;
-		}
-
-		if(sqlite3_exec(*db, "DELETE FROM recent_books WHERE rowid <(SELECT MAX(rowid) FROM recent_books)-5;", NULL, NULL, NULL) != SQLITE_OK)
+		if(sqlite3_exec(*db, "CREATE TABLE IF NOT EXISTS recent_books_ring(name TEXT, hash TEXT, path TEXT, time INT);", NULL, NULL, NULL) != SQLITE_OK)
 		{
 			g_log(NULL, G_LOG_LEVEL_WARNING, "SQLITE ERROR: %s", sqlite3_errmsg(*db));
 			return EXIT_FAILURE;

@@ -1,9 +1,8 @@
 #include "reader_book_chunks.h"
 
-char* reader_get_book_hash(APP* app, char* file_path)
+char* reader_get_book_hash(char* file_path)
 {
 	g_return_val_if_fail(file_path != NULL,	EXIT_FAILURE);
-	g_return_val_if_fail(app != NULL,		EXIT_FAILURE);
 
 	char* hash_out	= NULL;
 	FILE* f			= fopen(file_path, "rb");

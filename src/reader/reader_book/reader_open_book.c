@@ -6,7 +6,7 @@ int reader_open_book(APP* app, char* book_path)
 
 	if(book_type != BOOK_TYPE_NONE)
 	{
-		char* book_hash		= reader_get_book_hash(app, book_path);
+		char* book_hash		= reader_get_book_hash(book_path);
 		int64_t book_index	= -1;
 
 		reader_books_table_get_index_by_hash(app, book_hash, &book_index);
@@ -53,6 +53,8 @@ int reader_open_book(APP* app, char* book_path)
 				gtk_dialog_run(dialog);
 				gtk_widget_hide(GTK_WIDGET(dialog));
 				gtk_widget_destroy(GTK_WIDGET(dialog));
+
+				reader_close_book(app);
 			}
 		}
 		else

@@ -7,7 +7,7 @@ int reader_start_screen(APP* app)
 	GtkTextBuffer* text_buff	= app->text_buff;
 	GtkTextIter text_buff_end;
 
-	sqlite3_prepare(db, "SELECT name, path FROM recent_books;", -1, &query, NULL);
+	sqlite3_prepare(db, "SELECT name, path FROM recent_books_ring ORDER BY time DESC;", -1, &query, NULL);
 
 	gtk_text_buffer_get_end_iter(text_buff, &text_buff_end);
 
@@ -48,45 +48,7 @@ int reader_start_screen(APP* app)
 
 	sqlite3_finalize(query);
 
-		return EXIT_SUCCESS;
-}
-
-
-int reader_add_book_to_start_screen(APP* app, const char* book_title, const char* book_hash, const char* book_path)
-{
-	sqlite3* db					= app->book_db;
-	sqlite3_stmt* test_query	= NULL;
-
-	sqlite3_prepare(db, "SELECT rowid FROM recent_books WHERE hash IS ?;", -1, &test_query, NULL);
-	sqlite3_bind_text(test_query, 1, book_hash, -1, NULL);
-	if(sqlite3_step(test_query) != SQLITE_ROW)
-	{
-		sqlite3_stmt* insert_query	= NULL;
-
-		sqlite3_prepare(db, "INSERT INTO recent_books VALUES(?, ?, ?);", -1, &insert_query, NULL);
-		sqlite3_bind_text(insert_query, 1, book_title, -1, NULL);
-		sqlite3_bind_text(insert_query, 2, book_hash, -1, NULL);
-		sqlite3_bind_text(insert_query, 3, book_path, -1, NULL);
-		if(sqlite3_step(insert_query) == SQLITE_ERROR)
-			g_log(NULL, G_LOG_LEVEL_WARNING, "Failed add books in recent_table: %s", sqlite3_errmsg(db));
-		sqlite3_finalize(insert_query);
-
-		g_message("Add new book in recent_table");
-	}
-	else
-	{
-		sqlite3_stmt* update_query	= NULL;
-
-		sqlite3_prepare(db, "UPDATE recent_books SET path = ? WHRERE hash IS ?;", -1, &update_query, NULL);
-		sqlite3_bind_text(update_query, 1, book_path, -1, NULL);
-		sqlite3_bind_text(update_query, 2, book_hash, -1, NULL);
-		if(sqlite3_step(update_query) == SQLITE_ERROR)
-			g_log(NULL, G_LOG_LEVEL_WARNING, "Failed to update book in recent_table: %s", sqlite3_errmsg(db));
-		sqlite3_finalize(update_query);
-
-		g_message("Book already exist in recent_table. Update path.");
-	}
-	sqlite3_finalize(test_query);
-
 	return EXIT_SUCCESS;
 }
+
+
