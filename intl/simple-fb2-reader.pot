@@ -7,7 +7,7 @@
 msgid   ""
 msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Report-Msgid-Bugs-To: medved_cool@mail.ru\n"
-        "POT-Creation-Date: 2016-12-31 16:00+0300\n"
+        "POT-Creation-Date: 2017-01-03 19:51+0300\n"
         "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
         "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
         "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -16,7 +16,7 @@ msgstr  "Project-Id-Version: simple-fb2-reader 1.0.0\n"
         "Content-Type: text/plain; charset=CHARSET\n"
         "Content-Transfer-Encoding: 8bit\n"
 
-#: ../res/simple-fb2-reader.glade:92
+#: ../res/simple-fb2-reader.glade:93
 msgid   "\n"
         "ctrl+n\t\t\t\tNavigation\n"
         "ctrl+f\t\t\t\tSearch\n"
@@ -31,17 +31,30 @@ msgid   "\n"
         "\t\t\tHave nice reading!\n"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:188
+#: ../res/simple-fb2-reader.glade:118
+msgid   "Search"
+msgstr  ""
+
+#: ../res/simple-fb2-reader.glade:190
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:12
 msgid   "Backward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:205
+#: ../res/simple-fb2-reader.glade:207
 msgid   "Forward"
 msgstr  ""
 
-#: ../res/simple-fb2-reader.glade:246
+#: ../res/simple-fb2-reader.glade:248
 msgid   "Case ensitive"
+msgstr  ""
+
+#: ../res/simple-fb2-reader.glade:282
+#: ../src/callbacks/text_view_callback/popup_menu_callback.c:22
+msgid   "Navigation"
+msgstr  ""
+
+#: ../res/simple-fb2-reader.glade:396
+msgid   "Select file"
 msgstr  ""
 
 #: ../src/reader/reader_start_screen.c:16
@@ -59,10 +72,6 @@ msgstr  ""
 #, c-format
 msgid   "Failed to open book:\n"
         "%s"
-msgstr  ""
-
-#: ../src/callbacks/text_view_callback/popup_menu_callback.c:22
-msgid   "Navigation"
 msgstr  ""
 
 #: ../src/callbacks/text_view_callback/popup_menu_callback.c:27

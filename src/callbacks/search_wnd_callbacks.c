@@ -27,6 +27,18 @@ G_MODULE_EXPORT gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEve
 	return FALSE;
 }
 
+G_MODULE_EXPORT void search_wnd_show_cb(GtkWidget* widget, gpointer user_data)
+{
+	APP* app						= (APP*)user_data;
+	GtkTextIter* last_search_pos	= &(app->search_window.last_pos);
+
+	GtkTextView* text_view		= app->text_view;
+	GtkAdjustment* vertical_adj	= gtk_scrollable_get_vadjustment(GTK_SCROLLABLE(text_view));
+	double scroll_pos			= gtk_adjustment_get_value(vertical_adj);
+
+	gtk_text_view_get_iter_at_location(text_view, last_search_pos, 0, (gint)scroll_pos);
+}
+
 
 G_MODULE_EXPORT void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 {
@@ -76,13 +88,3 @@ G_MODULE_EXPORT void search_wnd_search_button_clicked_cb(GtkButton* button, gpoi
 			gtk_text_buffer_get_end_iter(text_buff, last_search_pos);
 	}
 }
-
-
-G_MODULE_EXPORT void search_query_changed_cb(GtkEditable* editable, gpointer user_data)
-{
-	APP* app						= (APP*)user_data;
-	GtkTextBuffer* text_buff		= app->text_buff;
-	GtkTextIter* last_search_pos	= &(app->search_window.last_pos);
-	gtk_text_buffer_get_start_iter(text_buff, last_search_pos);
-}
-

@@ -58,6 +58,7 @@
   <object class="GtkAboutDialog" id="reader_aboutdialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
+    <property name="role">About</property>
     <property name="modal">True</property>
     <property name="icon_name">simple-fb2-reader</property>
     <property name="type_hint">dialog</property>
@@ -114,6 +115,7 @@ left-arrow			Previous position(link navigation)
   </object>
   <object class="GtkWindow" id="search_wnd">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Search</property>
     <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="icon_name">simple-fb2-reader</property>
@@ -122,6 +124,7 @@ left-arrow			Previous position(link navigation)
     <property name="transient_for">main_wnd</property>
     <signal name="delete-event" handler="search_wnd_delete_event_cb" swapped="no"/>
     <signal name="key-press-event" handler="search_wnd_key_press_event_cb" swapped="no"/>
+    <signal name="show" handler="search_wnd_show_cb" swapped="no"/>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
@@ -142,7 +145,6 @@ left-arrow			Previous position(link navigation)
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="width_chars">30</property>
-                <signal name="changed" handler="search_query_changed_cb" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">True</property>
@@ -277,6 +279,7 @@ left-arrow			Previous position(link navigation)
   </object>
   <object class="GtkDialog" id="navigation_dialog">
     <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Navigation</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="default_width">400</property>
@@ -390,6 +393,7 @@ left-arrow			Previous position(link navigation)
   <object class="GtkFileChooserDialog" id="book_filechooserdialog">
     <property name="can_focus">False</property>
     <property name="border_width">5</property>
+    <property name="title" translatable="yes">Select file</property>
     <property name="modal">True</property>
     <property name="window_position">center</property>
     <property name="default_width">320</property>
