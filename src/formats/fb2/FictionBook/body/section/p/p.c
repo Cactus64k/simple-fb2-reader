@@ -12,10 +12,11 @@ int parse_fb2_p(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 
 	gtk_text_buffer_insert(text_buff, text_buff_end, "\t", -1);
 	parse_fb2_p__(app, node, text_buff_end);
-	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 
 	return EXIT_SUCCESS;
 }
+
+
 
 int parse_fb2_p__(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 {
@@ -76,5 +77,8 @@ int parse_fb2_p__(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 
 		node = node->next;
 	}
+
+	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+
 	return EXIT_SUCCESS;
 }

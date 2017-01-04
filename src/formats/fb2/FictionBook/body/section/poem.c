@@ -56,10 +56,7 @@ int parse_stanza(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 			else if(strcmp((char*)node->name, "subtitle") == 0)
 				parse_fb2_subtitle(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "v") == 0)
-			{
 				parse_fb2_p__(app, node, text_buff_end);
-				gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
-			}
 		}
 
 		node = node->next;
