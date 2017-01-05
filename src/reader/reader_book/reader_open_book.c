@@ -55,6 +55,7 @@ int reader_open_book(APP* app, char* book_path)
 				gtk_widget_destroy(GTK_WIDGET(dialog));
 
 				reader_close_book(app);
+				reader_start_screen(app);
 			}
 		}
 		else

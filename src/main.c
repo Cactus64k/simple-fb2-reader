@@ -17,8 +17,8 @@ int main(int argc,	char *argv[])
 	gboolean print_version = FALSE;
 
 	GOptionEntry cmd_options[]	= {
-									{"book",	'b',	0,	G_OPTION_ARG_FILENAME,	&book_path,	_C("Local path to book"), "/local/path/book.fb2"},
-									{"version",	'v',	0,	G_OPTION_ARG_NONE, 		&print_version,		_C("Print reader version"), NULL},
+									{"book",	'b',	0,	G_OPTION_ARG_FILENAME,	&book_path,		_C("Local path to book"), "/local/path/book.fb2"},
+									{"version",	'v',	0,	G_OPTION_ARG_NONE, 		&print_version,	_C("Print reader version"), NULL},
 									{NULL}
 								};
 

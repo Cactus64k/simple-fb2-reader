@@ -38,7 +38,7 @@ int reader_start_screen(APP* app)
 			gtk_text_buffer_insert(text_buff, &text_buff_end, "\n\n", -1);
 		}
 		else
-			g_message("Failed to find file on path %s", book_path);
+			g_log(NULL, G_LOG_LEVEL_MESSAGE, "Failed to find file on path %s", book_path);
 	}
 
 	GtkTextIter start_tag_iter;
