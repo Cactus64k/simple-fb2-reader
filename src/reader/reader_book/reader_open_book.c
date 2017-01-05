@@ -7,11 +7,13 @@ int reader_open_book(APP* app, char* book_path)
 	if(book_type != BOOK_TYPE_NONE)
 	{
 		char* book_hash		= reader_get_book_hash(book_path);
-		int64_t book_index	= -1;
 
-		reader_books_table_get_index_by_hash(app, book_hash, &book_index);
 		if(book_hash != NULL)
 		{
+			int64_t book_index	= -1;
+
+			reader_books_table_get_index_by_hash(app, book_hash, &book_index);
+
 			app->book_type			= book_type;
 			app->book_index			= book_index;
 			app->book_hash			= book_hash;
@@ -56,6 +58,8 @@ int reader_open_book(APP* app, char* book_path)
 
 				reader_close_book(app);
 				reader_start_screen(app);
+
+				return EXIT_FAILURE;
 			}
 		}
 		else
@@ -64,7 +68,7 @@ int reader_open_book(APP* app, char* book_path)
 		return EXIT_SUCCESS;
 	}
 
-	return EXIT_FAILURE;		// память нужно освободить руками
+	return EXIT_FAILURE;
 }
 
 int _strncmpr(const char *str1, const char *str2, size_t count)
