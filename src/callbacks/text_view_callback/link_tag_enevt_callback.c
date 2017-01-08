@@ -37,7 +37,6 @@ G_MODULE_EXPORT gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEve
 				if(reader_get_book_type(href) != BOOK_TYPE_NONE)
 				{
 					reader_close_book(app);
-
 					reader_open_book(app, href + sizeof("file://") - 1);
 				}
 			}
