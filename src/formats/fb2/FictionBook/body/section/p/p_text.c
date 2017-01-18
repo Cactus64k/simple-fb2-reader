@@ -18,7 +18,7 @@ int parse_fb2_p_get_text(xmlNode* parent_node, GString* buff)
 		{
 			if(strcmp((char*)node->name, "strong") == 0)				// жирный
 				parse_fb2_p_get_text(node, buff);
-			else if(strcmp((char*)node->name, "emphasis") == 0)			// курсив
+			else if(strcmp((char*)node->name, "emphasis") == 0)		// курсив
 				parse_fb2_p_get_text(node, buff);
 			else if(strcmp((char*)node->name, "a") == 0)				// ссылка
 				parse_fb2_p_get_text(node, buff);
