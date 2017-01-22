@@ -4,6 +4,7 @@
 	#include "../body_chunks.h"
 	#include "p/p_chunks.h"
 	#include "table/table_chunks.h"
+	#include "poem/poem.h"
 
 	int parse_fb2_section		(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end, GtkTreeIter* tree_iter);
 	int parse_fb2_a				(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
@@ -14,6 +15,7 @@
 	int parse_fb2_poem			(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
 	int parse_fb2_style			(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
 	int parse_fb2_subtitle		(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
+	int parse_fb2_stanza				(APP* app, xmlNode* node, GtkTextIter* text_buff_end);
 
 	int parse_fb2_text_autor	(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end);
 
