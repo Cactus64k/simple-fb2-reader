@@ -11,7 +11,5 @@ int parse_fb2_style(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 	g_log(NULL, G_LOG_LEVEL_WARNING, "Tag <style> not supported!");
 	parse_fb2_p__(app, node, text_buff_end);
 
-	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
-
 	return EXIT_SUCCESS;
 }
