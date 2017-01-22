@@ -1,10 +1,11 @@
+If you whant use autotools, remove CMakeLists.txt and copy files from autotools directory.
 
 DEBIAN:
 ################################################
 $ cd ~/
 $ git clone https://github.com/Cactus64k/simple-fb2-reader.git
 $ cd simple-fb2-reader
-$ fakeroot dpkg-buildpackage
+$ dpkg-buildpackage
 $ cd ..
 # dpkg -i simple-fb2-reader_*.deb
 
@@ -25,6 +26,6 @@ ANOTHER SYSTEMS:
 $ cd ~/
 $ git clone https://github.com/Cactus64k/simple-fb2-reader.git
 $ cd simple-fb2-reader
-$ ./configure
+$ cmake CMakeLists.txt
 $ make
 $ make install
