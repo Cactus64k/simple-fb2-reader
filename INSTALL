@@ -4,6 +4,7 @@ DEBIAN:
 ################################################
 $ cd ~/
 $ git clone https://github.com/Cactus64k/simple-fb2-reader.git
+# apt-get install debhelper libxml2-dev libgtk-3-dev libzip-dev pkg-config gettext libsqlite3-dev cmake
 $ cd simple-fb2-reader
 $ dpkg-buildpackage
 $ cd ..
