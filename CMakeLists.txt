@@ -5,7 +5,10 @@ include (FindPkgConfig)
  
 set (PROJECT simple-fb2-reader)
 set (VERSION 1.1.1)
-set (CMAKE_INSTALL_PREFIX /usr)
+
+if (NOT DEFINED CMAKE_INSTALL_PREFIX)
+	set(CMAKE_INSTALL_PREFIX "/usr")
+endif ()
  
 project (${PROJECT} C)
 
@@ -39,7 +42,7 @@ set (INCLUDES
 set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -std=c99")
 set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} -export-dynamic")
 
-add_definitions (-DGUI_CONSTRUCT_PATH="${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT}/${PROJECT}.glade")
+add_definitions (-DGUI_CONSTRUCT_PATH="${CMAKE_INSTALL_PREFIX}/${CMAKE_INSTALL_DATAROOTDIR}/${PROJECT}/${PROJECT}.glade")
 add_definitions (-DPACKAGE_VERSION="${VERSION}")
 add_definitions (-DPACKAGE_NAME="${PROJECT}")
 
@@ -61,5 +64,5 @@ install (FILES res/${PROJECT}.svg DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons
 
 install (FILES res/${PROJECT}.xml DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/mime/packages/)
 install (FILES res/application-x-fictionbook+xml.svg DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/mimetypes/)
-
+install (FILES res/application-x-zip-compressed-fb2.svg DESTINATION ${CMAKE_INSTALL_DATAROOTDIR}/icons/hicolor/scalable/mimetypes/)
 
