@@ -12,14 +12,14 @@ int parse_fb2_cite(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 
 	GtkTextMark* start_tag_mark	= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
 
-	//gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 
 	while(node != NULL)
 	{
 		if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "p") == 0)
-				parse_fb2_p(app, node, text_buff_end);
+				parse_fb2_p_common(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "subtitle") == 0)
 				parse_fb2_subtitle(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)
@@ -35,7 +35,7 @@ int parse_fb2_cite(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 		node = node->next;
 	}
 
-	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+	//gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 
 	GtkTextIter start_tag_iter;
 	gtk_text_buffer_get_iter_at_mark(text_buff, &start_tag_iter, start_tag_mark);

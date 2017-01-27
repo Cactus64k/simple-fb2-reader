@@ -8,6 +8,8 @@ int parse_fb2_epigraph(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_en
 	GtkTextBuffer* text_buff	= app->text_buff;
 	xmlNode* node				= parent_node->children;
 
+	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+
 	parse_fb2_id_attribute(app, parent_node, text_buff_end);
 
 	GtkTextMark* start_tag_mark		= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);

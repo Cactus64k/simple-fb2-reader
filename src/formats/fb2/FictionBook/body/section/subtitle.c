@@ -12,7 +12,7 @@ int parse_fb2_subtitle(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_en
 
 	GtkTextMark* start_subtitle	= gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
 
-	parse_fb2_p__(app, node, text_buff_end);
+	parse_fb2_p(app, node, text_buff_end);
 
 	GtkTextIter start_subtitle_iter;
 	gtk_text_buffer_get_iter_at_mark(text_buff, &start_subtitle_iter, start_subtitle);
