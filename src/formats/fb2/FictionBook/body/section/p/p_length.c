@@ -11,10 +11,7 @@ int parse_fb2_p_get_length(xmlNode* parent_node, glong* len)
 	{
 		if(node->type == XML_TEXT_NODE)
 		{
-			if(strcmp((char*)node->name, "text") == 0)
-			{
-				*len += g_utf8_strlen((char*)node->content, -1);
-			}
+			*len += g_utf8_strlen((char*)node->content, -1);
 		}
 		else if(node->type == XML_ELEMENT_NODE)
 		{

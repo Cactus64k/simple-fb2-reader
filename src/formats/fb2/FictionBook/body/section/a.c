@@ -50,7 +50,7 @@ int parse_fb2_a__(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)		/
 	{
 		tag = NULL;
 
-		if((node->type == XML_TEXT_NODE) && (strcmp((char*)node->name, "text") == 0))
+		if(node->type == XML_TEXT_NODE)
 			gtk_text_buffer_insert(text_buff, text_buff_end, (char*)node->content, -1);
 		else if(node->type == XML_ELEMENT_NODE)
 		{

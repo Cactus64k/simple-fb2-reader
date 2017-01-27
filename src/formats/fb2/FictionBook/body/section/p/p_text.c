@@ -10,10 +10,7 @@ int parse_fb2_p_get_text(xmlNode* parent_node, GString* buff)
 	while(node != NULL)
 	{
 		if(node->type == XML_TEXT_NODE)
-		{
-			if(strcmp((char*)node->name, "text") == 0)
-				g_string_append(buff, (char*)node->content);
-		}
+			g_string_append(buff, (char*)node->content);
 		else if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "strong") == 0)				// жирный

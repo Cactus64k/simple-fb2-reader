@@ -19,7 +19,7 @@ int parse_fb2_cite(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 		if(node->type == XML_ELEMENT_NODE)
 		{
 			if(strcmp((char*)node->name, "p") == 0)
-				parse_fb2_p_common(app, node, text_buff_end);
+				parse_fb2_p(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "subtitle") == 0)
 				parse_fb2_subtitle(app, node, text_buff_end);
 			else if(strcmp((char*)node->name, "empty-line") == 0)

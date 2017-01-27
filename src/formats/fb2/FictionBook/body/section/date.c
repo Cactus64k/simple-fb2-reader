@@ -12,18 +12,15 @@ int parse_fb2_date(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 
 	if(value_attr != NULL)
 		gtk_text_buffer_insert(text_buff, text_buff_end, value_attr, -1);
-  else
-  {
-    xmlNode* node				= parent_node->children;
-    if (node != NULL)
-    {
-      if(node->type == XML_TEXT_NODE)
-      {
-        if(strcmp((char*)node->name, "text") == 0)
-          gtk_text_buffer_insert(text_buff, text_buff_end, (char*)node->content, -1);
-      }
-    }
-  }
+	else
+	{
+		xmlNode* node	= parent_node->children;
+		if(node != NULL)
+		{
+			if(node->type == XML_TEXT_NODE)
+				gtk_text_buffer_insert(text_buff, text_buff_end, (char*)node->content, -1);
+		}
+	}
 
 	xmlFree(value_attr);
 
