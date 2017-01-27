@@ -11,7 +11,7 @@ int parse_fb2_poem(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 	parse_fb2_id_attribute(app, parent_node, text_buff_end);
 
 
-	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+	//gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 
 	while(node != NULL)
 	{

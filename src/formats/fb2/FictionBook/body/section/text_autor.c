@@ -12,10 +12,10 @@ int parse_fb2_text_autor(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_
 
 	GtkTextMark* start_tag_mark = gtk_text_buffer_create_mark(text_buff, NULL, text_buff_end, TRUE);
 
-	//gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
-	parse_fb2_p__(app, node, text_buff_end);
-
 	gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
+	parse_fb2_p(app, node, text_buff_end);
+
+	//gtk_text_buffer_insert(text_buff, text_buff_end, "\n", -1);
 
 
 	GtkTextIter start_tag_iter;

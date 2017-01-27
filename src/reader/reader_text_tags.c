@@ -53,6 +53,9 @@ int reader_create_text_tags(APP* app)
 																//"justification",		GTK_JUSTIFY_CENTER,
 																"wrap_mode",			GTK_WRAP_NONE, NULL);
 	//####################################################################################################################################
+	gtk_text_buffer_create_tag(text_buff, "date_tag", 	"size-points",			12.f,
+																"justification",		GTK_JUSTIFY_RIGHT, NULL);
+	//####################################################################################################################################
 
 	return EXIT_SUCCESS;
 }
