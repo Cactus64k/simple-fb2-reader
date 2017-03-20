@@ -18,7 +18,7 @@ G_MODULE_EXPORT gboolean book_textview_scroll_event_cb(GtkTextView *text_view, G
 		else if(event->direction == GDK_SCROLL_DOWN)
 			text_scale = text_scale - 0.1;
 		else if(event->direction == GDK_SCROLL_SMOOTH)
-			text_scale = text_scale + event->delta_y*0.1;
+			text_scale = text_scale + event->delta_y*(-0.1);
 
 		text_scale = MAX(text_scale, 0.5);
 		text_scale = MIN(text_scale, 20.0);
