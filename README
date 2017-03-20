@@ -15,9 +15,8 @@ Features:
 - auto scrolling(see config for customise scrolling speed)
 - hotkeys
 
-
 All features located in context menu.
-
+Hotkeys description in "About" menu item.
 
 Depends:
 - libxml2		>= 2.9.1
