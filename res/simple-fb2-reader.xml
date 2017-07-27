@@ -1,6 +1,7 @@
-<?xml version="1.0"?>
-<mime-info xmlns='http://www.freedesktop.org/standards/shared-mime-info'>
-	<mime-type type="application/x-zip-compressed-fb2">  
+<?xml version="1.0" encoding="UTF-8"?>
+<mime-info xmlns="http://www.freedesktop.org/standards/shared-mime-info">
+	<mime-type type="application/x-zip-compressed-fb2">
+		<sub-class-of type="application/zip"/>
 		<comment>Compressed book FB2</comment>
 		<comment xml:lang="ru">Сжатая книга FB2</comment>
 		<glob pattern="*.fb2.zip"/>
