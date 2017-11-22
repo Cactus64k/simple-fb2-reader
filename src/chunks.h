@@ -91,7 +91,7 @@
 		char*					app_config_path;
 
 		gboolean				auto_scroll;
-		double					auto_scroll_divider;
+		double					auto_scroll_period;
 
 	} APP;
 

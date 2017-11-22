@@ -3,7 +3,7 @@
 G_MODULE_EXPORT void backward_itemmenu_cb(GtkMenuItem* menuitem, gpointer user_data)
 {
 	APP* app						= (APP*)user_data;
-	GtkTextView* text_view			= app->text_view;
+	GtkTextView* text_view		= app->text_view;
 	GList* book_jump_list			= app->book_jump_list;
 
 	GtkAdjustment* horisontal_adj	= gtk_scrollable_get_hadjustment(GTK_SCROLLABLE(text_view));

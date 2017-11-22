@@ -3,21 +3,26 @@
 G_MODULE_EXPORT void auto_scroll_enable_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)
 {
 	APP* app						= (APP*)user_data;
-	app->auto_scroll				= TRUE;
-	g_timeout_add(10, auto_scroll_update, app);
+	if(app->book_type != BOOK_TYPE_NONE)
+	{
+		app->auto_scroll			= TRUE;
+		double period			= app->auto_scroll_period;
+		g_timeout_add(period, auto_scroll_update, app);
+	}
+
 }
 
 G_MODULE_EXPORT void auto_scroll_disable_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data)
 {
 	APP* app						= (APP*)user_data;
-	app->auto_scroll					= FALSE;
+	app->auto_scroll				= FALSE;
 }
 
 G_MODULE_EXPORT void auto_scroll_activate_cb(GtkMenuItem* menuitem, gpointer user_data)
 {
 	APP* app						= (APP*)user_data;
 	GKeyFile* app_config			= app->app_config;
-	GtkWidget* sub_menu				= gtk_menu_item_get_submenu(menuitem);
+	GtkWidget* sub_menu			= gtk_menu_item_get_submenu(menuitem);
 
 	GList* items_list				= gtk_container_get_children(GTK_CONTAINER(sub_menu));
 	g_list_free_full(items_list, (GDestroyNotify)gtk_widget_destroy);

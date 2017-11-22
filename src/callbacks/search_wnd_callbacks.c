@@ -17,7 +17,7 @@ G_MODULE_EXPORT gboolean search_wnd_delete_event_cb(GtkWidget *widget, GdkEvent 
 
 G_MODULE_EXPORT gboolean search_wnd_key_press_event_cb(GtkWidget* widget, GdkEvent* event, gpointer user_data)
 {
-	APP* app					= (APP*)user_data;
+	APP* app						= (APP*)user_data;
 	GdkEventKey key_event		= event->key;
 	if(key_event.keyval == GDK_KEY_Escape)
 		gtk_widget_hide(widget);
@@ -34,7 +34,7 @@ G_MODULE_EXPORT void search_wnd_show_cb(GtkWidget* widget, gpointer user_data)
 
 	GtkTextView* text_view		= app->text_view;
 	GtkAdjustment* vertical_adj	= gtk_scrollable_get_vadjustment(GTK_SCROLLABLE(text_view));
-	double scroll_pos			= gtk_adjustment_get_value(vertical_adj);
+	double scroll_pos				= gtk_adjustment_get_value(vertical_adj);
 
 	gtk_text_view_get_iter_at_location(text_view, last_search_pos, 0, (gint)scroll_pos);
 }
@@ -42,12 +42,12 @@ G_MODULE_EXPORT void search_wnd_show_cb(GtkWidget* widget, gpointer user_data)
 
 G_MODULE_EXPORT void search_wnd_search_button_clicked_cb(GtkButton* button, gpointer user_data)
 {
-	APP* app						= (APP*)user_data;
-	GtkTextBuffer* text_buff		= app->text_buff;
+	APP* app							= (APP*)user_data;
+	GtkTextBuffer* text_buff			= app->text_buff;
 	GtkTextView* text_view			= app->text_view;
 	GtkEntry* search_entry			= app->search_window.search_query_entry;
-	GtkTextIter* last_search_pos	= &(app->search_window.last_pos);
-	GtkCheckButton* case_sensitive	= app->search_window.case_sensitive;
+	GtkTextIter* last_search_pos		= &(app->search_window.last_pos);
+	GtkCheckButton* case_sensitive		= app->search_window.case_sensitive;
 	GtkRadioButton* forward			= app->search_window.forward;
 
 	const char* query = gtk_entry_get_text(search_entry);

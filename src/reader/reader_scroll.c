@@ -4,12 +4,10 @@ gboolean auto_scroll_update(gpointer user_data)
 {
 	APP* app 								= (APP*)user_data;
 	GtkScrolledWindow* scrolled_window		= app->text_scrolledwindow;
-	double divider							= app->auto_scroll_divider;
 	GtkAdjustment* adj						= gtk_scrolled_window_get_vadjustment(scrolled_window);
-	double page_incr						= gtk_adjustment_get_page_increment(adj);
-	double scroll_pos						= gtk_adjustment_get_value(adj);
+	double scroll_pos							= gtk_adjustment_get_value(adj);
 
-	gtk_adjustment_set_value(adj, scroll_pos + page_incr/divider);
+	gtk_adjustment_set_value(adj, scroll_pos + 1);
 
 	return app->auto_scroll;
 }
@@ -20,7 +18,7 @@ int reader_scroll_save(APP* app)
 	int64_t book_index			= app->book_index;
 	char* book_hash				= app->book_hash;
 	GtkAdjustment* vertical_adj	= gtk_scrollable_get_vadjustment(GTK_SCROLLABLE(text_view));
-	double scroll_pos			= gtk_adjustment_get_value(vertical_adj);
+	double scroll_pos				= gtk_adjustment_get_value(vertical_adj);
 	GtkTextIter scroll_iter;
 
 	gtk_text_view_get_iter_at_location(text_view, &scroll_iter, 0, (gint)scroll_pos);
@@ -44,9 +42,9 @@ int reader_scroll_save(APP* app)
 
 int reader_scroll_to_line_offset(APP* app, gint line, gint line_offset)
 {
-	GtkTextBuffer* text_buff		= app->text_buff;
+	GtkTextBuffer* text_buff			= app->text_buff;
 	GtkTextView* text_view			= app->text_view;
-	GtkAdjustment* horisontal_adj	= gtk_scrollable_get_hadjustment(GTK_SCROLLABLE(text_view));
+	GtkAdjustment* horisontal_adj		= gtk_scrollable_get_hadjustment(GTK_SCROLLABLE(text_view));
 	GtkTextIter scroll_iter;
 
 	if(gtk_text_buffer_get_line_count(text_buff) >= line)

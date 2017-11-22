@@ -4,7 +4,7 @@ G_MODULE_EXPORT void color_theme_checkmenuitem_toggled_cb(GtkCheckMenuItem* chec
 {
 	APP* app						= (APP*)user_data;
 	GKeyFile* app_config			= app->app_config;
-	const char* menu_item_name		= gtk_widget_get_name(GTK_WIDGET(checkmenuitem));
+	const char* menu_item_name	= gtk_widget_get_name(GTK_WIDGET(checkmenuitem));
 
 	reader_set_color_theme(app, menu_item_name);
 
@@ -15,7 +15,7 @@ G_MODULE_EXPORT void color_theme_activate_cb(GtkMenuItem* menuitem, gpointer use
 {
 	APP* app						= (APP*)user_data;
 	GKeyFile* app_config			= app->app_config;
-	GtkWidget* sub_menu				= gtk_menu_item_get_submenu(menuitem);
+	GtkWidget* sub_menu			= gtk_menu_item_get_submenu(menuitem);
 
 	GList* items_list				= gtk_container_get_children(GTK_CONTAINER(sub_menu));
 	g_list_free_full(items_list, (GDestroyNotify)gtk_widget_destroy);
