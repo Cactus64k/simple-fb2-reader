@@ -4,7 +4,7 @@ include (GNUInstallDirs)
 include (FindPkgConfig)
  
 set (PROJECT simple-fb2-reader)
-set (VERSION 1.1.1)
+set (VERSION 1.1.2)
 
 if (NOT DEFINED CMAKE_INSTALL_PREFIX)
 	set(CMAKE_INSTALL_PREFIX "/usr")
