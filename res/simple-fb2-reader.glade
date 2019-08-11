@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 -->
+<!-- Generated with glade 3.22.1 -->
 <interface>
-  <requires lib="gtk+" version="3.2"/>
+  <requires lib="gtk+" version="3.20"/>
   <object class="GtkTextBuffer" id="book_textbuff"/>
   <object class="GtkAdjustment" id="book_textview_horisontal_adjustment">
     <property name="upper">100</property>
@@ -27,6 +27,9 @@
     <signal name="size-allocate" handler="main_wnd_size_allocate_cb" object="book_textview" swapped="no"/>
     <signal name="window-state-event" handler="main_wnd_window_state_event_cb" swapped="no"/>
     <child>
+      <placeholder/>
+    </child>
+    <child>
       <object class="GtkScrolledWindow" id="book_scrolledwindow">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
@@ -35,6 +38,7 @@
         <property name="shadow_type">in</property>
         <child>
           <object class="GtkTextView" id="book_textview">
+            <property name="name">book_textview</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
             <property name="has_tooltip">True</property>
@@ -50,6 +54,9 @@
             <signal name="populate-popup" handler="book_textview_populate_popup_cb" swapped="no"/>
             <signal name="query-tooltip" handler="book_textview_query_tooltip_cb" swapped="no"/>
             <signal name="scroll-event" handler="book_textview_scroll_event_cb" swapped="no"/>
+            <style>
+              <class name="book_textview"/>
+            </style>
           </object>
         </child>
       </object>
@@ -69,6 +76,9 @@
     <property name="authors">Cactus &lt;medved_cool@mail.ru&gt;</property>
     <property name="logo_icon_name">simple-fb2-reader</property>
     <property name="license_type">gpl-3-0</property>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox" id="reader_aboutdialog_vbox">
         <property name="can_focus">False</property>
@@ -89,13 +99,13 @@
           <object class="GtkLabel" id="about_dialog_hotkeys_label">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="xpad">30</property>
             <property name="label" translatable="yes">
 ctrl+n				Navigation
 ctrl+f				Search
 ctrl+h				About
 ctrl+o				Open book
 ctrl+q				Exit
+ctrl+w				Close book
 ctrl+c				Copy text
 ctrl+mouse-wheel 	Font scale
 ctrl+0			 	Default font scale
@@ -112,6 +122,9 @@ left-arrow			Previous position(link navigation)
         </child>
       </object>
     </child>
+    <style>
+      <class name="reader_aboutdialog"/>
+    </style>
   </object>
   <object class="GtkWindow" id="search_wnd">
     <property name="can_focus">False</property>
@@ -125,6 +138,9 @@ left-arrow			Previous position(link navigation)
     <signal name="delete-event" handler="search_wnd_delete_event_cb" swapped="no"/>
     <signal name="key-press-event" handler="search_wnd_key_press_event_cb" swapped="no"/>
     <signal name="show" handler="search_wnd_show_cb" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child>
       <object class="GtkBox" id="box1">
         <property name="visible">True</property>
@@ -154,7 +170,6 @@ left-arrow			Previous position(link navigation)
             </child>
             <child>
               <object class="GtkButton" id="search_wnd_search_button">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
@@ -188,11 +203,9 @@ left-arrow			Previous position(link navigation)
             <child>
               <object class="GtkRadioButton" id="search_backward_radiobutton">
                 <property name="label" translatable="yes">Backward</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
-                <property name="xalign">0</property>
                 <property name="draw_indicator">True</property>
                 <property name="group">search_forward_radiobutton</property>
               </object>
@@ -205,11 +218,9 @@ left-arrow			Previous position(link navigation)
             <child>
               <object class="GtkRadioButton" id="search_forward_radiobutton">
                 <property name="label" translatable="yes">Forward</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
-                <property name="xalign">0</property>
                 <property name="active">True</property>
                 <property name="draw_indicator">True</property>
               </object>
@@ -221,7 +232,6 @@ left-arrow			Previous position(link navigation)
             </child>
             <child>
               <object class="GtkButton" id="search_wnd_close_button">
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -246,11 +256,9 @@ left-arrow			Previous position(link navigation)
             <child>
               <object class="GtkCheckButton" id="search_case_sensitive_checkbutton">
                 <property name="label" translatable="yes">Case ensitive</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">False</property>
-                <property name="xalign">0</property>
                 <property name="draw_indicator">True</property>
               </object>
               <packing>
@@ -282,11 +290,14 @@ left-arrow			Previous position(link navigation)
     <property name="title" translatable="yes">Navigation</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
-    <property name="default_width">400</property>
-    <property name="default_height">400</property>
+    <property name="default_width">640</property>
+    <property name="default_height">480</property>
     <property name="icon_name">simple-fb2-reader</property>
     <property name="type_hint">dialog</property>
     <property name="transient_for">main_wnd</property>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox" id="navigation_dialog-vbox">
         <property name="can_focus">False</property>
@@ -299,7 +310,6 @@ left-arrow			Previous position(link navigation)
             <child>
               <object class="GtkButton" id="navigation_dialog-cancel-button">
                 <property name="label">gtk-cancel</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -314,7 +324,6 @@ left-arrow			Previous position(link navigation)
             <child>
               <object class="GtkButton" id="navigation_dialog-jump-button">
                 <property name="label">gtk-jump-to</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -402,6 +411,9 @@ left-arrow			Previous position(link navigation)
     <property name="transient_for">main_wnd</property>
     <property name="filter">fb2_files_filter</property>
     <signal name="file-activated" handler="book_filechooserdialog_file_activated_cb" swapped="no"/>
+    <child>
+      <placeholder/>
+    </child>
     <child internal-child="vbox">
       <object class="GtkBox" id="book_filechooserdialog-vbox">
         <property name="can_focus">False</property>
@@ -414,7 +426,6 @@ left-arrow			Previous position(link navigation)
             <child>
               <object class="GtkButton" id="book_filechooserdialog_cancel_button">
                 <property name="label">gtk-cancel</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -429,7 +440,6 @@ left-arrow			Previous position(link navigation)
             <child>
               <object class="GtkButton" id="book_filechooserdialog_ok_button">
                 <property name="label">gtk-open</property>
-                <property name="use_action_appearance">False</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

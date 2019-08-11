@@ -8,7 +8,7 @@ export GLADE=`(find ../ -name '*.glade' -printf '../%P ')`
 
 echo ${SRC[0]}
 
-xgettext					 	--package-name=$PROGNAME --package-version=$VERSION --msgid-bugs-address=$MAIL --i --from-code=UTF-8 --output=./$PROGNAME.pot $GLADE
+xgettext --package-name=$PROGNAME --package-version=$VERSION --msgid-bugs-address=$MAIL --i --from-code=UTF-8 --output=./$PROGNAME.pot $GLADE
 xgettext -j --keyword=$KEYWORD	--package-name=$PROGNAME --package-version=$VERSION --msgid-bugs-address=$MAIL --i --from-code=UTF-8 --output=./$PROGNAME.pot $SRC
 
 if [ -f ru.po ];

@@ -5,7 +5,7 @@ int parse_fb2_poem(APP* app, xmlNode* parent_node, GtkTextIter* text_buff_end)
 	g_return_val_if_fail(parent_node != NULL,	EXIT_FAILURE);
 	g_return_val_if_fail(text_buff_end != NULL,	EXIT_FAILURE);
 
-	GtkTextBuffer* text_buff	= app->text_buff;
+	//GtkTextBuffer* text_buff	= app->text_buff;
 	xmlNode* node				= parent_node->children;
 
 	parse_fb2_id_attribute(app, parent_node, text_buff_end);

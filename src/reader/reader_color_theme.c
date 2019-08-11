@@ -1,68 +1,42 @@
 #include "reader_chunks.h"
 
-int reader_set_color_theme(APP* app, const char* color_theme)
+int reader_set_color_theme(APP* app)
 {
-	g_return_val_if_fail(color_theme, EXIT_FAILURE);
+	g_return_val_if_fail(app, EXIT_FAILURE);
 
 
 	GKeyFile* app_config		= app->app_config;
+	char* app_css_path			= app->app_css_path;
 
-	GtkTextTagTable* tag_table	= gtk_text_buffer_get_tag_table(app->text_buff);
-	GtkTextTag* default_tag		= gtk_text_tag_table_lookup(tag_table, "default_tag");
-	GtkTextTag* code_tag		= gtk_text_tag_table_lookup(tag_table, "code_tag");
+	GtkCssProvider* css_provider	= gtk_css_provider_new();
+	if(gtk_css_provider_load_from_path(css_provider, app_css_path, NULL) == TRUE)
+	{
+		GdkScreen* screen_default = gdk_screen_get_default();
+		gtk_style_context_add_provider_for_screen(screen_default, GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
 
-	char* background_color		= g_key_file_get_string(app_config, color_theme, "background", NULL);
-	char* text_color			= g_key_file_get_string(app_config, color_theme, "text", NULL);
-	char* selection_color		= g_key_file_get_string(app_config, color_theme, "selection", NULL);
+		GtkStyleContext* style_context = gtk_widget_get_style_context(GTK_WIDGET(app->text_view));
+		gtk_style_context_add_provider(style_context, GTK_STYLE_PROVIDER(css_provider), GTK_STYLE_PROVIDER_PRIORITY_USER);
+	}
 
-	char* font_general			= g_key_file_get_string(app_config, color_theme, "font_general", NULL);
-	char* font_monospace		= g_key_file_get_string(app_config, color_theme, "font_monospace", NULL);
-	gint line_spacing			= g_key_file_get_integer(app_config, color_theme, "line_spacing", NULL);
-
-	g_return_val_if_fail(background_color	!= NULL, EXIT_FAILURE);
-	g_return_val_if_fail(text_color			!= NULL, EXIT_FAILURE);
-	g_return_val_if_fail(selection_color	!= NULL, EXIT_FAILURE);
-
-	g_return_val_if_fail(text_color			!= NULL, EXIT_FAILURE);
-	g_return_val_if_fail(selection_color	!= NULL, EXIT_FAILURE);
-
-	GdkRGBA color;
-	gdk_rgba_parse(&color, background_color);
-	gtk_widget_override_background_color(GTK_WIDGET(app->text_view), GTK_STATE_FLAG_NORMAL, &color);
-
-	gdk_rgba_parse(&color, selection_color);
-	gtk_widget_override_background_color(GTK_WIDGET(app->text_view), GTK_STATE_FLAG_SELECTED, &color);
-
-	GValue str_value = G_VALUE_INIT;
-	g_value_init(&str_value, G_TYPE_STRING);
-
-	g_value_set_string(&str_value, text_color);
-	g_object_set_property(G_OBJECT(default_tag),	"foreground", &str_value);
-
-	g_value_set_string(&str_value, font_general);
-	g_object_set_property(G_OBJECT(default_tag),	"family", &str_value);
-
-	g_value_set_string(&str_value, font_monospace);
-	g_object_set_property(G_OBJECT(code_tag),		"family", &str_value);
+	g_object_unref(css_provider);
 
 	GValue int_value = G_VALUE_INIT;
 	g_value_init(&int_value, G_TYPE_INT);
 
-	g_value_set_int(&int_value, line_spacing);
+	GtkTextTagTable* tag_table	= gtk_text_buffer_get_tag_table(app->text_buff);
+	GtkTextTag* default_tag		= gtk_text_tag_table_lookup(tag_table, "default_tag");
+
+	int pixels_inside_wrap = g_key_file_get_integer(app_config, "app", "pixels_inside_wrap", NULL);
+	g_value_set_int(&int_value, pixels_inside_wrap);
 	g_object_set_property(G_OBJECT(default_tag),	"pixels-inside-wrap", &int_value);
 
-	g_value_set_int(&int_value, line_spacing);
+	int  pixels_above_lines = g_key_file_get_integer(app_config, "app", "pixels_above_lines", NULL);
+	g_value_set_int(&int_value, pixels_above_lines);
 	g_object_set_property(G_OBJECT(default_tag),	"pixels-above-lines", &int_value);
 
 
-	g_free(background_color);
-	g_free(text_color);
-	g_free(selection_color);
 
-	g_free(font_general);
-	g_free(font_monospace);
-
-	g_value_unset(&str_value);
+//	g_value_unset(&str_value);
 	g_value_unset(&int_value);
 
 	return EXIT_SUCCESS;

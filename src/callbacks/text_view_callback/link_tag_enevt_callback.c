@@ -43,7 +43,7 @@ G_MODULE_EXPORT gboolean a_tag_event_cb(GtkTextTag* tag, GObject* object, GdkEve
 			else
 			{
 				GError* error = NULL;
-				if(gtk_show_uri(NULL, href, GDK_CURRENT_TIME, &error) == FALSE)
+				if(gtk_show_uri_on_window(NULL, href, GDK_CURRENT_TIME, NULL) == FALSE)
 					g_log(NULL, G_LOG_LEVEL_WARNING, "%s: %s",error->message,  href);
 			}
 		}

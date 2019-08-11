@@ -4,6 +4,7 @@ int reader_close_app(APP* app)
 {
 	GKeyFile* app_config			= app->app_config;
 	char* app_config_path			= app->app_config_path;
+	char* app_css_path				= app->app_css_path;
 	GtkWidget* main_wnd				= app->main_wnd;
 	GdkCursor* cursor_link			= app->cursor_link;
 	GdkCursor* cursor_watch			= app->cursor_watch;
@@ -47,6 +48,7 @@ int reader_close_app(APP* app)
 	g_object_unref(cursor_watch);
 
 	g_free(app_config_path);
+	g_free(app_css_path);
 
 	sqlite3_close(db);
 

@@ -17,8 +17,8 @@ int main(int argc,	char *argv[])
 	gboolean print_version = FALSE;
 
 	GOptionEntry cmd_options[]	= {
-									{"book",		'b',	0,	G_OPTION_ARG_FILENAME,		&book_path,		_C("Local path to book"), "/local/path/book.fb2"},
-									{"version",	'v',	0,	G_OPTION_ARG_NONE, 		&print_version,	_C("Print reader version"), NULL},
+									{"book",	'b',	0,	G_OPTION_ARG_FILENAME,		&book_path,		_C("Local path to book"), "/local/path/book.fb2"},
+									{"version",	'v',	0,	G_OPTION_ARG_NONE, 			&print_version,	_C("Print reader version"), NULL},
 									{NULL}
 									};
 
@@ -69,9 +69,7 @@ int main(int argc,	char *argv[])
 			reader_create_text_tags(&app);
 			reader_books_db_init(&app);
 
-			char* color_theme	= g_key_file_get_string(app.app_config, "app", "color_theme", NULL);
-			reader_set_color_theme(&app, color_theme);
-			g_free(color_theme);
+			reader_set_color_theme(&app);
 
 			gtk_builder_connect_signals(builder, &app);
 

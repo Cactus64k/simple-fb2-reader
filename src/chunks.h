@@ -90,8 +90,10 @@
 		GKeyFile*				app_config;
 		char*					app_config_path;
 
+		char*					app_css_path;
+
 		gboolean				auto_scroll;
-		double					auto_scroll_period;
+		int						auto_scroll_period;
 
 	} APP;
 

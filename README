@@ -11,7 +11,9 @@ Features:
 - full 2.1 format support(without stylesheet and partial table support)
 - navigation
 - russian and english gui
-- user themes(see ~/.config/simple-fb2-reader/config.cfg)
+- user themes
+	edit ~/.config/simple-fb2-reader/simple-fb2-reader.css
+	example dark theme /usr/share/simple-fb2-reader/simple-fb2-reader.css
 - auto scrolling(see config for customise scrolling speed)
 - hotkeys
 
@@ -19,18 +21,18 @@ All features located in context menu.
 Hotkeys description in "About" menu item.
 
 Depends:
-- libxml2		>= 2.9.1
-- libgtk-3-0     	>= 3.14.5
-- libzip2        	>= 0.11.2
-- libsqlite3-0	  	>= 3.8.7.1
+- libxml2		>= 2.9.4
+- libgtk-3-0     	>= 3.24.10
+- libzip        	>= 1.5.1
+- libsqlite3-0	  	>= 3.29.0
 
 
 Build Depends:
-- debhelper		>= 9.0.0
-- libxml2-dev		>= 2.9.1
-- libgtk-3-dev		>= 3.14.5
-- libzip-dev		>= 0.11.2
-- pkg-config		>= 0.28
-- gettext		>= 0.19.3
-- libsqlite3-dev 	>= 3.8.7.1
-- cmake			>= 3.0.2
+- debhelper		>= 12.3
+- libxml2-dev		>= 2.9.4
+- libgtk-3-dev		>= 3.24.10
+- libzip-dev		>= 1.5.1
+- pkg-config		>= 0.29
+- gettext		>= 0.19.8
+- libsqlite3-dev 	>= 3.29.0
+- cmake			>= 3.13.4

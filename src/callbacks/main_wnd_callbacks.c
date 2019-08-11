@@ -47,7 +47,9 @@ G_MODULE_EXPORT gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEven
 	GtkTextView* text_view			= app->text_view;
 	BOOK_TYPE book_type				= app->book_type;
 	GtkClipboard* clipboard			= app->clipboard;
-	GdkKeymap* default_key_map		= gdk_keymap_get_default();
+	GdkDisplay* default_display		= gdk_display_get_default();
+	GdkKeymap* default_key_map		= gdk_keymap_get_for_display(default_display);
+
 
 	GdkKeymapKey key = {.keycode	= event->hardware_keycode,
 						.group		= 0,
@@ -66,10 +68,6 @@ G_MODULE_EXPORT gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEven
 		{
 			if(book_type != BOOK_TYPE_NONE)
 				search_menuitem_activate_cb(NULL, app);
-		}
-		else if(keyval == 't')
-		{
-			color_theme_activate_cb(NULL, app);
 		}
 		else if(keyval == 'h')
 		{
@@ -106,6 +104,10 @@ G_MODULE_EXPORT gboolean main_wnd_key_press_event_cb (GtkWidget* widget, GdkEven
 		{
 			if(gtk_text_buffer_get_has_selection(text_buff) == TRUE)
 				gtk_text_buffer_copy_clipboard(text_buff, clipboard);
+		}
+		else if(keyval == 'w')
+		{
+			reader_close_book(app);
 		}
 	}
 	else

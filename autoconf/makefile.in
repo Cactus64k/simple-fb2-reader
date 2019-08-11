@@ -13,9 +13,9 @@ SOURCES			= $(shell find . -name '*.c' -printf './%P ')
 OBJECTS			= $(SOURCES:.c=.o)
 
 DEFINIONS		=	-DGUI_CONSTRUCT_PATH='"$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade"' \
-					-DPACKAGE_VERSION='"$(PACKAGE_VERSION)"' \
-					-DPACKAGE_NAME='"$(PACKAGE_NAME)"'
-CC				= @CC@
+				-DPACKAGE_VERSION='"$(PACKAGE_VERSION)"' \
+				-DPACKAGE_NAME='"$(PACKAGE_NAME)"'
+CC			= @CC@
 CFLAGS			= @CFLAGS@ $(DEFINIONS)
 LDFLAGS			= -export-dynamic
 
@@ -36,7 +36,7 @@ INCLUDE			=	@GTK_CFLAGS@\
 all: $(SOURCES) $(PACKAGE_NAME) TRANSLATE_TARGET
 
 TRANSLATE_TARGET:
-				msgfmt intl/ru.po		--output-file=intl/ru.mo
+				msgfmt intl/ru.po	--output-file=intl/ru.mo
 				msgfmt intl/en_US.po	--output-file=intl/en_US.mo
 
 $(PACKAGE_NAME): $(OBJECTS) 
@@ -66,14 +66,15 @@ mk_folders:
 
 # FIXME for new project
 install:mk_folders
-				install $(PACKAGE_NAME)						$(DESTDIR)$(bindir)/$(PACKAGE_NAME)
-				cp intl/ru.mo								$(DESTDIR)$(localedir)/ru/LC_MESSAGES/$(PACKAGE_NAME).mo
-				cp intl/en_US.mo							$(DESTDIR)$(localedir)/en_US/LC_MESSAGES/$(PACKAGE_NAME).mo
-				cp res/$(PACKAGE_NAME).desktop				$(DESTDIR)$(datarootdir)/applications/$(PACKAGE_NAME).desktop
-				cp res/$(PACKAGE_NAME).svg					$(DESTDIR)$(datarootdir)/icons/hicolor/scalable/apps/$(PACKAGE_NAME).svg	
-				cp res/simple-fb2-reader.xml				$(DESTDIR)$(datarootdir)/mime/packages/simple-fb2-reader.xml
+				install $(PACKAGE_NAME)			$(DESTDIR)$(bindir)/$(PACKAGE_NAME)
+				cp intl/ru.mo					$(DESTDIR)$(localedir)/ru/LC_MESSAGES/$(PACKAGE_NAME).mo
+				cp intl/en_US.mo				$(DESTDIR)$(localedir)/en_US/LC_MESSAGES/$(PACKAGE_NAME).mo
+				cp res/$(PACKAGE_NAME).desktop		$(DESTDIR)$(datarootdir)/applications/$(PACKAGE_NAME).desktop
+				cp res/$(PACKAGE_NAME).svg			$(DESTDIR)$(datarootdir)/icons/hicolor/scalable/apps/$(PACKAGE_NAME).svg	
+				cp res/simple-fb2-reader.xml			$(DESTDIR)$(datarootdir)/mime/packages/simple-fb2-reader.xml
 				cp res/application-x-fictionbook+xml.svg	$(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-fictionbook+xml.svg
-				cp res/$(PACKAGE_NAME).glade				$(DESTDIR)$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade
+				cp res/$(PACKAGE_NAME).glade			$(DESTDIR)$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).glade
+				cp res/$(PACKAGE_NAME).css			$(DESTDIR)$(datarootdir)/$(PACKAGE_NAME)/$(PACKAGE_NAME).css
 				ln -sr $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-fictionbook+xml.svg $(DESTDIR)$(datarootdir)/icons/hicolor/scalable/mimetypes/application-x-zip-compressed-fb2.svg
 
 

@@ -1,0 +1,11 @@
+.book_textview text selection {
+	color: white;
+	background-color: #888A85;
+}
+
+.book_textview text {
+	color: #e8e2b7;
+	background-color: #293134;
+	font-family: Sans;
+}
+

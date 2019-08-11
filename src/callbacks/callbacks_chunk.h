@@ -27,15 +27,9 @@
 	void navigation_menuitem_activate_cb		(GtkMenuItem *menuitem,			gpointer user_data);
 
 	void about_menuitem_activate_cb				(GtkMenuItem *menuitem,			gpointer user_data);
-	void color_theme_checkmenuitem_toggled_cb	(GtkCheckMenuItem* checkmenuitem, gpointer user_data);
-
 	void backward_itemmenu_cb					(GtkMenuItem* menuitem,			gpointer user_data);
 
-	void color_theme_activate_cb				(GtkMenuItem* menuitem,			gpointer user_data);
-
-	void auto_scroll_disable_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data);
-	void auto_scroll_enable_checkmenuitem_toggled_cb(GtkCheckMenuItem* checkmenuitem, gpointer user_data);
-	void auto_scroll_activate_cb				(GtkMenuItem* menuitem,			gpointer user_data);
+	void auto_scroll_toggled_cb					(GtkCheckMenuItem* menuitem, gpointer user_data);
 
 	void exit_menuitem_activate_cb				(GtkMenuItem *menuitem, gpointer user_data);
 
