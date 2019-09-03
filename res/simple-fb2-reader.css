@@ -6,6 +6,9 @@
 .book_textview text {
 	color: #e8e2b7;
 	background-color: #293134;
+}
+
+.book_textview {
 	font-family: Sans;
 }
 
